@@ -33,7 +33,7 @@
   <!-- ============ HEADER / NAVIGATION ============ -->
   <header class="site-header">
     <div class="nav-wrap">
-      <a href="#top" class="brand">Frankly Inspired</a>
+      <a href="#top" class="brand"><img src="assets/images/logo-mark.svg" alt="" class="brand-mark" width="28" height="40">Frankly Inspired</a>
 
       <div class="nav-actions">
         <!-- Always-visible on mobile, independent of the hamburger menu,
@@ -109,6 +109,38 @@
       </div>
     </section>
 
+    <!-- ============ DONOR CHURN CALCULATOR ============ -->
+    <!-- A small interactive moment between the pillar teaser and the dense
+         Consulting/pricing section below — breaks up a long read-only
+         stretch and makes the retention thesis (from the article and the
+         homepage copy) concrete with the visitor's own numbers. Figures
+         used: AFP Fundraising Effectiveness Project 2025 sector average
+         first-time donor retention (19.4%) — see Article_Draft. Purely
+         illustrative; framed that way explicitly below. -->
+    <section class="section calculator-section">
+      <div class="container narrow center">
+        <h2 class="section-title reveal">What Might First-Time Donor Churn Be Costing You?</h2>
+        <p class="section-note reveal">Sector-wide, roughly 4 in 5 first-time donors never give a second gift. A rough, illustrative estimate using your own numbers:</p>
+        <div class="calculator reveal">
+          <div class="calculator-row">
+            <label for="calc-donors">First-time donors last year</label>
+            <input type="number" id="calc-donors" min="0" step="1" placeholder="e.g. 150" inputmode="numeric">
+          </div>
+          <div class="calculator-row">
+            <label for="calc-gift">Average first-gift size</label>
+            <div class="calculator-input-prefix">
+              <span aria-hidden="true">$</span>
+              <input type="number" id="calc-gift" min="0" step="1" placeholder="e.g. 75" inputmode="numeric">
+            </div>
+          </div>
+        </div>
+        <p class="calculator-result" id="calculator-result" hidden>
+          At the sector-average 19.4% first-time donor retention rate, an estimated <strong id="calc-lost-donors"></strong> of those donors likely won't give again — representing roughly <strong id="calc-lost-revenue"></strong> in lost second-gift revenue this year alone.
+        </p>
+        <p class="calculator-caveat reveal">Illustrative only, based on the AFP Fundraising Effectiveness Project's 2025 sector averages — not a prediction for your specific organization.</p>
+      </div>
+    </section>
+
     <!-- ============ CONSULTING AND ADVISORY ============ -->
     <section id="consulting" class="section consulting alt-bg">
       <div class="container">
@@ -133,12 +165,12 @@
           <div class="card reveal" id="pillar-revenue">
             <span id="pillar-partnership" class="anchor-offset"></span>
             <h4>Revenue &amp; Growth</h4>
-            <p>Fundraising strategy, grant and public-funding strategy, revenue-pipeline design, and the cross-sector partnerships (education, workforce, government, corporate, philanthropic, and community) that sustain them.</p>
+            <p>Individual donor stewardship and retention, fundraising strategy, grant and public-funding strategy, revenue-pipeline design, and the cross-sector partnerships (education, workforce, government, corporate, philanthropic, and community) that sustain them.</p>
           </div>
           <div class="card reveal" id="pillar-leadership">
             <span id="pillar-operations" class="anchor-offset"></span>
             <h4>Leadership &amp; Operations</h4>
-            <p>Executive advising, 1:1 leadership coaching, and change leadership, paired with the workflows, KPIs, CRM/Salesforce practices, and AI readiness guidance that keep an organization running well.</p>
+            <p>Executive advising and change leadership, paired with the workflows, KPIs, CRM/Salesforce practices, and AI readiness guidance that keep an organization running well. 1:1 leadership coaching is available as its own engagement.</p>
           </div>
         </div>
 
@@ -153,7 +185,8 @@
 
         <h3 id="pricing" class="subhead reveal">Engagement Options</h3>
         <div class="pricing-grid">
-          <div class="pricing-card reveal">
+          <div class="pricing-card reveal" id="pricing-advisory">
+            <span class="recommended-badge" hidden>Recommended for you</span>
             <h4>Strategic Advisory Retainer</h4>
             <p class="price">$2,500<span>/month</span></p>
             <p class="plan-fit">Best fit if you need experienced strategic guidance, not full hands-on implementation.</p>
@@ -167,14 +200,15 @@
             </ul>
             <a class="btn btn-secondary plan-cta" href="#contact" data-plan="Nonprofit Sustainability Strategy,Fundraising and Revenue Diversification">Start with This Retainer</a>
           </div>
-          <div class="pricing-card featured reveal">
+          <div class="pricing-card featured reveal" id="pricing-implementation">
+            <span class="recommended-badge" hidden>Recommended for you</span>
             <h4>Strategic Implementation Retainer</h4>
             <p class="price">$3,500<span>/month</span></p>
             <p class="plan-fit">Best fit if you're ready to implement across sustainability, revenue, and operations at the same time.</p>
             <ul class="bullet-list">
               <li>Weekly engagement</li>
               <li>Sustainability roadmap implementation</li>
-              <li>Revenue pipeline strategy</li>
+              <li>Revenue pipeline strategy and donor stewardship systems</li>
               <li>Operational systems / KPIs</li>
               <li>Leadership alignment</li>
               <li>Expanded project support</li>
@@ -189,6 +223,18 @@
               <li>For defined projects such as sustainability assessments, revenue diversification plans, operating systems, partnership strategies, and leadership planning.</li>
             </ul>
             <a class="btn btn-secondary plan-cta" href="#contact" data-plan="Other">Discuss a Project</a>
+          </div>
+          <div class="pricing-card reveal">
+            <h4>1:1 Executive Coaching</h4>
+            <p class="price">$350<span>/session</span></p>
+            <p class="plan-fit">Best fit as a standalone engagement or alongside either retainer, for leaders who want dedicated, confidential support.</p>
+            <ul class="bullet-list">
+              <li>60-minute 1:1 sessions</li>
+              <li>Executive decision-making and change leadership</li>
+              <li>Confidential space outside board and staff dynamics</li>
+              <li>Scheduled as needed, no monthly minimum</li>
+            </ul>
+            <a class="btn btn-secondary plan-cta" href="#contact" data-plan="1:1 Leadership Coaching">Book a Coaching Session</a>
           </div>
         </div>
         <p class="pricing-reassurance reveal">Not sure which option fits? <a href="#contact">Start with a conversation</a>, and I'll help you figure out the right scope.</p>
@@ -228,13 +274,14 @@
 
         <p class="form-divider">Prefer to write it out first? Share a few details below and I'll follow up.</p>
 
-        <!-- NOTE FOR BRIAN: This form has no backend yet. The "thank you"
-             message below is simulated client-side in js/main.js so the
-             page has correct behavior to preview, but nothing is actually
-             sent anywhere. Wire the `action` attribute (or a JS fetch call
-             in js/main.js) to a form service such as Formspree, Netlify
-             Forms, or a custom endpoint before launch, and configure that
-             service to send the acknowledgement email in README.md. -->
+        <!-- This form is live: js/main.js posts to the frankly-inspired-backend
+             /api/contact endpoint, which sends both the visitor's
+             acknowledgement email and the internal lead-notification email
+             via Resend. The `action="#"` attribute below is inert on purpose
+             — submission is handled entirely by the JS fetch call, which
+             calls preventDefault() before it runs. See
+             frankly-inspired-backend/README.md for the deployed service
+             details. -->
         <form class="contact-form" id="contact-form" action="#" method="POST" novalidate>
           <!-- Honeypot: real visitors never see or fill this in (see css
                .hp-field). A filled value means a bot submitted the form. -->

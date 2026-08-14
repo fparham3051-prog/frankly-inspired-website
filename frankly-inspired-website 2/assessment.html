@@ -7,14 +7,13 @@
   <title>Nonprofit Sustainability Self-Assessment | Frankly Inspired</title>
   <meta name="description" content="A free, 15-question self-assessment to help nonprofit leaders gauge their organization's sustainability across strategy, revenue, leadership, operations, and partnerships.">
 
-  <!-- PROTOTYPE NOTE FOR BRIAN / FRANKLIN: This is a working sketch, not yet
-       linked from the main site nav or hero. The scoring runs entirely in
-       the browser (no data leaves the page) except the optional "email me
-       my results" capture at the end, which posts to the backend configured
-       via API_BASE at the top of js/assessment.js — see
-       frankly-inspired-backend/README.md for deployment status. See this
-       site's README.md, "Self-assessment tool" for the nav-placement
-       decision that's still open. -->
+  <!-- This tool is live and linked from the main nav, the footer, and the
+       pricing section's callout on index.html. Scoring runs entirely in the
+       browser (no data leaves the page) except two backend calls: an
+       anonymized score log + AI narrative request on completion, and the
+       optional "email me my results" capture at the end. Both post to
+       API_BASE at the top of js/assessment.js — see
+       frankly-inspired-backend/README.md for the deployed service details. -->
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,7 +26,7 @@
 
   <header class="site-header">
     <div class="nav-wrap">
-      <a href="index.html" class="brand">Frankly Inspired</a>
+      <a href="index.html" class="brand"><img src="assets/images/logo-mark.svg" alt="" class="brand-mark" width="28" height="40">Frankly Inspired</a>
       <div class="nav-actions">
         <a class="btn btn-primary btn-nav-mobile" href="https://calendly.com/fparham/30min" target="_blank" rel="noopener">Schedule</a>
         <nav class="site-nav" aria-label="Primary">
@@ -54,9 +53,18 @@
     <!-- ============ ASSESSMENT FORM ============ -->
     <section class="section assessment-form-section alt-bg">
       <div class="container narrow">
+
+        <!-- Sticky progress indicator, kept in sync with which pillar-group
+             is in view — see js/assessment.js. Hidden automatically once
+             results are shown (no form left to track progress through). -->
+        <div class="assessment-progress" id="assessment-progress">
+          <p class="assessment-progress-label" id="assessment-progress-label">Section 1 of 5 — Sustainability Strategy</p>
+          <span class="assessment-progress-track"><span class="assessment-progress-fill" id="assessment-progress-fill"></span></span>
+        </div>
+
         <form id="assessment-form" novalidate>
 
-          <div class="pillar-group">
+          <div class="pillar-group" data-pillar-index="1">
             <h2 class="pillar-heading">1. Sustainability Strategy</h2>
             <fieldset class="likert">
               <legend>Our organization has a clear, written strategic plan that guides major decisions.</legend>
@@ -90,7 +98,7 @@
             </fieldset>
           </div>
 
-          <div class="pillar-group">
+          <div class="pillar-group" data-pillar-index="2">
             <h2 class="pillar-heading">2. Revenue Diversification</h2>
             <fieldset class="likert">
               <legend>Our revenue comes from more than one major source, so no single grant or donor makes up most of our budget.</legend>
@@ -124,7 +132,7 @@
             </fieldset>
           </div>
 
-          <div class="pillar-group">
+          <div class="pillar-group" data-pillar-index="3">
             <h2 class="pillar-heading">3. Leadership &amp; Organizational Development</h2>
             <fieldset class="likert">
               <legend>Roles and performance expectations are clearly defined across the organization.</legend>
@@ -158,7 +166,7 @@
             </fieldset>
           </div>
 
-          <div class="pillar-group">
+          <div class="pillar-group" data-pillar-index="4">
             <h2 class="pillar-heading">4. Operations &amp; Infrastructure</h2>
             <fieldset class="likert">
               <legend>We use consistent systems (CRM, project management, etc.) to track our work and data.</legend>
@@ -192,7 +200,7 @@
             </fieldset>
           </div>
 
-          <div class="pillar-group">
+          <div class="pillar-group" data-pillar-index="5">
             <h2 class="pillar-heading">5. Partnership &amp; Ecosystem Strategy</h2>
             <fieldset class="likert">
               <legend>We have active partnerships across sectors: education, workforce, government, corporate, community.</legend>
@@ -239,12 +247,15 @@
             <span class="results-score-band" id="results-score-band"></span>
           </div>
           <p class="results-band-desc" id="results-band-desc"></p>
+          <p class="results-avg-overall" id="results-avg-overall" hidden></p>
           <p class="results-narrative-loading" id="results-narrative-loading" hidden>Writing a personalized summary of your results…</p>
 
           <h3 class="subhead">By Pillar</h3>
           <div class="results-bars" id="results-bars"></div>
 
           <div class="results-priority" id="results-priority"></div>
+
+          <div class="results-recommendation" id="results-recommendation"></div>
 
           <div class="results-disclaimer">
             <p>This is a directional self-assessment based on your own responses, not a formal audit or guarantee of any outcome. It's meant to help you think through your organization's sustainability posture and where to focus next.</p>

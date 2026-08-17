@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="UTF-8">
+  <script>document.documentElement.classList.replace('no-js', 'js');</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Organizational Sustainability Score | Frankly Inspired</title>
+  <meta name="description" content="A free diagnostic that scores your nonprofit's strategic clarity, risk management, impact/financial integration, and execution discipline — and ties the result to your Financial and Leadership scores using Harvard Kennedy School's Strategic Triangle.">
+
+  <!-- PROTOTYPE: The third and, by design, integrating diagnostic. Its own
+       4 dimensions are grounded the same way as the other two tools:
+         - Strategic Clarity & Public Value -> Mark Moore's "Strategic
+           Triangle" (Harvard Kennedy School, "Creating Public Value," 1995)
+         - Risk Identification & Management -> the COSO Enterprise Risk
+           Management Framework (the world's most widely used risk standard)
+         - Impact & Financial Sustainability Integration -> the Matrix Map /
+           "dual bottom line" model (Bell, Masaoka & Zimmerman, "Nonprofit
+           Sustainability")
+         - Roadmap & Implementation Discipline -> the Balanced Scorecard
+           (Kaplan & Norton, Harvard Business School, 1992) and Kaplan's
+           research finding that ~90% of strategies fail on execution, not
+           formulation
+
+       What makes this tool different from the other two: Moore's Strategic
+       Triangle explicitly requires weighing strategy against operational
+       capacity and legitimacy/support — so the results page pulls in this
+       visitor's saved Financial Health Score and Leadership & Operations
+       Score (via localStorage, same-browser only, nothing sent anywhere)
+       and presents all three as the Triangle's three legs. If either hasn't
+       been completed, that leg prompts the visitor to go do it instead of
+       silently guessing. See js/sustainability-score.js for the exact
+       scoring, thresholds, and the Sources line in the results for full
+       citations. -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="nav-wrap">
+      <a href="index.html" class="brand"><img src="assets/images/logo-mark.svg" alt="" class="brand-mark" width="28" height="40">Frankly Inspired</a>
+      <div class="nav-actions">
+        <a class="btn btn-primary btn-nav-mobile" href="https://calendly.com/fparham/30min" target="_blank" rel="noopener">Schedule</a>
+        <nav class="site-nav" aria-label="Primary">
+          <ul class="nav-menu" style="display:flex;">
+            <li><a href="index.html">Back to Site</a></li>
+            <li><a class="btn btn-primary btn-nav" href="https://calendly.com/fparham/30min" target="_blank" rel="noopener">Schedule a Conversation</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ============ INTRO ============ -->
+    <section class="section assessment-intro">
+      <div class="container narrow center">
+        <p class="eyebrow eyebrow-dark">Free Diagnostic</p>
+        <h1>Organizational Sustainability Score</h1>
+        <p class="hero-sub-light">12 questions on strategic clarity, risk management, impact/financial integration, and execution discipline — grounded in Harvard Kennedy School's Strategic Triangle, the COSO risk framework, the nonprofit sector's own "dual bottom line" research, and Harvard Business School's Balanced Scorecard. If you've completed the Financial and Leadership scores, this tool ties all three together. Takes about 7 minutes.</p>
+      </div>
+    </section>
+
+    <!-- ============ ASSESSMENT FORM ============ -->
+    <section class="section assessment-form-section alt-bg">
+      <div class="container narrow">
+
+        <div class="assessment-progress" id="ss-progress">
+          <p class="assessment-progress-label" id="ss-progress-label">Section 1 of 4 — Strategic Clarity &amp; Public Value</p>
+          <span class="assessment-progress-track"><span class="assessment-progress-fill" id="ss-progress-fill"></span></span>
+        </div>
+
+        <form id="ss-form" novalidate>
+
+          <div class="pillar-group" data-pillar-index="1">
+            <h2 class="pillar-heading">1. Strategic Clarity &amp; Public Value</h2>
+            <p class="fh-field-help">Based on Mark Moore's Strategic Triangle (Harvard Kennedy School).</p>
+            <fieldset class="likert">
+              <legend>Staff, board, and leadership could each independently describe our top 2-3 strategic priorities in similar terms.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="st1" value="1" required><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="st1" value="2"><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="st1" value="3"><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="st1" value="4"><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="st1" value="5"><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+            <fieldset class="likert">
+              <legend>Our strategy clearly identifies who benefits from our work and what specific value we create for them.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="st2" value="1" required><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="st2" value="2"><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="st2" value="3"><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="st2" value="4"><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="st2" value="5"><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+            <fieldset class="likert">
+              <legend>When a new opportunity or request comes in, it's clear whether it fits our strategic priorities or not.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="st3" value="1" required><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="st3" value="2"><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="st3" value="3"><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="st3" value="4"><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="st3" value="5"><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="pillar-group" data-pillar-index="2">
+            <h2 class="pillar-heading">2. Risk Identification &amp; Management</h2>
+            <p class="fh-field-help">Based on the COSO Enterprise Risk Management Framework.</p>
+            <fieldset class="likert">
+              <legend>We maintain a written list of our top risks — financial, operational, reputational, and strategic — not just an informal sense of them.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="r1" value="1" required><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="r1" value="2"><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="r1" value="3"><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="r1" value="4"><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="r1" value="5"><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+            <fieldset class="likert">
+              <legend>Risk is reviewed on a regular, scheduled basis, not just when something goes wrong or during a funding application.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="r2" value="1" required><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="r2" value="2"><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="r2" value="3"><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="r2" value="4"><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="r2" value="5"><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+            <fieldset class="likert">
+              <legend>Leadership and the board have discussed what we would do if our largest funding source or a key leader left suddenly.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="r3" value="1" required><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="r3" value="2"><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="r3" value="3"><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="r3" value="4"><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="r3" value="5"><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="pillar-group" data-pillar-index="3">
+            <h2 class="pillar-heading">3. Impact &amp; Financial Sustainability Integration</h2>
+            <p class="fh-field-help">Based on the Matrix Map / "dual bottom line" model (Bell, Masaoka &amp; Zimmerman, "Nonprofit Sustainability").</p>
+            <fieldset class="likert">
+              <legend>We know, program by program, which ones are financially self-sustaining and which are subsidized by other revenue.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="i1" value="1" required><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="i1" value="2"><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="i1" value="3"><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="i1" value="4"><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="i1" value="5"><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+            <fieldset class="likert">
+              <legend>Decisions about which programs to grow, maintain, or sunset weigh both mission impact and financial contribution together.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="i2" value="1" required><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="i2" value="2"><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="i2" value="3"><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="i2" value="4"><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="i2" value="5"><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+            <fieldset class="likert">
+              <legend>Leadership and the board have had an honest conversation about programs that are mission-critical but not financially sustainable on their own.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="i3" value="1" required><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="i3" value="2"><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="i3" value="3"><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="i3" value="4"><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="i3" value="5"><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="pillar-group" data-pillar-index="4">
+            <h2 class="pillar-heading">4. Roadmap &amp; Implementation Discipline</h2>
+            <p class="fh-field-help">Based on the Balanced Scorecard (Kaplan &amp; Norton, Harvard Business School).</p>
+            <fieldset class="likert">
+              <legend>Our strategic priorities are translated into specific initiatives with owners and timelines, not just stated goals.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="e1" value="1" required><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="e1" value="2"><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="e1" value="3"><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="e1" value="4"><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="e1" value="5"><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+            <fieldset class="likert">
+              <legend>We track a small set of key metrics regularly (at least quarterly) that show whether we're actually executing the strategy.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="e2" value="1" required><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="e2" value="2"><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="e2" value="3"><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="e2" value="4"><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="e2" value="5"><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+            <fieldset class="likert">
+              <legend>Progress against our strategic plan is reviewed and adjusted at least once or twice a year, not filed away until the next planning cycle.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="e3" value="1" required><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="e3" value="2"><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="e3" value="3"><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="e3" value="4"><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="e3" value="5"><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="assessment-submit">
+            <button type="submit" class="btn btn-primary">See My Sustainability Score</button>
+            <p class="form-status" id="ss-status" role="status" aria-live="polite"></p>
+          </div>
+        </form>
+
+        <!-- ============ RESULTS (shown by js/sustainability-score.js) ============ -->
+        <div class="fh-results" id="ss-results" hidden>
+
+          <div class="fh-gauge-wrap">
+            <svg class="fh-gauge" viewBox="0 0 200 115" role="img" aria-labelledby="ss-gauge-title">
+              <title id="ss-gauge-title">Organizational sustainability gauge</title>
+              <path d="M10,100 A90,90 0 0,1 27.19,47.10" class="fh-gauge-band fh-band-0"></path>
+              <path d="M27.19,47.10 A90,90 0 0,1 72.19,14.40" class="fh-gauge-band fh-band-1"></path>
+              <path d="M72.19,14.40 A90,90 0 0,1 127.81,14.40" class="fh-gauge-band fh-band-2"></path>
+              <path d="M127.81,14.40 A90,90 0 0,1 172.81,47.10" class="fh-gauge-band fh-band-3"></path>
+              <path d="M172.81,47.10 A90,90 0 0,1 190,100" class="fh-gauge-band fh-band-4"></path>
+              <g id="ss-needle" transform="rotate(-90,100,100)">
+                <line x1="100" y1="100" x2="100" y2="25" class="fh-needle-line"></line>
+                <circle cx="100" cy="100" r="7" class="fh-needle-hub"></circle>
+              </g>
+            </svg>
+            <div class="fh-gauge-readout">
+              <span class="fh-gauge-score" id="ss-gauge-score"></span>
+              <span class="fh-gauge-band-name" id="ss-gauge-band-name"></span>
+            </div>
+          </div>
+
+          <p class="results-band-desc" id="ss-summary"></p>
+
+          <h3 class="subhead">The Strategic Triangle</h3>
+          <p class="fh-field-help">Harvard Kennedy School's Mark Moore argues that a mission-driven organization's strategy only works if three things are balanced together: the value it creates, its capacity to deliver, and the support it has to keep operating. Here's how those three legs look for you right now.</p>
+          <div class="ss-triangle" id="ss-triangle"></div>
+
+          <h3 class="subhead">By Dimension</h3>
+          <div class="fh-metrics" id="ss-metrics"></div>
+
+          <div class="results-recommendation" id="ss-recommendation"></div>
+
+          <div class="results-disclaimer">
+            <p>This is a directional self-assessment based on your own responses, scored against published research and national benchmarks. It is not a formal strategic or risk audit, and every question involves judgment — treat it as a starting point for a real conversation, not a verdict.</p>
+          </div>
+
+          <div class="results-related">
+            <p>This tool measures strategy, risk, and execution, and blends in your Financial and Leadership scores if you've completed them. For a numbers-based read on funder-specific readiness, <a href="https://grantpass-dashboard.onrender.com" target="_blank" rel="noopener">GrantPass</a> is a separate, purpose-built tool for that.</p>
+          </div>
+
+          <div class="results-cta">
+            <h3>Want to talk through these results?</h3>
+            <p>A short conversation is the fastest way to turn this into a plan.</p>
+            <div class="hero-ctas center">
+              <a class="btn btn-primary" href="https://calendly.com/fparham/30min" target="_blank" rel="noopener">Schedule a Strategy Conversation</a>
+              <a class="btn btn-secondary" href="index.html#pricing">See Pricing</a>
+            </div>
+          </div>
+
+          <p class="calculator-caveat">Sources: Mark H. Moore, "Creating Public Value: Strategic Management in Government" (Harvard University Press, 1995) and the Strategic Triangle; the COSO Enterprise Risk Management Framework; Jeanne Bell, Jan Masaoka &amp; Steve Zimmerman, "Nonprofit Sustainability: Making Strategic Decisions for Financial Viability" and the Matrix Map; Robert S. Kaplan &amp; David P. Norton, "The Balanced Scorecard" (Harvard Business Review, 1992) and subsequent research on strategy execution. Benchmark figures are sector-wide findings, not specific to any organization Frankly Inspired and Associates, LLC has worked with.</p>
+
+          <button type="button" class="results-retake" id="ss-retake">Retake the Assessment</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p class="footer-org">Frankly Inspired and Associates, LLC</p>
+      <p class="footer-meta">Founded by Franklin D. Parham · Lanham, Maryland / DMV</p>
+      <p class="footer-meta">
+        <a href="mailto:franklin@franklyinspired.associates">franklin@franklyinspired.associates</a>
+        <span aria-hidden="true">·</span>
+        <a href="tel:+12403918283">240-391-8283</a>
+      </p>
+      <p class="footer-links">
+        <a href="index.html">Back to Site</a>
+        <span aria-hidden="true">·</span>
+        <a href="assessment.html">Free Assessment</a>
+        <span aria-hidden="true">·</span>
+        <a href="financial-health.html">Financial Health Score</a>
+        <span aria-hidden="true">·</span>
+        <a href="leadership-health.html">Leadership &amp; Operations Score</a>
+        <span aria-hidden="true">·</span>
+        <a href="https://calendly.com/fparham/30min" target="_blank" rel="noopener">Schedule a Strategy Conversation</a>
+      </p>
+      <p class="footer-legal">
+        © 2026 Frankly Inspired and Associates, LLC
+        <span aria-hidden="true">·</span>
+        <a href="privacy.html">Privacy Policy</a>
+        <span aria-hidden="true">·</span>
+        <a href="terms.html">Terms of Use</a>
+        <span aria-hidden="true">·</span>
+        <button type="button" class="manage-cookies-link" data-manage-cookies>Manage Cookie Preferences</button>
+      </p>
+    </div>
+  </footer>
+
+  <script src="js/sustainability-score.js"></script>
+  <script src="js/cookie-consent.js"></script>
+  <script src="js/analytics.js"></script>
+</body>
+</html>

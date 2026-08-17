@@ -1,0 +1,1702 @@
+/* ==========================================================================
+   Frankly Inspired and Associates, LLC — stylesheet
+   Palette: Navy #11233D | White #FFFFFF | Warm Gold #B28E42 |
+            Charcoal #23282D | Light Gray #F3F5F7
+   A refined evolution of the original brand system: same identity, more
+   depth (layered navy, soft colored shadows), a larger editorial type
+   scale, and more generous rhythm. Every class name below is load-bearing —
+   js/*.js and the page markup select against them directly. Extend values,
+   don't rename selectors.
+   ========================================================================== */
+
+:root {
+  --navy: #11233D;
+  --navy-deep: #0b1a2d;
+  --navy-mid: #16294a;
+  --white: #FFFFFF;
+  --gold: #B28E42;
+  --gold-light: #cba869;
+  /* Same hue as --gold, darkened until it clears 4.5:1 on white (4.60:1) —
+     use this instead of --gold anywhere gold is applied to small/regular
+     text on a light background (hover links, labels, status text). The
+     brighter --gold stays fine for large text (prices, big numbers) and
+     for borders/UI outlines, which only need 3:1. */
+  --gold-accessible: #8E7134;
+  --gold-soft: rgba(178, 142, 66, 0.12);
+  --charcoal: #23282D;
+  --light-gray: #F3F5F7;
+  --border: #e2e6ea;
+
+  --font-heading: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  --max-width: 1160px;
+  --radius-sm: 8px;
+  --radius: 14px;
+  --radius-lg: 28px;
+  --transition: 220ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 520ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  --shadow-sm: 0 2px 10px rgba(17, 35, 61, 0.06);
+  --shadow-md: 0 20px 44px rgba(17, 35, 61, 0.12);
+  --shadow-lg: 0 32px 68px rgba(11, 26, 45, 0.22);
+  --shadow-navy: 0 28px 60px rgba(11, 26, 45, 0.45);
+}
+
+/* ---------- Reset / base ---------- */
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+/* Any component rule that sets `display` (e.g. .contact-form's
+   display:grid, .recommended-badge's display:inline-block) is author CSS,
+   which overrides the browser's built-in `[hidden] { display: none }` UA
+   rule regardless of selector specificity — so without this, elements
+   toggled via the `hidden` attribute/property (the contact form after
+   submit, the recommended-tier badges, assessment results panels, etc.)
+   would stay visibly displayed. This restores the native hidden behavior
+   globally, once, instead of guarding every individual component rule. */
+[hidden] { display: none !important; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--charcoal);
+  background: var(--white);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+  color: var(--navy);
+  line-height: 1.15;
+  margin: 0 0 0.5em;
+  font-weight: 600;
+  letter-spacing: -0.012em;
+}
+
+h1 { font-size: clamp(2.75rem, 6vw, 4.75rem); }
+h2 { font-size: clamp(2rem, 4.2vw, 3.1rem); }
+h3 { font-size: 1.3rem; letter-spacing: -0.005em; }
+h4 { font-size: 1.2rem; letter-spacing: -0.005em; }
+
+p { margin: 0 0 1em; }
+
+a {
+  color: var(--navy);
+  text-decoration-color: var(--gold);
+  text-underline-offset: 0.15em;
+}
+a:hover { color: var(--gold-accessible); }
+
+img { max-width: 100%; display: block; }
+
+ul, ol { padding-left: 1.25em; }
+
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Honeypot spam trap: off-screen rather than display:none, since some bots
+   skip display:none fields specifically. Real visitors never encounter it. */
+.hp-field {
+  position: absolute;
+  left: -5000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* Invisible anchor target — used when two pillar ids were merged onto one
+   card (Service Pillars consolidation) so old/external links to either id
+   still land on the right card without an empty heading. */
+.anchor-offset {
+  display: block;
+  position: relative;
+  top: -1rem;
+  visibility: hidden;
+}
+
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  background: var(--navy);
+  color: var(--white);
+  padding: 0.75em 1.25em;
+  z-index: 1000;
+  border-radius: 0 0 var(--radius-sm) 0;
+}
+.skip-link:focus {
+  left: 0;
+}
+
+:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 2px;
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+.container.narrow { max-width: 780px; }
+.container.center { text-align: center; }
+
+.section { padding: clamp(3rem, 7vw, 6.5rem) 0; }
+.section.alt-bg { background: var(--light-gray); }
+
+.section-title { margin-bottom: 0.85rem; }
+.section-note {
+  color: #55606b;
+  max-width: 640px;
+  margin-bottom: 1.75rem;
+  font-size: 1.05rem;
+}
+.subhead {
+  margin-top: 2.5rem;
+  padding-bottom: 0.5em;
+  border-bottom: 1px solid var(--border);
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-block;
+  padding: 0.9em 1.9em;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: background var(--transition), color var(--transition), border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+  border: 1.5px solid transparent;
+  cursor: pointer;
+}
+.btn-primary {
+  background: var(--gold);
+  color: var(--navy-deep);
+  box-shadow: 0 1px 2px rgba(11, 26, 45, 0.08);
+}
+.btn-primary:hover {
+  background: var(--gold-light);
+  color: var(--navy-deep);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(178, 142, 66, 0.35);
+}
+.btn-secondary {
+  background: transparent;
+  color: var(--navy);
+  border-color: var(--navy);
+}
+.btn-secondary:hover {
+  background: var(--navy);
+  color: var(--white);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+.btn-nav {
+  padding: 0.6em 1.3em;
+  font-size: 0.85rem;
+}
+
+/* ---------- Header / nav ---------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: saturate(180%) blur(14px);
+  -webkit-backdrop-filter: saturate(180%) blur(14px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-wrap {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 1.15rem 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 0.5rem;
+  align-items: center;
+  justify-content: space-between;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.35rem;
+  color: var(--navy);
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+@media (max-width: 400px) {
+  /* At the very narrowest phone widths, "Frankly Inspired" + the hamburger
+     + the mobile Schedule pill don't all fit on one line at the full brand
+     size — it used to wrap the wordmark onto two lines, which read as
+     cramped. Shrinking it here keeps the header a single tidy row. */
+  .brand { font-size: 1.05rem; gap: 0.45rem; }
+  .brand-mark { height: 1.6rem; }
+  .nav-wrap { padding-left: 1rem; padding-right: 1rem; }
+  .nav-actions { gap: 0.5rem; }
+}
+.brand-mark {
+  height: 1.95rem;
+  width: auto;
+  flex-shrink: 0;
+}
+.nav-actions { display: flex; align-items: center; gap: 0.75rem; }
+.site-nav { display: flex; align-items: center; }
+.btn-nav-mobile { display: none; }
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 1.85rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.nav-menu a:not(.btn) {
+  color: var(--charcoal);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  position: relative;
+}
+.nav-menu a:not(.btn)::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 100%;
+  bottom: -4px;
+  height: 2px;
+  background: var(--gold);
+  transition: right var(--transition);
+}
+.nav-menu a:not(.btn):hover { color: var(--gold-accessible); }
+.nav-menu a:not(.btn):hover::after,
+.nav-menu a:not(.btn).is-active::after { right: 0; }
+.nav-menu a:not(.btn).is-active { color: var(--navy); font-weight: 600; }
+
+/* ---------- Minimal header nav (assessment / privacy / terms) ----------
+   Deliberately its own class, not a reuse of .nav-menu — .nav-menu carries
+   the full header's mobile dropdown-panel treatment (position:absolute,
+   white background, column layout) under the 860px media query below, and
+   forcing it visible with an inline style only overrides `display`, not
+   those other properties, so it used to render as a stray floating panel
+   here. This stays a normal in-flow row at every width; on very narrow
+   screens it simply wraps to a second line instead of corrupting layout. */
+.nav-menu-minimal {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem 1.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.nav-menu-minimal a:not(.btn) {
+  color: var(--charcoal);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+.nav-menu-minimal a:not(.btn):hover { color: var(--gold-accessible); }
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+.nav-toggle-bar,
+.nav-toggle-bar::before,
+.nav-toggle-bar::after {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--navy);
+  position: relative;
+  transition: transform var(--transition);
+}
+.nav-toggle-bar::before,
+.nav-toggle-bar::after {
+  content: "";
+  position: absolute;
+  left: 0;
+}
+.nav-toggle-bar::before { top: -7px; }
+.nav-toggle-bar::after { top: 7px; }
+
+/* ---------- "More" nav dropdown ---------- */
+.nav-item-dropdown { position: relative; }
+.nav-dropdown-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  color: var(--charcoal);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+.nav-dropdown-toggle:hover { color: var(--gold-accessible); }
+.nav-caret {
+  font-size: 0.7em;
+  transition: transform var(--transition);
+}
+.nav-item-dropdown.is-open .nav-caret { transform: rotate(180deg); }
+.nav-dropdown-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0.6rem 0;
+  position: absolute;
+  top: calc(100% + 0.9rem);
+  left: 50%;
+  transform: translateX(-50%) translateY(-6px);
+  min-width: 220px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition), transform var(--transition), visibility var(--transition);
+  z-index: 110;
+}
+.nav-item-dropdown.is-open .nav-dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+.nav-dropdown-menu li a {
+  display: block;
+  padding: 0.6rem 1.2rem;
+  white-space: nowrap;
+}
+.nav-dropdown-menu li a:hover { background: var(--light-gray); }
+
+/* ---------- Hero ----------
+   Full-bleed abstract background (hero-bg.svg, ambient texture rather than
+   the main visual now that a real photo exists) behind a two-part row:
+   headline copy left, Franklin's actual headshot right, sized to its real
+   800x800 proportions rather than stretched/cropped into a wide banner —
+   it's a tight studio portrait, not an environmental wide shot, so a
+   generously-sized framed treatment reads far better than a full-bleed
+   crop would. Credentials strip still anchors the bottom of the section. */
+.hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: clamp(560px, 82vh, 820px);
+  background:
+    url('/assets/images/hero-bg.svg') center bottom / cover no-repeat,
+    linear-gradient(165deg, var(--navy) 0%, var(--navy-deep) 100%);
+  color: var(--white);
+  overflow: hidden;
+}
+.hero-inner {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  max-width: var(--max-width);
+  width: 100%;
+  margin: 0 auto;
+  padding: clamp(6rem, 14vw, 8rem) 1.5rem 2.5rem;
+  position: relative;
+  z-index: 1;
+}
+.hero-copy { max-width: 600px; flex: 1 1 auto; }
+/* Framed portrait with a soft blurred gold glow behind it — a
+   depth-of-field cue (sharp photo, soft out-of-focus color behind it) that
+   gives the navy hero contrast instead of a flat photo pasted onto it. */
+.hero-portrait {
+  position: relative;
+  flex: 0 0 auto;
+  width: clamp(220px, 28vw, 400px);
+  margin-left: auto;
+}
+.hero-portrait::before {
+  content: "";
+  position: absolute;
+  inset: -16%;
+  background: radial-gradient(circle at 50% 42%, rgba(203, 168, 105, 0.55) 0%, rgba(203, 168, 105, 0.2) 45%, rgba(203, 168, 105, 0) 72%);
+  filter: blur(32px);
+  z-index: 0;
+}
+.hero-portrait img {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: var(--shadow-navy);
+  /* Photo is already black & white; contrast/brightness just tune it to
+     sit naturally against the navy background rather than reading as a
+     flat gray cutout. */
+  filter: contrast(1.05) brightness(0.97);
+}
+@media (max-width: 640px) {
+  .hero-inner { flex-direction: column; }
+  .hero-portrait { width: min(60vw, 280px); margin: 0 auto; }
+}
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--gold-light);
+  margin-bottom: 1.1rem;
+}
+.hero h1 { color: var(--white); font-size: clamp(2.75rem, 6.5vw, 5.5rem); }
+.hero-sub {
+  color: #d7dee6;
+  font-size: 1.15rem;
+  max-width: 46ch;
+  margin-bottom: 2rem;
+}
+.hero-ctas { display: flex; flex-wrap: wrap; gap: 1rem; }
+.hero .btn-secondary {
+  color: var(--white);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+.hero .btn-secondary:hover {
+  background: var(--white);
+  color: var(--navy);
+}
+
+/* Credentials strip — sits directly on the image at the bottom of the
+   hero, reusing facts already established elsewhere on the site (years of
+   experience, the three service pillars) rather than inventing new claims. */
+.hero-credentials {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 2.5rem;
+  max-width: var(--max-width);
+  width: 100%;
+  margin: 0 auto;
+  padding: 1.35rem 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(11, 26, 45, 0.35);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.hero-credential {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #d7dee6;
+  white-space: nowrap;
+}
+.hero-credential-num {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--gold-light);
+}
+.hero-credential-divider {
+  width: 1px;
+  height: 1.1rem;
+  background: rgba(255, 255, 255, 0.2);
+}
+@media (max-width: 640px) {
+  .hero-credentials { gap: 0.6rem 1.5rem; padding: 1.1rem 1.5rem; }
+  .hero-credential-divider { display: none; }
+}
+
+/* ---------- Quick-nav tiles (post-hero routing) ---------- */
+/* Sits right after the hero so a visitor who isn't going to read the whole
+   page can immediately jump to the path that matches their intent, instead
+   of the only way down being a long scroll. Three routes, not five — this
+   is a shortcut, not a second nav bar. */
+.quicknav-section { padding: clamp(1.5rem, 3vw, 2.25rem) 0 0; }
+.quicknav {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+.quicknav-tile {
+  display: block;
+  padding: 1.5rem 1.4rem;
+  text-align: center;
+  text-decoration: none;
+  border-right: 1px solid var(--border);
+  transition: background var(--transition), transform var(--transition);
+}
+.quicknav-tile:last-child { border-right: none; }
+.quicknav-tile:hover { background: var(--light-gray); transform: translateY(-2px); }
+.quicknav-tile .qn-label {
+  display: block;
+  font-weight: 700;
+  color: var(--navy);
+  font-size: 1rem;
+  margin-bottom: 0.3rem;
+}
+.quicknav-tile:hover .qn-label { color: var(--gold-accessible); }
+.quicknav-tile .qn-sub {
+  display: block;
+  font-size: 0.85rem;
+  color: #6b7480;
+}
+@media (max-width: 640px) {
+  .quicknav { grid-template-columns: 1fr; }
+  .quicknav-tile { border-right: none; border-bottom: 1px solid var(--border); }
+  .quicknav-tile:last-child { border-bottom: none; }
+}
+
+/* ---------- Positioning / lede ---------- */
+.positioning { padding-top: clamp(2.5rem, 5vw, 4rem); padding-bottom: 0; }
+.lede {
+  font-size: 1.35rem;
+  color: var(--navy);
+  font-family: var(--font-heading);
+  font-weight: 500;
+  line-height: 1.55;
+}
+
+/* ---------- Affiliation strip (early credibility signal) ---------- */
+/* A quiet trust signal right after the intro paragraph, so a skeptical
+   visitor sees a credibility marker before reaching the full Experience &
+   Impact section on the About page. Reuses the same org names already
+   listed under "Board Leadership & Affiliations" on /about — condensed to
+   a scannable line, not a new claim. */
+.affiliation-strip { padding: clamp(1.75rem, 4vw, 2.5rem) 0; text-align: center; }
+.affiliation-label {
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--gold-accessible);
+  margin-bottom: 1rem;
+}
+.affiliation-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem 2rem;
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  color: #4a545e;
+}
+
+/* ---------- Cards ---------- */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.75rem;
+  margin-top: 1.75rem;
+}
+.card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--gold);
+  border-radius: var(--radius);
+  padding: 1.85rem;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-md);
+}
+.consulting .card { background: var(--white); }
+.card h4 { margin-bottom: 0.55rem; }
+.card p { margin: 0; color: #4a545e; font-size: 0.95rem; }
+
+/* ---------- Homepage pillar teaser (links down to #consulting) ---------- */
+.pillar-tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.85rem;
+  margin: 1.75rem 0 1.4rem;
+}
+.pillar-tag {
+  display: inline-block;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.6em 1.35em;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--navy);
+  text-decoration: none;
+  box-shadow: var(--shadow-sm);
+  transition: border-color var(--transition), color var(--transition), transform var(--transition), box-shadow var(--transition);
+}
+.pillar-tag:hover {
+  border-color: var(--gold);
+  color: var(--gold-accessible);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+.link-more {
+  display: inline-block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--navy);
+  text-decoration-color: var(--gold);
+}
+.link-more:hover { color: var(--gold-accessible); }
+
+/* ---------- Donor churn calculator (homepage) ---------- */
+.calculator-section { padding-top: 0; }
+.calculator {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.35rem;
+  margin: 1.75rem 0;
+  text-align: left;
+}
+.calculator-row {
+  display: flex;
+  flex-direction: column;
+  min-width: 210px;
+}
+.calculator-row label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 0.45em;
+}
+.calculator-row input {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  padding: 0.7em 0.8em;
+  border: 1px solid #c7cdd3;
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  color: var(--charcoal);
+  width: 100%;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+.calculator-row input:focus { border-color: var(--gold); box-shadow: 0 0 0 4px var(--gold-soft); outline: none; }
+.calculator-input-prefix {
+  display: flex;
+  align-items: center;
+  border: 1px solid #c7cdd3;
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  padding-left: 0.8em;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+.calculator-input-prefix:focus-within { border-color: var(--gold); box-shadow: 0 0 0 4px var(--gold-soft); }
+.calculator-input-prefix span { color: #6b7480; font-weight: 600; }
+.calculator-input-prefix input {
+  border: none;
+  padding-left: 0.35em;
+}
+.calculator-input-prefix input:focus { border-color: transparent; box-shadow: none; }
+.calculator-result {
+  max-width: 640px;
+  margin: 0 auto 1.1rem;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  padding: 1.15rem 1.4rem;
+  color: #4a545e;
+}
+.calculator-result strong { color: var(--navy); }
+.calculator-caveat {
+  font-size: 0.8rem;
+  color: #8a94a0;
+}
+
+/* ---------- Impact stats ---------- */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2.25rem;
+  margin-top: 1.25rem;
+}
+.stat {
+  padding: 1.5rem 0.25rem;
+  border-top: 1px solid var(--border);
+}
+.stat-num {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 2.75rem;
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.01em;
+}
+.stat-label {
+  display: block;
+  font-size: 0.92rem;
+  color: #4a545e;
+}
+
+/* ---------- Philosophy quote ----------
+   Navy background on about.html — that page is otherwise white/light-gray
+   until its own navy closing CTA at the very bottom, so this gives it a
+   dark contrast point near the top too, echoing the hero on index.html. */
+.philosophy {
+  position: relative;
+  background: radial-gradient(ellipse 70% 100% at 50% 0%, rgba(203, 168, 105, 0.14), transparent 60%), var(--navy);
+  overflow: hidden;
+}
+.philosophy blockquote {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: clamp(1.4rem, 2.8vw, 1.9rem);
+  color: var(--white);
+  font-style: italic;
+  text-align: center;
+  line-height: 1.55;
+  border: none;
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------- Lists ---------- */
+.bullet-list { margin: 0 0 1.5rem; padding-left: 1.25em; }
+.bullet-list li { margin-bottom: 0.55em; }
+.bullet-list.two-col {
+  columns: 2;
+  column-gap: 2.5rem;
+}
+@media (max-width: 640px) {
+  .bullet-list.two-col { columns: 1; }
+}
+.role-meta {
+  font-weight: 600;
+  color: var(--gold-accessible);
+  margin-bottom: 1rem;
+}
+
+.process-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  list-style: none;
+  padding: 0;
+  margin: 1.1rem 0 2.25rem;
+  counter-reset: step;
+}
+.process-list li {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.55em 1.2em;
+  font-size: 0.9rem;
+  font-weight: 500;
+  counter-increment: step;
+  box-shadow: var(--shadow-sm);
+}
+.process-list li::before {
+  content: counter(step) ". ";
+  color: var(--gold-accessible);
+  font-weight: 700;
+}
+
+.pricing-note {
+  background: var(--white);
+  border-left: 3px solid var(--gold);
+  padding: 1.25rem 1.5rem;
+  border-radius: var(--radius);
+  max-width: 640px;
+}
+.pricing-note p { margin: 0; color: #4a545e; }
+
+/* ---------- Pricing cards ---------- */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
+  gap: 1.75rem;
+  margin-top: 1.75rem;
+}
+.pricing-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.pricing-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-md);
+}
+.pricing-card.featured:hover {
+  box-shadow: var(--shadow-navy);
+}
+.recommended-badge {
+  display: inline-block;
+  align-self: flex-start;
+  background: var(--gold);
+  color: var(--navy);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding: 0.32em 0.8em;
+  border-radius: 999px;
+  margin-bottom: 0.8rem;
+}
+.pricing-card.featured .recommended-badge {
+  background: var(--gold-light);
+}
+/* Applied by main.js when a visitor arrives from the assessment results
+   page's recommended-tier link, so the specific card being pointed to is
+   unmistakable, not just scrolled-to. */
+.pricing-card.is-recommended {
+  box-shadow: 0 0 0 3px var(--gold), var(--shadow-md);
+}
+/* Featured plan uses a navy card instead of a gold-outlined white one — it
+   both draws the eye to the recommended tier and gives this stretch of the
+   page (otherwise all white/light-gray after the hero) a dark contrast
+   point for visual balance. */
+.pricing-card.featured {
+  background: linear-gradient(165deg, var(--navy) 0%, var(--navy-deep) 100%);
+  border-color: rgba(203, 168, 105, 0.25);
+  box-shadow: var(--shadow-navy);
+  color: var(--white);
+}
+.pricing-card.featured h4 { color: var(--white); }
+.pricing-card.featured .price { color: var(--gold-light); }
+.pricing-card.featured .price span { color: #b7c1cc; }
+.pricing-card.featured .bullet-list { color: #d7dee6; }
+.pricing-card.featured .plan-fit { color: #b7c1cc; }
+.pricing-card h4 { margin-bottom: 0.45rem; }
+.plan-fit {
+  font-size: 0.85rem;
+  font-style: italic;
+  color: #6b7480;
+  margin: 0 0 1.2rem;
+}
+.pricing-card .price {
+  font-family: var(--font-heading);
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: 1.1rem;
+  letter-spacing: -0.01em;
+}
+.pricing-card .price span {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #4a545e;
+  margin-left: 0.35em;
+}
+.pricing-card .bullet-list {
+  margin: 0 0 1.6rem;
+  font-size: 0.9rem;
+  color: #4a545e;
+  flex-grow: 1;
+}
+.pricing-card .bullet-list li { margin-bottom: 0.45em; }
+.pricing-card .btn {
+  align-self: stretch;
+  text-align: center;
+}
+.pricing-reassurance {
+  margin-top: 1.6rem;
+  color: #4a545e;
+  font-size: 0.95rem;
+}
+
+/* Navy fill instead of a white card with a navy accent border — another
+   contained dark-contrast moment in an otherwise light section, and it
+   makes the free-assessment path visually distinct from the paid pricing
+   cards above it. */
+.assessment-callout {
+  margin-top: 2.25rem;
+  padding: 1.9rem;
+  background: linear-gradient(160deg, var(--navy) 0%, var(--navy-deep) 100%);
+  border: none;
+  border-left: 4px solid var(--gold);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-navy);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.35rem;
+}
+.assessment-callout-text h4 {
+  font-size: 1.05rem;
+  margin-bottom: 0.35rem;
+  color: var(--white);
+}
+.assessment-callout-text p {
+  margin: 0;
+  color: #d7dee6;
+  font-size: 0.92rem;
+  max-width: 46ch;
+}
+.assessment-callout .btn {
+  flex-shrink: 0;
+}
+.assessment-callout .btn.btn-secondary {
+  color: var(--white);
+  border-color: rgba(255, 255, 255, 0.55);
+}
+.assessment-callout .btn.btn-secondary:hover {
+  background: var(--white);
+  color: var(--navy);
+}
+
+/* ---------- Resume ---------- */
+.resume .btn[aria-disabled="true"] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ---------- Closing CTA ---------- */
+.closing-cta {
+  position: relative;
+  background: radial-gradient(ellipse 70% 100% at 50% 100%, rgba(203, 168, 105, 0.14), transparent 60%), var(--navy);
+  color: var(--white);
+  text-align: center;
+  overflow: hidden;
+}
+.closing-cta h2 { color: var(--white); }
+.closing-cta p { color: #d7dee6; margin-bottom: 1.85rem; position: relative; z-index: 1; }
+
+/* ---------- Contact section extras ---------- */
+.lede-sm {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  color: var(--navy);
+  font-weight: 500;
+}
+.direct-contact {
+  font-weight: 600;
+  margin: 1.35rem 0 0.5rem;
+}
+.direct-contact a { color: var(--navy); }
+
+/* ---------- Contact form ---------- */
+.contact-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.35rem;
+  margin-top: 2.25rem;
+}
+.form-row { display: flex; flex-direction: column; border: none; padding: 0; margin: 0; }
+.form-row.full { grid-column: 1 / -1; }
+.form-row label,
+.form-row legend {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 0.45em;
+  padding: 0;
+}
+.form-row input,
+.form-row select,
+.form-row textarea {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  padding: 0.7em 0.8em;
+  border: 1px solid #c7cdd3;
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  color: var(--charcoal);
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+.form-row input:focus,
+.form-row select:focus,
+.form-row textarea:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 4px var(--gold-soft);
+  outline: none;
+}
+.contact-form .btn {
+  grid-column: 1 / -1;
+  justify-self: start;
+}
+.form-status {
+  grid-column: 1 / -1;
+  margin: 0;
+  font-weight: 600;
+}
+
+.checkbox-group,
+.radio-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.55rem 1rem;
+}
+.checkbox-group label,
+.radio-group label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5em;
+  font-size: 0.92rem;
+  font-weight: 400;
+  color: var(--charcoal);
+}
+.checkbox-group input,
+.radio-group input {
+  margin-top: 0.25em;
+}
+
+.disclaimer {
+  font-size: 0.82rem;
+  color: #6b7480;
+  border-top: 1px solid var(--border);
+  padding-top: 1rem;
+  margin-top: 0.5rem;
+}
+
+.thank-you {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--gold);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  padding: 2.25rem;
+  margin-top: 2.25rem;
+}
+.thank-you h3 { margin-bottom: 0.8rem; }
+
+.schedule-cta {
+  margin-top: 2.75rem;
+  padding-top: 2.25rem;
+  border-top: 1px solid var(--border);
+}
+.schedule-cta-label {
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 0.8rem;
+}
+.schedule-cta-primary {
+  margin-top: 1.6rem;
+  padding: 1.6rem;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-top: none;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+}
+.schedule-cta-primary .schedule-cta-label { margin-bottom: 1rem; }
+.form-divider {
+  margin: 2.25rem 0 0;
+  text-align: center;
+  color: #6b7480;
+  font-size: 0.9rem;
+  position: relative;
+}
+
+@media (max-width: 640px) {
+  .contact-form { grid-template-columns: 1fr; }
+  .checkbox-group,
+  .radio-group { grid-template-columns: 1fr; }
+}
+
+/* ---------- Legal pages (privacy.html / terms.html) ---------- */
+.legal-page main .container.narrow h2 {
+  margin-top: 2.25rem;
+}
+.legal-page main .container.narrow h2:first-of-type {
+  margin-top: 0;
+}
+.legal-effective-date {
+  color: #6b7480;
+  font-size: 0.9rem;
+  margin-bottom: 2.25rem;
+}
+.legal-page main .container.narrow ul { margin-bottom: 1.5rem; }
+.legal-page main .container.narrow p { color: #333c45; }
+
+/* ---------- Footer ---------- */
+.site-footer {
+  background: var(--navy-deep);
+  color: #c3ccd6;
+  padding: 3rem 0;
+  text-align: center;
+  font-size: 0.9rem;
+}
+.footer-org {
+  color: var(--white);
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+  font-family: var(--font-heading);
+}
+.footer-meta { margin-bottom: 0.8rem; }
+.footer-links a {
+  color: #c3ccd6;
+  margin: 0 0.45rem;
+}
+.footer-links a:hover { color: var(--gold-light); }
+.footer-legal {
+  margin-top: 1.1rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.8rem;
+  color: #8b96a3;
+}
+.footer-legal a { color: #8b96a3; margin: 0 0.3rem; }
+.footer-legal a:hover { color: var(--gold-light); }
+.footer-legal .manage-cookies-link {
+  color: #8b96a3;
+  margin: 0 0.3rem;
+  text-decoration: underline;
+}
+.footer-legal .manage-cookies-link:hover { color: var(--gold-light); }
+
+/* ---------- Responsive nav ---------- */
+/* Raised from the original 860px: the full nav (brand + 5 items + CTA
+   button) measured genuinely cramped in the 860-1024px tablet-landscape
+   range during a real-device audit — buttons nearly touching the
+   container edge with no breathing room. 1024px matches common
+   tablet-landscape widths (iPad 1024, and close to iPad Air/Pro's ~1180),
+   so tablets in landscape now reliably get the hamburger instead of a
+   squeezed desktop nav. */
+@media (max-width: 1024px) {
+  .nav-toggle { display: block; }
+  .btn-nav-mobile {
+    display: inline-block;
+    padding: 0.5em 1em;
+    font-size: 0.82rem;
+  }
+  .nav-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    box-shadow: var(--shadow-lg);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem 1.5rem 1.5rem;
+    gap: 1rem;
+    display: none;
+  }
+  .nav-menu.is-open { display: flex; }
+  .btn-nav { width: 100%; text-align: center; }
+
+  /* Dropdown becomes an inline accordion inside the mobile menu — hover-style
+     absolute panels don't work on touch, and there's no room for them. */
+  .nav-item-dropdown { width: 100%; }
+  .nav-dropdown-toggle { width: 100%; justify-content: space-between; padding: 0.25rem 0; }
+  .nav-dropdown-menu {
+    position: static;
+    transform: none;
+    opacity: 1;
+    visibility: visible;
+    display: none;
+    width: 100%;
+    box-shadow: none;
+    border: none;
+    border-left: 2px solid var(--border);
+    margin-top: 0.5rem;
+    padding: 0 0 0 0.25rem;
+  }
+  .nav-item-dropdown.is-open .nav-dropdown-menu { display: block; }
+  .nav-dropdown-menu li a { padding: 0.5rem 0.75rem; }
+}
+
+/* ==========================================================================
+   SELF-ASSESSMENT TOOL (assessment.html)
+   ========================================================================== */
+
+.assessment-intro {
+  position: relative;
+  background:
+    radial-gradient(ellipse 60% 60% at 85% 0%, rgba(203, 168, 105, 0.18), transparent 55%),
+    linear-gradient(165deg, var(--navy) 0%, var(--navy-deep) 100%);
+  color: var(--white);
+  padding: clamp(3rem, 8vw, 5.5rem) 1.5rem;
+  overflow: hidden;
+}
+.eyebrow-dark {
+  color: var(--gold-light);
+}
+.assessment-intro h1 { color: var(--white); }
+.hero-sub-light {
+  color: #d7dee6;
+  font-size: 1.08rem;
+  max-width: 58ch;
+  margin: 0 auto;
+}
+
+.assessment-progress {
+  position: sticky;
+  /* --header-height is set by BaseLayout's script from the header's real
+     rendered height, since the minimal header can wrap to 2-3 rows on
+     narrow phones — a fixed guess would sit underneath a wrapped header. */
+  top: calc(var(--header-height, 4.9rem) + 0.4rem);
+  z-index: 20;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(10px);
+  padding: 0.9rem 0 0.75rem;
+  margin-bottom: 1.75rem;
+  border-bottom: 1px solid var(--border);
+}
+.assessment-progress-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--navy);
+  margin: 0 0 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.assessment-progress-track {
+  display: block;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--light-gray);
+  overflow: hidden;
+}
+.assessment-progress-fill {
+  display: block;
+  height: 100%;
+  width: 20%;
+  background: linear-gradient(90deg, var(--gold-accessible), var(--gold-light));
+  border-radius: 999px;
+  transition: width 320ms ease;
+}
+
+.pillar-group {
+  margin-bottom: 2.75rem;
+  padding-bottom: 1rem;
+  scroll-margin-top: 5.75rem;
+}
+.pillar-group + .pillar-group {
+  border-top: 1px solid var(--border);
+  padding-top: 2.25rem;
+}
+.pillar-heading {
+  color: var(--navy);
+  font-size: 1.3rem;
+  margin-bottom: 1.35rem;
+}
+
+.likert {
+  border: none;
+  padding: 0;
+  margin: 0 0 1.9rem;
+}
+.likert legend {
+  font-size: 0.98rem;
+  font-weight: 500;
+  color: var(--charcoal);
+  margin-bottom: 0.8rem;
+  padding: 0;
+  white-space: normal;
+}
+.likert-scale {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.55rem;
+}
+.likert-scale label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.8rem 0.4rem;
+  cursor: pointer;
+  text-align: center;
+  transition: border-color var(--transition), background var(--transition), transform var(--transition), box-shadow var(--transition);
+}
+.likert-scale label:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+.likert-scale label:has(input:checked) {
+  border-color: var(--gold);
+  background: #fbf6ec;
+  box-shadow: 0 0 0 3px var(--gold-soft);
+}
+.likert-scale input {
+  margin: 0 0 0.15rem;
+}
+.likert-scale span {
+  font-weight: 700;
+  color: var(--navy);
+  font-family: var(--font-heading);
+}
+.likert-scale small {
+  font-size: 0.7rem;
+  color: #6b7480;
+  line-height: 1.2;
+}
+
+.assessment-submit {
+  text-align: center;
+  padding-top: 1rem;
+}
+.assessment-submit .form-status {
+  margin-top: 0.75rem;
+  font-weight: 600;
+  color: var(--gold-accessible);
+}
+
+/* ---------- Results ---------- */
+.assessment-results {
+  margin-top: 1rem;
+  padding-top: 1rem;
+}
+.results-score {
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+.results-score-num {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 4rem;
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+.results-score-band {
+  display: inline-block;
+  margin-top: 0.6rem;
+  font-weight: 700;
+  color: var(--navy);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.95rem;
+}
+.results-band-desc {
+  text-align: center;
+  max-width: 560px;
+  margin: 0.6rem auto 2.75rem;
+  color: #4a545e;
+}
+.results-avg-overall {
+  text-align: center;
+  max-width: 560px;
+  margin: -1.9rem auto 2.75rem;
+  font-size: 0.9rem;
+  color: #4a545e;
+}
+.results-avg-overall strong { color: var(--navy); }
+.results-avg-caveat {
+  display: block;
+  font-size: 0.78rem;
+  color: #8a94a0;
+  margin-top: 0.2rem;
+}
+.results-narrative-loading {
+  text-align: center;
+  max-width: 560px;
+  margin: -1.6rem auto 2.75rem;
+  color: #9aa2ab;
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+.results-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  margin: 1.35rem 0 2.75rem;
+}
+.results-bar-row {
+  display: grid;
+  grid-template-columns: 1fr 2fr auto;
+  align-items: center;
+  gap: 0.8rem;
+}
+.results-bar-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--navy);
+  text-decoration-color: var(--gold);
+}
+.results-bar-label:hover { color: var(--gold-accessible); }
+.results-priority .link-more {
+  display: inline-block;
+  margin-top: 0.75rem;
+}
+.results-bar-track {
+  display: block;
+  position: relative;
+  height: 10px;
+  background: var(--light-gray);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.results-bar-fill {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold-accessible), var(--gold));
+  border-radius: 999px;
+  transition: width var(--transition-slow);
+}
+.results-bar-avg-marker {
+  position: absolute;
+  top: -2px;
+  bottom: -2px;
+  width: 2px;
+  background: var(--navy);
+}
+.results-bar-avg {
+  grid-column: 2 / 3;
+  font-size: 0.78rem;
+  color: #6b7480;
+  margin-top: 0.2rem;
+}
+.results-bar-avg strong { color: var(--navy); }
+.results-bar-pct {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #4a545e;
+  min-width: 2.5em;
+  text-align: right;
+}
+
+.results-priority {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--gold);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  padding: 1.6rem;
+  margin-bottom: 2.25rem;
+}
+.results-priority .subhead { margin-top: 0; border: none; padding-bottom: 0; }
+.results-priority p { margin: 0; color: #4a545e; }
+
+.results-recommendation {
+  background: linear-gradient(160deg, var(--navy) 0%, var(--navy-deep) 100%);
+  color: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-navy);
+  padding: 1.6rem;
+  margin-bottom: 2.25rem;
+}
+.results-recommendation .subhead { margin-top: 0; border: none; padding-bottom: 0; color: var(--white); }
+.results-recommendation p { margin: 0 0 1rem; color: #d7dee6; }
+.results-recommendation .btn-secondary {
+  border-color: var(--gold-light);
+  color: var(--gold-light);
+}
+.results-recommendation .btn-secondary:hover {
+  background: var(--gold-light);
+  color: var(--navy);
+}
+
+.results-disclaimer {
+  font-size: 0.82rem;
+  color: #6b7480;
+  border-top: 1px solid var(--border);
+  padding-top: 1rem;
+  margin-bottom: 2.75rem;
+}
+.results-disclaimer p { margin: 0; }
+
+.results-related {
+  font-size: 0.88rem;
+  color: #4a545e;
+  background: var(--light-gray);
+  border-radius: var(--radius);
+  padding: 1.1rem 1.35rem;
+  margin-bottom: 2.75rem;
+}
+.results-related p { margin: 0; }
+.results-related a { color: var(--gold-accessible); text-decoration: underline; }
+
+.results-cta {
+  text-align: center;
+  background: radial-gradient(ellipse 70% 100% at 50% 100%, rgba(203, 168, 105, 0.14), transparent 60%), var(--navy);
+  color: var(--white);
+  border-radius: var(--radius);
+  padding: 2.75rem 1.6rem;
+  margin-bottom: 2.75rem;
+}
+.results-cta h3 { color: var(--white); margin-bottom: 0.55rem; }
+.results-cta p { color: #d7dee6; margin-bottom: 1.6rem; }
+.hero-ctas.center { justify-content: center; }
+.results-cta .btn-secondary {
+  color: var(--white);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+.results-cta .btn-secondary:hover {
+  background: var(--white);
+  color: var(--navy);
+}
+
+.results-email-form {
+  max-width: 480px;
+  margin: 0 auto 2.25rem;
+  text-align: center;
+}
+.results-email-form label {
+  display: block;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 0.8rem;
+}
+.results-email-row {
+  display: flex;
+  gap: 0.8rem;
+}
+.results-email-row input {
+  flex: 1;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  padding: 0.7em 0.8em;
+  border: 1px solid #c7cdd3;
+  border-radius: var(--radius-sm);
+}
+.results-email-row input:focus { border-color: var(--gold); box-shadow: 0 0 0 4px var(--gold-soft); outline: none; }
+.results-email-form .form-status {
+  margin-top: 0.75rem;
+  font-weight: 600;
+  color: var(--gold-accessible);
+}
+
+.results-retake {
+  display: block;
+  margin: 0 auto;
+  background: none;
+  border: none;
+  color: var(--navy);
+  text-decoration: underline;
+  text-decoration-color: var(--gold);
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+}
+.results-retake:hover { color: var(--gold-accessible); }
+
+@media (max-width: 640px) {
+  .likert-scale {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.3rem;
+  }
+  .likert-scale label { padding: 0.5rem 0.2rem; }
+  .likert-scale small { display: none; }
+  .results-bar-row {
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+  }
+  .results-bar-pct { text-align: left; }
+  .results-bar-avg { grid-column: auto; }
+  .results-email-row { flex-direction: column; }
+}
+
+/* ---------- Cookie consent banner ---------- */
+.btn-small {
+  padding: 0.6em 1.3em;
+  font-size: 0.85rem;
+}
+.cookie-banner {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1200;
+  background: var(--navy-deep);
+  color: var(--white);
+  box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.3);
+  transform: translateY(100%);
+  transition: transform var(--transition-slow);
+}
+.cookie-banner-visible {
+  transform: translateY(0);
+}
+.cookie-banner-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.1rem 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.cookie-banner-text {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--white);
+  flex: 1 1 320px;
+}
+.cookie-banner-text a {
+  color: var(--gold-light);
+}
+.cookie-banner-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex: 0 0 auto;
+}
+.cookie-banner .btn-secondary {
+  color: var(--white);
+  border-color: var(--white);
+}
+.cookie-banner .btn-secondary:hover {
+  background: var(--white);
+  color: var(--navy);
+}
+.manage-cookies-link {
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+}
+@media (max-width: 640px) {
+  .cookie-banner-inner {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+  .cookie-banner-actions {
+    justify-content: center;
+  }
+}
+
+/* ---------- Scroll reveal ----------
+   Elements with class="reveal" fade and slide up into place as they enter
+   the viewport (see ScrollReveal.astro). Wrapped in a prefers-reduced-motion
+   check so visitors who've asked for less motion just see the content
+   directly, with no animation applied at all. */
+/* Gated behind html.js (set by a tiny inline script in <head>, see
+   BaseLayout.astro) so .reveal only ever hides content when JavaScript is
+   confirmed running. If JS is disabled, html.js never appears and this
+   whole block never applies, so content is simply visible with no
+   animation. */
+@media (prefers-reduced-motion: no-preference) {
+  html.js .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  html.js .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

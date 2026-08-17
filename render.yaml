@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: frankly-inspired-website
+    runtime: static
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./dist
+    autoDeploy: true
+    headers:
+      - path: /*
+        name: X-Frame-Options
+        value: SAMEORIGIN

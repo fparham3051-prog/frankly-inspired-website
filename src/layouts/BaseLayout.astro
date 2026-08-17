@@ -1,0 +1,67 @@
+---
+import '../styles/global.css';
+import Footer from '../components/Footer.astro';
+import CookieConsentBanner from '../components/CookieConsentBanner.astro';
+import Analytics from '../components/Analytics.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  bodyClass?: string;
+  robotsNoindex?: boolean;
+  footerVariant?: 'home' | 'about' | 'assessment' | 'legal';
+}
+
+const { title, description, bodyClass, robotsNoindex = false, footerVariant = 'home' } = Astro.props;
+---
+
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Flips no-js -> js immediately so CSS can gate the scroll-reveal
+         effect behind confirmed JS support (see .reveal in global.css).
+         If JS is off, this never runs and content just stays visible. -->
+    <script is:inline>document.documentElement.classList.replace('no-js', 'js');</script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {robotsNoindex && <meta name="robots" content="noindex" />}
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class={bodyClass}>
+    <a class="skip-link" href="#main">Skip to main content</a>
+
+    <slot />
+
+    <Footer variant={footerVariant} />
+    <CookieConsentBanner />
+    <Analytics />
+
+    <script>
+      // Exposes the sticky header's real rendered height as --header-height,
+      // since it isn't a fixed number: the minimal header (assessment/
+      // privacy/terms) can wrap to 2-3 rows on narrow phones, and the full
+      // header's row height differs slightly by breakpoint. Anything that
+      // needs to sit "just below the header" (assessment's sticky progress
+      // bar) reads this instead of a guessed fixed offset.
+      function setHeaderHeightVar() {
+        const header = document.querySelector<HTMLElement>('.site-header');
+        if (!header) return;
+        document.documentElement.style.setProperty('--header-height', header.getBoundingClientRect().height + 'px');
+      }
+      setHeaderHeightVar();
+      window.addEventListener('resize', setHeaderHeightVar);
+      if ('ResizeObserver' in window) {
+        const header = document.querySelector('.site-header');
+        if (header) new ResizeObserver(setHeaderHeightVar).observe(header);
+      }
+    </script>
+  </body>
+</html>

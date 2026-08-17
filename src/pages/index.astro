@@ -1,17 +1,498 @@
 ---
-
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import ScrollReveal from '../components/ScrollReveal.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout
+  title="Franklin D. Parham | Nonprofit Strategy & Sustainability"
+  description="Franklin D. Parham helps nonprofit leaders strengthen sustainability through strategy, diversified revenue, organizational development, operations, and cross-sector partnerships."
+  footerVariant="home"
+>
+  <Header variant="full" />
+
+  <main id="main">
+
+    <!-- ============ HERO ============ -->
+    <section id="top" class="hero">
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow reveal">Franklin D. Parham</p>
+          <h1 class="reveal">Building stronger nonprofits for long-term impact.</h1>
+          <p class="hero-sub reveal">Executive strategy and sustainability consulting for leaders of mission-driven institutions seeking stronger revenue models, organizational systems, leadership capacity, and cross-sector partnerships.</p>
+          <div class="hero-ctas reveal">
+            <a class="btn btn-primary" href="https://calendly.com/fparham/30min" target="_blank" rel="noopener">Schedule a Strategy Conversation</a>
+            <a class="btn btn-secondary" href="#pricing">See Pricing</a>
+          </div>
+        </div>
+        <div class="hero-portrait reveal">
+          <img
+            src="/assets/images/franklin-parham-headshot.jpg"
+            alt="Franklin D. Parham, Founder and Principal of Frankly Inspired and Associates, LLC"
+            width="800"
+            height="800"
+          />
+        </div>
+      </div>
+      <div class="hero-credentials reveal">
+        <div class="hero-credential"><span class="hero-credential-num">20+</span><span>Years Leadership Experience</span></div>
+        <div class="hero-credential-divider" aria-hidden="true"></div>
+        <div class="hero-credential"><span>Sustainability Strategy</span></div>
+        <div class="hero-credential-divider" aria-hidden="true"></div>
+        <div class="hero-credential"><span>Revenue &amp; Growth</span></div>
+        <div class="hero-credential-divider" aria-hidden="true"></div>
+        <div class="hero-credential"><span>Leadership &amp; Operations</span></div>
+      </div>
+    </section>
+
+    <!-- ============ QUICK-NAV TILES ============ -->
+    <!-- Lets a visitor who won't read the whole page jump straight to the
+         path that matches their intent. Added after the Pinterest-inspired
+         design review flagged this as a flow gap: Free Assessment and
+         Contact were both more than a scroll away from the hero. -->
+    <section class="section quicknav-section">
+      <div class="container">
+        <nav class="quicknav" aria-label="Quick links">
+          <a class="quicknav-tile" href="#consulting">
+            <span class="qn-label">Consulting &amp; Pricing &rarr;</span>
+            <span class="qn-sub">Service pillars and engagement options</span>
+          </a>
+          <a class="quicknav-tile" href="/assessment">
+            <span class="qn-label">Free Assessment &rarr;</span>
+            <span class="qn-sub">Score your organization in 5 minutes</span>
+          </a>
+          <a class="quicknav-tile" href="#contact">
+            <span class="qn-label">Contact &rarr;</span>
+            <span class="qn-sub">Start a conversation</span>
+          </a>
+        </nav>
+      </div>
+    </section>
+
+    <!-- ============ POSITIONING / INTRO ============ -->
+    <section class="section positioning">
+      <div class="container narrow">
+        <p class="lede reveal">Franklin D. Parham is an institution builder and nonprofit executive with more than 20 years of leadership experience. Through Frankly Inspired and Associates, LLC, he helps mission-driven institutions translate purpose into sustainable strategy, stronger systems, and durable community impact.</p>
+        <a class="link-more reveal" href="/about">More about Franklin's background</a>
+      </div>
+    </section>
+
+    <!-- ============ AFFILIATION STRIP ============ -->
+    <!-- Early credibility signal, borrowed from the design review — same
+         board/affiliation names already listed on /about under "Board
+         Leadership & Affiliations", just surfaced sooner. -->
+    <section class="section affiliation-strip">
+      <div class="container">
+        <p class="affiliation-label reveal">Board Leadership &amp; Affiliations</p>
+        <div class="affiliation-list reveal">
+          <span>Ora Lee Smith Cancer Research Foundation</span>
+          <span>Turner Foundation for Community Advocacy</span>
+          <span>Howard Rye Institute</span>
+          <span>Association of Fundraising Professionals</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SERVICE PILLARS (homepage preview) ============ -->
+    <!-- Deliberately a scannable teaser, not a second copy of the Consulting
+         section's descriptions — full detail on each pillar lives at
+         #consulting so this doesn't repeat that content twice on one page. -->
+    <section class="section services-preview alt-bg">
+      <div class="container center">
+        <h2 class="section-title reveal">How Franklin Helps</h2>
+        <div class="pillar-tags reveal">
+          <a class="pillar-tag" href="#consulting">Sustainability Strategy</a>
+          <a class="pillar-tag" href="#consulting">Revenue &amp; Growth</a>
+          <a class="pillar-tag" href="#consulting">Leadership &amp; Operations</a>
+        </div>
+        <a class="link-more reveal" href="#consulting">See how each one works</a>
+      </div>
+    </section>
+
+    <!-- ============ DONOR CHURN CALCULATOR ============ -->
+    <!-- A small interactive moment between the pillar teaser and the dense
+         Consulting/pricing section below. Figures used: AFP Fundraising
+         Effectiveness Project 2025 sector average first-time donor
+         retention (19.4%). Purely illustrative; framed that way explicitly
+         below. -->
+    <section class="section calculator-section">
+      <div class="container narrow center">
+        <h2 class="section-title reveal">What Might First-Time Donor Churn Be Costing You?</h2>
+        <p class="section-note reveal">Sector-wide, roughly 4 in 5 first-time donors never give a second gift. A rough, illustrative estimate using your own numbers:</p>
+        <div class="calculator reveal">
+          <div class="calculator-row">
+            <label for="calc-donors">First-time donors last year</label>
+            <input type="number" id="calc-donors" min="0" step="1" placeholder="e.g. 150" inputmode="numeric" />
+          </div>
+          <div class="calculator-row">
+            <label for="calc-gift">Average first-gift size</label>
+            <div class="calculator-input-prefix">
+              <span aria-hidden="true">$</span>
+              <input type="number" id="calc-gift" min="0" step="1" placeholder="e.g. 75" inputmode="numeric" />
+            </div>
+          </div>
+        </div>
+        <p class="calculator-result" id="calculator-result" hidden>
+          At the sector-average 19.4% first-time donor retention rate, an estimated <strong id="calc-lost-donors"></strong> of those donors likely won't give again — representing roughly <strong id="calc-lost-revenue"></strong> in lost second-gift revenue this year alone.
+        </p>
+        <p class="calculator-caveat reveal">Illustrative only, based on the AFP Fundraising Effectiveness Project's 2025 sector averages — not a prediction for your specific organization.</p>
+      </div>
+    </section>
+
+    <!-- ============ CONSULTING AND ADVISORY ============ -->
+    <section id="consulting" class="section consulting alt-bg">
+      <div class="container">
+        <h2 class="section-title reveal">Strategy for organizations that want to last.</h2>
+        <p class="section-note reveal">Frankly Inspired and Associates, LLC works with mission-driven institutions that need more than a short-term fix. Engagements are designed around the organization's context, capacity, leadership needs, and sustainability goals.</p>
+
+        <!-- Three headline offerings, not five. The underlying five-dimension
+             measurement framework (Sustainability Strategy / Revenue
+             Diversification / Leadership & Org Dev / Operations &
+             Infrastructure / Partnership & Ecosystem) still lives, unchanged,
+             in the Self-Assessment. All five pillar-* anchor ids are
+             preserved below (two of them as invisible anchors inside a
+             merged card) so the assessment results page's per-pillar links
+             still resolve correctly. -->
+        <h3 class="subhead reveal">Service Pillars</h3>
+        <div class="card-grid">
+          <div class="card reveal" id="pillar-sustainability">
+            <h4>Sustainability Strategy</h4>
+            <p>Organizational assessment, strategic priorities, risk identification, sustainability roadmaps, and implementation planning.</p>
+          </div>
+          <div class="card reveal" id="pillar-revenue">
+            <span id="pillar-partnership" class="anchor-offset"></span>
+            <h4>Revenue &amp; Growth</h4>
+            <p>Individual donor stewardship and retention, fundraising strategy, grant and public-funding strategy, revenue-pipeline design, and the cross-sector partnerships (education, workforce, government, corporate, philanthropic, and community) that sustain them.</p>
+          </div>
+          <div class="card reveal" id="pillar-leadership">
+            <span id="pillar-operations" class="anchor-offset"></span>
+            <h4>Leadership &amp; Operations</h4>
+            <p>Executive advising and change leadership, paired with the workflows, KPIs, CRM/Salesforce practices, and AI readiness guidance that keep an organization running well. 1:1 leadership coaching is available as its own engagement.</p>
+          </div>
+        </div>
+
+        <h3 class="subhead reveal">Engagement Model</h3>
+        <ol class="process-list reveal">
+          <li>Discovery Conversation</li>
+          <li>Organizational Assessment</li>
+          <li>Recommended Scope</li>
+          <li>Engagement</li>
+          <li>Review and Next Steps</li>
+        </ol>
+
+        <h3 id="pricing" class="subhead reveal">Engagement Options</h3>
+        <div class="pricing-grid">
+          <div class="pricing-card reveal" id="pricing-advisory">
+            <span class="recommended-badge" hidden>Recommended for you</span>
+            <h4>Strategic Advisory Retainer</h4>
+            <p class="price">$2,500<span>/month</span></p>
+            <p class="plan-fit">Best fit if you need experienced strategic guidance, not full hands-on implementation.</p>
+            <ul class="bullet-list">
+              <li>Two executive strategy sessions</li>
+              <li>Sustainability and revenue guidance</li>
+              <li>Stakeholder strategy</li>
+              <li>Document review</li>
+              <li>Limited email support</li>
+              <li>Three-month recommended minimum</li>
+            </ul>
+            <a class="btn btn-secondary plan-cta" href="#contact" data-plan="Nonprofit Sustainability Strategy,Fundraising and Revenue Diversification">Start with This Retainer</a>
+          </div>
+          <div class="pricing-card featured reveal" id="pricing-implementation">
+            <span class="recommended-badge" hidden>Recommended for you</span>
+            <h4>Strategic Implementation Retainer</h4>
+            <p class="price">$3,500<span>/month</span></p>
+            <p class="plan-fit">Best fit if you're ready to implement across sustainability, revenue, and operations at the same time.</p>
+            <ul class="bullet-list">
+              <li>Weekly engagement</li>
+              <li>Sustainability roadmap implementation</li>
+              <li>Revenue pipeline strategy and donor stewardship systems</li>
+              <li>Operational systems / KPIs</li>
+              <li>Leadership alignment</li>
+              <li>Expanded project support</li>
+            </ul>
+            <a class="btn btn-primary plan-cta" href="#contact" data-plan="Nonprofit Sustainability Strategy,Fundraising and Revenue Diversification,Organizational Development and Operations,Executive and Leadership Advisory">Start with This Retainer</a>
+          </div>
+          <div class="pricing-card reveal">
+            <h4>Project-Based Engagements</h4>
+            <p class="price">Custom<span>scope &amp; fee</span></p>
+            <p class="plan-fit">Best fit for a single, clearly defined project rather than an ongoing retainer.</p>
+            <ul class="bullet-list">
+              <li>For defined projects such as sustainability assessments, revenue diversification plans, operating systems, partnership strategies, and leadership planning.</li>
+            </ul>
+            <a class="btn btn-secondary plan-cta" href="#contact" data-plan="Other">Discuss a Project</a>
+          </div>
+          <div class="pricing-card reveal">
+            <h4>1:1 Executive Coaching</h4>
+            <p class="price">$350<span>/session</span></p>
+            <p class="plan-fit">Best fit as a standalone engagement or alongside either retainer, for leaders who want dedicated, confidential support.</p>
+            <ul class="bullet-list">
+              <li>60-minute 1:1 sessions</li>
+              <li>Executive decision-making and change leadership</li>
+              <li>Confidential space outside board and staff dynamics</li>
+              <li>Scheduled as needed, no monthly minimum</li>
+            </ul>
+            <a class="btn btn-secondary plan-cta" href="#contact" data-plan="1:1 Leadership Coaching">Book a Coaching Session</a>
+          </div>
+        </div>
+        <p class="pricing-reassurance reveal">Not sure which option fits? <a href="#contact">Start with a conversation</a>, and I'll help you figure out the right scope.</p>
+
+        <div class="assessment-callout reveal">
+          <div class="assessment-callout-text">
+            <h4>Not ready for a conversation yet?</h4>
+            <p>Take the free, 5-minute Nonprofit Sustainability Self-Assessment first. It scores your organization across five underlying dimensions and points to where to focus.</p>
+          </div>
+          <a class="btn btn-secondary" href="/assessment">Take the Free Assessment</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section id="contact" class="section contact alt-bg">
+      <div class="container narrow">
+        <h2 class="section-title reveal">Start a Conversation</h2>
+        <p class="lede-sm reveal">Strong missions need sustainable institutions. If your organization is navigating growth, revenue pressure, operational complexity, leadership transition, or the need for a clearer sustainability strategy, start with a conversation.</p>
+        <p class="reveal">Tell me a little about your organization, where you are today, and what you're working to strengthen. I'll review your inquiry and follow up regarding whether Frankly Inspired may be a good fit.</p>
+
+        <p class="direct-contact reveal">
+          <a href="mailto:franklin@franklyinspired.associates">franklin@franklyinspired.associates</a>
+          <span aria-hidden="true">&middot;</span>
+          <a href="tel:+12403918283">240-391-8283</a>
+        </p>
+
+        <div class="schedule-cta schedule-cta-primary reveal">
+          <p class="schedule-cta-label">Already know you'd like to talk?</p>
+          <a class="btn btn-primary" href="https://calendly.com/fparham/30min" target="_blank" rel="noopener">Schedule a 30 Minute Conversation</a>
+        </div>
+
+        <p class="form-divider">Prefer to write it out first? Share a few details below and I'll follow up.</p>
+
+        <!-- This form is live: posts to the frankly-inspired-backend
+             /api/contact endpoint, which sends both the visitor's
+             acknowledgement email and the internal lead-notification email.
+             action="#" is inert on purpose — submission is handled entirely
+             by the fetch call below, which calls preventDefault() first. -->
+        <form class="contact-form" id="contact-form" action="#" method="POST" novalidate>
+          <!-- Honeypot: real visitors never see or fill this in (see .hp-field
+               in global.css). A filled value means a bot submitted the form. -->
+          <div class="hp-field" aria-hidden="true">
+            <label for="hp_field">Leave this field blank</label>
+            <input type="text" id="hp_field" name="hp_field" tabindex="-1" autocomplete="off" />
+          </div>
+          <div class="form-row">
+            <label for="name">Name*</label>
+            <input type="text" id="name" name="name" placeholder="Your name" required />
+          </div>
+          <div class="form-row">
+            <label for="organization">Organization*</label>
+            <input type="text" id="organization" name="organization" placeholder="Organization name" required />
+          </div>
+          <div class="form-row">
+            <label for="title">Title / Role*</label>
+            <input type="text" id="title" name="title" placeholder="Your role" required />
+          </div>
+          <div class="form-row">
+            <label for="email">Email*</label>
+            <input type="email" id="email" name="email" placeholder="Email address" required />
+          </div>
+          <div class="form-row">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" name="phone" placeholder="Optional" />
+          </div>
+          <div class="form-row">
+            <label for="org-website">Organization Website</label>
+            <input type="url" id="org-website" name="org_website" placeholder="Optional" />
+          </div>
+
+          <fieldset class="form-row full">
+            <legend>How can I support your organization?*</legend>
+            <div class="checkbox-group">
+              <label><input type="checkbox" name="support_area" value="Nonprofit Sustainability Strategy" /> Nonprofit Sustainability Strategy</label>
+              <label><input type="checkbox" name="support_area" value="Fundraising and Revenue Diversification" /> Fundraising and Revenue Diversification</label>
+              <label><input type="checkbox" name="support_area" value="Organizational Development and Operations" /> Organizational Development and Operations</label>
+              <label><input type="checkbox" name="support_area" value="Executive and Leadership Advisory" /> Executive and Leadership Advisory</label>
+              <label><input type="checkbox" name="support_area" value="1:1 Leadership Coaching" /> 1:1 Leadership Coaching</label>
+              <label><input type="checkbox" name="support_area" value="Partnership and Ecosystem Strategy" /> Partnership and Ecosystem Strategy</label>
+              <label><input type="checkbox" name="support_area" value="AI Readiness and Adoption Advisory" /> AI Readiness and Adoption Advisory</label>
+              <label><input type="checkbox" name="support_area" value="Speaking" /> Speaking</label>
+              <label><input type="checkbox" name="support_area" value="Board or Advisory Service" /> Board or Advisory Service</label>
+              <label><input type="checkbox" name="support_area" value="Other" /> Other</label>
+            </div>
+          </fieldset>
+
+          <div class="form-row full">
+            <label for="challenge">What challenge or opportunity are you currently navigating?*</label>
+            <textarea id="challenge" name="challenge" rows="4" placeholder="Open text field" required></textarea>
+          </div>
+
+          <fieldset class="form-row full">
+            <legend>What is your desired timeline?</legend>
+            <div class="radio-group">
+              <label><input type="radio" name="timeline" value="As soon as possible" /> As soon as possible</label>
+              <label><input type="radio" name="timeline" value="Within 30 days" /> Within 30 days</label>
+              <label><input type="radio" name="timeline" value="Within 3 months" /> Within 3 months</label>
+              <label><input type="radio" name="timeline" value="Within 6 months" /> Within 6 months</label>
+              <label><input type="radio" name="timeline" value="Exploring options" /> Exploring options</label>
+            </div>
+          </fieldset>
+
+          <div class="form-row full">
+            <label for="referral">How did you hear about Frankly Inspired?</label>
+            <input type="text" id="referral" name="referral" />
+          </div>
+
+          <p class="form-row full disclaimer">By submitting this form, you agree that Frankly Inspired and Associates, LLC may use the information provided to respond to your inquiry and communicate with you regarding potential services. Submitting this form does not create a consultant client relationship.</p>
+
+          <button type="submit" class="btn btn-primary">Submit Inquiry</button>
+          <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+        </form>
+
+        <!-- Client-side "thank you" state, shown after submit -->
+        <div class="thank-you" id="thank-you" hidden>
+          <h3>Thank you for reaching out.</h3>
+          <p>Your inquiry has been received. I appreciate your interest in working with Frankly Inspired and Associates, LLC. I'll review the information you've provided and follow up regarding next steps.</p>
+          <p>If you'd like to reserve time now, you can schedule a 30 minute introductory conversation below.</p>
+          <a class="btn btn-secondary" href="https://calendly.com/fparham/30min" target="_blank" rel="noopener">Schedule a Conversation &rarr;</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <ScrollReveal />
+</BaseLayout>
+
+<script>
+  // UPDATE THIS once frankly-inspired-backend is deployed to Render — see
+  // that repo's README.md. Same value as assessment.astro's API_BASE.
+  const API_BASE = 'https://frankly-inspired-api.onrender.com';
+
+  // ---------- Pricing card CTAs pre-check the matching service area ----------
+  // data-plan accepts a comma-separated list, since a single retainer often
+  // covers more than one service-area checkbox (e.g. the Implementation
+  // Retainer's bullets span sustainability, revenue, operations, and
+  // leadership — pre-checking just one box under-represented what someone
+  // clicking it was actually signing up for).
+  document.querySelectorAll<HTMLAnchorElement>('.plan-cta[data-plan]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const plans = (btn.getAttribute('data-plan') || '').split(',');
+      plans.forEach((plan) => {
+        const checkbox = document.querySelector<HTMLInputElement>(
+          `input[name="support_area"][value="${plan.trim()}"]`
+        );
+        if (checkbox) checkbox.checked = true;
+      });
+    });
+  });
+
+  // ---------- Contact form ----------
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const status = document.getElementById('form-status');
+  const thankYou = document.getElementById('thank-you');
+  const submitBtn = form?.querySelector<HTMLButtonElement>('button[type="submit"]');
+
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const checked = form.querySelectorAll('input[name="support_area"]:checked');
+      if (checked.length === 0) {
+        if (status) status.textContent = 'Please select at least one option under "How can I support your organization?"';
+        return;
+      }
+
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      const formData = new FormData(form);
+      const payload = {
+        name: formData.get('name'),
+        organization: formData.get('organization'),
+        title: formData.get('title'),
+        email: formData.get('email'),
+        phone: formData.get('phone'),
+        org_website: formData.get('org_website'),
+        support_area: formData.getAll('support_area'),
+        challenge: formData.get('challenge'),
+        timeline: formData.get('timeline'),
+        referral: formData.get('referral'),
+        hp_field: formData.get('hp_field'),
+      };
+
+      if (status) status.textContent = 'Sending...';
+      if (submitBtn) submitBtn.disabled = true;
+
+      fetch(API_BASE + '/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+        .then((res) => res.json().then((data) => ({ ok: res.ok, data })))
+        .then((result) => {
+          if (!result.ok || !result.data.ok) {
+            throw new Error((result.data && result.data.error) || 'Something went wrong.');
+          }
+          if (status) status.textContent = '';
+          form.hidden = true;
+          if (thankYou) thankYou.hidden = false;
+        })
+        .catch((err) => {
+          if (status) status.textContent = err.message + ' You can also email franklin@franklyinspired.associates directly.';
+        })
+        .finally(() => {
+          if (submitBtn) submitBtn.disabled = false;
+        });
+    });
+  }
+
+  // ---------- Recommended-tier highlight ----------
+  // The self-assessment results page links to /#pricing-advisory or
+  // #pricing-implementation based on the visitor's score band. The browser
+  // already scrolls there natively via the hash; this just makes the
+  // specific recommended card unmistakable rather than merely scrolled-to.
+  (function highlightRecommendedTier() {
+    const hash = window.location.hash.replace('#', '');
+    if (hash !== 'pricing-advisory' && hash !== 'pricing-implementation') return;
+    const targetCard = document.getElementById(hash);
+    if (!targetCard) return;
+    targetCard.classList.add('is-recommended');
+    const badge = targetCard.querySelector<HTMLElement>('.recommended-badge');
+    if (badge) badge.hidden = false;
+  })();
+
+  // ---------- Donor churn calculator ----------
+  // Sector-average first-time donor retention rate (19.4%), from the AFP
+  // Fundraising Effectiveness Project's 2025 data — same figure cited in
+  // the homepage copy. Kept as a single named constant so it only has to be
+  // updated in one place if the sector figure is refreshed later.
+  const FIRST_TIME_RETENTION_RATE = 0.194;
+
+  const calcDonorsInput = document.getElementById('calc-donors') as HTMLInputElement | null;
+  const calcGiftInput = document.getElementById('calc-gift') as HTMLInputElement | null;
+  const calcResultEl = document.getElementById('calculator-result') as HTMLElement | null;
+  const calcLostDonorsEl = document.getElementById('calc-lost-donors');
+  const calcLostRevenueEl = document.getElementById('calc-lost-revenue');
+
+  function updateCalculator() {
+    const donors = Number(calcDonorsInput?.value);
+    const gift = Number(calcGiftInput?.value);
+
+    if (!donors || donors <= 0 || !gift || gift <= 0) {
+      if (calcResultEl) calcResultEl.hidden = true;
+      return;
+    }
+
+    const lostDonors = Math.round(donors * (1 - FIRST_TIME_RETENTION_RATE));
+    const lostRevenue = lostDonors * gift;
+
+    if (calcLostDonorsEl) calcLostDonorsEl.textContent = lostDonors.toLocaleString('en-US') + ' donors';
+    if (calcLostRevenueEl) calcLostRevenueEl.textContent = '$' + Math.round(lostRevenue).toLocaleString('en-US');
+    if (calcResultEl) calcResultEl.hidden = false;
+  }
+
+  if (calcDonorsInput && calcGiftInput) {
+    calcDonorsInput.addEventListener('input', updateCalculator);
+    calcGiftInput.addEventListener('input', updateCalculator);
+  }
+</script>

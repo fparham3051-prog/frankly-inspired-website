@@ -1,0 +1,109 @@
+---
+// Loaded on every page. Injects a bottom banner on first visit, remembers
+// the visitor's choice in localStorage, and exposes a small window API so
+// Analytics.astro can check consent before loading anything, and so the
+// footer's "Manage Cookie Preferences" button can reopen it.
+//
+// Sets no cookie itself — this is the consent layer Analytics.astro checks
+// before it loads anything.
+---
+
+<script>
+  const STORAGE_KEY = 'fi_cookie_consent'; // 'accepted' | 'declined'
+  const CHANGE_EVENT = 'fi-cookie-consent-changed';
+
+  function getConsent(): string | null {
+    try {
+      return window.localStorage.getItem(STORAGE_KEY);
+    } catch {
+      // localStorage unavailable (privacy mode, etc.) — treat as no choice made yet.
+      return null;
+    }
+  }
+
+  function setConsent(value: string) {
+    try {
+      window.localStorage.setItem(STORAGE_KEY, value);
+    } catch {
+      // Ignore — banner will just reappear next visit if storage isn't available.
+    }
+    document.dispatchEvent(new CustomEvent(CHANGE_EVENT, { detail: { consent: value } }));
+  }
+
+  function buildBanner(): HTMLDivElement {
+    const banner = document.createElement('div');
+    banner.id = 'cookie-consent-banner';
+    banner.className = 'cookie-banner';
+    banner.setAttribute('role', 'region');
+    banner.setAttribute('aria-label', 'Cookie consent');
+    banner.innerHTML =
+      '<div class="cookie-banner-inner">' +
+      '<p class="cookie-banner-text">This site uses essential cookies to function, and may use optional analytics cookies to understand website traffic — only if you accept them. See our <a href="/privacy">Privacy Policy</a> for details.</p>' +
+      '<div class="cookie-banner-actions">' +
+      '<button type="button" class="btn btn-secondary btn-small" id="cookie-decline">Decline</button>' +
+      '<button type="button" class="btn btn-primary btn-small" id="cookie-accept">Accept</button>' +
+      '</div>' +
+      '</div>';
+    return banner;
+  }
+
+  function showBanner() {
+    if (document.getElementById('cookie-consent-banner')) return;
+    const banner = buildBanner();
+    document.body.appendChild(banner);
+
+    document.getElementById('cookie-accept')?.addEventListener('click', () => {
+      setConsent('accepted');
+      hideBanner();
+    });
+    document.getElementById('cookie-decline')?.addEventListener('click', () => {
+      setConsent('declined');
+      hideBanner();
+    });
+
+    // Let the browser paint the element before animating it in.
+    window.requestAnimationFrame(() => {
+      banner.classList.add('cookie-banner-visible');
+    });
+  }
+
+  function hideBanner() {
+    const banner = document.getElementById('cookie-consent-banner');
+    if (!banner) return;
+    banner.classList.remove('cookie-banner-visible');
+    window.setTimeout(() => {
+      banner.parentNode?.removeChild(banner);
+    }, 300);
+  }
+
+  // Public API — used by Analytics.astro and the "Manage Cookie Preferences"
+  // footer button on every page.
+  declare global {
+    interface Window {
+      cookieConsent: {
+        get: () => string | null;
+        set: (value: string) => void;
+        reopen: () => void;
+        CHANGE_EVENT: string;
+      };
+    }
+  }
+
+  window.cookieConsent = {
+    get: getConsent,
+    set: setConsent,
+    reopen: showBanner,
+    CHANGE_EVENT,
+  };
+
+  document.addEventListener('DOMContentLoaded', () => {
+    if (!getConsent()) showBanner();
+
+    document.querySelectorAll('[data-manage-cookies]').forEach((link) => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        showBanner();
+      });
+    });
+  });
+</script>

@@ -1,0 +1,139 @@
+---
+// variant "full": brand + hamburger + full nav menu (Consulting, Free
+// Assessment, About dropdown, Contact, Schedule) with active-section
+// highlighting — used on index.html and about.html.
+// variant "minimal": brand + a simple always-visible 2-item nav — used on
+// assessment.html, privacy.html, terms.html, where there's no long page of
+// same-page anchors to track and no room needed for the full menu.
+interface Props {
+  variant?: 'full' | 'minimal';
+}
+
+const { variant = 'full' } = Astro.props;
+// Brand always returns to the homepage. Full-variant pages (home, about)
+// send it to the hero anchor, matching the original site's behavior where
+// clicking the brand from anywhere scrolls/navigates to the very top.
+const brandHref = variant === 'full' ? '/#top' : '/';
+---
+
+<header class="site-header">
+  <div class="nav-wrap">
+    <a href={brandHref} class="brand">
+      <img src="/assets/images/logo-mark.svg" alt="" class="brand-mark" width="28" height="40" />
+      Frankly Inspired
+    </a>
+
+    {variant === 'full' ? (
+      <div class="nav-actions">
+        <a class="btn btn-primary btn-nav-mobile" href="https://calendly.com/fparham/30min" target="_blank" rel="noopener">Schedule</a>
+
+        <nav class="site-nav" aria-label="Primary">
+          <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu">
+            <span class="sr-only">Menu</span>
+            <span class="nav-toggle-bar"></span>
+          </button>
+          <ul id="nav-menu" class="nav-menu">
+            <li><a href="/#consulting">Consulting</a></li>
+            <li><a href="/assessment">Free Assessment</a></li>
+            <li class="nav-item-dropdown">
+              <button type="button" class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">About <span class="nav-caret" aria-hidden="true">&#9662;</span></button>
+              <ul class="nav-dropdown-menu">
+                <li><a href="/about#about">About Franklin</a></li>
+                <li><a href="/about#experience">Experience &amp; Impact</a></li>
+                <li><a href="/about#speaking">Speaking</a></li>
+                <li><a href="/about#resume">Resume</a></li>
+              </ul>
+            </li>
+            <li><a href="/#contact">Contact</a></li>
+            <li><a class="btn btn-primary btn-nav" href="https://calendly.com/fparham/30min" target="_blank" rel="noopener">Schedule a Conversation</a></li>
+          </ul>
+        </nav>
+      </div>
+    ) : (
+      <div class="nav-actions">
+        <nav class="site-nav" aria-label="Primary">
+          <ul class="nav-menu-minimal">
+            <li><a href="/">Back to Site</a></li>
+            <li><a class="btn btn-primary btn-nav" href="https://calendly.com/fparham/30min" target="_blank" rel="noopener">Schedule a Conversation</a></li>
+          </ul>
+        </nav>
+      </div>
+    )}
+  </div>
+</header>
+
+{variant === 'full' && (
+  <script>
+    // ---------- Mobile nav toggle ----------
+    const navToggle = document.querySelector<HTMLButtonElement>('.nav-toggle');
+    const navMenu = document.getElementById('nav-menu');
+
+    if (navToggle && navMenu) {
+      navToggle.addEventListener('click', () => {
+        const isOpen = navMenu.classList.toggle('is-open');
+        navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+
+      // Close menu after tapping a link (mobile)
+      navMenu.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => {
+          navMenu.classList.remove('is-open');
+          navToggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+    }
+
+    // ---------- Active section highlighting ----------
+    const sections = document.querySelectorAll<HTMLElement>('main section[id]');
+    const navLinks = document.querySelectorAll<HTMLAnchorElement>('.nav-menu a[href*="#"]');
+
+    if (sections.length && navLinks.length && 'IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const id = entry.target.getAttribute('id');
+              navLinks.forEach((link) => {
+                const hash = link.getAttribute('href')?.split('#')[1];
+                link.classList.toggle('is-active', hash === id);
+              });
+            }
+          });
+        },
+        { rootMargin: '-45% 0px -50% 0px' }
+      );
+
+      sections.forEach((section) => observer.observe(section));
+    }
+
+    // ---------- "More" nav dropdown ----------
+    const dropdownToggle = document.querySelector<HTMLButtonElement>('.nav-dropdown-toggle');
+    const dropdownMenu = document.querySelector<HTMLElement>('.nav-dropdown-menu');
+    const dropdownItem = document.querySelector<HTMLElement>('.nav-item-dropdown');
+
+    if (dropdownToggle && dropdownMenu && dropdownItem) {
+      const closeDropdown = () => {
+        dropdownItem.classList.remove('is-open');
+        dropdownToggle.setAttribute('aria-expanded', 'false');
+      };
+      const openDropdown = () => {
+        dropdownItem.classList.add('is-open');
+        dropdownToggle.setAttribute('aria-expanded', 'true');
+      };
+
+      dropdownToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (dropdownItem.classList.contains('is-open')) closeDropdown();
+        else openDropdown();
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!dropdownItem.contains(e.target as Node)) closeDropdown();
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeDropdown();
+      });
+    }
+  </script>
+)}

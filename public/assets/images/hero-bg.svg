@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#16294a"/>
+      <stop offset="0.55" stop-color="#11233D"/>
+      <stop offset="1" stop-color="#0b1a2d"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="18%" cy="8%" r="60%">
+      <stop offset="0" stop-color="#cba869" stop-opacity="0.28"/>
+      <stop offset="0.5" stop-color="#cba869" stop-opacity="0.08"/>
+      <stop offset="1" stop-color="#cba869" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0b1a2d" stop-opacity="0"/>
+      <stop offset="1" stop-color="#0b1a2d" stop-opacity="0.65"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#sky)"/>
+  <rect width="1600" height="900" fill="url(#glow)"/>
+
+  <!-- Abstract skyline: simple rectangular columns of varying height,
+       evoking institutional architecture without depicting a real building
+       or place. Two staggered rows for depth (back row dimmer/bluer). -->
+  <g opacity="0.5">
+    <rect x="60" y="620" width="70" height="280" fill="#16294a"/>
+    <rect x="150" y="560" width="50" height="340" fill="#16294a"/>
+    <rect x="220" y="660" width="90" height="240" fill="#16294a"/>
+    <rect x="330" y="500" width="45" height="400" fill="#16294a"/>
+    <rect x="1180" y="580" width="60" height="320" fill="#16294a"/>
+    <rect x="1260" y="640" width="80" height="260" fill="#16294a"/>
+    <rect x="1360" y="520" width="50" height="380" fill="#16294a"/>
+    <rect x="1430" y="600" width="100" height="300" fill="#16294a"/>
+  </g>
+
+  <g opacity="0.85">
+    <rect x="95" y="700" width="55" height="200" fill="#11233D"/>
+    <rect x="190" y="640" width="40" height="260" fill="#11233D"/>
+    <rect x="280" y="730" width="65" height="170" fill="#11233D"/>
+    <rect x="1210" y="690" width="45" height="210" fill="#11233D"/>
+    <rect x="1310" y="720" width="60" height="180" fill="#11233D"/>
+    <rect x="1410" y="660" width="35" height="240" fill="#11233D"/>
+  </g>
+
+  <!-- Fine column lines suggesting classical civic architecture, centered
+       loosely behind where the headline sits, kept subtle. -->
+  <g stroke="#cba869" stroke-opacity="0.18" stroke-width="2">
+    <line x1="700" y1="900" x2="700" y2="420"/>
+    <line x1="760" y1="900" x2="760" y2="380"/>
+    <line x1="820" y1="900" x2="820" y2="350"/>
+    <line x1="880" y1="900" x2="880" y2="380"/>
+    <line x1="940" y1="900" x2="940" y2="420"/>
+  </g>
+
+  <!-- Soft dot grid texture, sparse -->
+  <g fill="#cba869" fill-opacity="0.14">
+    <circle cx="120" cy="120" r="2"/>
+    <circle cx="220" cy="90" r="2"/>
+    <circle cx="320" cy="150" r="2"/>
+    <circle cx="420" cy="80" r="2"/>
+    <circle cx="1200" cy="110" r="2"/>
+    <circle cx="1300" cy="70" r="2"/>
+    <circle cx="1400" cy="140" r="2"/>
+    <circle cx="1500" cy="90" r="2"/>
+  </g>
+
+  <rect width="1600" height="900" fill="url(#fade)"/>
+</svg>

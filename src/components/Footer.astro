@@ -1,0 +1,76 @@
+---
+// The original static site has four distinct footer configurations, not
+// two — preserved exactly here rather than collapsed into Header's
+// full/minimal split:
+//   home:       full footer-links row (About & Experience, LinkedIn, Free
+//               Assessment, Schedule, Contact) + email/phone line
+//   about:      same as home minus the self-referential "About & Experience"
+//               link, still with email/phone
+//   assessment: just "Back to Site" + Schedule, still with email/phone
+//   legal:      (privacy/terms) no footer-links row and no email/phone line
+//               at all — legal pages stay minimal on purpose
+interface Props {
+  variant?: 'home' | 'about' | 'assessment' | 'legal';
+}
+
+const { variant = 'home' } = Astro.props;
+---
+
+<footer class="site-footer">
+  <div class="container">
+    <p class="footer-org">Frankly Inspired and Associates, LLC</p>
+    <p class="footer-meta">Founded by Franklin D. Parham &middot; Lanham, Maryland / DMV</p>
+
+    {variant !== 'legal' && (
+      <p class="footer-meta">
+        <a href="mailto:franklin@franklyinspired.associates">franklin@franklyinspired.associates</a>
+        <span aria-hidden="true">&middot;</span>
+        <a href="tel:+12403918283">240-391-8283</a>
+      </p>
+    )}
+
+    {variant === 'home' && (
+      <p class="footer-links">
+        <a href="/about">About &amp; Experience</a>
+        <span aria-hidden="true">&middot;</span>
+        <a href="https://www.linkedin.com/in/franklin-parham-b7a545382" target="_blank" rel="noopener">LinkedIn</a>
+        <span aria-hidden="true">&middot;</span>
+        <a href="/assessment">Free Assessment</a>
+        <span aria-hidden="true">&middot;</span>
+        <a href="https://calendly.com/fparham/30min" target="_blank" rel="noopener">Schedule a Strategy Conversation</a>
+        <span aria-hidden="true">&middot;</span>
+        <a href="/#contact">Contact</a>
+      </p>
+    )}
+
+    {variant === 'about' && (
+      <p class="footer-links">
+        <a href="https://www.linkedin.com/in/franklin-parham-b7a545382" target="_blank" rel="noopener">LinkedIn</a>
+        <span aria-hidden="true">&middot;</span>
+        <a href="/assessment">Free Assessment</a>
+        <span aria-hidden="true">&middot;</span>
+        <a href="https://calendly.com/fparham/30min" target="_blank" rel="noopener">Schedule a Strategy Conversation</a>
+        <span aria-hidden="true">&middot;</span>
+        <a href="/#contact">Contact</a>
+      </p>
+    )}
+
+    {variant === 'assessment' && (
+      <p class="footer-links">
+        <a href="/">Back to Site</a>
+        <span aria-hidden="true">&middot;</span>
+        <a href="https://calendly.com/fparham/30min" target="_blank" rel="noopener">Schedule a Strategy Conversation</a>
+      </p>
+    )}
+
+    <p class="footer-legal">
+      &copy; 2026 Frankly Inspired and Associates, LLC
+      <span aria-hidden="true">&middot;</span>
+      <a href="/privacy">Privacy Policy</a>
+      <span aria-hidden="true">&middot;</span>
+      <a href="/terms">Terms of Use</a>
+      <span aria-hidden="true">&middot;</span>
+      <button type="button" class="manage-cookies-link" data-manage-cookies>Manage Cookie Preferences</button>
+    </p>
+  </div>
+</footer>

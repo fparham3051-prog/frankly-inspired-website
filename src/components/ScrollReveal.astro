@@ -1,0 +1,52 @@
+---
+// Elements marked class="reveal" fade + slide up the first time they enter
+// the viewport. CSS (see .reveal / .reveal.is-visible in global.css) does
+// the actual animating; this just toggles the class and unobserves once
+// triggered so it never re-runs on repeat scrolls. Siblings get a small
+// staggered delay so grids/lists cascade in instead of popping in all at
+// once. Skips entirely if the browser doesn't support IntersectionObserver
+// — content is simply visible. Only included on pages that use .reveal
+// (home, about) — assessment/privacy/terms don't need this shipped at all.
+---
+
+<script>
+  const revealEls = document.querySelectorAll<HTMLElement>('.reveal');
+
+  if (revealEls.length) {
+    if ('IntersectionObserver' in window) {
+      const delayCounts = new WeakMap<Element, number>();
+      revealEls.forEach((el) => {
+        const parent = el.parentElement;
+        const count = (parent && delayCounts.get(parent)) || 0;
+        if (count < 6) el.style.transitionDelay = count * 90 + 'ms';
+        if (parent) delayCounts.set(parent, count + 1);
+      });
+
+      const revealObserver = new IntersectionObserver(
+        (entries, obs) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              obs.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+      );
+
+      revealEls.forEach((el) => revealObserver.observe(el));
+
+      // Safety net: if something goes wrong with the observer (a bug, an
+      // unusual layout, a browser quirk) and an element never gets marked
+      // visible on its own, force everything visible after a few seconds
+      // rather than risk content staying hidden indefinitely.
+      window.setTimeout(() => {
+        document.querySelectorAll('.reveal:not(.is-visible)').forEach((el) => {
+          el.classList.add('is-visible');
+        });
+      }, 2500);
+    } else {
+      revealEls.forEach((el) => el.classList.add('is-visible'));
+    }
+  }
+</script>

@@ -1,0 +1,605 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+---
+
+<BaseLayout
+  title="Nonprofit Sustainability Self-Assessment | Frankly Inspired"
+  description="A free, 15-question self-assessment to help nonprofit leaders gauge their organization's sustainability across strategy, revenue, leadership, operations, and partnerships."
+  footerVariant="assessment"
+>
+  <Header variant="minimal" />
+
+  <main id="main">
+
+    <!-- ============ INTRO ============ -->
+    <section class="section assessment-intro">
+      <div class="container narrow center">
+        <p class="eyebrow eyebrow-dark">Free Tool</p>
+        <h1>Nonprofit Sustainability Self-Assessment</h1>
+        <p class="hero-sub-light">15 quick questions across the five areas that determine whether an organization is built to last: strategy, revenue, leadership, operations, and partnerships. Takes about 5 minutes. Your answers stay in your browser unless you choose to email yourself the results.</p>
+      </div>
+    </section>
+
+    <!-- ============ ASSESSMENT FORM ============ -->
+    <section class="section assessment-form-section alt-bg">
+      <div class="container narrow">
+
+        <!-- Sticky progress indicator, kept in sync with which pillar-group
+             is in view. Hidden automatically once results are shown (no
+             form left to track progress through). -->
+        <div class="assessment-progress" id="assessment-progress">
+          <p class="assessment-progress-label" id="assessment-progress-label">Section 1 of 5 &mdash; Sustainability Strategy</p>
+          <span class="assessment-progress-track"><span class="assessment-progress-fill" id="assessment-progress-fill"></span></span>
+        </div>
+
+        <form id="assessment-form" novalidate>
+
+          <div class="pillar-group" data-pillar-index="1">
+            <h2 class="pillar-heading">1. Sustainability Strategy</h2>
+            <fieldset class="likert">
+              <legend>Our organization has a clear, written strategic plan that guides major decisions.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="p1q1" value="1" required /><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="p1q1" value="2" /><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="p1q1" value="3" /><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="p1q1" value="4" /><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="p1q1" value="5" /><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+            <fieldset class="likert">
+              <legend>Leadership regularly reviews organizational risks and has a plan to address them.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="p1q2" value="1" required /><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="p1q2" value="2" /><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="p1q2" value="3" /><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="p1q2" value="4" /><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="p1q2" value="5" /><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+            <fieldset class="likert">
+              <legend>We have a defined sustainability roadmap for the next 1-3 years.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="p1q3" value="1" required /><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="p1q3" value="2" /><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="p1q3" value="3" /><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="p1q3" value="4" /><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="p1q3" value="5" /><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="pillar-group" data-pillar-index="2">
+            <h2 class="pillar-heading">2. Revenue Diversification</h2>
+            <fieldset class="likert">
+              <legend>Our revenue comes from more than one major source, so no single grant or donor makes up most of our budget.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="p2q1" value="1" required /><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="p2q1" value="2" /><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="p2q1" value="3" /><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="p2q1" value="4" /><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="p2q1" value="5" /><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+            <fieldset class="likert">
+              <legend>We have active strategies for grants, corporate partnerships, and earned or contracted revenue.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="p2q2" value="1" required /><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="p2q2" value="2" /><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="p2q2" value="3" /><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="p2q2" value="4" /><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="p2q2" value="5" /><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+            <fieldset class="likert">
+              <legend>We track and forecast our revenue pipeline at least quarterly.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="p2q3" value="1" required /><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="p2q3" value="2" /><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="p2q3" value="3" /><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="p2q3" value="4" /><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="p2q3" value="5" /><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="pillar-group" data-pillar-index="3">
+            <h2 class="pillar-heading">3. Leadership &amp; Organizational Development</h2>
+            <fieldset class="likert">
+              <legend>Roles and performance expectations are clearly defined across the organization.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="p3q1" value="1" required /><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="p3q1" value="2" /><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="p3q1" value="3" /><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="p3q1" value="4" /><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="p3q1" value="5" /><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+            <fieldset class="likert">
+              <legend>Leadership has a plan for developing staff and building bench strength.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="p3q2" value="1" required /><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="p3q2" value="2" /><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="p3q2" value="3" /><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="p3q2" value="4" /><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="p3q2" value="5" /><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+            <fieldset class="likert">
+              <legend>The board and executive team are aligned on strategic priorities.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="p3q3" value="1" required /><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="p3q3" value="2" /><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="p3q3" value="3" /><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="p3q3" value="4" /><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="p3q3" value="5" /><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="pillar-group" data-pillar-index="4">
+            <h2 class="pillar-heading">4. Operations &amp; Infrastructure</h2>
+            <fieldset class="likert">
+              <legend>We use consistent systems (CRM, project management, etc.) to track our work and data.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="p4q1" value="1" required /><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="p4q1" value="2" /><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="p4q1" value="3" /><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="p4q1" value="4" /><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="p4q1" value="5" /><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+            <fieldset class="likert">
+              <legend>We have KPIs or dashboards that leadership reviews regularly.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="p4q2" value="1" required /><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="p4q2" value="2" /><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="p4q2" value="3" /><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="p4q2" value="4" /><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="p4q2" value="5" /><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+            <fieldset class="likert">
+              <legend>Our operational workflows are documented well enough that a new hire could follow them.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="p4q3" value="1" required /><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="p4q3" value="2" /><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="p4q3" value="3" /><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="p4q3" value="4" /><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="p4q3" value="5" /><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="pillar-group" data-pillar-index="5">
+            <h2 class="pillar-heading">5. Partnership &amp; Ecosystem Strategy</h2>
+            <fieldset class="likert">
+              <legend>We have active partnerships across sectors: education, workforce, government, corporate, community.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="p5q1" value="1" required /><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="p5q1" value="2" /><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="p5q1" value="3" /><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="p5q1" value="4" /><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="p5q1" value="5" /><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+            <fieldset class="likert">
+              <legend>We have a deliberate strategy for building and stewarding partnerships, not just ad hoc relationships.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="p5q2" value="1" required /><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="p5q2" value="2" /><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="p5q2" value="3" /><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="p5q2" value="4" /><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="p5q2" value="5" /><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+            <fieldset class="likert">
+              <legend>Our key partnerships are formalized (MOUs or agreements) where appropriate.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="p5q3" value="1" required /><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="p5q3" value="2" /><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="p5q3" value="3" /><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="p5q3" value="4" /><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="p5q3" value="5" /><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="assessment-submit">
+            <button type="submit" class="btn btn-primary">See My Results</button>
+            <p class="form-status" id="assessment-status" role="status" aria-live="polite"></p>
+          </div>
+        </form>
+
+        <!-- ============ RESULTS (rendered by the script below) ============ -->
+        <div class="assessment-results" id="assessment-results" hidden>
+          <div class="results-score">
+            <span class="results-score-num" id="results-score-num"></span>
+            <span class="results-score-band" id="results-score-band"></span>
+          </div>
+          <p class="results-band-desc" id="results-band-desc"></p>
+          <p class="results-avg-overall" id="results-avg-overall" hidden></p>
+          <p class="results-narrative-loading" id="results-narrative-loading" hidden>Writing a personalized summary of your results&hellip;</p>
+
+          <h3 class="subhead">By Pillar</h3>
+          <div class="results-bars" id="results-bars"></div>
+
+          <div class="results-priority" id="results-priority"></div>
+
+          <div class="results-recommendation" id="results-recommendation"></div>
+
+          <div class="results-disclaimer">
+            <p>This is a directional self-assessment based on your own responses, not a formal audit or guarantee of any outcome. It's meant to help you think through your organization's sustainability posture and where to focus next.</p>
+          </div>
+
+          <div class="results-related">
+            <p>If grant funding is a meaningful part of your revenue strategy, <a href="https://grantpass-dashboard.onrender.com" target="_blank" rel="noopener">GrantPass</a> is a separate tool that scores your organization's readiness against a specific funder's stated priorities.</p>
+          </div>
+
+          <div class="results-cta">
+            <h3>Not sure where to start?</h3>
+            <p>A short conversation is the fastest way to turn this into a plan.</p>
+            <div class="hero-ctas center">
+              <a class="btn btn-primary" href="https://calendly.com/fparham/30min" target="_blank" rel="noopener">Schedule a Strategy Conversation</a>
+              <a class="btn btn-secondary" href="/#pricing">See Pricing</a>
+            </div>
+          </div>
+
+          <form class="results-email-form" id="results-email-form" novalidate>
+            <div class="hp-field" aria-hidden="true">
+              <label for="hp_field_assessment">Leave this field blank</label>
+              <input type="text" id="hp_field_assessment" name="hp_field" tabindex="-1" autocomplete="off" />
+            </div>
+            <label for="results-email">Want these results emailed to you?</label>
+            <div class="results-email-row">
+              <input type="email" id="results-email" name="email" placeholder="Email address" required />
+              <button type="submit" class="btn btn-secondary">Email My Results</button>
+            </div>
+            <p class="form-status" id="email-status" role="status" aria-live="polite"></p>
+          </form>
+
+          <button type="button" class="results-retake" id="results-retake">Retake the Assessment</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</BaseLayout>
+
+<script>
+  // Scoring runs entirely in the browser (no data leaves the page) except
+  // two backend calls: an anonymized score log + AI narrative request on
+  // completion, and the optional "email me my results" capture at the end.
+  // UPDATE THIS once frankly-inspired-backend is deployed to Render — same
+  // value as index.astro's API_BASE.
+  const API_BASE = 'https://frankly-inspired-api.onrender.com';
+
+  let lastResults: {
+    scorePct: number;
+    band: string;
+    pillarScores: { label: string; pct: number }[];
+    narrative?: string;
+  } | null = null;
+
+  // Pillar definitions. "service" text is copied verbatim from the
+  // Consulting section on index.astro — keep in sync if that copy ever
+  // changes. "anchor" points at the matching Service Pillar card's id, so
+  // results link straight to that specific service instead of the general
+  // Consulting section.
+  const PILLARS = [
+    {
+      num: 1,
+      label: 'Sustainability Strategy',
+      service: 'Organizational assessment, strategic priorities, risk identification, sustainability roadmaps, and implementation planning.',
+      anchor: 'pillar-sustainability',
+    },
+    {
+      num: 2,
+      label: 'Revenue Diversification',
+      service: 'Fundraising strategy, partnership development, grant and public-funding strategy, sponsorship thinking, and revenue-pipeline design.',
+      anchor: 'pillar-revenue',
+    },
+    {
+      num: 3,
+      label: 'Leadership & Organizational Development',
+      service: 'Executive advising, leadership systems, role clarity, performance expectations, staff alignment, and change leadership.',
+      anchor: 'pillar-leadership',
+    },
+    {
+      num: 4,
+      label: 'Operations & Infrastructure',
+      service: 'Workflows, KPIs, dashboards, CRM/Salesforce practices, accountability systems, planning rhythms, and execution.',
+      anchor: 'pillar-operations',
+    },
+    {
+      num: 5,
+      label: 'Partnership & Ecosystem Strategy',
+      service: 'Education, workforce, government, corporate, philanthropic, and community partnership development.',
+      anchor: 'pillar-partnership',
+    },
+  ];
+
+  // recommendedTier maps to a specific pricing card id on index.astro
+  // (#pricing-implementation or #pricing-advisory) so the results page can
+  // deep-link to the specific retainer that best matches this score band.
+  const BANDS = [
+    { max: 30, name: 'Foundational', desc: "This is a common starting point — and exactly where a focused strategy makes the most difference. The priority area below is where to start.", recommendedTier: 'implementation', tierName: 'Strategic Implementation Retainer', tierReason: 'with this many areas to build at once, weekly hands-on support tends to move faster than periodic advisory alone.' },
+    { max: 55, name: 'Developing', desc: 'Some structure is in place, but meaningful gaps remain in one or more areas. Closing them is very achievable with the right focus.', recommendedTier: 'implementation', tierName: 'Strategic Implementation Retainer', tierReason: 'closing gaps across more than one pillar usually benefits from hands-on implementation, not just advisory guidance.' },
+    { max: 80, name: 'Strengthening', desc: "A solid foundation is in place. The opportunity now is to sharpen and connect what's already working.", recommendedTier: 'advisory', tierName: 'Strategic Advisory Retainer', tierReason: 'with a solid foundation already in place, experienced strategic guidance is usually enough to sharpen it further.' },
+    { max: 101, name: 'Resilient', desc: 'A strong sustainability posture. The opportunity now is to protect it and extend it as the organization grows.', recommendedTier: 'advisory', tierName: 'Strategic Advisory Retainer', tierReason: 'a strong foundation like this usually just needs a periodic strategic thought partner to protect and extend it.' },
+  ];
+
+  const form = document.getElementById('assessment-form') as HTMLFormElement | null;
+  const status = document.getElementById('assessment-status');
+  const resultsEl = document.getElementById('assessment-results') as HTMLElement | null;
+  const barsEl = document.getElementById('results-bars');
+  const priorityEl = document.getElementById('results-priority');
+  const bandDescEl = document.getElementById('results-band-desc');
+  const narrativeLoadingEl = document.getElementById('results-narrative-loading') as HTMLElement | null;
+
+  /* ---------- Sticky progress bar ---------- */
+  const progressEl = document.getElementById('assessment-progress') as HTMLElement | null;
+  const progressLabel = document.getElementById('assessment-progress-label');
+  const progressFill = document.getElementById('assessment-progress-fill') as HTMLElement | null;
+  const pillarGroups = document.querySelectorAll<HTMLElement>('.pillar-group[data-pillar-index]');
+
+  if (progressEl && progressLabel && progressFill && pillarGroups.length && 'IntersectionObserver' in window) {
+    const pillarLabelByIndex: Record<number, string> = {};
+    PILLARS.forEach((p) => { pillarLabelByIndex[p.num] = p.label; });
+
+    const progressObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const idx = Number(entry.target.getAttribute('data-pillar-index'));
+            progressLabel.textContent = `Section ${idx} of ${pillarGroups.length} — ${pillarLabelByIndex[idx] || ''}`;
+            progressFill.style.width = (idx / pillarGroups.length) * 100 + '%';
+          }
+        });
+      },
+      { rootMargin: '-15% 0px -70% 0px' }
+    );
+
+    pillarGroups.forEach((group) => progressObserver.observe(group));
+  }
+
+  function pillarScore(num: number, formEl: HTMLFormElement): number {
+    let total = 0;
+    for (let q = 1; q <= 3; q++) {
+      const checked = formEl.querySelector<HTMLInputElement>(`input[name="p${num}q${q}"]:checked`);
+      total += checked ? Number(checked.value) : 0;
+    }
+    return total; // 3-15
+  }
+
+  function bandFor(pct: number) {
+    for (let i = 0; i < BANDS.length; i++) {
+      if (pct <= BANDS[i].max) return BANDS[i];
+    }
+    return BANDS[BANDS.length - 1];
+  }
+
+  function renderResults(pillarScores: { num: number; label: string; service: string; anchor: string; score: number }[]) {
+    const composite = pillarScores.reduce((sum, p) => sum + p.score, 0); // 15-75
+    const pct = Math.round(((composite - 15) / 60) * 100);
+    const band = bandFor(pct);
+
+    const scoreNumEl = document.getElementById('results-score-num');
+    const scoreBandEl = document.getElementById('results-score-band');
+    if (scoreNumEl) scoreNumEl.textContent = pct + '%';
+    if (scoreBandEl) scoreBandEl.textContent = band.name;
+    if (bandDescEl) bandDescEl.textContent = band.desc;
+
+    if (barsEl) {
+      barsEl.innerHTML = '';
+      pillarScores.forEach((p) => {
+        const scaledPct = Math.round(((p.score - 3) / 12) * 100);
+        const row = document.createElement('div');
+        row.className = 'results-bar-row';
+        row.innerHTML =
+          `<a class="results-bar-label" href="/#${p.anchor}">${p.label}</a>` +
+          '<span class="results-bar-track">' +
+          `<span class="results-bar-fill" style="width:${scaledPct}%"></span>` +
+          `<span class="results-bar-avg-marker" data-avg-marker="${p.label}" hidden></span>` +
+          '</span>' +
+          `<span class="results-bar-pct">${scaledPct}%</span>` +
+          `<span class="results-bar-avg" data-avg-text="${p.label}"></span>`;
+        barsEl.appendChild(row);
+      });
+    }
+
+    const scoredPillars = pillarScores.map((p) => ({ ...p, pct: Math.round(((p.score - 3) / 12) * 100) }));
+    const lowest = scoredPillars.reduce((min, p) => (p.pct < min.pct ? p : min), scoredPillars[0]);
+
+    if (priorityEl) {
+      priorityEl.innerHTML =
+        `<h3 class="subhead">Priority Area: ${lowest.label}</h3>` +
+        `<p>${lowest.service}</p>` +
+        `<a class="link-more" href="/#${lowest.anchor}">See this service on the site</a>`;
+    }
+
+    const recommendationEl = document.getElementById('results-recommendation');
+    if (recommendationEl) {
+      recommendationEl.innerHTML =
+        '<h3 class="subhead">Recommended Starting Point</h3>' +
+        `<p>Based on your results, the <strong>${band.tierName}</strong> is likely the best fit — ${band.tierReason}</p>` +
+        `<a class="btn btn-secondary" href="/#pricing-${band.recommendedTier}">See This Retainer</a>`;
+    }
+
+    lastResults = {
+      scorePct: pct,
+      band: band.name,
+      pillarScores: scoredPillars.map((p) => ({ label: p.label, pct: p.pct })),
+    };
+
+    if (form) form.hidden = true;
+    if (progressEl) progressEl.hidden = true;
+    if (resultsEl) {
+      resultsEl.hidden = false;
+      resultsEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    fetchNarrative(lastResults);
+    fetchBenchmarks(pct);
+  }
+
+  /* Benchmark comparison. An enhancement, not a dependency — if the
+     database isn't reachable, has no data yet, or the sample is too small
+     to be meaningful, the results the visitor already sees are unaffected;
+     this just quietly adds a comparison line and tick marks when it can. */
+  function fetchBenchmarks(compositePct: number) {
+    const overallEl = document.getElementById('results-avg-overall') as HTMLElement | null;
+
+    fetch(API_BASE + '/api/benchmarks')
+      .then((res) => res.json())
+      .then((data) => {
+        const b = data && data.ok ? data.benchmarks : null;
+        if (!b || !b.count) return; // nothing logged yet — say nothing rather than show a zero
+
+        if (overallEl) {
+          const lowSample = b.count < 5;
+          overallEl.hidden = false;
+          overallEl.innerHTML =
+            `Your score: <strong>${compositePct}%</strong> &middot; Average so far: <strong>${b.avgScore}%</strong>` +
+            (lowSample
+              ? ` <span class="results-avg-caveat">(early data — ${b.count} response${b.count === 1 ? '' : 's'} so far)</span>`
+              : ` (${b.count} responses)`);
+        }
+
+        (b.pillarAverages || []).forEach((avg: { label: string; avgPct: number }) => {
+          const marker = document.querySelector<HTMLElement>(`[data-avg-marker="${avg.label}"]`);
+          const text = document.querySelector<HTMLElement>(`[data-avg-text="${avg.label}"]`);
+          if (marker) {
+            marker.hidden = false;
+            marker.style.left = avg.avgPct + '%';
+          }
+          if (text) text.innerHTML = `Avg: <strong>${avg.avgPct}%</strong>`;
+        });
+      })
+      .catch(() => {
+        // Silent by design — same reasoning as fetchNarrative below.
+      });
+  }
+
+  /* AI-generated personalized summary. An enhancement, not a dependency:
+     the static band description is already visible from renderResults()
+     above, so if this call is slow, fails, or the backend has no
+     ANTHROPIC_API_KEY configured, the visitor still has a complete,
+     correct set of results — this just quietly upgrades the description
+     text if and when a narrative comes back. */
+  function fetchNarrative(results: NonNullable<typeof lastResults>) {
+    if (narrativeLoadingEl) narrativeLoadingEl.hidden = false;
+
+    fetch(API_BASE + '/api/assessment-narrative', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        scorePct: results.scorePct,
+        band: results.band,
+        pillarScores: results.pillarScores,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data && data.ok && data.narrative) {
+          if (bandDescEl) bandDescEl.textContent = data.narrative;
+          if (lastResults) lastResults.narrative = data.narrative;
+        }
+      })
+      .catch(() => {
+        // Silent by design — static description already shown, nothing to fix.
+      })
+      .finally(() => {
+        if (narrativeLoadingEl) narrativeLoadingEl.hidden = true;
+      });
+  }
+
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        if (status) status.textContent = 'Please answer every question — one is still missing.';
+        return;
+      }
+
+      const pillarScores = PILLARS.map((p) => ({
+        num: p.num,
+        label: p.label,
+        service: p.service,
+        anchor: p.anchor,
+        score: pillarScore(p.num, form),
+      }));
+
+      if (status) status.textContent = '';
+      renderResults(pillarScores);
+    });
+  }
+
+  const retakeBtn = document.getElementById('results-retake');
+  if (retakeBtn) {
+    retakeBtn.addEventListener('click', () => {
+      if (resultsEl) resultsEl.hidden = true;
+      if (form) form.hidden = false;
+      if (progressEl && progressLabel && progressFill) {
+        progressEl.hidden = false;
+        progressLabel.textContent = `Section 1 of ${pillarGroups.length} — ${PILLARS[0] ? PILLARS[0].label : ''}`;
+        progressFill.style.width = 100 / pillarGroups.length + '%';
+      }
+      form?.reset();
+      form?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
+
+  const emailForm = document.getElementById('results-email-form') as HTMLFormElement | null;
+  const emailStatus = document.getElementById('email-status');
+  if (emailForm) {
+    emailForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      if (!lastResults) {
+        if (emailStatus) emailStatus.textContent = 'Please complete the assessment first.';
+        return;
+      }
+      if (!emailForm.checkValidity()) {
+        emailForm.reportValidity();
+        return;
+      }
+
+      const formData = new FormData(emailForm);
+      const payload = {
+        email: formData.get('email'),
+        hp_field: formData.get('hp_field'),
+        scorePct: lastResults.scorePct,
+        band: lastResults.band,
+        pillarScores: lastResults.pillarScores,
+        narrative: lastResults.narrative || null,
+      };
+
+      const submitBtn = emailForm.querySelector<HTMLButtonElement>('button[type="submit"]');
+      if (emailStatus) emailStatus.textContent = 'Sending...';
+      if (submitBtn) submitBtn.disabled = true;
+
+      fetch(API_BASE + '/api/assessment-lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+        .then((res) => res.json().then((data) => ({ ok: res.ok, data })))
+        .then((result) => {
+          if (!result.ok || !result.data.ok) {
+            throw new Error((result.data && result.data.error) || 'Something went wrong.');
+          }
+          if (emailStatus) emailStatus.textContent = 'Sent — check your inbox.';
+          emailForm.reset();
+        })
+        .catch((err) => {
+          if (emailStatus) emailStatus.textContent = err.message;
+        })
+        .finally(() => {
+          if (submitBtn) submitBtn.disabled = false;
+        });
+    });
+  }
+</script>

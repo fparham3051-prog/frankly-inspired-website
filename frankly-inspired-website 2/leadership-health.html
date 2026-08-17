@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="UTF-8">
+  <script>document.documentElement.classList.replace('no-js', 'js');</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leadership &amp; Operations Health Score | Frankly Inspired</title>
+  <meta name="description" content="A free diagnostic that scores your nonprofit's governance, leadership succession, organizational alignment, and change capacity against research from BoardSource, McKinsey, and Harvard Business School.">
+
+  <!-- PROTOTYPE: The third funnel diagnostic, same standard as the Financial
+       Health Score. Where that tool scores real budget numbers, this one
+       scores organizational/leadership maturity — which can't be pulled
+       from a spreadsheet, so it uses a structured 1-5 self-report grid
+       (same interaction pattern as assessment.html) instead of numeric
+       inputs. What makes it rigorous rather than generic is that every one
+       of the 12 questions is written to map directly to a specific finding
+       or construct from a named, credible source, not a generic HR
+       checklist:
+         - Governance Health        -> BoardSource, "Leading with Intent"
+           (the field's longest-running national board-practices survey)
+         - Leadership Succession     -> CompassPoint & Meyer Foundation,
+           "Daring to Lead" (the definitive national ED succession/burnout
+           study; only 17% of nonprofits report a documented succession plan)
+         - Organizational Alignment  -> McKinsey's Organizational Health
+           Index (OHI) — its Direction, Accountability, and Capabilities
+           outcomes specifically, simplified from the full 9-outcome/
+           37-practice model
+         - Change Leadership Capacity -> John Kotter's 8-Step Change Model
+           (Harvard Business School, "Leading Change," 1996) — urgency/
+           coalition, vision/short-term wins, and anchoring change, the
+           step Kotter's own research flags as most often skipped
+       See js/leadership-health.js for exact scoring, thresholds, and the
+       Sources line in the results for full citations. All calculation runs
+       client-side. -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="nav-wrap">
+      <a href="index.html" class="brand"><img src="assets/images/logo-mark.svg" alt="" class="brand-mark" width="28" height="40">Frankly Inspired</a>
+      <div class="nav-actions">
+        <a class="btn btn-primary btn-nav-mobile" href="https://calendly.com/fparham/30min" target="_blank" rel="noopener">Schedule</a>
+        <nav class="site-nav" aria-label="Primary">
+          <ul class="nav-menu" style="display:flex;">
+            <li><a href="index.html">Back to Site</a></li>
+            <li><a class="btn btn-primary btn-nav" href="https://calendly.com/fparham/30min" target="_blank" rel="noopener">Schedule a Conversation</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ============ INTRO ============ -->
+    <section class="section assessment-intro">
+      <div class="container narrow center">
+        <p class="eyebrow eyebrow-dark">Free Diagnostic</p>
+        <h1>Leadership &amp; Operations Health Score</h1>
+        <p class="hero-sub-light">12 quick questions across governance, leadership succession, organizational alignment, and change capacity — each grounded in named research from BoardSource, the CompassPoint/Meyer Foundation "Daring to Lead" study, McKinsey's Organizational Health Index, and Harvard Business School's Kotter change model. Takes about 7 minutes.</p>
+      </div>
+    </section>
+
+    <!-- ============ ASSESSMENT FORM ============ -->
+    <section class="section assessment-form-section alt-bg">
+      <div class="container narrow">
+
+        <div class="assessment-progress" id="lh-progress">
+          <p class="assessment-progress-label" id="lh-progress-label">Section 1 of 4 — Governance Health</p>
+          <span class="assessment-progress-track"><span class="assessment-progress-fill" id="lh-progress-fill"></span></span>
+        </div>
+
+        <form id="lh-form" novalidate>
+
+          <div class="pillar-group" data-pillar-index="1">
+            <h2 class="pillar-heading">1. Governance Health</h2>
+            <p class="fh-field-help">Based on BoardSource's "Leading with Intent" national board-practices research.</p>
+            <fieldset class="likert">
+              <legend>Our board has the right composition and relationships to build trust with the communities we serve.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="g1" value="1" required><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="g1" value="2"><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="g1" value="3"><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="g1" value="4"><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="g1" value="5"><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+            <fieldset class="likert">
+              <legend>Board members are actively engaged in advocating for our mission, not just fundraising and compliance.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="g2" value="1" required><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="g2" value="2"><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="g2" value="3"><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="g2" value="4"><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="g2" value="5"><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+            <fieldset class="likert">
+              <legend>Board meetings spend meaningful time on strategy and organizational direction, not just fundraising updates.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="g3" value="1" required><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="g3" value="2"><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="g3" value="3"><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="g3" value="4"><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="g3" value="5"><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="pillar-group" data-pillar-index="2">
+            <h2 class="pillar-heading">2. Leadership Succession &amp; Bench Strength</h2>
+            <p class="fh-field-help">Based on CompassPoint &amp; the Meyer Foundation's "Daring to Lead" national study of nonprofit executive leadership.</p>
+            <fieldset class="likert">
+              <legend>We have a documented, board-approved plan for what happens if our Executive Director leaves unexpectedly.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="s1" value="1" required><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="s1" value="2"><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="s1" value="3"><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="s1" value="4"><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="s1" value="5"><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+            <fieldset class="likert">
+              <legend>If our Executive Director left tomorrow, at least one other staff member could credibly step in on an interim basis.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="s2" value="1" required><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="s2" value="2"><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="s2" value="3"><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="s2" value="4"><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="s2" value="5"><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+            <fieldset class="likert">
+              <legend>Our organization actively invests in developing future leaders — training, mentorship, real delegated authority — rather than concentrating leadership in one person.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="s3" value="1" required><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="s3" value="2"><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="s3" value="3"><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="s3" value="4"><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="s3" value="5"><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="pillar-group" data-pillar-index="3">
+            <h2 class="pillar-heading">3. Organizational Alignment &amp; Execution</h2>
+            <p class="fh-field-help">Based on three outcomes from McKinsey's Organizational Health Index (OHI): Direction, Accountability, and Capabilities.</p>
+            <fieldset class="likert">
+              <legend>Staff at every level could clearly articulate our organization's top priorities for this year.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="a1" value="1" required><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="a1" value="2"><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="a1" value="3"><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="a1" value="4"><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="a1" value="5"><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+            <fieldset class="likert">
+              <legend>Roles, decision rights, and performance expectations are clearly defined and consistently followed.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="a2" value="1" required><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="a2" value="2"><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="a2" value="3"><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="a2" value="4"><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="a2" value="5"><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+            <fieldset class="likert">
+              <legend>Staff have the skills, tools, and training they need to do their jobs well, and gaps are actively addressed.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="a3" value="1" required><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="a3" value="2"><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="a3" value="3"><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="a3" value="4"><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="a3" value="5"><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="pillar-group" data-pillar-index="4">
+            <h2 class="pillar-heading">4. Change Leadership Capacity</h2>
+            <p class="fh-field-help">Based on John Kotter's 8-Step Change Model (Harvard Business School, "Leading Change").</p>
+            <fieldset class="likert">
+              <legend>When we've pursued major changes, leadership built a genuine sense of urgency and a real coalition to drive it, rather than mandating it top-down.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="c1" value="1" required><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="c1" value="2"><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="c1" value="3"><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="c1" value="4"><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="c1" value="5"><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+            <fieldset class="likert">
+              <legend>We communicate a clear vision for change and track visible short-term wins along the way, not just a distant end goal.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="c2" value="1" required><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="c2" value="2"><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="c2" value="3"><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="c2" value="4"><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="c2" value="5"><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+            <fieldset class="likert">
+              <legend>Past changes have stuck — they became part of how we normally operate, not reverted once attention moved elsewhere.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="c3" value="1" required><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="c3" value="2"><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="c3" value="3"><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="c3" value="4"><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="c3" value="5"><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="assessment-submit">
+            <button type="submit" class="btn btn-primary">See My Leadership &amp; Operations Health Score</button>
+            <p class="form-status" id="lh-status" role="status" aria-live="polite"></p>
+          </div>
+        </form>
+
+        <!-- ============ RESULTS (shown by js/leadership-health.js) ============ -->
+        <div class="fh-results" id="lh-results" hidden>
+
+          <div class="fh-gauge-wrap">
+            <svg class="fh-gauge" viewBox="0 0 200 115" role="img" aria-labelledby="lh-gauge-title">
+              <title id="lh-gauge-title">Leadership and operations health gauge</title>
+              <path d="M10,100 A90,90 0 0,1 27.19,47.10" class="fh-gauge-band fh-band-0"></path>
+              <path d="M27.19,47.10 A90,90 0 0,1 72.19,14.40" class="fh-gauge-band fh-band-1"></path>
+              <path d="M72.19,14.40 A90,90 0 0,1 127.81,14.40" class="fh-gauge-band fh-band-2"></path>
+              <path d="M127.81,14.40 A90,90 0 0,1 172.81,47.10" class="fh-gauge-band fh-band-3"></path>
+              <path d="M172.81,47.10 A90,90 0 0,1 190,100" class="fh-gauge-band fh-band-4"></path>
+              <g id="lh-needle" transform="rotate(-90,100,100)">
+                <line x1="100" y1="100" x2="100" y2="25" class="fh-needle-line"></line>
+                <circle cx="100" cy="100" r="7" class="fh-needle-hub"></circle>
+              </g>
+            </svg>
+            <div class="fh-gauge-readout">
+              <span class="fh-gauge-score" id="lh-gauge-score"></span>
+              <span class="fh-gauge-band-name" id="lh-gauge-band-name"></span>
+            </div>
+          </div>
+
+          <p class="results-band-desc" id="lh-summary"></p>
+
+          <h3 class="subhead">By Dimension</h3>
+          <div class="fh-metrics" id="lh-metrics"></div>
+
+          <div class="results-recommendation" id="lh-recommendation"></div>
+
+          <div class="results-disclaimer">
+            <p>This is a directional self-assessment based on your own responses, scored against published research and national benchmarks. It is not a formal governance or organizational audit, and every question involves judgment — treat it as a starting point for a real conversation, not a verdict.</p>
+          </div>
+
+          <div class="results-related">
+            <p>This tool measures leadership and organizational capacity. For a numbers-based read on financial sustainability — reserves, spending mix, revenue concentration, and liquidity — see the <a href="financial-health.html">Financial Health Score</a>.</p>
+          </div>
+
+          <div class="results-cta">
+            <h3>Want to talk through these results?</h3>
+            <p>A short conversation is the fastest way to turn this into a plan.</p>
+            <div class="hero-ctas center">
+              <a class="btn btn-primary" href="https://calendly.com/fparham/30min" target="_blank" rel="noopener">Schedule a Strategy Conversation</a>
+              <a class="btn btn-secondary" href="index.html#pricing">See Pricing</a>
+            </div>
+          </div>
+
+          <p class="calculator-caveat">Sources: BoardSource, "Leading with Intent: BoardSource Index of Nonprofit Board Practices"; CompassPoint Nonprofit Services &amp; the Meyer Foundation, "Daring to Lead" (2006/2011 national studies of nonprofit executive leadership); McKinsey &amp; Company, the Organizational Health Index (OHI); John P. Kotter, "Leading Change" (Harvard Business School Press, 1996) and subsequent research on the 8-Step Change Model. Benchmark figures are sector-wide findings, not specific to any organization Frankly Inspired and Associates, LLC has worked with.</p>
+
+          <button type="button" class="results-retake" id="lh-retake">Retake the Assessment</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p class="footer-org">Frankly Inspired and Associates, LLC</p>
+      <p class="footer-meta">Founded by Franklin D. Parham · Lanham, Maryland / DMV</p>
+      <p class="footer-meta">
+        <a href="mailto:franklin@franklyinspired.associates">franklin@franklyinspired.associates</a>
+        <span aria-hidden="true">·</span>
+        <a href="tel:+12403918283">240-391-8283</a>
+      </p>
+      <p class="footer-links">
+        <a href="index.html">Back to Site</a>
+        <span aria-hidden="true">·</span>
+        <a href="assessment.html">Free Assessment</a>
+        <span aria-hidden="true">·</span>
+        <a href="financial-health.html">Financial Health Score</a>
+        <span aria-hidden="true">·</span>
+        <a href="https://calendly.com/fparham/30min" target="_blank" rel="noopener">Schedule a Strategy Conversation</a>
+      </p>
+      <p class="footer-legal">
+        © 2026 Frankly Inspired and Associates, LLC
+        <span aria-hidden="true">·</span>
+        <a href="privacy.html">Privacy Policy</a>
+        <span aria-hidden="true">·</span>
+        <a href="terms.html">Terms of Use</a>
+        <span aria-hidden="true">·</span>
+        <button type="button" class="manage-cookies-link" data-manage-cookies>Manage Cookie Preferences</button>
+      </p>
+    </div>
+  </footer>
+
+  <script src="js/leadership-health.js"></script>
+  <script src="js/cookie-consent.js"></script>
+  <script src="js/analytics.js"></script>
+</body>
+</html>

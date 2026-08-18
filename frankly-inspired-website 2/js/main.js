@@ -6,7 +6,6 @@
    4. Contact form submit handling — posts to the backend below
    5. "More" nav dropdown (About / Experience & Impact / Speaking / Resume)
    6b. Recommended-tier highlight (arriving from assessment results)
-   6c. Donor churn calculator
    6. Scroll reveal — fades/slides text and cards into view as you scroll
    ========================================================================== */
 
@@ -196,42 +195,6 @@ document.addEventListener('DOMContentLoaded', function () {
     var badge = targetCard.querySelector('.recommended-badge');
     if (badge) { badge.hidden = false; }
   })();
-
-  /* ---------- 6c. Donor churn calculator ---------- */
-  // Sector-average first-time donor retention rate (19.4%), from the AFP
-  // Fundraising Effectiveness Project's 2025 data — same figure cited in
-  // the homepage copy and the donor-retention article. Kept as a single
-  // named constant so it only has to be updated in one place if the
-  // sector figure is refreshed later.
-  var FIRST_TIME_RETENTION_RATE = 0.194;
-
-  var calcDonorsInput = document.getElementById('calc-donors');
-  var calcGiftInput = document.getElementById('calc-gift');
-  var calcResultEl = document.getElementById('calculator-result');
-  var calcLostDonorsEl = document.getElementById('calc-lost-donors');
-  var calcLostRevenueEl = document.getElementById('calc-lost-revenue');
-
-  function updateCalculator() {
-    var donors = Number(calcDonorsInput && calcDonorsInput.value);
-    var gift = Number(calcGiftInput && calcGiftInput.value);
-
-    if (!donors || donors <= 0 || !gift || gift <= 0) {
-      if (calcResultEl) { calcResultEl.hidden = true; }
-      return;
-    }
-
-    var lostDonors = Math.round(donors * (1 - FIRST_TIME_RETENTION_RATE));
-    var lostRevenue = lostDonors * gift;
-
-    if (calcLostDonorsEl) { calcLostDonorsEl.textContent = lostDonors.toLocaleString('en-US') + ' donors'; }
-    if (calcLostRevenueEl) { calcLostRevenueEl.textContent = '$' + Math.round(lostRevenue).toLocaleString('en-US'); }
-    if (calcResultEl) { calcResultEl.hidden = false; }
-  }
-
-  if (calcDonorsInput && calcGiftInput) {
-    calcDonorsInput.addEventListener('input', updateCalculator);
-    calcGiftInput.addEventListener('input', updateCalculator);
-  }
 
   /* ---------- 6. Scroll reveal ---------- */
   /* Elements marked class="reveal" fade + slide up the first time they

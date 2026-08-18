@@ -5,18 +5,24 @@
   <script>document.documentElement.classList.replace('no-js', 'js');</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Revenue & Growth Score | Frankly Inspired</title>
-  <meta name="description" content="A free diagnostic that scores your nonprofit's revenue and growth capacity — reserves, spending mix, revenue diversification, and liquidity — the same numbers that shape a strong fundraising and revenue-pipeline strategy.">
+  <meta name="description" content="A free diagnostic that scores your nonprofit's revenue and growth capacity — reserves, spending mix, revenue diversification, liquidity, and donor retention — the same numbers that shape a strong fundraising and revenue-pipeline strategy.">
 
   <!-- PROTOTYPE: This tool is the numbers-based diagnostic for the Revenue &
        Growth service pillar (donor stewardship and retention, fundraising
        strategy, grant and public-funding strategy, revenue-pipeline design,
        and the cross-sector partnerships that sustain them — see the pillar
        card on index.html). Renamed from "Financial Health Score" to align
-       with that pillar's language; the underlying math is unchanged, since
-       reserve depth, spending mix, revenue concentration, and liquidity are
-       the concrete numbers that determine how much room an organization has
-       to invest in fundraising strategy and revenue-pipeline growth. It
-       remains a deeper, numbers-based second step after the qualitative
+       with that pillar's language. Now includes a 5th metric, Donor
+       Retention Rate (added after retiring the homepage's standalone donor
+       churn calculator — that widget used a single illustrative stat with
+       no real scoring; this metric uses the same Fundraising Effectiveness
+       Project framework but with real bands and advisory talking points,
+       matching every other metric on this page). The other four metrics'
+       math is unchanged: reserve depth, spending mix, revenue concentration,
+       and liquidity are the concrete numbers that determine how much room
+       an organization has to invest in fundraising strategy and
+       revenue-pipeline growth. It remains a deeper, numbers-based second
+       step after the qualitative
        Self-Assessment (assessment.html) — that tool asks how an organization
        FEELS about its sustainability; this one asks for actual
        budget/financial-statement figures and computes standard nonprofit
@@ -59,7 +65,7 @@
       <div class="container narrow center">
         <p class="eyebrow eyebrow-dark">Free Diagnostic</p>
         <h1>Revenue & Growth Score</h1>
-        <p class="hero-sub-light">Seven numbers from your most recent budget or financial statements, scored against the same reserve, spending-mix, revenue-diversification, and liquidity benchmarks that shape a strong fundraising and revenue-pipeline strategy. Takes about 10 minutes. Nothing you enter here leaves your browser.</p>
+        <p class="hero-sub-light">Nine numbers from your most recent budget, financial statements, and donor database, scored against the same reserve, spending-mix, revenue-diversification, liquidity, and donor-retention benchmarks that shape a strong fundraising and revenue-pipeline strategy. Takes about 10 minutes. Nothing you enter here leaves your browser.</p>
       </div>
     </section>
 
@@ -68,7 +74,7 @@
       <div class="container narrow">
 
         <div class="fh-intro-note">
-          <p>Have your most recent annual budget, financial statements, or Form 990 on hand. Every figure below is a single line item you can pull directly from one of those — nothing needs to be calculated first.</p>
+          <p>Have your most recent annual budget, financial statements or Form 990, and a donor count from your CRM or donor database on hand. Every figure below is a single line item or count you can pull directly from one of those — nothing needs to be calculated first.</p>
         </div>
 
         <form id="rg-form" novalidate>
@@ -124,6 +130,20 @@
             </div>
           </div>
 
+          <div class="fh-field-group">
+            <h2 class="pillar-heading">Donor Retention</h2>
+            <div class="fh-field">
+              <label for="rg-prior-donors">Total donors who gave last year</label>
+              <p class="fh-field-help">Every individual, household, or organization that made at least one gift in your prior fiscal year — pull this as a donor count from your CRM or donor database.</p>
+              <input type="number" id="rg-prior-donors" min="0" step="1" placeholder="e.g. 420" inputmode="numeric" required>
+            </div>
+            <div class="fh-field">
+              <label for="rg-retained-donors">Of those, how many gave again this year</label>
+              <p class="fh-field-help">The count of last year's donors who made at least one gift again this year — the core number behind the Fundraising Effectiveness Project's donor retention rate, the standard national benchmark for this metric.</p>
+              <input type="number" id="rg-retained-donors" min="0" step="1" placeholder="e.g. 180" inputmode="numeric" required>
+            </div>
+          </div>
+
           <div class="assessment-submit">
             <button type="submit" class="btn btn-primary">See My Revenue & Growth Score</button>
             <p class="form-status" id="rg-status" role="status" aria-live="polite"></p>
@@ -176,7 +196,7 @@
             </div>
           </div>
 
-          <p class="calculator-caveat">Sources: Propel Nonprofits' Analyzing Financial Information Using Ratios; the BBB Wise Giving Alliance Standards for Charity Accountability; Charity Navigator's Rating Methodology (2026); and the Nonprofit Operating Reserves Initiative (NORI) Workgroup's reserve guidance — the same benchmarks that inform sound revenue and growth strategy. Benchmark figures are sector-wide averages, not specific to any organization Frankly Inspired and Associates, LLC has worked with.</p>
+          <p class="calculator-caveat">Sources: Propel Nonprofits' Analyzing Financial Information Using Ratios; the BBB Wise Giving Alliance Standards for Charity Accountability; Charity Navigator's Rating Methodology (2026); the Nonprofit Operating Reserves Initiative (NORI) Workgroup's reserve guidance; and the Fundraising Effectiveness Project (Association of Fundraising Professionals &amp; GivingTuesday) for donor retention benchmarks — the same benchmarks that inform sound revenue and growth strategy. Benchmark figures are sector-wide averages, not specific to any organization Frankly Inspired and Associates, LLC has worked with.</p>
 
           <button type="button" class="results-retake" id="rg-retake">Start Over</button>
         </div>

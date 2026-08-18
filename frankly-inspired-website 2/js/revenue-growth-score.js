@@ -32,6 +32,16 @@
    - Current Ratio: 1.0 = technically solvent; 1.5+ is the commonly cited
      target for well-run organizations to absorb payment delays or seasonal
      dips.
+   - Donor Retention Rate: the Fundraising Effectiveness Project (a joint
+     project of the Association of Fundraising Professionals and
+     GivingTuesday, the most current recurring benchmark on this specific
+     metric) puts overall donor retention at roughly 43% nationally, and
+     first-time donor retention at roughly 18% — meaning a healthy overall
+     rate can still mask a much weaker rate among newly acquired donors.
+     This replaces the standalone "donor churn calculator" that used to
+     live on the homepage as a single illustrative stat; folding it in here
+     gives it the same real bands and advisory talking points as every
+     other metric on this page instead of a one-off number.
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -125,6 +135,24 @@ document.addEventListener('DOMContentLoaded', function () {
         "2.0-3.0 gives real breathing room against delayed payments or seasonal revenue dips.",
         "Above 3.0 is a very strong liquidity position. Worth checking whether some of that short-term cash could be better deployed — into the operating reserve specifically, or toward new revenue-growth investment — rather than sitting idle."
       ]
+    },
+    {
+      key: 'retention',
+      label: 'Donor Retention Rate',
+      unit: 'percent',
+      compute: function (v) {
+        return v.priorYearDonors > 0 ? (v.retainedDonors / v.priorYearDonors) * 100 : 0;
+      },
+      thresholds: [25, 35, 45, 55], // percent — national overall average is ~43%, sitting inside the "Stable" band
+      invert: false,
+      format: function (n) { return Math.round(n) + '%'; },
+      points: [
+        "Below 25% donor retention is well under the ~43% national average tracked by the Fundraising Effectiveness Project (AFP & GivingTuesday). At this level, acquisition is likely masking a stewardship gap — new donors are probably being brought in faster than they're being kept. A structured thank-you and second-gift-ask cadence in the first 90 days is usually the highest-leverage fix.",
+        "25-35% is a common range for organizations that haven't yet built a deliberate stewardship process, but it's still meaningfully below the national average. Worth checking specifically how first-time donors are treated — nationally, first-time donor retention runs closer to 18%, well below the overall rate, and is usually the biggest single driver of a below-average blended number.",
+        "35-45% is close to the ~43% national average — a reasonable, unremarkable position. The opportunity is less about fixing a problem and more about a specific stewardship upgrade: a real moves-management process (structured cultivation, timely acknowledgment, meaningful updates between asks) tends to move this number meaningfully within a year or two.",
+        "45-55% is ahead of the national average, which nationally sits in the low 40s. Worth understanding which specific practices are driving that — personal acknowledgment, multi-channel stewardship, major-donor cultivation — so they can be protected and extended rather than left to chance as the organization grows.",
+        "Above 55% is a strong, resilient donor base by national benchmarks. The strategic conversation shifts from retention itself to donor upgrade — moving loyal donors to larger gifts or more deeply engaged roles (monthly giving, planned giving, ambassador roles) rather than only working to keep them at their current level."
+      ]
     }
   ];
 
@@ -171,6 +199,8 @@ document.addEventListener('DOMContentLoaded', function () {
       topSource: getNum('rg-top-source'),
       currentAssets: getNum('rg-current-assets'),
       currentLiabilities: getNum('rg-current-liabilities'),
+      priorYearDonors: getNum('rg-prior-donors'),
+      retainedDonors: getNum('rg-retained-donors'),
     };
 
     var results = METRICS.map(function (m) {

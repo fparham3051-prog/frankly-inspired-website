@@ -401,6 +401,23 @@ ul, ol { padding-left: 1.25em; }
 .card h4 { margin-bottom: 0.5rem; }
 .card p { margin: 0; color: #4a545e; font-size: 0.95rem; }
 
+/* Service Pillar cards double as links straight into the matching
+   assessment tool (financial-health.html, leadership-health.html,
+   sustainability-score.html) — see index.html. */
+a.card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+a.card .card-cta {
+  display: inline-block;
+  margin-top: 0.85rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--gold-accessible);
+}
+a.card:hover .card-cta { text-decoration: underline; }
+
 /* ---------- Homepage pillar teaser (links down to #consulting) ---------- */
 .pillar-tags {
   display: flex;
@@ -608,6 +625,7 @@ ul, ol { padding-left: 1.25em; }
 .pricing-card.featured:hover {
   box-shadow: 0 16px 32px rgba(17, 35, 61, 0.38);
 }
+.recommended-badge[hidden] { display: none; }
 .recommended-badge {
   display: inline-block;
   align-self: flex-start;

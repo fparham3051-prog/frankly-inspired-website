@@ -17,7 +17,7 @@ import Header from '../components/Header.astro';
       <div class="container narrow center">
         <p class="eyebrow eyebrow-dark">Free Tool</p>
         <h1>Nonprofit Sustainability Self-Assessment</h1>
-        <p class="hero-sub-light">15 quick questions across the five areas that determine whether an organization is built to last: strategy, revenue, leadership, operations, and partnerships. Takes about 5 minutes. Your answers stay in your browser unless you choose to email yourself the results.</p>
+        <p class="hero-sub-light">15 quick questions across the five areas that determine whether an organization is built to last: strategy, revenue, leadership, operations, and partnerships. Takes about 5 minutes. Your answers stay in your browser unless you choose to email yourself the results. Three of these areas also have a deeper, dedicated diagnostic if you want to go further afterward.</p>
       </div>
     </section>
 
@@ -233,6 +233,7 @@ import Header from '../components/Header.astro';
           </div>
 
           <div class="results-related">
+            <p>Three of these areas also have a deeper, dedicated diagnostic if you want to go further: the <a href="/leadership-health">Leadership &amp; Operations Score</a> (governance and succession research) and the <a href="/sustainability-score">Sustainability Strategy Score</a>, which blends the others into one strategic view. Revenue Diversification has two: the <a href="/revenue-growth-score">Revenue &amp; Growth Score</a> (real budget numbers against sector benchmarks) and the <a href="/institutional-advancement-score">Institutional Advancement Score</a> (the fundraising program behind those numbers — gift portfolios, stewardship, campaigns, and events).</p>
             <p>If grant funding is a meaningful part of your revenue strategy, <a href="https://grantpass-dashboard.onrender.com" target="_blank" rel="noopener">GrantPass</a> is a separate tool that scores your organization's readiness against a specific funder's stated priorities.</p>
           </div>
 
@@ -285,37 +286,50 @@ import Header from '../components/Header.astro';
   // Consulting section on index.astro — keep in sync if that copy ever
   // changes. "anchor" points at the matching Service Pillar card's id, so
   // results link straight to that specific service instead of the general
-  // Consulting section.
+  // Consulting section. "deepDive", where present, points at the dedicated
+  // numbers/research-grounded diagnostic for that same pillar — this quick
+  // 15-question assessment and that deeper tool share a pillar name on
+  // purpose (quick version / deep version of the same area), so the
+  // priority-area callout below makes that relationship explicit instead
+  // of leaving a visitor to discover a same-named tool on their own.
   const PILLARS = [
     {
       num: 1,
       label: 'Sustainability Strategy',
       service: 'Organizational assessment, strategic priorities, risk identification, sustainability roadmaps, and implementation planning.',
       anchor: 'pillar-sustainability',
+      deepDive: [{ href: '/sustainability-score', label: 'Sustainability Strategy Score' }],
     },
     {
       num: 2,
       label: 'Revenue Diversification',
       service: 'Fundraising strategy, partnership development, grant and public-funding strategy, sponsorship thinking, and revenue-pipeline design.',
       anchor: 'pillar-revenue',
+      deepDive: [
+        { href: '/revenue-growth-score', label: 'Revenue & Growth Score' },
+        { href: '/institutional-advancement-score', label: 'Institutional Advancement Score' },
+      ],
     },
     {
       num: 3,
       label: 'Leadership & Organizational Development',
       service: 'Executive advising, leadership systems, role clarity, performance expectations, staff alignment, and change leadership.',
       anchor: 'pillar-leadership',
+      deepDive: [{ href: '/leadership-health', label: 'Leadership & Operations Score' }],
     },
     {
       num: 4,
       label: 'Operations & Infrastructure',
       service: 'Workflows, KPIs, dashboards, CRM/Salesforce practices, accountability systems, planning rhythms, and execution.',
       anchor: 'pillar-operations',
+      deepDive: [],
     },
     {
       num: 5,
       label: 'Partnership & Ecosystem Strategy',
       service: 'Education, workforce, government, corporate, philanthropic, and community partnership development.',
       anchor: 'pillar-partnership',
+      deepDive: [],
     },
   ];
 
@@ -379,7 +393,7 @@ import Header from '../components/Header.astro';
     return BANDS[BANDS.length - 1];
   }
 
-  function renderResults(pillarScores: { num: number; label: string; service: string; anchor: string; score: number }[]) {
+  function renderResults(pillarScores: { num: number; label: string; service: string; anchor: string; deepDive: { href: string; label: string }[]; score: number }[]) {
     const composite = pillarScores.reduce((sum, p) => sum + p.score, 0); // 15-75
     const pct = Math.round(((composite - 15) / 60) * 100);
     const band = bandFor(pct);
@@ -412,10 +426,17 @@ import Header from '../components/Header.astro';
     const lowest = scoredPillars.reduce((min, p) => (p.pct < min.pct ? p : min), scoredPillars[0]);
 
     if (priorityEl) {
+      const deepDiveLinks = lowest.deepDive
+        .map((d) => `<a class="link-more" href="${d.href}">Take the ${d.label}</a>`)
+        .join(' or ');
+      const deepDiveNote = lowest.deepDive.length
+        ? `<p class="section-note" style="margin-top:0.75rem;">Want a deeper, more rigorous read on this specific area? ${deepDiveLinks}</p>`
+        : '';
       priorityEl.innerHTML =
         `<h3 class="subhead">Priority Area: ${lowest.label}</h3>` +
         `<p>${lowest.service}</p>` +
-        `<a class="link-more" href="/#${lowest.anchor}">See this service on the site</a>`;
+        `<a class="link-more" href="/#${lowest.anchor}">See this service on the site</a>` +
+        deepDiveNote;
     }
 
     const recommendationEl = document.getElementById('results-recommendation');
@@ -529,6 +550,7 @@ import Header from '../components/Header.astro';
         label: p.label,
         service: p.service,
         anchor: p.anchor,
+        deepDive: p.deepDive,
         score: pillarScore(p.num, form),
       }));
 

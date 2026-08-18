@@ -10,7 +10,7 @@
 //   legal:      (privacy/terms) no footer-links row and no email/phone line
 //               at all — legal pages stay minimal on purpose
 interface Props {
-  variant?: 'home' | 'about' | 'assessment' | 'legal';
+  variant?: 'home' | 'about' | 'assessment' | 'legal' | 'score';
 }
 
 const { variant = 'home' } = Astro.props;
@@ -37,6 +37,14 @@ const { variant = 'home' } = Astro.props;
         <span aria-hidden="true">&middot;</span>
         <a href="/assessment">Free Assessment</a>
         <span aria-hidden="true">&middot;</span>
+        <a href="/revenue-growth-score">Revenue &amp; Growth Score</a>
+        <span aria-hidden="true">&middot;</span>
+        <a href="/institutional-advancement-score">Institutional Advancement Score</a>
+        <span aria-hidden="true">&middot;</span>
+        <a href="/leadership-health">Leadership &amp; Operations Score</a>
+        <span aria-hidden="true">&middot;</span>
+        <a href="/sustainability-score">Sustainability Strategy Score</a>
+        <span aria-hidden="true">&middot;</span>
         <a href="https://calendly.com/fparham/30min" target="_blank" rel="noopener">Schedule a Strategy Conversation</a>
         <span aria-hidden="true">&middot;</span>
         <a href="/#contact">Contact</a>
@@ -58,6 +66,24 @@ const { variant = 'home' } = Astro.props;
     {variant === 'assessment' && (
       <p class="footer-links">
         <a href="/">Back to Site</a>
+        <span aria-hidden="true">&middot;</span>
+        <a href="https://calendly.com/fparham/30min" target="_blank" rel="noopener">Schedule a Strategy Conversation</a>
+      </p>
+    )}
+
+    {variant === 'score' && (
+      <p class="footer-links">
+        <a href="/">Back to Site</a>
+        <span aria-hidden="true">&middot;</span>
+        <a href="/assessment">Free Assessment</a>
+        <span aria-hidden="true">&middot;</span>
+        <a href="/revenue-growth-score">Revenue &amp; Growth Score</a>
+        <span aria-hidden="true">&middot;</span>
+        <a href="/institutional-advancement-score">Institutional Advancement Score</a>
+        <span aria-hidden="true">&middot;</span>
+        <a href="/leadership-health">Leadership &amp; Operations Score</a>
+        <span aria-hidden="true">&middot;</span>
+        <a href="/sustainability-score">Sustainability Strategy Score</a>
         <span aria-hidden="true">&middot;</span>
         <a href="https://calendly.com/fparham/30min" target="_blank" rel="noopener">Schedule a Strategy Conversation</a>
       </p>

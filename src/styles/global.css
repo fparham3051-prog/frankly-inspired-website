@@ -27,6 +27,16 @@
   --light-gray: #F3F5F7;
   --border: #e2e6ea;
 
+  /* Five-band scoring scale shared by the Revenue & Growth, Leadership &
+     Operations, and Sustainability Strategy diagnostics (Critical/At Risk/
+     Stable/Strong/Resilient) — red through green, same semantic meaning
+     everywhere it appears (gauge arc, metric-row left border, fill bars). */
+  --band-0: #b3402c;
+  --band-1: #c97a2e;
+  --band-2: #b28e42;
+  --band-3: #6f9c4d;
+  --band-4: #3d7a45;
+
   --font-heading: 'Playfair Display', Georgia, 'Times New Roman', serif;
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
@@ -519,6 +529,19 @@ ul, ol { padding-left: 1.25em; }
   height: 1.1rem;
   background: rgba(255, 255, 255, 0.2);
 }
+/* The three pillar credentials double as quick links straight into their
+   score tool — same destinations the old "How Franklin Helps" teaser
+   section used to point to, folded into a component that's already here
+   for proof rather than repeated as its own section. */
+a.hero-credential-link {
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color var(--transition), border-color var(--transition);
+}
+a.hero-credential-link:hover {
+  color: var(--gold-light);
+  border-bottom-color: var(--gold-light);
+}
 @media (max-width: 640px) {
   .hero-credentials { gap: 0.6rem 1.5rem; padding: 1.1rem 1.5rem; }
   .hero-credential-divider { display: none; }
@@ -626,33 +649,6 @@ ul, ol { padding-left: 1.25em; }
 .card h4 { margin-bottom: 0.55rem; }
 .card p { margin: 0; color: #4a545e; font-size: 0.95rem; }
 
-/* ---------- Homepage pillar teaser (links down to #consulting) ---------- */
-.pillar-tags {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.85rem;
-  margin: 1.75rem 0 1.4rem;
-}
-.pillar-tag {
-  display: inline-block;
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  padding: 0.6em 1.35em;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--navy);
-  text-decoration: none;
-  box-shadow: var(--shadow-sm);
-  transition: border-color var(--transition), color var(--transition), transform var(--transition), box-shadow var(--transition);
-}
-.pillar-tag:hover {
-  border-color: var(--gold);
-  color: var(--gold-accessible);
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-md);
-}
 .link-more {
   display: inline-block;
   font-size: 0.9rem;
@@ -1245,6 +1241,14 @@ ul, ol { padding-left: 1.25em; }
   max-width: 58ch;
   margin: 0 auto;
 }
+/* Without this, a link inside the dark .assessment-intro gradient inherits
+   the site-wide navy link color — navy text on a navy background,
+   effectively invisible. */
+.assessment-intro a {
+  color: var(--gold-light);
+  text-decoration-color: var(--gold-light);
+}
+.assessment-intro a:hover { color: var(--white); }
 
 .assessment-progress {
   position: sticky;
@@ -1592,6 +1596,191 @@ ul, ol { padding-left: 1.25em; }
   font-size: 0.9rem;
 }
 .results-retake:hover { color: var(--gold-accessible); }
+
+/* ==========================================================================
+   NUMBERS-BASED DIAGNOSTICS (revenue-growth-score, leadership-health,
+   sustainability-score) — shared gauge/metric-card infrastructure. The
+   fh- prefix is historical (first built for the "Financial Health Score")
+   and is now shared, generic scoring UI reused by all three tools; only
+   each page's element IDs differ (rg-/lh-/ss-), not these classes.
+   ========================================================================== */
+.fh-form-section { padding-top: clamp(2rem, 5vw, 3rem); }
+.fh-results { margin-top: 1rem; padding-top: 1rem; }
+.fh-intro-note {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  margin-bottom: 2rem;
+  font-size: 0.92rem;
+  color: #4a545e;
+}
+.fh-intro-note p { margin: 0; }
+
+.fh-field-group { margin-bottom: 2rem; }
+.fh-field { margin-bottom: 1.5rem; }
+.fh-field label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 0.3em;
+}
+.fh-field-help {
+  font-size: 0.82rem;
+  color: #6b7480;
+  margin: 0 0 0.5em;
+  max-width: 60ch;
+}
+.fh-field .calculator-input-prefix { max-width: 320px; }
+
+/* ---------- Gauge ---------- */
+.fh-gauge-wrap {
+  position: relative;
+  max-width: 320px;
+  margin: 0 auto 1rem;
+}
+.fh-gauge { display: block; width: 100%; height: auto; }
+.fh-gauge-band {
+  fill: none;
+  stroke-width: 20;
+}
+.fh-gauge-band.fh-band-0 { stroke: var(--band-0); }
+.fh-gauge-band.fh-band-1 { stroke: var(--band-1); }
+.fh-gauge-band.fh-band-2 { stroke: var(--band-2); }
+.fh-gauge-band.fh-band-3 { stroke: var(--band-3); }
+.fh-gauge-band.fh-band-4 { stroke: var(--band-4); }
+.fh-needle-line {
+  stroke: var(--navy);
+  stroke-width: 4;
+  stroke-linecap: round;
+  transition: transform 600ms ease;
+}
+.fh-needle-hub { fill: var(--navy); }
+.fh-gauge-readout {
+  text-align: center;
+  margin-top: -0.5rem;
+}
+.fh-gauge-score {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1;
+}
+.fh-gauge-band-name {
+  display: block;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--gold-accessible);
+  margin-top: 0.25rem;
+}
+
+/* ---------- Per-metric rows ---------- */
+.fh-metrics {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin: 1.25rem 0 2rem;
+}
+.fh-metric-row {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.1rem 1.25rem;
+}
+.fh-metric-row.fh-band-0 { border-left-color: var(--band-0); }
+.fh-metric-row.fh-band-1 { border-left-color: var(--band-1); }
+.fh-metric-row.fh-band-2 { border-left-color: var(--band-2); }
+.fh-metric-row.fh-band-3 { border-left-color: var(--band-3); }
+.fh-metric-row.fh-band-4 { border-left-color: var(--band-4); }
+.fh-metric-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+.fh-metric-label {
+  font-weight: 600;
+  color: var(--navy);
+  font-size: 0.95rem;
+}
+.fh-metric-value {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #4a545e;
+  white-space: nowrap;
+}
+.fh-metric-track {
+  display: block;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--light-gray);
+  overflow: hidden;
+  margin-bottom: 0.65rem;
+}
+.fh-metric-fill {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+}
+.fh-band-0 .fh-metric-fill { background: var(--band-0); }
+.fh-band-1 .fh-metric-fill { background: var(--band-1); }
+.fh-band-2 .fh-metric-fill { background: var(--band-2); }
+.fh-band-3 .fh-metric-fill { background: var(--band-3); }
+.fh-band-4 .fh-metric-fill { background: var(--band-4); }
+.fh-metric-points {
+  font-size: 0.88rem;
+  color: #4a545e;
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .fh-metric-head { flex-direction: column; gap: 0.2rem; }
+}
+
+/* Sustainability Strategy Score's "Strategic Triangle" — structurally the
+   same .fh-metric-row list as the other two tools, arranged three-across
+   instead of stacked. */
+.ss-triangle-intro {
+  font-size: 0.92rem;
+  color: #4a545e;
+  max-width: 65ch;
+  margin: 0 0 1.25rem;
+}
+.ss-triangle {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin: 1rem 0 2rem;
+}
+.ss-triangle .fh-metric-row { display: flex; flex-direction: column; }
+.ss-triangle .fh-metric-head { flex-direction: column; align-items: flex-start; gap: 0.15rem; }
+
+@media (max-width: 780px) {
+  .ss-triangle { grid-template-columns: 1fr; }
+}
+
+/* Service Pillar cards double as links straight into the matching
+   diagnostic tool (revenue-growth-score, leadership-health,
+   sustainability-score — see index.astro). */
+a.card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+a.card .card-cta {
+  display: inline-block;
+  margin-top: 0.85rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--gold-accessible);
+}
+a.card:hover .card-cta { text-decoration: underline; }
 
 @media (max-width: 640px) {
   .likert-scale {

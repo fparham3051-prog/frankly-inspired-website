@@ -34,7 +34,16 @@ const brandHref = variant === 'full' ? '/#top' : '/';
           </button>
           <ul id="nav-menu" class="nav-menu">
             <li><a href="/#consulting">Consulting</a></li>
-            <li><a href="/assessment">Free Assessment</a></li>
+            <li class="nav-item-dropdown">
+              <button type="button" class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">Assessments <span class="nav-caret" aria-hidden="true">&#9662;</span></button>
+              <ul class="nav-dropdown-menu">
+                <li><a href="/assessment">Free Sustainability Self-Assessment</a></li>
+                <li><a href="/revenue-growth-score">Revenue &amp; Growth Score</a></li>
+                <li><a href="/institutional-advancement-score">Institutional Advancement Score</a></li>
+                <li><a href="/leadership-health">Leadership &amp; Operations Score</a></li>
+                <li><a href="/sustainability-score">Sustainability Strategy Score</a></li>
+              </ul>
+            </li>
             <li class="nav-item-dropdown">
               <button type="button" class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">About <span class="nav-caret" aria-hidden="true">&#9662;</span></button>
               <ul class="nav-dropdown-menu">
@@ -106,34 +115,45 @@ const brandHref = variant === 'full' ? '/#top' : '/';
       sections.forEach((section) => observer.observe(section));
     }
 
-    // ---------- "More" nav dropdown ----------
-    const dropdownToggle = document.querySelector<HTMLButtonElement>('.nav-dropdown-toggle');
-    const dropdownMenu = document.querySelector<HTMLElement>('.nav-dropdown-menu');
-    const dropdownItem = document.querySelector<HTMLElement>('.nav-item-dropdown');
+    // ---------- Nav dropdowns (Assessments, About) ----------
+    // Generalized to support any number of .nav-item-dropdown elements in
+    // the nav, so each opens/closes independently and opening one closes
+    // any other that's open.
+    const dropdownItems = document.querySelectorAll<HTMLElement>('.nav-item-dropdown');
 
-    if (dropdownToggle && dropdownMenu && dropdownItem) {
+    dropdownItems.forEach((item) => {
+      const toggle = item.querySelector<HTMLButtonElement>('.nav-dropdown-toggle');
+      const menu = item.querySelector<HTMLElement>('.nav-dropdown-menu');
+      if (!toggle || !menu) return;
+
       const closeDropdown = () => {
-        dropdownItem.classList.remove('is-open');
-        dropdownToggle.setAttribute('aria-expanded', 'false');
+        item.classList.remove('is-open');
+        toggle.setAttribute('aria-expanded', 'false');
       };
       const openDropdown = () => {
-        dropdownItem.classList.add('is-open');
-        dropdownToggle.setAttribute('aria-expanded', 'true');
+        dropdownItems.forEach((other) => {
+          if (other !== item) {
+            other.classList.remove('is-open');
+            other.querySelector('.nav-dropdown-toggle')?.setAttribute('aria-expanded', 'false');
+          }
+        });
+        item.classList.add('is-open');
+        toggle.setAttribute('aria-expanded', 'true');
       };
 
-      dropdownToggle.addEventListener('click', (e) => {
+      toggle.addEventListener('click', (e) => {
         e.stopPropagation();
-        if (dropdownItem.classList.contains('is-open')) closeDropdown();
+        if (item.classList.contains('is-open')) closeDropdown();
         else openDropdown();
       });
 
       document.addEventListener('click', (e) => {
-        if (!dropdownItem.contains(e.target as Node)) closeDropdown();
+        if (!item.contains(e.target as Node)) closeDropdown();
       });
 
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') closeDropdown();
       });
-    }
+    });
   </script>
 )}

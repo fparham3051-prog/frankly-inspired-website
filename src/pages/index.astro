@@ -22,7 +22,6 @@ import ScrollReveal from '../components/ScrollReveal.astro';
           <p class="hero-sub reveal">Executive strategy and sustainability consulting for leaders of mission-driven institutions seeking stronger revenue models, organizational systems, leadership capacity, and cross-sector partnerships.</p>
           <div class="hero-ctas reveal">
             <a class="btn btn-primary" href="https://calendly.com/fparham/30min" target="_blank" rel="noopener">Schedule a Strategy Conversation</a>
-            <a class="btn btn-secondary" href="#pricing">See Pricing</a>
           </div>
         </div>
         <div class="hero-portrait reveal">
@@ -37,11 +36,11 @@ import ScrollReveal from '../components/ScrollReveal.astro';
       <div class="hero-credentials reveal">
         <div class="hero-credential"><span class="hero-credential-num">20+</span><span>Years Leadership Experience</span></div>
         <div class="hero-credential-divider" aria-hidden="true"></div>
-        <div class="hero-credential"><span>Sustainability Strategy</span></div>
+        <a class="hero-credential hero-credential-link" href="/sustainability-score"><span>Sustainability Strategy</span></a>
         <div class="hero-credential-divider" aria-hidden="true"></div>
-        <div class="hero-credential"><span>Revenue &amp; Growth</span></div>
+        <a class="hero-credential hero-credential-link" href="/revenue-growth-score"><span>Revenue &amp; Growth</span></a>
         <div class="hero-credential-divider" aria-hidden="true"></div>
-        <div class="hero-credential"><span>Leadership &amp; Operations</span></div>
+        <a class="hero-credential hero-credential-link" href="/leadership-health"><span>Leadership &amp; Operations</span></a>
       </div>
     </section>
 
@@ -81,7 +80,7 @@ import ScrollReveal from '../components/ScrollReveal.astro';
     <!-- Early credibility signal, borrowed from the design review — same
          board/affiliation names already listed on /about under "Board
          Leadership & Affiliations", just surfaced sooner. -->
-    <section class="section affiliation-strip">
+    <section class="section affiliation-strip alt-bg">
       <div class="container">
         <p class="affiliation-label reveal">Board Leadership &amp; Affiliations</p>
         <div class="affiliation-list reveal">
@@ -90,22 +89,6 @@ import ScrollReveal from '../components/ScrollReveal.astro';
           <span>Howard Rye Institute</span>
           <span>Association of Fundraising Professionals</span>
         </div>
-      </div>
-    </section>
-
-    <!-- ============ SERVICE PILLARS (homepage preview) ============ -->
-    <!-- Deliberately a scannable teaser, not a second copy of the Consulting
-         section's descriptions — full detail on each pillar lives at
-         #consulting so this doesn't repeat that content twice on one page. -->
-    <section class="section services-preview alt-bg">
-      <div class="container center">
-        <h2 class="section-title reveal">How Franklin Helps</h2>
-        <div class="pillar-tags reveal">
-          <a class="pillar-tag" href="#consulting">Sustainability Strategy</a>
-          <a class="pillar-tag" href="#consulting">Revenue &amp; Growth</a>
-          <a class="pillar-tag" href="#consulting">Leadership &amp; Operations</a>
-        </div>
-        <a class="link-more reveal" href="#consulting">See how each one works</a>
       </div>
     </section>
 
@@ -155,20 +138,23 @@ import ScrollReveal from '../components/ScrollReveal.astro';
              still resolve correctly. -->
         <h3 class="subhead reveal">Service Pillars</h3>
         <div class="card-grid">
-          <div class="card reveal" id="pillar-sustainability">
+          <a class="card reveal" id="pillar-sustainability" href="/sustainability-score">
             <h4>Sustainability Strategy</h4>
             <p>Organizational assessment, strategic priorities, risk identification, sustainability roadmaps, and implementation planning.</p>
-          </div>
-          <div class="card reveal" id="pillar-revenue">
+            <span class="card-cta">Take the Sustainability Strategy Score &rarr;</span>
+          </a>
+          <a class="card reveal" id="pillar-revenue" href="/revenue-growth-score">
             <span id="pillar-partnership" class="anchor-offset"></span>
             <h4>Revenue &amp; Growth</h4>
             <p>Individual donor stewardship and retention, fundraising strategy, grant and public-funding strategy, revenue-pipeline design, and the cross-sector partnerships (education, workforce, government, corporate, philanthropic, and community) that sustain them.</p>
-          </div>
-          <div class="card reveal" id="pillar-leadership">
+            <span class="card-cta">Take the Revenue &amp; Growth Score &rarr;</span>
+          </a>
+          <a class="card reveal" id="pillar-leadership" href="/leadership-health">
             <span id="pillar-operations" class="anchor-offset"></span>
             <h4>Leadership &amp; Operations</h4>
             <p>Executive advising and change leadership, paired with the workflows, KPIs, CRM/Salesforce practices, and AI readiness guidance that keep an organization running well. 1:1 leadership coaching is available as its own engagement.</p>
-          </div>
+            <span class="card-cta">Take the Leadership &amp; Operations Score &rarr;</span>
+          </a>
         </div>
 
         <h3 class="subhead reveal">Engagement Model</h3>

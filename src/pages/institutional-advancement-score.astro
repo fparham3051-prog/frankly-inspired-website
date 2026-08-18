@@ -1,0 +1,520 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+---
+
+<BaseLayout
+  title="Institutional Advancement Score | Frankly Inspired"
+  description="A free diagnostic that scores your nonprofit's fundraising program structure — gift portfolio strategy and staffing, moves management and stewardship, campaign readiness, and events strategy — against named fundraising research and AFP benchmarks."
+  footerVariant="score"
+>
+  <Header variant="minimal" />
+
+  <!-- The structural/practice companion to the Revenue & Growth Score.
+       That tool scores financial ratios (reserves, spending mix, liquidity,
+       concentration, retention rate) computed from budget figures — the
+       OUTCOMES of a fundraising program. This tool scores the STRUCTURE
+       that produces those outcomes: how gift levels are segmented and
+       staffed, whether donors move through a real moves-management
+       pipeline, whether campaigns follow a disciplined phase structure, and
+       whether events are run as strategy rather than habit. Deliberately
+       NOT folded into the Sustainability Strategy Score's "Strategic
+       Triangle" — that framework is Mark Moore's specific three-legged
+       model (value / capacity / support), and forcing a fourth leg into a
+       named three-part framework would misrepresent the citation. Instead
+       this cross-links directly with Revenue & Growth Score as a paired
+       "numbers + structure" read on the same Revenue & Growth pillar. -->
+
+  <main id="main">
+
+    <!-- ============ INTRO ============ -->
+    <section class="section assessment-intro">
+      <div class="container narrow center">
+        <p class="eyebrow eyebrow-dark">Free Diagnostic</p>
+        <h1>Institutional Advancement Score</h1>
+        <p class="hero-sub-light">12 questions on gift portfolio strategy and staffing, moves management and stewardship, campaign readiness, and events strategy — grounded in Cornell's moves-management framework, Penelope Burk's donor-centered fundraising research, AFP portfolio benchmarks, and standard capital-campaign methodology. Takes about 7 minutes. This is the structural companion to the <a href="/revenue-growth-score">Revenue &amp; Growth Score</a> — that tool scores your numbers, this one scores the program that produces them.</p>
+      </div>
+    </section>
+
+    <!-- ============ ASSESSMENT FORM ============ -->
+    <section class="section assessment-form-section alt-bg">
+      <div class="container narrow">
+
+        <div class="assessment-progress" id="ia-progress">
+          <p class="assessment-progress-label" id="ia-progress-label">Section 1 of 4 — Gift Portfolio Strategy &amp; Staffing</p>
+          <span class="assessment-progress-track"><span class="assessment-progress-fill" id="ia-progress-fill"></span></span>
+        </div>
+
+        <form id="ia-form" novalidate>
+
+          <div class="pillar-group" data-pillar-index="1">
+            <h2 class="pillar-heading">1. Gift Portfolio Strategy &amp; Staffing</h2>
+            <p class="fh-field-help">Based on AFP's fundraising staffing and portfolio-size benchmarks.</p>
+            <fieldset class="likert">
+              <legend>We segment donors into clear gift levels (e.g., broad-based/annual, mid-level, major, principal) and use a different strategy for each, not one blanket approach.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="gp1" value="1" required /><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="gp1" value="2" /><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="gp1" value="3" /><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="gp1" value="4" /><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="gp1" value="5" /><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+            <fieldset class="likert">
+              <legend>Major and principal gift relationships are assigned to a specific staff member's portfolio, not left to whoever has time.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="gp2" value="1" required /><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="gp2" value="2" /><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="gp2" value="3" /><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="gp2" value="4" /><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="gp2" value="5" /><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+            <fieldset class="likert">
+              <legend>Board members and other volunteer leaders are actively engaged in identifying and opening doors to prospects, not just staff.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="gp3" value="1" required /><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="gp3" value="2" /><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="gp3" value="3" /><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="gp3" value="4" /><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="gp3" value="5" /><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="pillar-group" data-pillar-index="2">
+            <h2 class="pillar-heading">2. Moves Management &amp; Stewardship</h2>
+            <p class="fh-field-help">Based on Cornell's moves-management framework and Penelope Burk's donor-centered fundraising research.</p>
+            <fieldset class="likert">
+              <legend>We track donors through defined stages (e.g., identification, qualification, cultivation, solicitation, stewardship), not just "contacted" or "not."</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="mm1" value="1" required /><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="mm1" value="2" /><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="mm1" value="3" /><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="mm1" value="4" /><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="mm1" value="5" /><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+            <fieldset class="likert">
+              <legend>Every gift is acknowledged promptly with more than a generic, automated receipt.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="mm2" value="1" required /><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="mm2" value="2" /><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="mm2" value="3" /><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="mm2" value="4" /><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="mm2" value="5" /><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+            <fieldset class="likert">
+              <legend>We have a deliberate stewardship plan for donors after the ask, not just before it — impact updates, personal touches, recognition tied to gift level.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="mm3" value="1" required /><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="mm3" value="2" /><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="mm3" value="3" /><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="mm3" value="4" /><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="mm3" value="5" /><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="pillar-group" data-pillar-index="3">
+            <h2 class="pillar-heading">3. Campaign Structure &amp; Readiness</h2>
+            <p class="fh-field-help">Based on standard capital-campaign phase methodology (feasibility, quiet phase, public phase).</p>
+            <fieldset class="likert">
+              <legend>Before launching a campaign, we run a real feasibility assessment (confidential interviews with top prospects), rather than setting a goal and hoping.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="cs1" value="1" required /><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="cs1" value="2" /><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="cs1" value="3" /><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="cs1" value="4" /><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="cs1" value="5" /><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+            <fieldset class="likert">
+              <legend>We understand and plan for a quiet/leadership phase, securing a strong majority of the goal from major donors before any public announcement.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="cs2" value="1" required /><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="cs2" value="2" /><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="cs2" value="3" /><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="cs2" value="4" /><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="cs2" value="5" /><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+            <fieldset class="likert">
+              <legend>We have a realistic campaign timeline and a specific, compelling case for support, not a general "help us" appeal.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="cs3" value="1" required /><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="cs3" value="2" /><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="cs3" value="3" /><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="cs3" value="4" /><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="cs3" value="5" /><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="pillar-group" data-pillar-index="4">
+            <h2 class="pillar-heading">4. Events as Strategy</h2>
+            <p class="fh-field-help">Based on standard nonprofit fundraising event ROI benchmarks.</p>
+            <fieldset class="likert">
+              <legend>We track true net revenue and cost-per-dollar-raised for each event, not just gross revenue.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="ev1" value="1" required /><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="ev1" value="2" /><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="ev1" value="3" /><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="ev1" value="4" /><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="ev1" value="5" /><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+            <fieldset class="likert">
+              <legend>Our events are designed as relationship and cultivation touchpoints, not only as fundraising transactions.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="ev2" value="1" required /><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="ev2" value="2" /><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="ev2" value="3" /><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="ev2" value="4" /><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="ev2" value="5" /><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+            <fieldset class="likert">
+              <legend>We evaluate whether each event is worth repeating based on ROI and strategic fit, rather than running it again out of habit.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="ev3" value="1" required /><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="ev3" value="2" /><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="ev3" value="3" /><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="ev3" value="4" /><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="ev3" value="5" /><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="assessment-submit">
+            <button type="submit" class="btn btn-primary">See My Institutional Advancement Score</button>
+            <p class="form-status" id="ia-status" role="status" aria-live="polite"></p>
+          </div>
+        </form>
+
+        <!-- ============ RESULTS (rendered by the script below) ============ -->
+        <div class="fh-results" id="ia-results" hidden>
+
+          <div class="fh-gauge-wrap">
+            <svg class="fh-gauge" viewBox="0 0 200 115" role="img" aria-labelledby="ia-gauge-title">
+              <title id="ia-gauge-title">Institutional advancement gauge</title>
+              <path d="M10,100 A90,90 0 0,1 27.19,47.10" class="fh-gauge-band fh-band-0"></path>
+              <path d="M27.19,47.10 A90,90 0 0,1 72.19,14.40" class="fh-gauge-band fh-band-1"></path>
+              <path d="M72.19,14.40 A90,90 0 0,1 127.81,14.40" class="fh-gauge-band fh-band-2"></path>
+              <path d="M127.81,14.40 A90,90 0 0,1 172.81,47.10" class="fh-gauge-band fh-band-3"></path>
+              <path d="M172.81,47.10 A90,90 0 0,1 190,100" class="fh-gauge-band fh-band-4"></path>
+              <g id="ia-needle" transform="rotate(-90,100,100)">
+                <line x1="100" y1="100" x2="100" y2="25" class="fh-needle-line"></line>
+                <circle cx="100" cy="100" r="7" class="fh-needle-hub"></circle>
+              </g>
+            </svg>
+            <div class="fh-gauge-readout">
+              <span class="fh-gauge-score" id="ia-gauge-score"></span>
+              <span class="fh-gauge-band-name" id="ia-gauge-band-name"></span>
+            </div>
+          </div>
+
+          <p class="results-band-desc" id="ia-summary"></p>
+          <p class="results-avg-overall" id="ia-avg-overall" hidden></p>
+          <p class="results-narrative-loading" id="ia-narrative-loading" hidden>Writing a personalized summary of your results&hellip;</p>
+
+          <h3 class="subhead">By Dimension</h3>
+          <div class="fh-metrics" id="ia-metrics"></div>
+
+          <div class="results-recommendation" id="ia-recommendation"></div>
+
+          <div class="results-disclaimer">
+            <p>This is a directional self-assessment based on your own responses, scored against published research and sector benchmarks. It is not a formal development audit, and every question involves judgment — treat it as a starting point for a real conversation, not a verdict.</p>
+          </div>
+
+          <div class="results-related">
+            <p>This tool measures fundraising program structure — staffing, stewardship, campaigns, and events. For the financial-ratio read on revenue health (reserves, spending mix, liquidity, concentration), see the <a href="/revenue-growth-score">Revenue &amp; Growth Score</a>. For the broader strategic view that also weighs leadership capacity, see the <a href="/sustainability-score">Sustainability Strategy Score</a>.</p>
+            <p>Haven't taken the free <a href="/assessment">Nonprofit Sustainability Self-Assessment</a> yet? It covers this and four other areas in about 5 minutes.</p>
+          </div>
+
+          <div class="results-cta">
+            <h3>Want to talk through these results?</h3>
+            <p>A short conversation is the fastest way to turn this into a plan.</p>
+            <div class="hero-ctas center">
+              <a class="btn btn-primary" href="https://calendly.com/fparham/30min" target="_blank" rel="noopener">Schedule a Strategy Conversation</a>
+              <a class="btn btn-secondary" href="/#pricing">See Pricing</a>
+            </div>
+          </div>
+
+          <p class="calculator-caveat">Sources: David Dunlop's moves-management framework, developed at Cornell University; Penelope Burk / Cygnus Applied Research's donor-centered fundraising research; the Association of Fundraising Professionals' portfolio-size and staffing benchmarks; standard capital-campaign phase methodology (feasibility study, quiet phase, public phase) as practiced across the sector; nonprofit fundraising event ROI benchmarks. Benchmark figures are sector-wide findings, not specific to any organization Frankly Inspired and Associates, LLC has worked with.</p>
+
+          <button type="button" class="results-retake" id="ia-retake">Retake the Assessment</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</BaseLayout>
+
+<script>
+  // UPDATE THIS once frankly-inspired-backend is deployed to Render — see
+  // that repo's README.md. Same value as assessment.astro's API_BASE.
+  const API_BASE = 'https://frankly-inspired-api.onrender.com';
+
+  const BAND_NAMES = ['Critical', 'At Risk', 'Stable', 'Strong', 'Resilient'];
+  const BAND_SUBNAMES = ['Poor', 'Fair', 'Good', 'Very Good', 'Excellent'];
+
+  const COMPOSITE_SUMMARY = [
+    "Fundraising program structure needs real attention across most of these areas. That's a common starting point, especially for younger or growing organizations, but building the fundamentals below — portfolio ownership, stewardship discipline, campaign readiness — is what turns fundraising from reactive to strategic.",
+    'There are real gaps in more than one area below. These are addressable with deliberate structure, not a full program overhaul.',
+    'The fundamentals are in place across most dimensions. The opportunity now is tightening the specific gaps below rather than a broad rebuild.',
+    'This is a well-structured fundraising program by sector benchmarks. The focus shifts from building fundamentals to protecting and extending what already works.',
+    'This organization shows genuine fundraising program maturity — portfolio discipline, real stewardship, campaign readiness — relative to sector norms. The conversation now is strategic use of that strength.',
+  ];
+
+  const DIMENSIONS = [
+    {
+      key: 'portfolio',
+      label: 'Gift Portfolio Strategy & Staffing',
+      questions: ['gp1', 'gp2', 'gp3'],
+      points: [
+        "There's no real gift-level segmentation and no assigned portfolios — every donor gets roughly the same treatment regardless of capacity. AFP's research puts a standard major-gifts portfolio at 75-150 active prospects per officer; without that structure, the organization's best relationships are likely getting the least deliberate attention, not the most.",
+        "Some informal sense of \"our bigger donors\" exists, but it isn't a real segmentation or a named portfolio. The fastest fix is naming who owns which relationships, even before formal gift-level tiers are defined.",
+        "Gift levels and portfolio ownership exist in some form. The next step is making sure portfolio size stays workable — AFP's benchmark of 75-150 prospects (fewer for true principal-gift work) is the point past which relationship quality tends to erode.",
+        "This is a genuinely structured portfolio system, ahead of most organizations this size. Worth checking board and volunteer involvement in prospect identification specifically, since that's the piece most often left informal even in well-structured programs.",
+        "This is mature portfolio management with real volunteer engagement in prospect identification — a combination most organizations never fully build. The opportunity now is protecting it through leadership transitions, since portfolio discipline is one of the first things to slip when a development director changes.",
+      ],
+    },
+    {
+      key: 'stewardship',
+      label: 'Moves Management & Stewardship',
+      questions: ['mm1', 'mm2', 'mm3'],
+      points: [
+        "There's no real stage-based tracking, and acknowledgment is likely inconsistent. Penelope Burk's research found first-gift-to-second-ask attrition has risen to roughly 65% nationally — without a stewardship system, that number is a real risk here, not just a statistic.",
+        'Some donors get real follow-up, but it depends on who remembers, not a system. A simple written acknowledgment-and-stewardship checklist by gift level is the fastest fix.',
+        "Basic stages and acknowledgment practices exist. The next step is consistency — Burk's research found 93% of donors would give again, and 64% would give more, specifically when communication improves, so this is a high-leverage area to tighten.",
+        'This is a genuinely donor-centered stewardship practice, ahead of sector norms. Worth checking whether stewardship scales with gift size, not just gift count, since the largest relationships usually warrant the most personal touch.',
+        'This is mature moves-management discipline most organizations don\'t have. The opportunity now is using stewardship data itself — response rates, engagement patterns — to refine cultivation strategy further, not just to say thank you well.',
+      ],
+    },
+    {
+      key: 'campaign',
+      label: 'Campaign Structure & Readiness',
+      questions: ['cs1', 'cs2', 'cs3'],
+      points: [
+        "There's no real campaign structure in place. Skipping the feasibility study and quiet phase, and going straight to a public ask, is one of the most common reasons campaigns fall short of goal, since the quiet phase is what typically secures 75-90% of the total before the public even hears about it.",
+        'Some campaign planning happens, but likely without a formal feasibility study or a distinct quiet phase. Even a lightweight version — confidential conversations with the 10-15 prospects most likely to anchor the goal — closes most of this gap.',
+        'The basic phase structure (feasibility, quiet phase, public phase) is understood and generally followed. The next step is discipline around the case for support, making sure it names a specific institutional need, not a general appeal.',
+        'This is real campaign readiness, with a working feasibility-to-public-phase structure. Worth checking that volunteer leadership (a chair or cabinet making peer asks) is built into the quiet phase specifically, since staff-only solicitation of major donors is a common limiting factor.',
+        "This is mature campaign discipline most organizations only develop after several campaigns. The opportunity now is using what worked — feasibility methodology, quiet-phase sequencing, case development — as a repeatable playbook rather than reinventing it each time.",
+      ],
+    },
+    {
+      key: 'events',
+      label: 'Events as Strategy',
+      questions: ['ev1', 'ev2', 'ev3'],
+      points: [
+        'Events likely aren\'t tracked past gross revenue, which means it\'s not actually clear whether they make money. A standard nonprofit benchmark is a 2:1 to 3:1 net-to-cost ratio, worth calculating directly rather than assuming an event "went well" because it was well attended.',
+        'Some revenue tracking exists, but net cost and relationship value likely aren\'t part of the conversation. Adding a simple cost-per-dollar-raised line to the post-event report is the fastest fix.',
+        'Events are tracked reasonably well financially. The next step is treating them explicitly as cultivation touchpoints — connecting attendee lists back to the moves-management pipeline instead of treating the event as a standalone transaction.',
+        'This is a strategic, well-measured events program, ahead of most organizations. Worth periodically retiring an underperforming annual event; loyalty to a legacy event is one of the more common ways events strategy quietly erodes over time.',
+        'This is genuine events strategy — measured, cultivation-focused, and actively pruned. The opportunity now is using event data (who engaged, who upgraded afterward) as a real input into portfolio and stewardship decisions, not just an annual report metric.',
+      ],
+    },
+  ];
+
+  function bandIndexFromAvg(avgLikert: number): number {
+    const pct = ((avgLikert - 1) / 4) * 100;
+    if (pct < 20) return 0;
+    if (pct < 40) return 1;
+    if (pct < 60) return 2;
+    if (pct < 80) return 3;
+    return 4;
+  }
+
+  const form = document.getElementById('ia-form') as HTMLFormElement | null;
+  const status = document.getElementById('ia-status');
+  const resultsEl = document.getElementById('ia-results') as HTMLElement | null;
+  const metricsEl = document.getElementById('ia-metrics');
+
+  /* ---------- Sticky progress bar (same pattern as the other tools) ---------- */
+  const progressEl = document.getElementById('ia-progress') as HTMLElement | null;
+  const progressLabel = document.getElementById('ia-progress-label');
+  const progressFill = document.getElementById('ia-progress-fill') as HTMLElement | null;
+  const pillarGroups = document.querySelectorAll<HTMLElement>('.pillar-group[data-pillar-index]');
+  const dimensionLabelByIndex: Record<number, string> = {};
+  DIMENSIONS.forEach((d, i) => { dimensionLabelByIndex[i + 1] = d.label; });
+
+  if (progressEl && progressLabel && progressFill && pillarGroups.length && 'IntersectionObserver' in window) {
+    const progressObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const idx = Number(entry.target.getAttribute('data-pillar-index'));
+            progressLabel.textContent = `Section ${idx} of ${pillarGroups.length} — ${dimensionLabelByIndex[idx] || ''}`;
+            progressFill.style.width = (idx / pillarGroups.length) * 100 + '%';
+          }
+        });
+      },
+      { rootMargin: '-15% 0px -70% 0px' }
+    );
+    pillarGroups.forEach((group) => progressObserver.observe(group));
+  }
+
+  function questionScore(name: string, formEl: HTMLFormElement): number {
+    const checked = formEl.querySelector<HTMLInputElement>(`input[name="${name}"]:checked`);
+    return checked ? Number(checked.value) : 0;
+  }
+
+  function renderResults() {
+    if (!form) return;
+
+    const results = DIMENSIONS.map((d) => {
+      const scores = d.questions.map((q) => questionScore(q, form));
+      const avg = scores.reduce((a, b) => a + b, 0) / scores.length;
+      const bandIdx = bandIndexFromAvg(avg);
+      return { dimension: d, avg, bandIdx, pct: Math.round(((avg - 1) / 4) * 100) };
+    });
+
+    const composite = Math.round(results.reduce((sum, r) => sum + r.pct, 0) / results.length);
+    const compositeBand = composite < 20 ? 0 : composite < 40 ? 1 : composite < 60 ? 2 : composite < 80 ? 3 : 4;
+
+    const needle = document.getElementById('ia-needle');
+    if (needle) needle.setAttribute('transform', 'rotate(' + ((composite / 100) * 180 - 90) + ',100,100)');
+
+    const gaugeScoreEl = document.getElementById('ia-gauge-score');
+    const gaugeBandEl = document.getElementById('ia-gauge-band-name');
+    const summaryEl = document.getElementById('ia-summary');
+    if (gaugeScoreEl) gaugeScoreEl.textContent = String(composite);
+    if (gaugeBandEl) gaugeBandEl.textContent = BAND_NAMES[compositeBand] + ' (' + BAND_SUBNAMES[compositeBand] + ')';
+    if (summaryEl) summaryEl.textContent = COMPOSITE_SUMMARY[compositeBand];
+
+    if (metricsEl) {
+      metricsEl.innerHTML = '';
+      results.forEach((r) => {
+        const row = document.createElement('div');
+        row.className = 'fh-metric-row fh-band-' + r.bandIdx;
+        row.innerHTML =
+          '<div class="fh-metric-head">' +
+          '<span class="fh-metric-label">' + r.dimension.label + '</span>' +
+          '<span class="fh-metric-value">' + r.pct + '% &middot; ' + BAND_SUBNAMES[r.bandIdx] + '</span>' +
+          '</div>' +
+          '<span class="fh-metric-track"><span class="fh-metric-fill" style="width:' + r.pct + '%"></span></span>' +
+          '<p class="fh-metric-points">' + r.dimension.points[r.bandIdx] + '</p>';
+        metricsEl.appendChild(row);
+      });
+    }
+
+    const recommendationEl = document.getElementById('ia-recommendation');
+    if (recommendationEl) {
+      const recommendedTier = compositeBand <= 1 ? 'implementation' : 'advisory';
+      const tierName = compositeBand <= 1 ? 'Strategic Implementation Retainer' : 'Strategic Advisory Retainer';
+      const tierReason =
+        compositeBand <= 1
+          ? 'with gaps across more than one part of the fundraising program, hands-on weekly implementation tends to build the missing structure faster than periodic advisory alone.'
+          : 'with solid-to-strong fundraising program fundamentals already in place, experienced strategic guidance is usually enough to sharpen and protect them further.';
+      recommendationEl.innerHTML =
+        '<h3 class="subhead">Recommended Starting Point</h3>' +
+        '<p>Based on these results, the <strong>' + tierName + '</strong> is likely the best fit — ' + tierReason + '</p>' +
+        '<a class="btn btn-secondary" href="/#pricing-' + recommendedTier + '">See This Retainer</a>';
+    }
+
+    fetchNarrative({
+      scorePct: composite,
+      band: BAND_NAMES[compositeBand] + ' (' + BAND_SUBNAMES[compositeBand] + ')',
+      pillarScores: results.map((r) => ({ label: r.dimension.label, pct: r.pct })),
+    });
+    fetchBenchmarks(composite);
+
+    form.hidden = true;
+    if (progressEl) progressEl.hidden = true;
+    if (resultsEl) {
+      resultsEl.hidden = false;
+      resultsEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  /* AI-generated personalized summary. An enhancement, not a dependency:
+     the static band description is already visible from renderResults()
+     above, so if this call is slow, fails, or the backend has no
+     ANTHROPIC_API_KEY configured, the visitor still has a complete,
+     correct set of results — this just quietly upgrades the description
+     text if and when a narrative comes back. */
+  function fetchNarrative(payload: { scorePct: number; band: string; pillarScores: { label: string; pct: number }[] }) {
+    const narrativeLoadingEl = document.getElementById('ia-narrative-loading') as HTMLElement | null;
+    if (narrativeLoadingEl) narrativeLoadingEl.hidden = false;
+
+    fetch(API_BASE + '/api/assessment-narrative', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ tool: 'institutional-advancement', ...payload }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data && data.ok && data.narrative) {
+          const summaryEl = document.getElementById('ia-summary');
+          if (summaryEl) summaryEl.textContent = data.narrative;
+        }
+      })
+      .catch(() => {
+        // Silent by design — static description already shown, nothing to fix.
+      })
+      .finally(() => {
+        if (narrativeLoadingEl) narrativeLoadingEl.hidden = true;
+      });
+  }
+
+  /* Benchmark comparison. An enhancement, not a dependency — if the
+     database isn't reachable, has no data yet, or the sample is too small
+     to be meaningful, the results the visitor already sees are unaffected;
+     this just quietly adds a comparison line when it can. */
+  function fetchBenchmarks(compositePct: number) {
+    const overallEl = document.getElementById('ia-avg-overall') as HTMLElement | null;
+
+    fetch(API_BASE + '/api/benchmarks?tool=institutional-advancement')
+      .then((res) => res.json())
+      .then((data) => {
+        const b = data && data.ok ? data.benchmarks : null;
+        if (!b || !b.count) return;
+
+        if (overallEl) {
+          const lowSample = b.count < 5;
+          overallEl.hidden = false;
+          overallEl.innerHTML =
+            `Your score: <strong>${compositePct}%</strong> &middot; Average so far: <strong>${b.avgScore}%</strong>` +
+            (lowSample
+              ? ` <span class="results-avg-caveat">(early data — ${b.count} response${b.count === 1 ? '' : 's'} so far)</span>`
+              : ` (${b.count} responses)`);
+        }
+      })
+      .catch(() => {
+        // Silent by design — same reasoning as fetchNarrative above.
+      });
+  }
+
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        if (status) status.textContent = 'Please answer every question — one is still missing.';
+        return;
+      }
+      if (status) status.textContent = '';
+      renderResults();
+    });
+  }
+
+  const retakeBtn = document.getElementById('ia-retake');
+  if (retakeBtn) {
+    retakeBtn.addEventListener('click', () => {
+      if (resultsEl) resultsEl.hidden = true;
+      if (form) {
+        form.hidden = false;
+        form.reset();
+        form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      if (progressEl && progressLabel && progressFill) {
+        progressEl.hidden = false;
+        progressLabel.textContent = `Section 1 of ${pillarGroups.length} — ${DIMENSIONS[0] ? DIMENSIONS[0].label : ''}`;
+        progressFill.style.width = 100 / pillarGroups.length + '%';
+      }
+    });
+  }
+</script>

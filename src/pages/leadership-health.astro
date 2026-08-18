@@ -1,0 +1,558 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+---
+
+<BaseLayout
+  title="Leadership & Operations Health Score | Frankly Inspired"
+  description="A free diagnostic that scores your nonprofit's governance, leadership succession, organizational alignment, and change capacity against research from BoardSource, McKinsey, and Harvard Business School."
+  footerVariant="score"
+>
+  <Header variant="minimal" />
+
+  <!-- Where the Revenue & Growth Score scores real budget numbers, this one
+       scores organizational/leadership maturity — which can't be pulled
+       from a spreadsheet, so it uses a structured 1-5 self-report grid
+       (same interaction pattern as /assessment) instead of numeric inputs.
+       What makes it rigorous rather than generic is that every one of the
+       12 questions is written to map directly to a specific finding or
+       construct from a named, credible source, not a generic HR checklist:
+         - Governance Health         -> BoardSource, "Leading with Intent"
+           (the field's longest-running national board-practices survey)
+         - Leadership Succession     -> CompassPoint & Meyer Foundation,
+           "Daring to Lead" (the definitive national ED succession/burnout
+           study; only 17% of nonprofits report a documented succession plan)
+         - Organizational Alignment  -> McKinsey's Organizational Health
+           Index (OHI) — its Direction, Accountability, and Capabilities
+           outcomes specifically, simplified from the full 9-outcome/
+           37-practice model
+         - Change Leadership Capacity -> John Kotter's 8-Step Change Model
+           (Harvard Business School, "Leading Change," 1996) — urgency/
+           coalition, vision/short-term wins, and anchoring change, the
+           step Kotter's own research flags as most often skipped
+       See the script below for exact scoring, thresholds, and the Sources
+       line in the results for full citations. All calculation runs
+       client-side. -->
+
+  <main id="main">
+
+    <!-- ============ INTRO ============ -->
+    <section class="section assessment-intro">
+      <div class="container narrow center">
+        <p class="eyebrow eyebrow-dark">Free Diagnostic</p>
+        <h1>Leadership &amp; Operations Health Score</h1>
+        <p class="hero-sub-light">12 quick questions across governance, leadership succession, organizational alignment, and change capacity — each grounded in named research from BoardSource, the CompassPoint/Meyer Foundation "Daring to Lead" study, McKinsey's Organizational Health Index, and Harvard Business School's Kotter change model. Takes about 7 minutes. This is the deeper follow-up to the Leadership &amp; Organizational Development pillar in the free <a href="/assessment">Self-Assessment</a> — jump in below, or start there first for the faster 5-minute version.</p>
+      </div>
+    </section>
+
+    <!-- ============ ASSESSMENT FORM ============ -->
+    <section class="section assessment-form-section alt-bg">
+      <div class="container narrow">
+
+        <div class="assessment-progress" id="lh-progress">
+          <p class="assessment-progress-label" id="lh-progress-label">Section 1 of 4 — Governance Health</p>
+          <span class="assessment-progress-track"><span class="assessment-progress-fill" id="lh-progress-fill"></span></span>
+        </div>
+
+        <form id="lh-form" novalidate>
+
+          <div class="pillar-group" data-pillar-index="1">
+            <h2 class="pillar-heading">1. Governance Health</h2>
+            <p class="fh-field-help">Based on BoardSource's "Leading with Intent" national board-practices research.</p>
+            <fieldset class="likert">
+              <legend>Our board has the right composition and relationships to build trust with the communities we serve.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="g1" value="1" required /><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="g1" value="2" /><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="g1" value="3" /><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="g1" value="4" /><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="g1" value="5" /><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+            <fieldset class="likert">
+              <legend>Board members are actively engaged in advocating for our mission, not just fundraising and compliance.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="g2" value="1" required /><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="g2" value="2" /><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="g2" value="3" /><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="g2" value="4" /><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="g2" value="5" /><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+            <fieldset class="likert">
+              <legend>Board meetings spend meaningful time on strategy and organizational direction, not just fundraising updates.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="g3" value="1" required /><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="g3" value="2" /><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="g3" value="3" /><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="g3" value="4" /><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="g3" value="5" /><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="pillar-group" data-pillar-index="2">
+            <h2 class="pillar-heading">2. Leadership Succession &amp; Bench Strength</h2>
+            <p class="fh-field-help">Based on CompassPoint &amp; the Meyer Foundation's "Daring to Lead" national study of nonprofit executive leadership.</p>
+            <fieldset class="likert">
+              <legend>We have a documented, board-approved plan for what happens if our Executive Director leaves unexpectedly.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="s1" value="1" required /><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="s1" value="2" /><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="s1" value="3" /><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="s1" value="4" /><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="s1" value="5" /><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+            <fieldset class="likert">
+              <legend>If our Executive Director left tomorrow, at least one other staff member could credibly step in on an interim basis.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="s2" value="1" required /><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="s2" value="2" /><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="s2" value="3" /><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="s2" value="4" /><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="s2" value="5" /><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+            <fieldset class="likert">
+              <legend>Our organization actively invests in developing future leaders — training, mentorship, real delegated authority — rather than concentrating leadership in one person.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="s3" value="1" required /><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="s3" value="2" /><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="s3" value="3" /><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="s3" value="4" /><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="s3" value="5" /><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="pillar-group" data-pillar-index="3">
+            <h2 class="pillar-heading">3. Organizational Alignment &amp; Execution</h2>
+            <p class="fh-field-help">Based on three outcomes from McKinsey's Organizational Health Index (OHI): Direction, Accountability, and Capabilities.</p>
+            <fieldset class="likert">
+              <legend>Staff at every level could clearly articulate our organization's top priorities for this year.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="a1" value="1" required /><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="a1" value="2" /><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="a1" value="3" /><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="a1" value="4" /><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="a1" value="5" /><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+            <fieldset class="likert">
+              <legend>Roles, decision rights, and performance expectations are clearly defined and consistently followed.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="a2" value="1" required /><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="a2" value="2" /><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="a2" value="3" /><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="a2" value="4" /><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="a2" value="5" /><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+            <fieldset class="likert">
+              <legend>Staff have the skills, tools, and training they need to do their jobs well, and gaps are actively addressed.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="a3" value="1" required /><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="a3" value="2" /><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="a3" value="3" /><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="a3" value="4" /><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="a3" value="5" /><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="pillar-group" data-pillar-index="4">
+            <h2 class="pillar-heading">4. Change Leadership Capacity</h2>
+            <p class="fh-field-help">Based on John Kotter's 8-Step Change Model (Harvard Business School, "Leading Change").</p>
+            <fieldset class="likert">
+              <legend>When we've pursued major changes, leadership built a genuine sense of urgency and a real coalition to drive it, rather than mandating it top-down.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="c1" value="1" required /><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="c1" value="2" /><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="c1" value="3" /><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="c1" value="4" /><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="c1" value="5" /><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+            <fieldset class="likert">
+              <legend>We communicate a clear vision for change and track visible short-term wins along the way, not just a distant end goal.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="c2" value="1" required /><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="c2" value="2" /><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="c2" value="3" /><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="c2" value="4" /><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="c2" value="5" /><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+            <fieldset class="likert">
+              <legend>Past changes have stuck — they became part of how we normally operate, not reverted once attention moved elsewhere.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="c3" value="1" required /><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="c3" value="2" /><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="c3" value="3" /><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="c3" value="4" /><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="c3" value="5" /><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="assessment-submit">
+            <button type="submit" class="btn btn-primary">See My Leadership &amp; Operations Health Score</button>
+            <p class="form-status" id="lh-status" role="status" aria-live="polite"></p>
+          </div>
+        </form>
+
+        <!-- ============ RESULTS (rendered by the script below) ============ -->
+        <div class="fh-results" id="lh-results" hidden>
+
+          <div class="fh-gauge-wrap">
+            <svg class="fh-gauge" viewBox="0 0 200 115" role="img" aria-labelledby="lh-gauge-title">
+              <title id="lh-gauge-title">Leadership and operations health gauge</title>
+              <path d="M10,100 A90,90 0 0,1 27.19,47.10" class="fh-gauge-band fh-band-0"></path>
+              <path d="M27.19,47.10 A90,90 0 0,1 72.19,14.40" class="fh-gauge-band fh-band-1"></path>
+              <path d="M72.19,14.40 A90,90 0 0,1 127.81,14.40" class="fh-gauge-band fh-band-2"></path>
+              <path d="M127.81,14.40 A90,90 0 0,1 172.81,47.10" class="fh-gauge-band fh-band-3"></path>
+              <path d="M172.81,47.10 A90,90 0 0,1 190,100" class="fh-gauge-band fh-band-4"></path>
+              <g id="lh-needle" transform="rotate(-90,100,100)">
+                <line x1="100" y1="100" x2="100" y2="25" class="fh-needle-line"></line>
+                <circle cx="100" cy="100" r="7" class="fh-needle-hub"></circle>
+              </g>
+            </svg>
+            <div class="fh-gauge-readout">
+              <span class="fh-gauge-score" id="lh-gauge-score"></span>
+              <span class="fh-gauge-band-name" id="lh-gauge-band-name"></span>
+            </div>
+          </div>
+
+          <p class="results-band-desc" id="lh-summary"></p>
+          <p class="results-avg-overall" id="lh-avg-overall" hidden></p>
+          <p class="results-narrative-loading" id="lh-narrative-loading" hidden>Writing a personalized summary of your results&hellip;</p>
+
+          <h3 class="subhead">By Dimension</h3>
+          <div class="fh-metrics" id="lh-metrics"></div>
+
+          <div class="results-recommendation" id="lh-recommendation"></div>
+
+          <div class="results-disclaimer">
+            <p>This is a directional self-assessment based on your own responses, scored against published research and national benchmarks. It is not a formal governance or organizational audit, and every question involves judgment — treat it as a starting point for a real conversation, not a verdict.</p>
+          </div>
+
+          <div class="results-related">
+            <p>This tool measures leadership and organizational capacity. For a numbers-based read on revenue and growth capacity — reserves, spending mix, revenue diversification, and liquidity — see the <a href="/revenue-growth-score">Revenue &amp; Growth Score</a>. This score also feeds directly into the <a href="/sustainability-score">Sustainability Strategy Score</a>, which places it alongside revenue and growth capacity and strategic clarity in a single Strategic Triangle view.</p>
+            <p>Haven't taken the free <a href="/assessment">Nonprofit Sustainability Self-Assessment</a> yet? It covers this and four other areas in about 5 minutes.</p>
+          </div>
+
+          <div class="results-cta">
+            <h3>Want to talk through these results?</h3>
+            <p>A short conversation is the fastest way to turn this into a plan.</p>
+            <div class="hero-ctas center">
+              <a class="btn btn-primary" href="https://calendly.com/fparham/30min" target="_blank" rel="noopener">Schedule a Strategy Conversation</a>
+              <a class="btn btn-secondary" href="/#pricing">See Pricing</a>
+            </div>
+          </div>
+
+          <p class="calculator-caveat">Sources: BoardSource, "Leading with Intent: BoardSource Index of Nonprofit Board Practices"; CompassPoint Nonprofit Services &amp; the Meyer Foundation, "Daring to Lead" (2006/2011 national studies of nonprofit executive leadership); McKinsey &amp; Company, the Organizational Health Index (OHI); John P. Kotter, "Leading Change" (Harvard Business School Press, 1996) and subsequent research on the 8-Step Change Model. Benchmark figures are sector-wide findings, not specific to any organization Frankly Inspired and Associates, LLC has worked with.</p>
+
+          <button type="button" class="results-retake" id="lh-retake">Retake the Assessment</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</BaseLayout>
+
+<script>
+  // Scores four dimensions, each a simplified, cited slice of a named
+  // research framework rather than a generic HR checklist:
+  //   - Governance          -> BoardSource, "Leading with Intent"
+  //   - Succession/Bench    -> CompassPoint & Meyer Foundation, "Daring to Lead"
+  //   - Alignment/Execution -> McKinsey Organizational Health Index (OHI)
+  //   - Change Leadership   -> Kotter's 8-Step Change Model (HBS)
+  // Same gauge/banding structure as the Revenue & Growth Score
+  // (Critical/At Risk/Stable/Strong/Resilient) for a consistent standard
+  // across both diagnostic tools. All scoring runs client-side; nothing is
+  // sent anywhere.
+
+  // UPDATE THIS once frankly-inspired-backend is deployed to Render — see
+  // that repo's README.md. Same value as assessment.astro's API_BASE.
+  const API_BASE = 'https://frankly-inspired-api.onrender.com';
+
+  const BAND_NAMES = ['Critical', 'At Risk', 'Stable', 'Strong', 'Resilient'];
+  const BAND_SUBNAMES = ['Poor', 'Fair', 'Good', 'Very Good', 'Excellent'];
+
+  const COMPOSITE_SUMMARY = [
+    "Leadership and operational fundamentals need real attention. That's a common place to start, especially for younger or fast-growing organizations, but it's worth treating as the priority before adding new programs or commitments.",
+    'There are real gaps in more than one dimension below. These are addressable with deliberate attention, not a full rebuild.',
+    'The fundamentals are in place across most dimensions. The opportunity now is tightening the specific gaps below rather than a broad overhaul.',
+    'This is a well-led, well-run organization by sector benchmarks. The focus shifts from fixing gaps to protecting and extending what already works.',
+    "This organization shows genuine leadership and operational maturity relative to sector norms — the kind McKinsey's research ties directly to outsized performance. The conversation now is strategic use of that strength.",
+  ];
+
+  // Each dimension: the 3 question names (matching the radio group "name"
+  // attributes above), the source it's drawn from, and discussion points
+  // per band — written as advisory talking points, the same standard as
+  // the Revenue & Growth Score.
+  const DIMENSIONS = [
+    {
+      key: 'governance',
+      label: 'Governance Health',
+      questions: ['g1', 'g2', 'g3'],
+      points: [
+        "Board engagement is a significant gap right now. BoardSource's national research found nearly half of executives say their board isn't positioned to build trust with the community they serve — that's the first conversation to have with the board chair, not a full governance overhaul.",
+        "There's a real disconnect between the board and the organization's strategic direction. National data shows only about a third of nonprofit boards are actively engaged in mission advocacy beyond fundraising and compliance — worth naming directly at the next board retreat.",
+        "Governance is functional but has room to deepen. Worth checking whether board meeting time genuinely balances strategy against fundraising updates — BoardSource's research consistently finds boards that over-index on fundraising do so at the expense of strategic engagement.",
+        "This board is more engaged than most — national benchmarks put the typical nonprofit board well behind this. Worth formalizing what's working into a written board engagement plan so it survives leadership transitions.",
+        "This is governance strength most nonprofits don't have. The opportunity now is using board engagement as a real strategic asset, not just a compliance function.",
+      ],
+    },
+    {
+      key: 'succession',
+      label: 'Leadership Succession & Bench Strength',
+      questions: ['s1', 's2', 's3'],
+      points: [
+        "Without a documented succession plan or a credible interim leader, this organization is one departure away from a real crisis. Only 17% of nonprofits nationally report a documented succession plan — building even a basic one is a high-leverage next step, not a someday project.",
+        "There's some bench strength but real gaps remain. The research here is blunt: roughly three in four executive directors report they're likely to leave within five years, and burnout is driven specifically by weak boards, low investment in leadership development, and concentrated decision-making — worth naming which of those applies here.",
+        "There's a credible interim path if leadership changed suddenly, which puts this organization ahead of most. Formalizing it in writing, with board sign-off, is what separates this from genuine resilience.",
+        "Leadership development is a real, active practice here — genuinely uncommon in the sector. The next step is stress-testing it: could the plan survive an unplanned departure, not just a planned one?",
+        "This is leadership bench strength most nonprofits lack entirely. Worth treating it as a retention and morale asset in its own right — staff who see a real development path tend to stay longer.",
+      ],
+    },
+    {
+      key: 'alignment',
+      label: 'Organizational Alignment & Execution',
+      questions: ['a1', 'a2', 'a3'],
+      points: [
+        "When priorities, roles, and skills aren't clear or consistently reinforced, McKinsey's organizational health research — built on data from thousands of companies — consistently finds this is where performance gaps start. Direction clarity is usually the fastest lever to pull first.",
+        "Alignment exists in pockets but isn't consistent across the organization. A simple test: ask three staff members at different levels what the top priority is this year, and see how closely the answers match.",
+        "The organization has real alignment fundamentals in place. The opportunity is consistency — making sure accountability and skill-building keep pace as the organization grows or takes on new work.",
+        "This is above-average organizational alignment. Worth protecting deliberately, since alignment tends to erode quietly during growth or leadership transitions if no one owns it explicitly.",
+        "This is genuine organizational health, the kind McKinsey's research ties directly to outsized performance relative to peers. The conversation now is sustaining it, not building it.",
+      ],
+    },
+    {
+      key: 'change',
+      label: 'Change Leadership Capacity',
+      questions: ['c1', 'c2', 'c3'],
+      points: [
+        "Kotter's research, based on over 100 organizational transformations, found most change efforts fail not from bad strategy but from skipping the groundwork — urgency, coalition, and a clear vision before asking people to change. That's worth revisiting before the next major initiative launches.",
+        "Change tends to be announced rather than built toward. Visible short-term wins along the way, not just a distant end state, are one of the more overlooked steps in Kotter's model and often the easiest one to add immediately.",
+        "The organization has real change capacity, though past changes haven't always stuck. Kotter's research points specifically to anchoring change in culture and systems as the step most often skipped — worth checking whether recent changes actually became 'how we operate' or quietly reverted.",
+        "This organization leads change more deliberately than most. Kotter reports roughly 70% of change efforts succeed when the full model is actually followed — worth naming which steps are already instinctive here.",
+        "This is genuine change leadership maturity. The opportunity now is using it as a real competitive advantage — the ability to adapt faster than peer organizations during funding shifts or sector change.",
+      ],
+    },
+  ];
+
+  function bandIndexFromAvg(avgLikert: number): number {
+    // avgLikert is 1-5 across the dimension's 3 questions; map to a 0-100
+    // scale, then band it on the same 20/40/60/80 cutoffs used everywhere
+    // else on the site, so a "Stable" result means the same thing across
+    // both diagnostic tools.
+    const pct = ((avgLikert - 1) / 4) * 100;
+    if (pct < 20) return 0;
+    if (pct < 40) return 1;
+    if (pct < 60) return 2;
+    if (pct < 80) return 3;
+    return 4;
+  }
+
+  const form = document.getElementById('lh-form') as HTMLFormElement | null;
+  const status = document.getElementById('lh-status');
+  const resultsEl = document.getElementById('lh-results') as HTMLElement | null;
+  const metricsEl = document.getElementById('lh-metrics');
+
+  /* ---------- Sticky progress bar (same pattern as /assessment) ---------- */
+  const progressEl = document.getElementById('lh-progress') as HTMLElement | null;
+  const progressLabel = document.getElementById('lh-progress-label');
+  const progressFill = document.getElementById('lh-progress-fill') as HTMLElement | null;
+  const pillarGroups = document.querySelectorAll<HTMLElement>('.pillar-group[data-pillar-index]');
+  const dimensionLabelByIndex: Record<number, string> = {};
+  DIMENSIONS.forEach((d, i) => { dimensionLabelByIndex[i + 1] = d.label; });
+
+  if (progressEl && progressLabel && progressFill && pillarGroups.length && 'IntersectionObserver' in window) {
+    const progressObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const idx = Number(entry.target.getAttribute('data-pillar-index'));
+            progressLabel.textContent = `Section ${idx} of ${pillarGroups.length} — ${dimensionLabelByIndex[idx] || ''}`;
+            progressFill.style.width = (idx / pillarGroups.length) * 100 + '%';
+          }
+        });
+      },
+      { rootMargin: '-15% 0px -70% 0px' }
+    );
+    pillarGroups.forEach((group) => progressObserver.observe(group));
+  }
+
+  function questionScore(name: string, formEl: HTMLFormElement): number {
+    const checked = formEl.querySelector<HTMLInputElement>(`input[name="${name}"]:checked`);
+    return checked ? Number(checked.value) : 0;
+  }
+
+  function renderResults() {
+    if (!form) return;
+
+    const results = DIMENSIONS.map((d) => {
+      const scores = d.questions.map((q) => questionScore(q, form));
+      const avg = scores.reduce((a, b) => a + b, 0) / scores.length;
+      const bandIdx = bandIndexFromAvg(avg);
+      return { dimension: d, avg, bandIdx, pct: Math.round(((avg - 1) / 4) * 100) };
+    });
+
+    const composite = Math.round(results.reduce((sum, r) => sum + r.pct, 0) / results.length);
+    const compositeBand = composite < 20 ? 0 : composite < 40 ? 1 : composite < 60 ? 2 : composite < 80 ? 3 : 4;
+
+    const needle = document.getElementById('lh-needle');
+    if (needle) needle.setAttribute('transform', 'rotate(' + ((composite / 100) * 180 - 90) + ',100,100)');
+
+    const gaugeScoreEl = document.getElementById('lh-gauge-score');
+    const gaugeBandEl = document.getElementById('lh-gauge-band-name');
+    const summaryEl = document.getElementById('lh-summary');
+    if (gaugeScoreEl) gaugeScoreEl.textContent = String(composite);
+    if (gaugeBandEl) gaugeBandEl.textContent = BAND_NAMES[compositeBand] + ' (' + BAND_SUBNAMES[compositeBand] + ')';
+    if (summaryEl) summaryEl.textContent = COMPOSITE_SUMMARY[compositeBand];
+
+    // Saved so the Sustainability Strategy Score tool can pull this in as
+    // the "Operational Capacity" leg of its Strategic Triangle view, if
+    // this visitor has completed both tools in the same browser. Stays
+    // entirely on-device, same as every other calculation on this page.
+    try {
+      localStorage.setItem('fi_leadership_score', JSON.stringify({ score: composite, band: compositeBand, at: Date.now() }));
+    } catch (e) {
+      /* localStorage unavailable (private browsing, etc.) — non-fatal */
+    }
+
+    if (metricsEl) {
+      metricsEl.innerHTML = '';
+      results.forEach((r) => {
+        const row = document.createElement('div');
+        row.className = 'fh-metric-row fh-band-' + r.bandIdx;
+        row.innerHTML =
+          '<div class="fh-metric-head">' +
+          '<span class="fh-metric-label">' + r.dimension.label + '</span>' +
+          '<span class="fh-metric-value">' + r.pct + '% &middot; ' + BAND_SUBNAMES[r.bandIdx] + '</span>' +
+          '</div>' +
+          '<span class="fh-metric-track"><span class="fh-metric-fill" style="width:' + r.pct + '%"></span></span>' +
+          '<p class="fh-metric-points">' + r.dimension.points[r.bandIdx] + '</p>';
+        metricsEl.appendChild(row);
+      });
+    }
+
+    const recommendationEl = document.getElementById('lh-recommendation');
+    if (recommendationEl) {
+      const recommendedTier = compositeBand <= 1 ? 'implementation' : 'advisory';
+      const tierName = compositeBand <= 1 ? 'Strategic Implementation Retainer' : 'Strategic Advisory Retainer';
+      const tierReason =
+        compositeBand <= 1
+          ? 'with gaps across more than one leadership or operational dimension, hands-on weekly implementation tends to build capacity faster than periodic advisory alone.'
+          : 'with solid-to-strong leadership fundamentals already in place, experienced strategic guidance is usually enough to sharpen and protect them further.';
+      recommendationEl.innerHTML =
+        '<h3 class="subhead">Recommended Starting Point</h3>' +
+        '<p>Based on these results, the <strong>' + tierName + '</strong> is likely the best fit — ' + tierReason + '</p>' +
+        '<a class="btn btn-secondary" href="/#pricing-' + recommendedTier + '">See This Retainer</a>';
+    }
+
+    fetchNarrative({
+      scorePct: composite,
+      band: BAND_NAMES[compositeBand] + ' (' + BAND_SUBNAMES[compositeBand] + ')',
+      pillarScores: results.map((r) => ({ label: r.dimension.label, pct: r.pct })),
+    });
+    fetchBenchmarks(composite);
+
+    form.hidden = true;
+    if (progressEl) progressEl.hidden = true;
+    if (resultsEl) {
+      resultsEl.hidden = false;
+      resultsEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  /* AI-generated personalized summary. An enhancement, not a dependency:
+     the static band description is already visible from renderResults()
+     above, so if this call is slow, fails, or the backend has no
+     ANTHROPIC_API_KEY configured, the visitor still has a complete,
+     correct set of results — this just quietly upgrades the description
+     text if and when a narrative comes back. */
+  function fetchNarrative(payload: { scorePct: number; band: string; pillarScores: { label: string; pct: number }[] }) {
+    const narrativeLoadingEl = document.getElementById('lh-narrative-loading') as HTMLElement | null;
+    if (narrativeLoadingEl) narrativeLoadingEl.hidden = false;
+
+    fetch(API_BASE + '/api/assessment-narrative', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ tool: 'leadership', ...payload }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data && data.ok && data.narrative) {
+          const summaryEl = document.getElementById('lh-summary');
+          if (summaryEl) summaryEl.textContent = data.narrative;
+        }
+      })
+      .catch(() => {
+        // Silent by design — static description already shown, nothing to fix.
+      })
+      .finally(() => {
+        if (narrativeLoadingEl) narrativeLoadingEl.hidden = true;
+      });
+  }
+
+  /* Benchmark comparison. An enhancement, not a dependency — if the
+     database isn't reachable, has no data yet, or the sample is too small
+     to be meaningful, the results the visitor already sees are unaffected;
+     this just quietly adds a comparison line when it can. */
+  function fetchBenchmarks(compositePct: number) {
+    const overallEl = document.getElementById('lh-avg-overall') as HTMLElement | null;
+
+    fetch(API_BASE + '/api/benchmarks?tool=leadership')
+      .then((res) => res.json())
+      .then((data) => {
+        const b = data && data.ok ? data.benchmarks : null;
+        if (!b || !b.count) return;
+
+        if (overallEl) {
+          const lowSample = b.count < 5;
+          overallEl.hidden = false;
+          overallEl.innerHTML =
+            `Your score: <strong>${compositePct}%</strong> &middot; Average so far: <strong>${b.avgScore}%</strong>` +
+            (lowSample
+              ? ` <span class="results-avg-caveat">(early data — ${b.count} response${b.count === 1 ? '' : 's'} so far)</span>`
+              : ` (${b.count} responses)`);
+        }
+      })
+      .catch(() => {
+        // Silent by design — same reasoning as fetchNarrative above.
+      });
+  }
+
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        if (status) status.textContent = 'Please answer every question — one is still missing.';
+        return;
+      }
+      if (status) status.textContent = '';
+      renderResults();
+    });
+  }
+
+  const retakeBtn = document.getElementById('lh-retake');
+  if (retakeBtn) {
+    retakeBtn.addEventListener('click', () => {
+      if (resultsEl) resultsEl.hidden = true;
+      if (form) {
+        form.hidden = false;
+        form.reset();
+        form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      if (progressEl && progressLabel && progressFill) {
+        progressEl.hidden = false;
+        progressLabel.textContent = `Section 1 of ${pillarGroups.length} — ${DIMENSIONS[0] ? DIMENSIONS[0].label : ''}`;
+        progressFill.style.width = 100 / pillarGroups.length + '%';
+      }
+    });
+  }
+</script>

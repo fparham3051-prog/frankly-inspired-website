@@ -1,0 +1,630 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+---
+
+<BaseLayout
+  title="Organizational Sustainability Score | Frankly Inspired"
+  description="A free diagnostic that scores your nonprofit's strategic clarity, risk management, impact/financial integration, and execution discipline — and ties the result to your Revenue & Growth and Leadership scores using Harvard Kennedy School's Strategic Triangle."
+  footerVariant="score"
+>
+  <Header variant="minimal" />
+
+  <!-- The third and, by design, integrating diagnostic. Its own 4
+       dimensions are grounded the same way as the other two tools:
+         - Strategic Clarity & Public Value -> Mark Moore's "Strategic
+           Triangle" (Harvard Kennedy School, "Creating Public Value," 1995)
+         - Risk Identification & Management -> the COSO Enterprise Risk
+           Management Framework (the world's most widely used risk standard)
+         - Impact & Financial Sustainability Integration -> the Matrix Map /
+           "dual bottom line" model (Bell, Masaoka & Zimmerman, "Nonprofit
+           Sustainability")
+         - Roadmap & Implementation Discipline -> the Balanced Scorecard
+           (Kaplan & Norton, Harvard Business School, 1992) and Kaplan's
+           research finding that ~90% of strategies fail on execution, not
+           formulation
+
+       What makes this tool different from the other two: Moore's Strategic
+       Triangle explicitly requires weighing strategy against operational
+       capacity and legitimacy/support — so the results page pulls in this
+       visitor's saved Revenue & Growth Score and Leadership & Operations
+       Score (via localStorage, same-browser only, nothing sent anywhere)
+       and presents all three as the Triangle's three legs. If either
+       hasn't been completed, that leg prompts the visitor to go do it
+       instead of silently guessing. See the script below for the exact
+       scoring, thresholds, and the Sources line in the results for full
+       citations. -->
+
+  <main id="main">
+
+    <!-- ============ INTRO ============ -->
+    <section class="section assessment-intro">
+      <div class="container narrow center">
+        <p class="eyebrow eyebrow-dark">Free Diagnostic</p>
+        <h1>Organizational Sustainability Score</h1>
+        <p class="hero-sub-light">12 questions on strategic clarity, risk management, impact/financial integration, and execution discipline — grounded in Harvard Kennedy School's Strategic Triangle, the COSO risk framework, the nonprofit sector's own "dual bottom line" research, and Harvard Business School's Balanced Scorecard. If you've completed the Revenue &amp; Growth and Leadership scores, this tool ties all three together. Takes about 7 minutes. New here? The free <a href="/assessment">Self-Assessment</a> is a faster 5-minute starting point across all five sustainability dimensions.</p>
+      </div>
+    </section>
+
+    <!-- ============ ASSESSMENT FORM ============ -->
+    <section class="section assessment-form-section alt-bg">
+      <div class="container narrow">
+
+        <div class="assessment-progress" id="ss-progress">
+          <p class="assessment-progress-label" id="ss-progress-label">Section 1 of 4 — Strategic Clarity &amp; Public Value</p>
+          <span class="assessment-progress-track"><span class="assessment-progress-fill" id="ss-progress-fill"></span></span>
+        </div>
+
+        <form id="ss-form" novalidate>
+
+          <div class="pillar-group" data-pillar-index="1">
+            <h2 class="pillar-heading">1. Strategic Clarity &amp; Public Value</h2>
+            <p class="fh-field-help">Based on Mark Moore's Strategic Triangle (Harvard Kennedy School).</p>
+            <fieldset class="likert">
+              <legend>Staff, board, and leadership could each independently describe our top 2-3 strategic priorities in similar terms.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="st1" value="1" required /><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="st1" value="2" /><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="st1" value="3" /><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="st1" value="4" /><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="st1" value="5" /><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+            <fieldset class="likert">
+              <legend>Our strategy clearly identifies who benefits from our work and what specific value we create for them.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="st2" value="1" required /><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="st2" value="2" /><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="st2" value="3" /><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="st2" value="4" /><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="st2" value="5" /><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+            <fieldset class="likert">
+              <legend>When a new opportunity or request comes in, it's clear whether it fits our strategic priorities or not.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="st3" value="1" required /><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="st3" value="2" /><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="st3" value="3" /><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="st3" value="4" /><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="st3" value="5" /><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="pillar-group" data-pillar-index="2">
+            <h2 class="pillar-heading">2. Risk Identification &amp; Management</h2>
+            <p class="fh-field-help">Based on the COSO Enterprise Risk Management Framework.</p>
+            <fieldset class="likert">
+              <legend>We maintain a written list of our top risks — financial, operational, reputational, and strategic — not just an informal sense of them.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="r1" value="1" required /><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="r1" value="2" /><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="r1" value="3" /><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="r1" value="4" /><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="r1" value="5" /><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+            <fieldset class="likert">
+              <legend>Risk is reviewed on a regular, scheduled basis, not just when something goes wrong or during a funding application.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="r2" value="1" required /><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="r2" value="2" /><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="r2" value="3" /><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="r2" value="4" /><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="r2" value="5" /><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+            <fieldset class="likert">
+              <legend>Leadership and the board have discussed what we would do if our largest funding source or a key leader left suddenly.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="r3" value="1" required /><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="r3" value="2" /><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="r3" value="3" /><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="r3" value="4" /><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="r3" value="5" /><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="pillar-group" data-pillar-index="3">
+            <h2 class="pillar-heading">3. Impact &amp; Financial Sustainability Integration</h2>
+            <p class="fh-field-help">Based on the Matrix Map / "dual bottom line" model (Bell, Masaoka &amp; Zimmerman, "Nonprofit Sustainability").</p>
+            <fieldset class="likert">
+              <legend>We know, program by program, which ones are financially self-sustaining and which are subsidized by other revenue.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="i1" value="1" required /><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="i1" value="2" /><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="i1" value="3" /><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="i1" value="4" /><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="i1" value="5" /><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+            <fieldset class="likert">
+              <legend>Decisions about which programs to grow, maintain, or sunset weigh both mission impact and financial contribution together.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="i2" value="1" required /><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="i2" value="2" /><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="i2" value="3" /><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="i2" value="4" /><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="i2" value="5" /><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+            <fieldset class="likert">
+              <legend>Leadership and the board have had an honest conversation about programs that are mission-critical but not financially sustainable on their own.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="i3" value="1" required /><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="i3" value="2" /><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="i3" value="3" /><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="i3" value="4" /><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="i3" value="5" /><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="pillar-group" data-pillar-index="4">
+            <h2 class="pillar-heading">4. Roadmap &amp; Implementation Discipline</h2>
+            <p class="fh-field-help">Based on the Balanced Scorecard (Kaplan &amp; Norton, Harvard Business School).</p>
+            <fieldset class="likert">
+              <legend>Our strategic priorities are translated into specific initiatives with owners and timelines, not just stated goals.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="e1" value="1" required /><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="e1" value="2" /><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="e1" value="3" /><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="e1" value="4" /><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="e1" value="5" /><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+            <fieldset class="likert">
+              <legend>We track a small set of key metrics regularly (at least quarterly) that show whether we're actually executing the strategy.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="e2" value="1" required /><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="e2" value="2" /><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="e2" value="3" /><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="e2" value="4" /><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="e2" value="5" /><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+            <fieldset class="likert">
+              <legend>Progress against our strategic plan is reviewed and adjusted at least once or twice a year, not filed away until the next planning cycle.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="e3" value="1" required /><span>1</span><small>Not at all true</small></label>
+                <label><input type="radio" name="e3" value="2" /><span>2</span><small>Rarely true</small></label>
+                <label><input type="radio" name="e3" value="3" /><span>3</span><small>Somewhat true</small></label>
+                <label><input type="radio" name="e3" value="4" /><span>4</span><small>Mostly true</small></label>
+                <label><input type="radio" name="e3" value="5" /><span>5</span><small>Very true</small></label>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="assessment-submit">
+            <button type="submit" class="btn btn-primary">See My Sustainability Score</button>
+            <p class="form-status" id="ss-status" role="status" aria-live="polite"></p>
+          </div>
+        </form>
+
+        <!-- ============ RESULTS (rendered by the script below) ============ -->
+        <div class="fh-results" id="ss-results" hidden>
+
+          <div class="fh-gauge-wrap">
+            <svg class="fh-gauge" viewBox="0 0 200 115" role="img" aria-labelledby="ss-gauge-title">
+              <title id="ss-gauge-title">Organizational sustainability gauge</title>
+              <path d="M10,100 A90,90 0 0,1 27.19,47.10" class="fh-gauge-band fh-band-0"></path>
+              <path d="M27.19,47.10 A90,90 0 0,1 72.19,14.40" class="fh-gauge-band fh-band-1"></path>
+              <path d="M72.19,14.40 A90,90 0 0,1 127.81,14.40" class="fh-gauge-band fh-band-2"></path>
+              <path d="M127.81,14.40 A90,90 0 0,1 172.81,47.10" class="fh-gauge-band fh-band-3"></path>
+              <path d="M172.81,47.10 A90,90 0 0,1 190,100" class="fh-gauge-band fh-band-4"></path>
+              <g id="ss-needle" transform="rotate(-90,100,100)">
+                <line x1="100" y1="100" x2="100" y2="25" class="fh-needle-line"></line>
+                <circle cx="100" cy="100" r="7" class="fh-needle-hub"></circle>
+              </g>
+            </svg>
+            <div class="fh-gauge-readout">
+              <span class="fh-gauge-score" id="ss-gauge-score"></span>
+              <span class="fh-gauge-band-name" id="ss-gauge-band-name"></span>
+            </div>
+          </div>
+
+          <p class="results-band-desc" id="ss-summary"></p>
+          <p class="results-avg-overall" id="ss-avg-overall" hidden></p>
+          <p class="results-narrative-loading" id="ss-narrative-loading" hidden>Writing a personalized summary of your results&hellip;</p>
+
+          <h3 class="subhead">The Strategic Triangle</h3>
+          <p class="fh-field-help">Harvard Kennedy School's Mark Moore argues that a mission-driven organization's strategy only works if three things are balanced together: the value it creates, its capacity to deliver, and the support it has to keep operating. Here's how those three legs look for you right now.</p>
+          <div class="ss-triangle" id="ss-triangle"></div>
+
+          <h3 class="subhead">By Dimension</h3>
+          <div class="fh-metrics" id="ss-metrics"></div>
+
+          <div class="results-recommendation" id="ss-recommendation"></div>
+
+          <div class="results-disclaimer">
+            <p>This is a directional self-assessment based on your own responses, scored against published research and national benchmarks. It is not a formal strategic or risk audit, and every question involves judgment — treat it as a starting point for a real conversation, not a verdict.</p>
+          </div>
+
+          <div class="results-related">
+            <p>This tool measures strategy, risk, and execution, and blends in your Revenue &amp; Growth and Leadership scores if you've completed them. For a closer look at fundraising program structure specifically — gift portfolios, stewardship, campaigns, and events — see the <a href="/institutional-advancement-score">Institutional Advancement Score</a> (not blended into the Triangle above, since Moore's framework is specifically three-legged, but a useful companion read). For a numbers-based read on funder-specific readiness, <a href="https://grantpass-dashboard.onrender.com" target="_blank" rel="noopener">GrantPass</a> is a separate, purpose-built tool for that.</p>
+            <p>Haven't taken the free <a href="/assessment">Nonprofit Sustainability Self-Assessment</a> yet? It covers this and four other areas in about 5 minutes.</p>
+          </div>
+
+          <div class="results-cta">
+            <h3>Want to talk through these results?</h3>
+            <p>A short conversation is the fastest way to turn this into a plan.</p>
+            <div class="hero-ctas center">
+              <a class="btn btn-primary" href="https://calendly.com/fparham/30min" target="_blank" rel="noopener">Schedule a Strategy Conversation</a>
+              <a class="btn btn-secondary" href="/#pricing">See Pricing</a>
+            </div>
+          </div>
+
+          <p class="calculator-caveat">Sources: Mark H. Moore, "Creating Public Value: Strategic Management in Government" (Harvard University Press, 1995) and the Strategic Triangle; the COSO Enterprise Risk Management Framework; Jeanne Bell, Jan Masaoka &amp; Steve Zimmerman, "Nonprofit Sustainability: Making Strategic Decisions for Financial Viability" and the Matrix Map; Robert S. Kaplan &amp; David P. Norton, "The Balanced Scorecard" (Harvard Business Review, 1992) and subsequent research on strategy execution. Benchmark figures are sector-wide findings, not specific to any organization Frankly Inspired and Associates, LLC has worked with.</p>
+
+          <button type="button" class="results-retake" id="ss-retake">Retake the Assessment</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</BaseLayout>
+
+<script>
+  // UPDATE THIS once frankly-inspired-backend is deployed to Render — see
+  // that repo's README.md. Same value as assessment.astro's API_BASE.
+  const API_BASE = 'https://frankly-inspired-api.onrender.com';
+
+  interface SavedScore {
+    score: number;
+    band: number;
+    at: number;
+  }
+
+  const BAND_NAMES = ['Critical', 'At Risk', 'Stable', 'Strong', 'Resilient'];
+  const BAND_SUBNAMES = ['Poor', 'Fair', 'Good', 'Very Good', 'Excellent'];
+
+  const COMPOSITE_SUMMARY = [
+    'Strategy, risk management, and execution discipline all need real attention right now. That is a common starting point, but it means stabilizing the fundamentals below should come before any major new initiative.',
+    'There are real gaps in more than one dimension below. These are addressable with deliberate attention, not a full strategic overhaul.',
+    'The fundamentals are in place across most dimensions. The opportunity now is tightening the specific gaps below rather than a broad rebuild.',
+    'This is a well-run, strategically disciplined organization by sector benchmarks. The focus shifts from fixing gaps to protecting and extending what already works.',
+    'This organization shows genuine strategic and organizational maturity relative to sector norms. The conversation now is strategic use of that strength, not stabilization.',
+  ];
+
+  const DIMENSIONS = [
+    {
+      key: 'strategy',
+      label: 'Strategic Clarity & Public Value',
+      questions: ['st1', 'st2', 'st3'],
+      points: [
+        "Without clear agreement on what value the organization creates and for whom, every other strategic decision gets harder. Harvard Kennedy School's public value framework treats this as the starting point of strategy, not an afterthought — worth revisiting before any new planning process begins.",
+        "There's a strategy on paper, but it may not be legible to the people executing it day to day. If staff and board can't restate the top 2-3 priorities in similar terms, the strategy isn't yet functioning as a real decision-making tool.",
+        "Strategic priorities are reasonably clear. The next step is testing whether they're actually driving resource allocation decisions, not just living in a planning document.",
+        "This is a well-articulated strategic direction. Worth checking it's been communicated deeply enough that mid-level staff, not just leadership, could explain it.",
+        "This is genuine strategic clarity — mission, priorities, and the value the organization creates are well understood. That clarity is a real asset when hard tradeoff decisions come up.",
+      ],
+    },
+    {
+      key: 'risk',
+      label: 'Risk Identification & Management',
+      questions: ['r1', 'r2', 'r3'],
+      points: [
+        "There's no real system for identifying risk before it becomes a crisis. The COSO framework — the world's most widely used risk management standard — starts with something as simple as a written risk register. That's a realistic first step, not a full enterprise risk program.",
+        "Some risks are known, but likely informally, living in people's heads rather than a shared document. Formalizing even a short list of the top 5-10 risks, reviewed twice a year, closes most of this gap.",
+        "Risk awareness exists. The next step is regularity — COSO's framework treats risk assessment as an ongoing practice, not a one-time exercise done during a crisis or a grant application.",
+        "Risk management is a genuine practice here, ahead of most peer organizations. Worth checking whether it covers reputational and strategic risk, not just financial and operational.",
+        "This is mature risk management by any sector's standard. The opportunity now is using it proactively in strategic decisions, not just defensively.",
+      ],
+    },
+    {
+      key: 'integration',
+      label: 'Impact & Financial Sustainability Integration',
+      questions: ['i1', 'i2', 'i3'],
+      points: [
+        "Programs are likely being evaluated on mission fit alone, without a clear view of what each one costs relative to what it brings in. The nonprofit sector's own 'dual bottom line' research (Bell, Masaoka & Zimmerman) is built specifically around this blind spot — it's common, and addressable.",
+        "There's some awareness of which programs are financially strained, but it may not be driving real decisions yet. Mapping every program on impact versus financial contribution, even roughly, usually surfaces at least one uncomfortable but necessary conversation.",
+        "The organization has a reasonable read on which programs carry their financial weight and which don't. The next step is making that explicit enough to guide next year's resource allocation, not just this year's awareness.",
+        "This is a genuinely integrated view of impact and financial sustainability — most organizations only track one side. Worth revisiting periodically, since a program's position shifts as funding and costs change.",
+        "This is the dual-bottom-line thinking the sector's own sustainability research holds up as the goal. The opportunity now is using it explicitly in every major resource decision, not just strategic planning season.",
+      ],
+    },
+    {
+      key: 'roadmap',
+      label: 'Roadmap & Implementation Discipline',
+      questions: ['e1', 'e2', 'e3'],
+      points: [
+        "Harvard's Robert Kaplan has found that roughly 90% of strategies fail not because the strategy itself was wrong, but because of poor execution. Without a roadmap that translates priorities into tracked initiatives, that's the most likely outcome here too — worth treating execution as its own discipline, separate from planning.",
+        "There's a plan, but it may not be connected to what actually gets tracked day to day. The Balanced Scorecard's core insight is that what gets measured regularly is what gets done — worth checking whether the strategic plan and the metrics anyone actually looks at monthly are the same document.",
+        "There's a real connection between strategy and execution. The next step is cadence — a regular, ideally quarterly, review of progress against the roadmap, not just an annual check-in.",
+        "Implementation discipline here is ahead of most organizations, which per Kaplan's research puts this organization in a small minority that actually executes what it plans.",
+        "This is genuine strategy-to-execution discipline — rare enough that it's a real competitive advantage, not just good practice.",
+      ],
+    },
+  ];
+
+  function bandIndexFromPct(pct: number): number {
+    if (pct < 20) return 0;
+    if (pct < 40) return 1;
+    if (pct < 60) return 2;
+    if (pct < 80) return 3;
+    return 4;
+  }
+
+  function readSavedScore(key: string): SavedScore | null {
+    try {
+      const raw = localStorage.getItem(key);
+      if (!raw) return null;
+      const parsed = JSON.parse(raw);
+      if (typeof parsed.score !== 'number') return null;
+      return parsed;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  const form = document.getElementById('ss-form') as HTMLFormElement | null;
+  const status = document.getElementById('ss-status');
+  const resultsEl = document.getElementById('ss-results') as HTMLElement | null;
+  const metricsEl = document.getElementById('ss-metrics');
+  const triangleEl = document.getElementById('ss-triangle');
+
+  /* ---------- Sticky progress bar (same pattern as the other two tools) ---------- */
+  const progressEl = document.getElementById('ss-progress') as HTMLElement | null;
+  const progressLabel = document.getElementById('ss-progress-label');
+  const progressFill = document.getElementById('ss-progress-fill') as HTMLElement | null;
+  const pillarGroups = document.querySelectorAll<HTMLElement>('.pillar-group[data-pillar-index]');
+  const dimensionLabelByIndex: Record<number, string> = {};
+  DIMENSIONS.forEach((d, i) => { dimensionLabelByIndex[i + 1] = d.label; });
+
+  if (progressEl && progressLabel && progressFill && pillarGroups.length && 'IntersectionObserver' in window) {
+    const progressObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const idx = Number(entry.target.getAttribute('data-pillar-index'));
+            progressLabel.textContent = `Section ${idx} of ${pillarGroups.length} — ${dimensionLabelByIndex[idx] || ''}`;
+            progressFill.style.width = (idx / pillarGroups.length) * 100 + '%';
+          }
+        });
+      },
+      { rootMargin: '-15% 0px -70% 0px' }
+    );
+    pillarGroups.forEach((group) => progressObserver.observe(group));
+  }
+
+  function questionScore(name: string, formEl: HTMLFormElement): number {
+    const checked = formEl.querySelector<HTMLInputElement>(`input[name="${name}"]:checked`);
+    return checked ? Number(checked.value) : 0;
+  }
+
+  function renderTriangle(strategyPct: number, strategyBand: number) {
+    const revenueGrowth = readSavedScore('fi_revenue_growth_score') || readSavedScore('fi_financial_score');
+    const leadership = readSavedScore('fi_leadership_score');
+
+    const legs = [
+      {
+        title: 'Public Value & Strategy',
+        note: 'From this tool',
+        score: strategyPct,
+        band: strategyBand,
+        available: true,
+        cta: null as { href: string; label: string } | null,
+      },
+      {
+        title: 'Operational Capacity',
+        note: leadership ? 'From your Leadership & Operations Score' : null,
+        score: leadership ? leadership.score : null,
+        band: leadership ? leadership.band : null,
+        available: !!leadership,
+        cta: { href: '/leadership-health', label: 'Take the Leadership & Operations Score' },
+      },
+      {
+        title: 'Legitimacy & Support',
+        note: revenueGrowth ? 'From your Revenue & Growth Score' : null,
+        score: revenueGrowth ? revenueGrowth.score : null,
+        band: revenueGrowth ? revenueGrowth.band : null,
+        available: !!revenueGrowth,
+        cta: { href: '/revenue-growth-score', label: 'Take the Revenue & Growth Score' },
+      },
+    ];
+
+    if (triangleEl) {
+      triangleEl.innerHTML = '';
+      legs.forEach((leg) => {
+        const card = document.createElement('div');
+        if (leg.available) {
+          card.className = 'fh-metric-row fh-band-' + leg.band;
+          card.innerHTML =
+            '<div class="fh-metric-head">' +
+            '<span class="fh-metric-label">' + leg.title + '</span>' +
+            '<span class="fh-metric-value">' + leg.score + '% &middot; ' + BAND_SUBNAMES[leg.band as number] + '</span>' +
+            '</div>' +
+            '<span class="fh-metric-track"><span class="fh-metric-fill" style="width:' + leg.score + '%"></span></span>' +
+            '<p class="fh-metric-points">' + leg.note + '.</p>';
+        } else {
+          card.className = 'fh-metric-row';
+          card.innerHTML =
+            '<div class="fh-metric-head">' +
+            '<span class="fh-metric-label">' + leg.title + '</span>' +
+            '<span class="fh-metric-value">Not yet completed</span>' +
+            '</div>' +
+            '<p class="fh-metric-points">This leg isn\'t part of the score below yet. <a class="link-more" href="' + leg.cta!.href + '">' + leg.cta!.label + '</a> to include it.</p>';
+        }
+        triangleEl.appendChild(card);
+      });
+    }
+
+    return { revenueGrowth, leadership };
+  }
+
+  function renderResults() {
+    if (!form) return;
+
+    const results = DIMENSIONS.map((d) => {
+      const scores = d.questions.map((q) => questionScore(q, form));
+      const avg = scores.reduce((a, b) => a + b, 0) / scores.length;
+      const pct = Math.round(((avg - 1) / 4) * 100);
+      return { dimension: d, pct, bandIdx: bandIndexFromPct(pct) };
+    });
+
+    const strategyPct = Math.round(results.reduce((sum, r) => sum + r.pct, 0) / results.length);
+    const strategyBand = bandIndexFromPct(strategyPct);
+
+    const triangleData = renderTriangle(strategyPct, strategyBand);
+
+    // Composite blends whichever of the three legs are available — just
+    // this tool's own score if the other two haven't been taken, or a true
+    // three-way blend if they have.
+    const legScores = [strategyPct];
+    if (triangleData.leadership) legScores.push(triangleData.leadership.score);
+    if (triangleData.revenueGrowth) legScores.push(triangleData.revenueGrowth.score);
+    const composite = Math.round(legScores.reduce((a, b) => a + b, 0) / legScores.length);
+    const compositeBand = bandIndexFromPct(composite);
+
+    const needle = document.getElementById('ss-needle');
+    if (needle) needle.setAttribute('transform', 'rotate(' + ((composite / 100) * 180 - 90) + ',100,100)');
+
+    const gaugeScoreEl = document.getElementById('ss-gauge-score');
+    const gaugeBandEl = document.getElementById('ss-gauge-band-name');
+    const summaryEl = document.getElementById('ss-summary');
+    if (gaugeScoreEl) gaugeScoreEl.textContent = String(composite);
+    if (gaugeBandEl) gaugeBandEl.textContent = BAND_NAMES[compositeBand] + ' (' + BAND_SUBNAMES[compositeBand] + ')';
+    const summaryPrefix =
+      legScores.length === 3
+        ? 'Blended from all three tools — strategy, revenue and growth capacity, and leadership capacity. '
+        : `Based on this tool alone so far (${3 - legScores.length} of 3 legs of the Strategic Triangle not yet completed). `;
+    if (summaryEl) summaryEl.textContent = summaryPrefix + COMPOSITE_SUMMARY[compositeBand];
+
+    if (metricsEl) {
+      metricsEl.innerHTML = '';
+      results.forEach((r) => {
+        const row = document.createElement('div');
+        row.className = 'fh-metric-row fh-band-' + r.bandIdx;
+        row.innerHTML =
+          '<div class="fh-metric-head">' +
+          '<span class="fh-metric-label">' + r.dimension.label + '</span>' +
+          '<span class="fh-metric-value">' + r.pct + '% &middot; ' + BAND_SUBNAMES[r.bandIdx] + '</span>' +
+          '</div>' +
+          '<span class="fh-metric-track"><span class="fh-metric-fill" style="width:' + r.pct + '%"></span></span>' +
+          '<p class="fh-metric-points">' + r.dimension.points[r.bandIdx] + '</p>';
+        metricsEl.appendChild(row);
+      });
+    }
+
+    const recommendationEl = document.getElementById('ss-recommendation');
+    if (recommendationEl) {
+      const recommendedTier = compositeBand <= 1 ? 'implementation' : 'advisory';
+      const tierName = compositeBand <= 1 ? 'Strategic Implementation Retainer' : 'Strategic Advisory Retainer';
+      const tierReason =
+        compositeBand <= 1
+          ? 'with gaps across strategy, risk, or execution, hands-on weekly implementation tends to build the missing fundamentals faster than periodic advisory alone.'
+          : 'with solid-to-strong strategic fundamentals already in place, experienced strategic guidance is usually enough to sharpen and protect them further.';
+      recommendationEl.innerHTML =
+        '<h3 class="subhead">Recommended Starting Point</h3>' +
+        '<p>Based on these results, the <strong>' + tierName + '</strong> is likely the best fit — ' + tierReason + '</p>' +
+        '<a class="btn btn-secondary" href="/#pricing-' + recommendedTier + '">See This Retainer</a>';
+    }
+
+    fetchNarrative(summaryPrefix, {
+      scorePct: composite,
+      band: BAND_NAMES[compositeBand] + ' (' + BAND_SUBNAMES[compositeBand] + ')',
+      pillarScores: results.map((r) => ({ label: r.dimension.label, pct: r.pct })),
+    });
+    fetchBenchmarks(composite);
+
+    form.hidden = true;
+    if (progressEl) progressEl.hidden = true;
+    if (resultsEl) {
+      resultsEl.hidden = false;
+      resultsEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  /* AI-generated personalized summary. An enhancement, not a dependency:
+     the static band description is already visible from renderResults()
+     above, so if this call is slow, fails, or the backend has no
+     ANTHROPIC_API_KEY configured, the visitor still has a complete,
+     correct set of results — this just quietly upgrades the description
+     text if and when a narrative comes back. `blendPrefix` (the "blended
+     from N of 3 legs" framing) is factual and computed client-side, so it
+     is always kept in front of whatever text ends up in the summary,
+     rather than letting the AI narrative silently overwrite it. */
+  function fetchNarrative(blendPrefix: string, payload: { scorePct: number; band: string; pillarScores: { label: string; pct: number }[] }) {
+    const narrativeLoadingEl = document.getElementById('ss-narrative-loading') as HTMLElement | null;
+    if (narrativeLoadingEl) narrativeLoadingEl.hidden = false;
+
+    fetch(API_BASE + '/api/assessment-narrative', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ tool: 'sustainability', ...payload }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data && data.ok && data.narrative) {
+          const summaryEl = document.getElementById('ss-summary');
+          if (summaryEl) summaryEl.textContent = blendPrefix + data.narrative;
+        }
+      })
+      .catch(() => {
+        // Silent by design — static description already shown, nothing to fix.
+      })
+      .finally(() => {
+        if (narrativeLoadingEl) narrativeLoadingEl.hidden = true;
+      });
+  }
+
+  /* Benchmark comparison. An enhancement, not a dependency — if the
+     database isn't reachable, has no data yet, or the sample is too small
+     to be meaningful, the results the visitor already sees are unaffected;
+     this just quietly adds a comparison line when it can. */
+  function fetchBenchmarks(compositePct: number) {
+    const overallEl = document.getElementById('ss-avg-overall') as HTMLElement | null;
+
+    fetch(API_BASE + '/api/benchmarks?tool=sustainability')
+      .then((res) => res.json())
+      .then((data) => {
+        const b = data && data.ok ? data.benchmarks : null;
+        if (!b || !b.count) return;
+
+        if (overallEl) {
+          const lowSample = b.count < 5;
+          overallEl.hidden = false;
+          overallEl.innerHTML =
+            `Your score: <strong>${compositePct}%</strong> &middot; Average so far: <strong>${b.avgScore}%</strong>` +
+            (lowSample
+              ? ` <span class="results-avg-caveat">(early data — ${b.count} response${b.count === 1 ? '' : 's'} so far)</span>`
+              : ` (${b.count} responses)`);
+        }
+      })
+      .catch(() => {
+        // Silent by design — same reasoning as fetchNarrative above.
+      });
+  }
+
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        if (status) status.textContent = 'Please answer every question — one is still missing.';
+        return;
+      }
+      if (status) status.textContent = '';
+      renderResults();
+    });
+  }
+
+  const retakeBtn = document.getElementById('ss-retake');
+  if (retakeBtn) {
+    retakeBtn.addEventListener('click', () => {
+      if (resultsEl) resultsEl.hidden = true;
+      if (form) {
+        form.hidden = false;
+        form.reset();
+        form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      if (progressEl && progressLabel && progressFill) {
+        progressEl.hidden = false;
+        progressLabel.textContent = `Section 1 of ${pillarGroups.length} — ${DIMENSIONS[0] ? DIMENSIONS[0].label : ''}`;
+        progressFill.style.width = 100 / pillarGroups.length + '%';
+      }
+    });
+  }
+</script>

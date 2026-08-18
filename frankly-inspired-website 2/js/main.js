@@ -138,35 +138,49 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  /* ---------- 5. "More" nav dropdown ---------- */
-  var dropdownToggle = document.querySelector('.nav-dropdown-toggle');
-  var dropdownMenu = document.querySelector('.nav-dropdown-menu');
-  var dropdownItem = document.querySelector('.nav-item-dropdown');
+  /* ---------- 5. Nav dropdowns (About, Assessments) ---------- */
+  // Generalized to support any number of .nav-item-dropdown elements in the
+  // nav — originally written for a single "About" dropdown via
+  // querySelector, now loops every dropdown found so each opens/closes
+  // independently (and closing one doesn't affect the others).
+  var dropdownItems = document.querySelectorAll('.nav-item-dropdown');
 
-  if (dropdownToggle && dropdownMenu && dropdownItem) {
+  dropdownItems.forEach(function (item) {
+    var toggle = item.querySelector('.nav-dropdown-toggle');
+    var menu = item.querySelector('.nav-dropdown-menu');
+    if (!toggle || !menu) { return; }
+
     function closeDropdown() {
-      dropdownItem.classList.remove('is-open');
-      dropdownToggle.setAttribute('aria-expanded', 'false');
+      item.classList.remove('is-open');
+      toggle.setAttribute('aria-expanded', 'false');
     }
     function openDropdown() {
-      dropdownItem.classList.add('is-open');
-      dropdownToggle.setAttribute('aria-expanded', 'true');
+      // Close any other open dropdowns first so only one is open at a time.
+      dropdownItems.forEach(function (other) {
+        if (other !== item) {
+          other.classList.remove('is-open');
+          var otherToggle = other.querySelector('.nav-dropdown-toggle');
+          if (otherToggle) { otherToggle.setAttribute('aria-expanded', 'false'); }
+        }
+      });
+      item.classList.add('is-open');
+      toggle.setAttribute('aria-expanded', 'true');
     }
 
-    dropdownToggle.addEventListener('click', function (e) {
+    toggle.addEventListener('click', function (e) {
       e.stopPropagation();
-      var isOpen = dropdownItem.classList.contains('is-open');
+      var isOpen = item.classList.contains('is-open');
       if (isOpen) { closeDropdown(); } else { openDropdown(); }
     });
 
     document.addEventListener('click', function (e) {
-      if (!dropdownItem.contains(e.target)) { closeDropdown(); }
+      if (!item.contains(e.target)) { closeDropdown(); }
     });
 
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') { closeDropdown(); }
     });
-  }
+  });
 
   /* ---------- 6b. Recommended-tier highlight ---------- */
   // The self-assessment results page links to index.html#pricing-advisory

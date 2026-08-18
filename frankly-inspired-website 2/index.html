@@ -47,7 +47,15 @@
           </button>
           <ul id="nav-menu" class="nav-menu">
             <li><a href="#consulting">Consulting</a></li>
-            <li><a href="assessment.html">Free Assessment</a></li>
+            <li class="nav-item-dropdown">
+              <button type="button" class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">Assessments <span class="nav-caret" aria-hidden="true">&#9662;</span></button>
+              <ul class="nav-dropdown-menu">
+                <li><a href="assessment.html">Free Sustainability Self-Assessment</a></li>
+                <li><a href="financial-health.html">Financial Health Score</a></li>
+                <li><a href="leadership-health.html">Leadership &amp; Operations Score</a></li>
+                <li><a href="sustainability-score.html">Sustainability Strategy Score</a></li>
+              </ul>
+            </li>
             <li class="nav-item-dropdown">
               <button type="button" class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">About <span class="nav-caret" aria-hidden="true">&#9662;</span></button>
               <ul class="nav-dropdown-menu">
@@ -101,11 +109,11 @@
       <div class="container center">
         <h2 class="section-title reveal">How Franklin Helps</h2>
         <div class="pillar-tags reveal">
-          <a class="pillar-tag" href="#consulting">Sustainability Strategy</a>
-          <a class="pillar-tag" href="#consulting">Revenue &amp; Growth</a>
-          <a class="pillar-tag" href="#consulting">Leadership &amp; Operations</a>
+          <a class="pillar-tag" href="sustainability-score.html">Sustainability Strategy</a>
+          <a class="pillar-tag" href="financial-health.html">Revenue &amp; Growth</a>
+          <a class="pillar-tag" href="leadership-health.html">Leadership &amp; Operations</a>
         </div>
-        <a class="link-more reveal" href="#consulting">See how each one works</a>
+        <p class="section-note reveal">Each one links to its own free diagnostic. <a class="link-more" href="#consulting">See how the engagement itself works</a></p>
       </div>
     </section>
 
@@ -157,21 +165,30 @@
              as invisible anchors inside a merged card) so the assessment
              results page's per-pillar links still resolve correctly. -->
         <h3 class="subhead reveal">Service Pillars</h3>
+        <!-- Each card is a link straight into its matching free diagnostic
+             tool (per Franklin's request to connect each Service Pillar to
+             an assessment). Revenue & Growth links to the Financial Health
+             Score, since there's no dedicated revenue-specific tool yet and
+             that score's reserve/revenue-concentration/liquidity metrics
+             are the closest numbers-based read on this pillar. -->
         <div class="card-grid">
-          <div class="card reveal" id="pillar-sustainability">
+          <a class="card reveal" id="pillar-sustainability" href="sustainability-score.html">
             <h4>Sustainability Strategy</h4>
             <p>Organizational assessment, strategic priorities, risk identification, sustainability roadmaps, and implementation planning.</p>
-          </div>
-          <div class="card reveal" id="pillar-revenue">
+            <span class="card-cta">Take the Sustainability Strategy Score &rarr;</span>
+          </a>
+          <a class="card reveal" id="pillar-revenue" href="financial-health.html">
             <span id="pillar-partnership" class="anchor-offset"></span>
             <h4>Revenue &amp; Growth</h4>
             <p>Individual donor stewardship and retention, fundraising strategy, grant and public-funding strategy, revenue-pipeline design, and the cross-sector partnerships (education, workforce, government, corporate, philanthropic, and community) that sustain them.</p>
-          </div>
-          <div class="card reveal" id="pillar-leadership">
+            <span class="card-cta">Take the Financial Health Score &rarr;</span>
+          </a>
+          <a class="card reveal" id="pillar-leadership" href="leadership-health.html">
             <span id="pillar-operations" class="anchor-offset"></span>
             <h4>Leadership &amp; Operations</h4>
             <p>Executive advising and change leadership, paired with the workflows, KPIs, CRM/Salesforce practices, and AI readiness guidance that keep an organization running well. 1:1 leadership coaching is available as its own engagement.</p>
-          </div>
+            <span class="card-cta">Take the Leadership &amp; Operations Score &rarr;</span>
+          </a>
         </div>
 
         <h3 class="subhead reveal">Engagement Model</h3>
@@ -389,6 +406,8 @@
         <a href="financial-health.html">Financial Health Score</a>
         <span aria-hidden="true">·</span>
         <a href="leadership-health.html">Leadership &amp; Operations Score</a>
+        <span aria-hidden="true">·</span>
+        <a href="sustainability-score.html">Sustainability Strategy Score</a>
         <span aria-hidden="true">·</span>
         <a href="https://calendly.com/fparham/30min" target="_blank" rel="noopener">Schedule a Strategy Conversation</a>
         <span aria-hidden="true">·</span>

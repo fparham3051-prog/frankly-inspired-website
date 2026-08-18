@@ -6,7 +6,7 @@
      - Succession/Bench    -> CompassPoint & Meyer Foundation, "Daring to Lead"
      - Alignment/Execution -> McKinsey Organizational Health Index (OHI)
      - Change Leadership   -> Kotter's 8-Step Change Model (HBS)
-   Same gauge/banding structure as js/financial-health.js (Critical/At Risk/
+   Same gauge/banding structure as js/revenue-growth-score.js (Critical/At Risk/
    Stable/Strong/Resilient) for a consistent standard across both diagnostic
    tools. All scoring runs client-side; nothing is sent anywhere.
    ========================================================================== */
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // Each dimension: the 3 question names (matching the radio group "name"
   // attributes in leadership-health.html), the source it's drawn from, and
   // discussion points per band — written as advisory talking points, the
-  // same standard as the Financial Health Score.
+  // same standard as the Revenue & Growth Score.
   var DIMENSIONS = [
     {
       key: 'governance',
@@ -140,6 +140,14 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('lh-gauge-score').textContent = composite;
     document.getElementById('lh-gauge-band-name').textContent = BAND_NAMES[compositeBand] + ' (' + BAND_SUBNAMES[compositeBand] + ')';
     document.getElementById('lh-summary').textContent = COMPOSITE_SUMMARY[compositeBand];
+
+    // Saved so the Organizational Sustainability Score tool can pull this
+    // in as the "Operational Capacity" leg of its Strategic Triangle view,
+    // if this visitor has completed both tools in the same browser. Stays
+    // entirely on-device, same as every other calculation on this page.
+    try {
+      localStorage.setItem('fi_leadership_score', JSON.stringify({ score: composite, band: compositeBand, at: Date.now() }));
+    } catch (e) { /* localStorage unavailable (private browsing, etc.) — non-fatal */ }
 
     metricsEl.innerHTML = '';
     results.forEach(function (r) {

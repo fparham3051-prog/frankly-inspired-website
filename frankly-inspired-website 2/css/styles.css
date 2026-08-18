@@ -21,8 +21,10 @@
   --light-gray: #F3F5F7;
   --border: #e2e6ea;
 
-  /* Financial Health Score bands — Critical/At Risk/Stable/Strong/Resilient,
-     used for the gauge and per-metric bars on financial-health.html. */
+  /* Revenue & Growth Score bands — Critical/At Risk/Stable/Strong/Resilient,
+     used for the gauge and per-metric bars on revenue-growth-score.html
+     (and reused by the Leadership & Operations and Sustainability Strategy
+     tools too). */
   --band-0: #b3402c;
   --band-1: #c97a2e;
   --band-2: #b28e42;
@@ -402,7 +404,7 @@ ul, ol { padding-left: 1.25em; }
 .card p { margin: 0; color: #4a545e; font-size: 0.95rem; }
 
 /* Service Pillar cards double as links straight into the matching
-   assessment tool (financial-health.html, leadership-health.html,
+   assessment tool (revenue-growth-score.html, leadership-health.html,
    sustainability-score.html) — see index.html. */
 a.card {
   display: block;
@@ -624,7 +626,8 @@ a.card:hover .card-cta { text-decoration: underline; }
 }
 .pricing-card.featured:hover {
   box-shadow: 0 16px 32px rgba(17, 35, 61, 0.38);
-}.recommended-badge[hidden] { display: none; }
+}
+.recommended-badge[hidden] { display: none; }
 .recommended-badge {
   display: inline-block;
   align-self: flex-start;
@@ -1444,7 +1447,12 @@ a.card:hover .card-cta { text-decoration: underline; }
 }
 
 /* ==========================================================================
-   FINANCIAL HEALTH SCORE (financial-health.html)
+   REVENUE & GROWTH SCORE (revenue-growth-score.html)
+   Renamed from "Financial Health Score" — class names below still use the
+   fh- prefix since they're shared, generic gauge/metric-card infrastructure
+   reused by the Leadership & Operations and Sustainability Strategy tools
+   too (see their own blocks further down this file). Only this tool's
+   page-specific element IDs changed (fh-* -> rg-*), not these shared classes.
    ========================================================================== */
 
 .fh-form-section { padding-top: clamp(2rem, 5vw, 3rem); }
@@ -1589,7 +1597,7 @@ a.card:hover .card-cta { text-decoration: underline; }
 
 /* ==========================================================================
    SUSTAINABILITY STRATEGY SCORE (sustainability-score.html)
-   Reuses .fh-gauge / .fh-metric-row etc. from the Financial Health Score
+   Reuses .fh-gauge / .fh-metric-row etc. from the Revenue & Growth Score
    block above. This block only adds the "Strategic Triangle" layout, which
    is structurally the same fh-metric-row list but arranged as three cards
    side by side rather than stacked.

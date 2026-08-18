@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="UTF-8">
+  <script>document.documentElement.classList.replace('no-js', 'js');</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Revenue & Growth Score | Frankly Inspired</title>
+  <meta name="description" content="A free diagnostic that scores your nonprofit's revenue and growth capacity — reserves, spending mix, revenue diversification, and liquidity — the same numbers that shape a strong fundraising and revenue-pipeline strategy.">
+
+  <!-- PROTOTYPE: This tool is the numbers-based diagnostic for the Revenue &
+       Growth service pillar (donor stewardship and retention, fundraising
+       strategy, grant and public-funding strategy, revenue-pipeline design,
+       and the cross-sector partnerships that sustain them — see the pillar
+       card on index.html). Renamed from "Financial Health Score" to align
+       with that pillar's language; the underlying math is unchanged, since
+       reserve depth, spending mix, revenue concentration, and liquidity are
+       the concrete numbers that determine how much room an organization has
+       to invest in fundraising strategy and revenue-pipeline growth. It
+       remains a deeper, numbers-based second step after the qualitative
+       Self-Assessment (assessment.html) — that tool asks how an organization
+       FEELS about its sustainability; this one asks for actual
+       budget/financial-statement figures and computes standard nonprofit
+       financial ratios against real sector benchmarks (Propel Nonprofits,
+       the BBB Wise Giving Alliance, Charity Navigator, and the Nonprofit
+       Operating Reserves Initiative — see Sources at the bottom of the
+       results). All calculation runs entirely in the browser; nothing is
+       sent anywhere, which matters here more than on the qualitative tool
+       since these are real financial figures. See js/revenue-growth-score.js
+       for the scoring model, thresholds, and citations. -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="nav-wrap">
+      <a href="index.html" class="brand"><img src="assets/images/logo-mark.svg" alt="" class="brand-mark" width="28" height="40">Frankly Inspired</a>
+      <div class="nav-actions">
+        <a class="btn btn-primary btn-nav-mobile" href="https://calendly.com/fparham/30min" target="_blank" rel="noopener">Schedule</a>
+        <nav class="site-nav" aria-label="Primary">
+          <ul class="nav-menu" style="display:flex;">
+            <li><a href="index.html">Back to Site</a></li>
+            <li><a class="btn btn-primary btn-nav" href="https://calendly.com/fparham/30min" target="_blank" rel="noopener">Schedule a Conversation</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ============ INTRO ============ -->
+    <section class="section assessment-intro">
+      <div class="container narrow center">
+        <p class="eyebrow eyebrow-dark">Free Diagnostic</p>
+        <h1>Revenue & Growth Score</h1>
+        <p class="hero-sub-light">Seven numbers from your most recent budget or financial statements, scored against the same reserve, spending-mix, revenue-diversification, and liquidity benchmarks that shape a strong fundraising and revenue-pipeline strategy. Takes about 10 minutes. Nothing you enter here leaves your browser.</p>
+      </div>
+    </section>
+
+    <!-- ============ INPUT FORM ============ -->
+    <section class="section fh-form-section alt-bg">
+      <div class="container narrow">
+
+        <div class="fh-intro-note">
+          <p>Have your most recent annual budget, financial statements, or Form 990 on hand. Every figure below is a single line item you can pull directly from one of those — nothing needs to be calculated first.</p>
+        </div>
+
+        <form id="rg-form" novalidate>
+
+          <div class="fh-field-group">
+            <h2 class="pillar-heading">Reserves</h2>
+            <div class="fh-field">
+              <label for="rg-cash">Unrestricted cash and net assets available for operations</label>
+              <p class="fh-field-help">Cash and investments your board could actually use if needed — not funds restricted by a donor or grant to a specific purpose. Reserve depth is what buys time to grow revenue deliberately instead of chasing whatever funding shows up next.</p>
+              <div class="calculator-input-prefix"><span aria-hidden="true">$</span><input type="number" id="rg-cash" min="0" step="1" placeholder="e.g. 85,000" inputmode="numeric" required></div>
+            </div>
+          </div>
+
+          <div class="fh-field-group">
+            <h2 class="pillar-heading">Spending Mix</h2>
+            <div class="fh-field">
+              <label for="rg-total-expenses">Total annual operating expenses</label>
+              <p class="fh-field-help">Everything spent to run the organization for the year — programs, administration, and fundraising combined.</p>
+              <div class="calculator-input-prefix"><span aria-hidden="true">$</span><input type="number" id="rg-total-expenses" min="0" step="1" placeholder="e.g. 620,000" inputmode="numeric" required></div>
+            </div>
+            <div class="fh-field">
+              <label for="rg-program-expenses">Program expenses</label>
+              <p class="fh-field-help">The portion of total expenses spent directly on programs and services, not administration or fundraising.</p>
+              <div class="calculator-input-prefix"><span aria-hidden="true">$</span><input type="number" id="rg-program-expenses" min="0" step="1" placeholder="e.g. 460,000" inputmode="numeric" required></div>
+            </div>
+          </div>
+
+          <div class="fh-field-group">
+            <h2 class="pillar-heading">Revenue Diversification</h2>
+            <div class="fh-field">
+              <label for="rg-total-revenue">Total annual revenue</label>
+              <p class="fh-field-help">All revenue for the year, from every source combined — the baseline for measuring how well your fundraising strategy and revenue pipeline are diversifying growth.</p>
+              <div class="calculator-input-prefix"><span aria-hidden="true">$</span><input type="number" id="rg-total-revenue" min="0" step="1" placeholder="e.g. 640,000" inputmode="numeric" required></div>
+            </div>
+            <div class="fh-field">
+              <label for="rg-top-source">Revenue from your single largest funding source</label>
+              <p class="fh-field-help">The largest grant, contract, or donor — whichever one, if lost, would hurt the most. This is the core number behind any donor stewardship, retention, or revenue-diversification strategy. If two funders are close, use the larger.</p>
+              <div class="calculator-input-prefix"><span aria-hidden="true">$</span><input type="number" id="rg-top-source" min="0" step="1" placeholder="e.g. 180,000" inputmode="numeric" required></div>
+            </div>
+          </div>
+
+          <div class="fh-field-group">
+            <h2 class="pillar-heading">Short-Term Liquidity</h2>
+            <div class="fh-field">
+              <label for="rg-current-assets">Current assets</label>
+              <p class="fh-field-help">Cash, receivables, and anything else convertible to cash within about 12 months. Excludes buildings, equipment, and other fixed assets.</p>
+              <div class="calculator-input-prefix"><span aria-hidden="true">$</span><input type="number" id="rg-current-assets" min="0" step="1" placeholder="e.g. 140,000" inputmode="numeric" required></div>
+            </div>
+            <div class="fh-field">
+              <label for="rg-current-liabilities">Current liabilities</label>
+              <p class="fh-field-help">Bills, payroll, and other obligations due within about 12 months.</p>
+              <div class="calculator-input-prefix"><span aria-hidden="true">$</span><input type="number" id="rg-current-liabilities" min="0" step="1" placeholder="e.g. 75,000" inputmode="numeric" required></div>
+            </div>
+          </div>
+
+          <div class="assessment-submit">
+            <button type="submit" class="btn btn-primary">See My Revenue & Growth Score</button>
+            <p class="form-status" id="rg-status" role="status" aria-live="polite"></p>
+          </div>
+        </form>
+
+        <!-- ============ RESULTS (shown by js/revenue-growth-score.js) ============ -->
+        <div class="fh-results" id="rg-results" hidden>
+
+          <div class="fh-gauge-wrap">
+            <svg class="fh-gauge" viewBox="0 0 200 115" role="img" aria-labelledby="rg-gauge-title">
+              <title id="rg-gauge-title">Revenue and growth gauge</title>
+              <path d="M10,100 A90,90 0 0,1 27.19,47.10" class="fh-gauge-band fh-band-0"></path>
+              <path d="M27.19,47.10 A90,90 0 0,1 72.19,14.40" class="fh-gauge-band fh-band-1"></path>
+              <path d="M72.19,14.40 A90,90 0 0,1 127.81,14.40" class="fh-gauge-band fh-band-2"></path>
+              <path d="M127.81,14.40 A90,90 0 0,1 172.81,47.10" class="fh-gauge-band fh-band-3"></path>
+              <path d="M172.81,47.10 A90,90 0 0,1 190,100" class="fh-gauge-band fh-band-4"></path>
+              <g id="rg-needle" transform="rotate(-90,100,100)">
+                <line x1="100" y1="100" x2="100" y2="25" class="fh-needle-line"></line>
+                <circle cx="100" cy="100" r="7" class="fh-needle-hub"></circle>
+              </g>
+            </svg>
+            <div class="fh-gauge-readout">
+              <span class="fh-gauge-score" id="rg-gauge-score"></span>
+              <span class="fh-gauge-band-name" id="rg-gauge-band-name"></span>
+            </div>
+          </div>
+
+          <p class="results-band-desc" id="rg-summary"></p>
+
+          <h3 class="subhead">By Metric</h3>
+          <div class="fh-metrics" id="rg-metrics"></div>
+
+          <div class="results-recommendation" id="rg-recommendation"></div>
+
+          <div class="results-disclaimer">
+            <p>This is a directional estimate based on the figures you entered, using standard, publicly documented nonprofit financial ratios and commonly cited sector benchmarks. It is not a substitute for a review by a CPA or financial advisor, and it does not account for context specific to your organization (grant cycles, capital campaigns, planned deficits, and similar).</p>
+          </div>
+
+          <div class="results-related">
+            <p>This tool measures revenue and growth capacity from your own budget. For a research-backed read on governance, succession readiness, and organizational alignment, see the <a href="leadership-health.html">Leadership &amp; Operations Health Score</a>. This score also feeds directly into the <a href="sustainability-score.html">Sustainability Strategy Score</a>, which places it alongside leadership capacity and strategic clarity in a single Strategic Triangle view. If you want to know how ready your organization is for a <em>specific</em> funder's stated priorities, <a href="https://grantpass-dashboard.onrender.com" target="_blank" rel="noopener">GrantPass</a> is a separate, purpose-built tool for that.</p>
+          </div>
+
+          <div class="results-cta">
+            <h3>Want to talk through these numbers?</h3>
+            <p>A short conversation is the fastest way to turn this into a plan.</p>
+            <div class="hero-ctas center">
+              <a class="btn btn-primary" href="https://calendly.com/fparham/30min" target="_blank" rel="noopener">Schedule a Strategy Conversation</a>
+              <a class="btn btn-secondary" href="index.html#pricing">See Pricing</a>
+            </div>
+          </div>
+
+          <p class="calculator-caveat">Sources: Propel Nonprofits' Analyzing Financial Information Using Ratios; the BBB Wise Giving Alliance Standards for Charity Accountability; Charity Navigator's Rating Methodology (2026); and the Nonprofit Operating Reserves Initiative (NORI) Workgroup's reserve guidance — the same benchmarks that inform sound revenue and growth strategy. Benchmark figures are sector-wide averages, not specific to any organization Frankly Inspired and Associates, LLC has worked with.</p>
+
+          <button type="button" class="results-retake" id="rg-retake">Start Over</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p class="footer-org">Frankly Inspired and Associates, LLC</p>
+      <p class="footer-meta">Founded by Franklin D. Parham · Lanham, Maryland / DMV</p>
+      <p class="footer-meta">
+        <a href="mailto:franklin@franklyinspired.associates">franklin@franklyinspired.associates</a>
+        <span aria-hidden="true">·</span>
+        <a href="tel:+12403918283">240-391-8283</a>
+      </p>
+      <p class="footer-links">
+        <a href="index.html">Back to Site</a>
+        <span aria-hidden="true">·</span>
+        <a href="assessment.html">Free Assessment</a>
+        <span aria-hidden="true">·</span>
+        <a href="leadership-health.html">Leadership &amp; Operations Score</a>
+        <span aria-hidden="true">·</span>
+        <a href="sustainability-score.html">Sustainability Strategy Score</a>
+        <span aria-hidden="true">·</span>
+        <a href="https://calendly.com/fparham/30min" target="_blank" rel="noopener">Schedule a Strategy Conversation</a>
+      </p>
+      <p class="footer-legal">
+        © 2026 Frankly Inspired and Associates, LLC
+        <span aria-hidden="true">·</span>
+        <a href="privacy.html">Privacy Policy</a>
+        <span aria-hidden="true">·</span>
+        <a href="terms.html">Terms of Use</a>
+        <span aria-hidden="true">·</span>
+        <button type="button" class="manage-cookies-link" data-manage-cookies>Manage Cookie Preferences</button>
+      </p>
+    </div>
+  </footer>
+
+  <script src="js/revenue-growth-score.js"></script>
+  <script src="js/cookie-consent.js"></script>
+  <script src="js/analytics.js"></script>
+</body>
+</html>

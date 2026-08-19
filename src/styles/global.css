@@ -658,69 +658,19 @@ a.hero-credential-link:hover {
 }
 .link-more:hover { color: var(--gold-accessible); }
 
-/* ---------- Donor churn calculator (homepage) ---------- */
-.calculator-section { padding-top: 0; }
-.calculator {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1.35rem;
-  margin: 1.75rem 0;
-  text-align: left;
-}
-.calculator-row {
-  display: flex;
-  flex-direction: column;
-  min-width: 210px;
-}
-.calculator-row label {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--navy);
-  margin-bottom: 0.45em;
-}
-.calculator-row input {
-  font-family: var(--font-body);
-  font-size: 1rem;
-  padding: 0.7em 0.8em;
-  border: 1px solid #c7cdd3;
-  border-radius: var(--radius-sm);
-  background: var(--white);
-  color: var(--charcoal);
-  width: 100%;
-  transition: border-color var(--transition), box-shadow var(--transition);
-}
-.calculator-row input:focus { border-color: var(--gold); box-shadow: 0 0 0 4px var(--gold-soft); outline: none; }
-.calculator-input-prefix {
-  display: flex;
-  align-items: center;
-  border: 1px solid #c7cdd3;
-  border-radius: var(--radius-sm);
-  background: var(--white);
-  padding-left: 0.8em;
-  transition: border-color var(--transition), box-shadow var(--transition);
-}
-.calculator-input-prefix:focus-within { border-color: var(--gold); box-shadow: 0 0 0 4px var(--gold-soft); }
-.calculator-input-prefix span { color: #6b7480; font-weight: 600; }
-.calculator-input-prefix input {
-  border: none;
-  padding-left: 0.35em;
-}
-.calculator-input-prefix input:focus { border-color: transparent; box-shadow: none; }
-.calculator-result {
-  max-width: 640px;
-  margin: 0 auto 1.1rem;
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-left: 3px solid var(--gold);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-sm);
-  padding: 1.15rem 1.4rem;
-  color: #4a545e;
-}
-.calculator-result strong { color: var(--navy); }
+/* Shared small-print "Sources:" style, used at the bottom of every
+   assessment tool's results — kept under its original calculator-era name
+   since it's referenced by class in several already-shipped pages. */
 .calculator-caveat {
   font-size: 0.8rem;
+  color: #8a94a0;
+}
+
+/* ---------- Research & Insights (homepage) ---------- */
+.insight-source {
+  margin: 0.9rem 0 0;
+  font-size: 0.8rem;
+  font-style: italic;
   color: #8a94a0;
 }
 

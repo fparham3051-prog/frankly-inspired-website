@@ -136,33 +136,31 @@ import ScrollReveal from '../components/ScrollReveal.astro';
       </div>
     </section>
 
-    <!-- ============ DONOR CHURN CALCULATOR ============ -->
-    <!-- A small interactive moment between the pillar teaser and the dense
-         Consulting/pricing section below. Figures used: AFP Fundraising
-         Effectiveness Project 2025 sector average first-time donor
-         retention (19.4%). Purely illustrative; framed that way explicitly
-         below. -->
-    <section class="section calculator-section">
-      <div class="container narrow center">
-        <h2 class="section-title reveal">What Might First-Time Donor Churn Be Costing You?</h2>
-        <p class="section-note reveal">Sector-wide, roughly 4 in 5 first-time donors never give a second gift. A rough, illustrative estimate using your own numbers:</p>
-        <div class="calculator reveal">
-          <div class="calculator-row">
-            <label for="calc-donors">First-time donors last year</label>
-            <input type="number" id="calc-donors" min="0" step="1" placeholder="e.g. 150" inputmode="numeric" />
+    <!-- ============ RESEARCH & INSIGHTS ============ -->
+    <!-- Replaces the donor churn calculator, which only mapped to one
+         dimension of one tool (Revenue & Growth's Donor Retention) and read
+         as an interactive marketing gadget sitting next to five
+         research-grounded diagnostic tools — a scope and tone mismatch.
+         This is cited, non-interactive prose in the same analytical voice
+         as the assessment tools' band commentary, with each brief linking
+         forward to the specific tool that scores that area. -->
+    <section class="section insights-section">
+      <div class="container">
+        <h2 class="section-title reveal">What the Research Shows</h2>
+        <div class="card-grid">
+          <div class="card reveal">
+            <h4>The First-Gift Cliff</h4>
+            <p>Nationally, roughly 4 in 5 first-time donors never make a second gift — first-time donor retention sits around 18%, well below the 43% overall average. A structured stewardship process in a donor's first 90 days is one of the highest-leverage, lowest-cost fixes most nonprofits have available.</p>
+            <p class="insight-source">Fundraising Effectiveness Project, Association of Fundraising Professionals &amp; GivingTuesday</p>
+            <a class="link-more" href="/revenue-growth-score">See where your organization stands &rarr;</a>
           </div>
-          <div class="calculator-row">
-            <label for="calc-gift">Average first-gift size</label>
-            <div class="calculator-input-prefix">
-              <span aria-hidden="true">$</span>
-              <input type="number" id="calc-gift" min="0" step="1" placeholder="e.g. 75" inputmode="numeric" />
-            </div>
+          <div class="card reveal">
+            <h4>The Planned-Giving Gap</h4>
+            <p>Charitable bequests have made up roughly 7-9% of all U.S. giving in most years over the past four decades — yet most nonprofits still don't have even a basic planned-giving program. The gap matters beyond the eventual gift: donors who commit a bequest increase their annual giving by roughly 75% in the years that follow, meaning a planned-giving conversation is also a signal of a donor ready to give more now.</p>
+            <p class="insight-source">Giving USA; the Chronicle of Philanthropy; FreeWill Planned Giving Report</p>
+            <a class="link-more" href="/institutional-advancement-score">See where your fundraising program stands &rarr;</a>
           </div>
         </div>
-        <p class="calculator-result" id="calculator-result" hidden>
-          At the sector-average 19.4% first-time donor retention rate, an estimated <strong id="calc-lost-donors"></strong> of those donors likely won't give again — representing roughly <strong id="calc-lost-revenue"></strong> in lost second-gift revenue this year alone.
-        </p>
-        <p class="calculator-caveat reveal">Illustrative only, based on the AFP Fundraising Effectiveness Project's 2025 sector averages — not a prediction for your specific organization.</p>
       </div>
     </section>
 
@@ -507,38 +505,4 @@ import ScrollReveal from '../components/ScrollReveal.astro';
     if (badge) badge.hidden = false;
   })();
 
-  // ---------- Donor churn calculator ----------
-  // Sector-average first-time donor retention rate (19.4%), from the AFP
-  // Fundraising Effectiveness Project's 2025 data — same figure cited in
-  // the homepage copy. Kept as a single named constant so it only has to be
-  // updated in one place if the sector figure is refreshed later.
-  const FIRST_TIME_RETENTION_RATE = 0.194;
-
-  const calcDonorsInput = document.getElementById('calc-donors') as HTMLInputElement | null;
-  const calcGiftInput = document.getElementById('calc-gift') as HTMLInputElement | null;
-  const calcResultEl = document.getElementById('calculator-result') as HTMLElement | null;
-  const calcLostDonorsEl = document.getElementById('calc-lost-donors');
-  const calcLostRevenueEl = document.getElementById('calc-lost-revenue');
-
-  function updateCalculator() {
-    const donors = Number(calcDonorsInput?.value);
-    const gift = Number(calcGiftInput?.value);
-
-    if (!donors || donors <= 0 || !gift || gift <= 0) {
-      if (calcResultEl) calcResultEl.hidden = true;
-      return;
-    }
-
-    const lostDonors = Math.round(donors * (1 - FIRST_TIME_RETENTION_RATE));
-    const lostRevenue = lostDonors * gift;
-
-    if (calcLostDonorsEl) calcLostDonorsEl.textContent = lostDonors.toLocaleString('en-US') + ' donors';
-    if (calcLostRevenueEl) calcLostRevenueEl.textContent = '$' + Math.round(lostRevenue).toLocaleString('en-US');
-    if (calcResultEl) calcResultEl.hidden = false;
-  }
-
-  if (calcDonorsInput && calcGiftInput) {
-    calcDonorsInput.addEventListener('input', updateCalculator);
-    calcGiftInput.addEventListener('input', updateCalculator);
-  }
 </script>

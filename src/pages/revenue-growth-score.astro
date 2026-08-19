@@ -245,6 +245,7 @@ import Header from '../components/Header.astro';
     {
       key: 'reserve',
       label: 'Operating Reserve',
+      specificHelp: 'The starting point here is a reserve policy — how much to target, how it gets funded, and when it can be used — plus a concrete, funded plan to build toward it.',
       compute: (v: Values) => {
         const monthlyExpenses = v.totalExpenses / 12;
         return monthlyExpenses > 0 ? v.cash / monthlyExpenses : 0;
@@ -263,6 +264,7 @@ import Header from '../components/Header.astro';
     {
       key: 'program',
       label: 'Program Expense Ratio',
+      specificHelp: 'This usually starts with a cost-allocation review — checking whether shared costs are already being counted toward programs accurately — followed by a look at the program-cost structure itself.',
       compute: (v: Values) => (v.totalExpenses > 0 ? (v.programExpenses / v.totalExpenses) * 100 : 0),
       thresholds: [65, 70, 80, 85], // percent
       invert: false,
@@ -278,6 +280,7 @@ import Header from '../components/Header.astro';
     {
       key: 'concentration',
       label: 'Revenue Diversification',
+      specificHelp: 'This is a donor-stewardship and revenue-pipeline problem more than a program problem — building retention systems and new partnership or funding sources so no single relationship can sink the budget.',
       compute: (v: Values) => (v.totalRevenue > 0 ? (v.topSource / v.totalRevenue) * 100 : 0),
       thresholds: [50, 35, 25, 15], // percent — invert: lower is better
       invert: true,
@@ -293,6 +296,7 @@ import Header from '../components/Header.astro';
     {
       key: 'liquidity',
       label: 'Current Ratio (Liquidity)',
+      specificHelp: 'The immediate work is rolling cash-flow forecasting, so short-term obligations are visible weeks ahead, followed by a plan to build toward a healthier liquidity cushion.',
       compute: (v: Values) => (v.currentLiabilities > 0 ? v.currentAssets / v.currentLiabilities : 0),
       thresholds: [1.0, 1.5, 2.0, 3.0],
       invert: false,
@@ -308,6 +312,7 @@ import Header from '../components/Header.astro';
     {
       key: 'retention',
       label: 'Donor Retention Rate',
+      specificHelp: 'This is a moves-management build: a structured cultivation, acknowledgment, and re-ask process so first-time and repeat donors are actually retained instead of lost after the first gift.',
       compute: (v: Values) => (v.priorYearDonors > 0 ? (v.retainedDonors / v.priorYearDonors) * 100 : 0),
       thresholds: [25, 35, 45, 55], // percent — national overall average is ~43%, sitting inside the "Stable" band
       invert: false,
@@ -428,6 +433,7 @@ import Header from '../components/Header.astro';
 
     const recommendationEl = document.getElementById('rg-recommendation');
     if (recommendationEl) {
+      const lowest = results.reduce((min, r) => (r.score < min.score ? r : min), results[0]);
       const recommendedTier = compositeBand <= 1 ? 'implementation' : 'advisory';
       const tierName = compositeBand <= 1 ? 'Strategic Implementation Retainer' : 'Strategic Advisory Retainer';
       const tierReason =
@@ -435,7 +441,9 @@ import Header from '../components/Header.astro';
           ? 'with revenue and growth gaps across more than one area, hands-on weekly implementation — including donor stewardship, revenue-pipeline design, and partnership development — tends to stabilize things faster than periodic advisory alone.'
           : 'with a stable-to-strong revenue and growth foundation, experienced strategic guidance is usually enough to sharpen fundraising strategy and protect that strength further.';
       recommendationEl.innerHTML =
-        '<h3 class="subhead">Recommended Starting Point</h3>' +
+        '<h3 class="subhead">Priority Area: ' + lowest.metric.label + '</h3>' +
+        '<p>' + lowest.metric.specificHelp + '</p>' +
+        '<h3 class="subhead" style="margin-top:1.4rem;">Recommended Starting Point</h3>' +
         '<p>Based on these numbers, the <strong>' + tierName + '</strong> is likely the best fit — ' + tierReason + '</p>' +
         '<a class="btn btn-secondary" href="/#pricing-' + recommendedTier + '">See This Retainer</a>';
     }

@@ -272,6 +272,7 @@ import Header from '../components/Header.astro';
     {
       key: 'portfolio',
       label: 'Gift Portfolio Strategy & Staffing',
+      specificHelp: 'This starts with gift officer portfolio design — who owns which donors, at what capacity, with what workload — so cultivation isn\'t left to chance.',
       questions: ['gp1', 'gp2', 'gp3'],
       points: [
         "There's no real gift-level segmentation and no assigned portfolios — every donor gets roughly the same treatment regardless of capacity. AFP's research puts a standard major-gifts portfolio at 75-150 active prospects per officer; without that structure, the organization's best relationships are likely getting the least deliberate attention, not the most.",
@@ -284,6 +285,7 @@ import Header from '../components/Header.astro';
     {
       key: 'stewardship',
       label: 'Moves Management & Stewardship',
+      specificHelp: 'The work here is building a real moves-management process: a structured stewardship calendar with defined cultivation steps, acknowledgment timing, and next-ask triggers.',
       questions: ['mm1', 'mm2', 'mm3'],
       points: [
         "There's no real stage-based tracking, and acknowledgment is likely inconsistent. Penelope Burk's research found first-gift-to-second-ask attrition has risen to roughly 65% nationally — without a stewardship system, that number is a real risk here, not just a statistic.",
@@ -296,6 +298,7 @@ import Header from '../components/Header.astro';
     {
       key: 'campaign',
       label: 'Campaign Structure & Readiness',
+      specificHelp: 'This means building actual campaign infrastructure — a case for support, gift table, and leadership/volunteer structure — before a campaign is announced, not during it.',
       questions: ['cs1', 'cs2', 'cs3'],
       points: [
         "There's no real campaign structure in place. Skipping the feasibility study and quiet phase, and going straight to a public ask, is one of the most common reasons campaigns fall short of goal, since the quiet phase is what typically secures 75-90% of the total before the public even hears about it.",
@@ -308,6 +311,7 @@ import Header from '../components/Header.astro';
     {
       key: 'events',
       label: 'Events as Strategy',
+      specificHelp: 'This is a redesign of what your events are for — shifting them from one-off revenue days toward relationship-building moments that feed the broader gift pipeline.',
       questions: ['ev1', 'ev2', 'ev3'],
       points: [
         'Events likely aren\'t tracked past gross revenue, which means it\'s not actually clear whether they make money. A standard nonprofit benchmark is a 2:1 to 3:1 net-to-cost ratio, worth calculating directly rather than assuming an event "went well" because it was well attended.',
@@ -403,6 +407,7 @@ import Header from '../components/Header.astro';
 
     const recommendationEl = document.getElementById('ia-recommendation');
     if (recommendationEl) {
+      const lowest = results.reduce((min, r) => (r.pct < min.pct ? r : min), results[0]);
       const recommendedTier = compositeBand <= 1 ? 'implementation' : 'advisory';
       const tierName = compositeBand <= 1 ? 'Strategic Implementation Retainer' : 'Strategic Advisory Retainer';
       const tierReason =
@@ -410,7 +415,9 @@ import Header from '../components/Header.astro';
           ? 'with gaps across more than one part of the fundraising program, hands-on weekly implementation tends to build the missing structure faster than periodic advisory alone.'
           : 'with solid-to-strong fundraising program fundamentals already in place, experienced strategic guidance is usually enough to sharpen and protect them further.';
       recommendationEl.innerHTML =
-        '<h3 class="subhead">Recommended Starting Point</h3>' +
+        '<h3 class="subhead">Priority Area: ' + lowest.dimension.label + '</h3>' +
+        '<p>' + lowest.dimension.specificHelp + '</p>' +
+        '<h3 class="subhead" style="margin-top:1.4rem;">Recommended Starting Point</h3>' +
         '<p>Based on these results, the <strong>' + tierName + '</strong> is likely the best fit — ' + tierReason + '</p>' +
         '<a class="btn btn-secondary" href="/#pricing-' + recommendedTier + '">See This Retainer</a>';
     }

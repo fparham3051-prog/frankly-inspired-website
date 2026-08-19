@@ -292,6 +292,7 @@ import Header from '../components/Header.astro';
     {
       key: 'strategy',
       label: 'Strategic Clarity & Public Value',
+      specificHelp: 'This starts with strategic-plan facilitation — getting staff, board, and leadership to describe the same 2-3 priorities in the same terms, so the plan actually functions as a decision-making tool.',
       questions: ['st1', 'st2', 'st3'],
       points: [
         "Without clear agreement on what value the organization creates and for whom, every other strategic decision gets harder. Harvard Kennedy School's public value framework treats this as the starting point of strategy, not an afterthought — worth revisiting before any new planning process begins.",
@@ -304,6 +305,7 @@ import Header from '../components/Header.astro';
     {
       key: 'risk',
       label: 'Risk Identification & Management',
+      specificHelp: 'The work here is building a formal risk register and a regular review cadence, so risk is tracked on a schedule rather than only surfacing after something goes wrong.',
       questions: ['r1', 'r2', 'r3'],
       points: [
         "There's no real system for identifying risk before it becomes a crisis. The COSO framework — the world's most widely used risk management standard — starts with something as simple as a written risk register. That's a realistic first step, not a full enterprise risk program.",
@@ -316,6 +318,7 @@ import Header from '../components/Header.astro';
     {
       key: 'integration',
       label: 'Impact & Financial Sustainability Integration',
+      specificHelp: 'This means a program portfolio review — looking at mission impact and financial sustainability together, program by program, rather than as separate conversations.',
       questions: ['i1', 'i2', 'i3'],
       points: [
         "Programs are likely being evaluated on mission fit alone, without a clear view of what each one costs relative to what it brings in. The nonprofit sector's own 'dual bottom line' research (Bell, Masaoka & Zimmerman) is built specifically around this blind spot — it's common, and addressable.",
@@ -328,6 +331,7 @@ import Header from '../components/Header.astro';
     {
       key: 'roadmap',
       label: 'Roadmap & Implementation Discipline',
+      specificHelp: 'This is translating the strategic plan into an actual initiative roadmap — owners, timelines, and a small set of tracked metrics — so it doesn\'t get filed away after the planning retreat.',
       questions: ['e1', 'e2', 'e3'],
       points: [
         "Harvard's Robert Kaplan has found that roughly 90% of strategies fail not because the strategy itself was wrong, but because of poor execution. Without a roadmap that translates priorities into tracked initiatives, that's the most likely outcome here too — worth treating execution as its own discipline, separate from planning.",
@@ -510,6 +514,12 @@ import Header from '../components/Header.astro';
 
     const recommendationEl = document.getElementById('ss-recommendation');
     if (recommendationEl) {
+      // Priority area is drawn from this tool's own 4 dimensions, even when
+      // the composite score above blends in the Leadership/Revenue legs —
+      // those legs are single scores from other tools, not dimensions with
+      // their own specificHelp text, so this stays scoped to what this
+      // tool itself measures.
+      const lowest = results.reduce((min, r) => (r.pct < min.pct ? r : min), results[0]);
       const recommendedTier = compositeBand <= 1 ? 'implementation' : 'advisory';
       const tierName = compositeBand <= 1 ? 'Strategic Implementation Retainer' : 'Strategic Advisory Retainer';
       const tierReason =
@@ -517,7 +527,9 @@ import Header from '../components/Header.astro';
           ? 'with gaps across strategy, risk, or execution, hands-on weekly implementation tends to build the missing fundamentals faster than periodic advisory alone.'
           : 'with solid-to-strong strategic fundamentals already in place, experienced strategic guidance is usually enough to sharpen and protect them further.';
       recommendationEl.innerHTML =
-        '<h3 class="subhead">Recommended Starting Point</h3>' +
+        '<h3 class="subhead">Priority Area: ' + lowest.dimension.label + '</h3>' +
+        '<p>' + lowest.dimension.specificHelp + '</p>' +
+        '<h3 class="subhead" style="margin-top:1.4rem;">Recommended Starting Point</h3>' +
         '<p>Based on these results, the <strong>' + tierName + '</strong> is likely the best fit — ' + tierReason + '</p>' +
         '<a class="btn btn-secondary" href="/#pricing-' + recommendedTier + '">See This Retainer</a>';
     }

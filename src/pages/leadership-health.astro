@@ -296,6 +296,7 @@ import Header from '../components/Header.astro';
     {
       key: 'governance',
       label: 'Governance Health',
+      specificHelp: 'This starts with board governance structure — committee design, role clarity between board and staff, and what oversight actually looks like in practice.',
       questions: ['g1', 'g2', 'g3'],
       points: [
         "Board engagement is a significant gap right now. BoardSource's national research found nearly half of executives say their board isn't positioned to build trust with the community they serve — that's the first conversation to have with the board chair, not a full governance overhaul.",
@@ -308,6 +309,7 @@ import Header from '../components/Header.astro';
     {
       key: 'succession',
       label: 'Leadership Succession & Bench Strength',
+      specificHelp: 'The work here is succession planning: identifying bench strength, documenting institutional knowledge, and building a real leadership pipeline before a transition is forced.',
       questions: ['s1', 's2', 's3'],
       points: [
         "Without a documented succession plan or a credible interim leader, this organization is one departure away from a real crisis. Only 17% of nonprofits nationally report a documented succession plan — building even a basic one is a high-leverage next step, not a someday project.",
@@ -320,6 +322,7 @@ import Header from '../components/Header.astro';
     {
       key: 'alignment',
       label: 'Organizational Alignment & Execution',
+      specificHelp: 'This means building the KPI/dashboard systems and staff alignment practices that connect day-to-day work back to strategic priorities.',
       questions: ['a1', 'a2', 'a3'],
       points: [
         "When priorities, roles, and skills aren't clear or consistently reinforced, McKinsey's organizational health research — built on data from thousands of companies — consistently finds this is where performance gaps start. Direction clarity is usually the fastest lever to pull first.",
@@ -332,6 +335,7 @@ import Header from '../components/Header.astro';
     {
       key: 'change',
       label: 'Change Leadership Capacity',
+      specificHelp: 'This is direct change-leadership advising through a specific transition — a merger, a leadership change, a major program pivot — rather than general management support.',
       questions: ['c1', 'c2', 'c3'],
       points: [
         "Kotter's research, based on over 100 organizational transformations, found most change efforts fail not from bad strategy but from skipping the groundwork — urgency, coalition, and a clear vision before asking people to change. That's worth revisiting before the next major initiative launches.",
@@ -441,6 +445,7 @@ import Header from '../components/Header.astro';
 
     const recommendationEl = document.getElementById('lh-recommendation');
     if (recommendationEl) {
+      const lowest = results.reduce((min, r) => (r.pct < min.pct ? r : min), results[0]);
       const recommendedTier = compositeBand <= 1 ? 'implementation' : 'advisory';
       const tierName = compositeBand <= 1 ? 'Strategic Implementation Retainer' : 'Strategic Advisory Retainer';
       const tierReason =
@@ -448,7 +453,9 @@ import Header from '../components/Header.astro';
           ? 'with gaps across more than one leadership or operational dimension, hands-on weekly implementation tends to build capacity faster than periodic advisory alone.'
           : 'with solid-to-strong leadership fundamentals already in place, experienced strategic guidance is usually enough to sharpen and protect them further.';
       recommendationEl.innerHTML =
-        '<h3 class="subhead">Recommended Starting Point</h3>' +
+        '<h3 class="subhead">Priority Area: ' + lowest.dimension.label + '</h3>' +
+        '<p>' + lowest.dimension.specificHelp + '</p>' +
+        '<h3 class="subhead" style="margin-top:1.4rem;">Recommended Starting Point</h3>' +
         '<p>Based on these results, the <strong>' + tierName + '</strong> is likely the best fit — ' + tierReason + '</p>' +
         '<a class="btn btn-secondary" href="/#pricing-' + recommendedTier + '">See This Retainer</a>';
     }

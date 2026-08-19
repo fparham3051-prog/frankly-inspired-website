@@ -11,7 +11,7 @@ import Header from '../components/Header.astro';
   <Header variant="minimal" />
 
   <!-- Where the Revenue & Growth Score scores real budget numbers, this one
-       scores organizational/leadership maturity — which can't be pulled
+       scores organizational/leadership maturity, which can't be pulled
        from a spreadsheet, so it uses a structured 1-5 self-report grid
        (same interaction pattern as /assessment) instead of numeric inputs.
        What makes it rigorous rather than generic is that every one of the
@@ -23,11 +23,11 @@ import Header from '../components/Header.astro';
            "Daring to Lead" (the definitive national ED succession/burnout
            study; only 17% of nonprofits report a documented succession plan)
          - Organizational Alignment  -> McKinsey's Organizational Health
-           Index (OHI) — its Direction, Accountability, and Capabilities
+           Index (OHI): its Direction, Accountability, and Capabilities
            outcomes specifically, simplified from the full 9-outcome/
            37-practice model
          - Change Leadership Capacity -> John Kotter's 8-Step Change Model
-           (Harvard Business School, "Leading Change," 1996) — urgency/
+           (Harvard Business School, "Leading Change," 1996): urgency/
            coalition, vision/short-term wins, and anchoring change, the
            step Kotter's own research flags as most often skipped
        See the script below for exact scoring, thresholds, and the Sources
@@ -41,7 +41,7 @@ import Header from '../components/Header.astro';
       <div class="container narrow center">
         <p class="eyebrow eyebrow-dark">Free Diagnostic</p>
         <h1>Leadership &amp; Operations Health Score</h1>
-        <p class="hero-sub-light">12 quick questions across governance, leadership succession, organizational alignment, and change capacity — each grounded in named research from BoardSource, the CompassPoint/Meyer Foundation "Daring to Lead" study, McKinsey's Organizational Health Index, and Harvard Business School's Kotter change model. Takes about 7 minutes. This is the deeper follow-up to the Leadership &amp; Organizational Development pillar in the free <a href="/assessment">Self-Assessment</a> — jump in below, or start there first for the faster 5-minute version.</p>
+        <p class="hero-sub-light">12 quick questions across governance, leadership succession, organizational alignment, and change capacity, each grounded in named research from BoardSource, the CompassPoint/Meyer Foundation "Daring to Lead" study, McKinsey's Organizational Health Index, and Harvard Business School's Kotter change model. Takes about 7 minutes. This is the deeper follow-up to the Leadership &amp; Organizational Development pillar in the free <a href="/assessment">Self-Assessment</a>: jump in below, or start there first for the faster 5-minute version.</p>
       </div>
     </section>
 
@@ -50,7 +50,7 @@ import Header from '../components/Header.astro';
       <div class="container narrow">
 
         <div class="assessment-progress" id="lh-progress">
-          <p class="assessment-progress-label" id="lh-progress-label">Section 1 of 4 — Governance Health</p>
+          <p class="assessment-progress-label" id="lh-progress-label">Section 1 of 4: Governance Health</p>
           <span class="assessment-progress-track"><span class="assessment-progress-fill" id="lh-progress-fill"></span></span>
         </div>
 
@@ -115,7 +115,7 @@ import Header from '../components/Header.astro';
               </div>
             </fieldset>
             <fieldset class="likert">
-              <legend>Our organization actively invests in developing future leaders — training, mentorship, real delegated authority — rather than concentrating leadership in one person.</legend>
+              <legend>Our organization actively invests in developing future leaders (training, mentorship, real delegated authority) rather than concentrating leadership in one person.</legend>
               <div class="likert-scale">
                 <label><input type="radio" name="s3" value="1" required /><span>1</span><small>Not at all true</small></label>
                 <label><input type="radio" name="s3" value="2" /><span>2</span><small>Rarely true</small></label>
@@ -185,7 +185,7 @@ import Header from '../components/Header.astro';
               </div>
             </fieldset>
             <fieldset class="likert">
-              <legend>Past changes have stuck — they became part of how we normally operate, not reverted once attention moved elsewhere.</legend>
+              <legend>Past changes have stuck: they became part of how we normally operate, not reverted once attention moved elsewhere.</legend>
               <div class="likert-scale">
                 <label><input type="radio" name="c3" value="1" required /><span>1</span><small>Not at all true</small></label>
                 <label><input type="radio" name="c3" value="2" /><span>2</span><small>Rarely true</small></label>
@@ -234,11 +234,11 @@ import Header from '../components/Header.astro';
           <div class="results-recommendation" id="lh-recommendation"></div>
 
           <div class="results-disclaimer">
-            <p>This is a directional self-assessment based on your own responses, scored against published research and national benchmarks. It is not a formal governance or organizational audit, and every question involves judgment — treat it as a starting point for a real conversation, not a verdict.</p>
+            <p>This is a directional self-assessment based on your own responses, scored against published research and national benchmarks. It is not a formal governance or organizational audit, and every question involves judgment; treat it as a starting point for a real conversation, not a verdict.</p>
           </div>
 
           <div class="results-related">
-            <p>This tool measures leadership and organizational capacity. For a numbers-based read on revenue and growth capacity — reserves, spending mix, revenue diversification, and liquidity — see the <a href="/revenue-growth-score">Revenue &amp; Growth Score</a>. This score also feeds directly into the <a href="/sustainability-score">Sustainability Strategy Score</a>, which places it alongside revenue and growth capacity and strategic clarity in a single Strategic Triangle view.</p>
+            <p>This tool measures leadership and organizational capacity. For a numbers-based read on revenue and growth capacity (reserves, spending mix, revenue diversification, and liquidity), see the <a href="/revenue-growth-score">Revenue &amp; Growth Score</a>. This score also feeds directly into the <a href="/sustainability-score">Sustainability Strategy Score</a>, which places it alongside revenue and growth capacity and strategic clarity in a single Strategic Triangle view.</p>
             <p>Haven't taken the free <a href="/assessment">Nonprofit Sustainability Self-Assessment</a> yet? It covers this and four other areas in about 5 minutes.</p>
           </div>
 
@@ -273,7 +273,7 @@ import Header from '../components/Header.astro';
   // across both diagnostic tools. All scoring runs client-side; nothing is
   // sent anywhere.
 
-  // UPDATE THIS once frankly-inspired-backend is deployed to Render — see
+  // UPDATE THIS once frankly-inspired-backend is deployed to Render. See
   // that repo's README.md. Same value as assessment.astro's API_BASE.
   const API_BASE = 'https://frankly-inspired-api.onrender.com';
 
@@ -285,24 +285,24 @@ import Header from '../components/Header.astro';
     'There are real gaps in more than one dimension below. These are addressable with deliberate attention, not a full rebuild.',
     'The fundamentals are in place across most dimensions. The opportunity now is tightening the specific gaps below rather than a broad overhaul.',
     'This is a well-led, well-run organization by sector benchmarks. The focus shifts from fixing gaps to protecting and extending what already works.',
-    "This organization shows genuine leadership and operational maturity relative to sector norms — the kind McKinsey's research ties directly to outsized performance. The conversation now is strategic use of that strength.",
+    "This organization shows genuine leadership and operational maturity relative to sector norms, the kind McKinsey's research ties directly to outsized performance. The conversation now is strategic use of that strength.",
   ];
 
   // Each dimension: the 3 question names (matching the radio group "name"
   // attributes above), the source it's drawn from, and discussion points
-  // per band — written as advisory talking points, the same standard as
+  // per band, written as advisory talking points, the same standard as
   // the Revenue & Growth Score.
   const DIMENSIONS = [
     {
       key: 'governance',
       label: 'Governance Health',
-      specificHelp: 'This starts with board governance structure — committee design, role clarity between board and staff, and what oversight actually looks like in practice.',
+      specificHelp: 'This starts with board governance structure: committee design, role clarity between board and staff, and what oversight actually looks like in practice.',
       questions: ['g1', 'g2', 'g3'],
       points: [
-        "Board engagement is a significant gap right now. BoardSource's national research found nearly half of executives say their board isn't positioned to build trust with the community they serve — that's the first conversation to have with the board chair, not a full governance overhaul.",
-        "There's a real disconnect between the board and the organization's strategic direction. National data shows only about a third of nonprofit boards are actively engaged in mission advocacy beyond fundraising and compliance — worth naming directly at the next board retreat.",
-        "Governance is functional but has room to deepen. Worth checking whether board meeting time genuinely balances strategy against fundraising updates — BoardSource's research consistently finds boards that over-index on fundraising do so at the expense of strategic engagement.",
-        "This board is more engaged than most — national benchmarks put the typical nonprofit board well behind this. Worth formalizing what's working into a written board engagement plan so it survives leadership transitions.",
+        "Board engagement is a significant gap right now. BoardSource's national research found nearly half of executives say their board isn't positioned to build trust with the community they serve; that's the first conversation to have with the board chair, not a full governance overhaul.",
+        "There's a real disconnect between the board and the organization's strategic direction. National data shows only about a third of nonprofit boards are actively engaged in mission advocacy beyond fundraising and compliance; worth naming directly at the next board retreat.",
+        "Governance is functional but has room to deepen. Worth checking whether board meeting time genuinely balances strategy against fundraising updates; BoardSource's research consistently finds boards that over-index on fundraising do so at the expense of strategic engagement.",
+        "This board is more engaged than most; national benchmarks put the typical nonprofit board well behind this. Worth formalizing what's working into a written board engagement plan so it survives leadership transitions.",
         "This is governance strength most nonprofits don't have. The opportunity now is using board engagement as a real strategic asset, not just a compliance function.",
       ],
     },
@@ -312,11 +312,11 @@ import Header from '../components/Header.astro';
       specificHelp: 'The work here is succession planning: identifying bench strength, documenting institutional knowledge, and building a real leadership pipeline before a transition is forced.',
       questions: ['s1', 's2', 's3'],
       points: [
-        "Without a documented succession plan or a credible interim leader, this organization is one departure away from a real crisis. Only 17% of nonprofits nationally report a documented succession plan — building even a basic one is a high-leverage next step, not a someday project.",
-        "There's some bench strength but real gaps remain. The research here is blunt: roughly three in four executive directors report they're likely to leave within five years, and burnout is driven specifically by weak boards, low investment in leadership development, and concentrated decision-making — worth naming which of those applies here.",
+        "Without a documented succession plan or a credible interim leader, this organization is one departure away from a real crisis. Only 17% of nonprofits nationally report a documented succession plan; building even a basic one is a high-leverage next step, not a someday project.",
+        "There's some bench strength but real gaps remain. The research here is blunt: roughly three in four executive directors report they're likely to leave within five years, and burnout is driven specifically by weak boards, low investment in leadership development, and concentrated decision-making; worth naming which of those applies here.",
         "There's a credible interim path if leadership changed suddenly, which puts this organization ahead of most. Formalizing it in writing, with board sign-off, is what separates this from genuine resilience.",
-        "Leadership development is a real, active practice here — genuinely uncommon in the sector. The next step is stress-testing it: could the plan survive an unplanned departure, not just a planned one?",
-        "This is leadership bench strength most nonprofits lack entirely. Worth treating it as a retention and morale asset in its own right — staff who see a real development path tend to stay longer.",
+        "Leadership development is a real, active practice here, genuinely uncommon in the sector. The next step is stress-testing it: could the plan survive an unplanned departure, not just a planned one?",
+        "This is leadership bench strength most nonprofits lack entirely. Worth treating it as a retention and morale asset in its own right; staff who see a real development path tend to stay longer.",
       ],
     },
     {
@@ -325,9 +325,9 @@ import Header from '../components/Header.astro';
       specificHelp: 'This means building the KPI/dashboard systems and staff alignment practices that connect day-to-day work back to strategic priorities.',
       questions: ['a1', 'a2', 'a3'],
       points: [
-        "When priorities, roles, and skills aren't clear or consistently reinforced, McKinsey's organizational health research — built on data from thousands of companies — consistently finds this is where performance gaps start. Direction clarity is usually the fastest lever to pull first.",
+        "When priorities, roles, and skills aren't clear or consistently reinforced, McKinsey's organizational health research (built on data from thousands of companies) consistently finds this is where performance gaps start. Direction clarity is usually the fastest lever to pull first.",
         "Alignment exists in pockets but isn't consistent across the organization. A simple test: ask three staff members at different levels what the top priority is this year, and see how closely the answers match.",
-        "The organization has real alignment fundamentals in place. The opportunity is consistency — making sure accountability and skill-building keep pace as the organization grows or takes on new work.",
+        "The organization has real alignment fundamentals in place. The opportunity is consistency: making sure accountability and skill-building keep pace as the organization grows or takes on new work.",
         "This is above-average organizational alignment. Worth protecting deliberately, since alignment tends to erode quietly during growth or leadership transitions if no one owns it explicitly.",
         "This is genuine organizational health, the kind McKinsey's research ties directly to outsized performance relative to peers. The conversation now is sustaining it, not building it.",
       ],
@@ -335,14 +335,14 @@ import Header from '../components/Header.astro';
     {
       key: 'change',
       label: 'Change Leadership Capacity',
-      specificHelp: 'This is direct change-leadership advising through a specific transition — a merger, a leadership change, a major program pivot — rather than general management support.',
+      specificHelp: 'This is direct change-leadership advising through a specific transition (a merger, a leadership change, a major program pivot) rather than general management support.',
       questions: ['c1', 'c2', 'c3'],
       points: [
-        "Kotter's research, based on over 100 organizational transformations, found most change efforts fail not from bad strategy but from skipping the groundwork — urgency, coalition, and a clear vision before asking people to change. That's worth revisiting before the next major initiative launches.",
+        "Kotter's research, based on over 100 organizational transformations, found most change efforts fail not from bad strategy but from skipping the groundwork: urgency, coalition, and a clear vision before asking people to change. That's worth revisiting before the next major initiative launches.",
         "Change tends to be announced rather than built toward. Visible short-term wins along the way, not just a distant end state, are one of the more overlooked steps in Kotter's model and often the easiest one to add immediately.",
-        "The organization has real change capacity, though past changes haven't always stuck. Kotter's research points specifically to anchoring change in culture and systems as the step most often skipped — worth checking whether recent changes actually became 'how we operate' or quietly reverted.",
-        "This organization leads change more deliberately than most. Kotter reports roughly 70% of change efforts succeed when the full model is actually followed — worth naming which steps are already instinctive here.",
-        "This is genuine change leadership maturity. The opportunity now is using it as a real competitive advantage — the ability to adapt faster than peer organizations during funding shifts or sector change.",
+        "The organization has real change capacity, though past changes haven't always stuck. Kotter's research points specifically to anchoring change in culture and systems as the step most often skipped; worth checking whether recent changes actually became 'how we operate' or quietly reverted.",
+        "This organization leads change more deliberately than most. Kotter reports roughly 70% of change efforts succeed when the full model is actually followed; worth naming which steps are already instinctive here.",
+        "This is genuine change leadership maturity. The opportunity now is using it as a real competitive advantage: the ability to adapt faster than peer organizations during funding shifts or sector change.",
       ],
     },
   ];
@@ -379,7 +379,7 @@ import Header from '../components/Header.astro';
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             const idx = Number(entry.target.getAttribute('data-pillar-index'));
-            progressLabel.textContent = `Section ${idx} of ${pillarGroups.length} — ${dimensionLabelByIndex[idx] || ''}`;
+            progressLabel.textContent = `Section ${idx} of ${pillarGroups.length}: ${dimensionLabelByIndex[idx] || ''}`;
             progressFill.style.width = (idx / pillarGroups.length) * 100 + '%';
           }
         });
@@ -424,7 +424,7 @@ import Header from '../components/Header.astro';
     try {
       localStorage.setItem('fi_leadership_score', JSON.stringify({ score: composite, band: compositeBand, at: Date.now() }));
     } catch (e) {
-      /* localStorage unavailable (private browsing, etc.) — non-fatal */
+      /* localStorage unavailable (private browsing, etc.), non-fatal */
     }
 
     if (metricsEl) {
@@ -456,7 +456,7 @@ import Header from '../components/Header.astro';
         '<h3 class="subhead">Priority Area: ' + lowest.dimension.label + '</h3>' +
         '<p>' + lowest.dimension.specificHelp + '</p>' +
         '<h3 class="subhead" style="margin-top:1.4rem;">Recommended Starting Point</h3>' +
-        '<p>Based on these results, the <strong>' + tierName + '</strong> is likely the best fit — ' + tierReason + '</p>' +
+        '<p>Based on these results, the <strong>' + tierName + '</strong> is likely the best fit: ' + tierReason + '</p>' +
         '<a class="btn btn-secondary" href="/#pricing-' + recommendedTier + '">See This Retainer</a>';
     }
 
@@ -479,7 +479,7 @@ import Header from '../components/Header.astro';
      the static band description is already visible from renderResults()
      above, so if this call is slow, fails, or the backend has no
      ANTHROPIC_API_KEY configured, the visitor still has a complete,
-     correct set of results — this just quietly upgrades the description
+     correct set of results; this just quietly upgrades the description
      text if and when a narrative comes back. */
   function fetchNarrative(payload: { scorePct: number; band: string; pillarScores: { label: string; pct: number }[] }) {
     const narrativeLoadingEl = document.getElementById('lh-narrative-loading') as HTMLElement | null;
@@ -498,14 +498,14 @@ import Header from '../components/Header.astro';
         }
       })
       .catch(() => {
-        // Silent by design — static description already shown, nothing to fix.
+        // Silent by design, static description already shown, nothing to fix.
       })
       .finally(() => {
         if (narrativeLoadingEl) narrativeLoadingEl.hidden = true;
       });
   }
 
-  /* Benchmark comparison. An enhancement, not a dependency — if the
+  /* Benchmark comparison. An enhancement, not a dependency: if the
      database isn't reachable, has no data yet, or the sample is too small
      to be meaningful, the results the visitor already sees are unaffected;
      this just quietly adds a comparison line when it can. */
@@ -524,12 +524,12 @@ import Header from '../components/Header.astro';
           overallEl.innerHTML =
             `Your score: <strong>${compositePct}%</strong> &middot; Average so far: <strong>${b.avgScore}%</strong>` +
             (lowSample
-              ? ` <span class="results-avg-caveat">(early data — ${b.count} response${b.count === 1 ? '' : 's'} so far)</span>`
+              ? ` <span class="results-avg-caveat">(early data: ${b.count} response${b.count === 1 ? '' : 's'} so far)</span>`
               : ` (${b.count} responses)`);
         }
       })
       .catch(() => {
-        // Silent by design — same reasoning as fetchNarrative above.
+        // Silent by design, same reasoning as fetchNarrative above.
       });
   }
 
@@ -538,7 +538,7 @@ import Header from '../components/Header.astro';
       e.preventDefault();
       if (!form.checkValidity()) {
         form.reportValidity();
-        if (status) status.textContent = 'Please answer every question — one is still missing.';
+        if (status) status.textContent = 'Please answer every question: one is still missing.';
         return;
       }
       if (status) status.textContent = '';
@@ -557,7 +557,7 @@ import Header from '../components/Header.astro';
       }
       if (progressEl && progressLabel && progressFill) {
         progressEl.hidden = false;
-        progressLabel.textContent = `Section 1 of ${pillarGroups.length} — ${DIMENSIONS[0] ? DIMENSIONS[0].label : ''}`;
+        progressLabel.textContent = `Section 1 of ${pillarGroups.length}: ${DIMENSIONS[0] ? DIMENSIONS[0].label : ''}`;
         progressFill.style.width = 100 / pillarGroups.length + '%';
       }
     });

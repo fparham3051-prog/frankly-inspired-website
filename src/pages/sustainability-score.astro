@@ -5,7 +5,7 @@ import Header from '../components/Header.astro';
 
 <BaseLayout
   title="Organizational Sustainability Score | Frankly Inspired"
-  description="A free diagnostic that scores your nonprofit's strategic clarity, risk management, impact/financial integration, and execution discipline — and ties the result to your Revenue & Growth and Leadership scores using Harvard Kennedy School's Strategic Triangle."
+  description="A free diagnostic that scores your nonprofit's strategic clarity, risk management, impact/financial integration, and execution discipline, and ties the result to your Revenue & Growth and Leadership scores using Harvard Kennedy School's Strategic Triangle."
   footerVariant="score"
 >
   <Header variant="minimal" />
@@ -26,7 +26,7 @@ import Header from '../components/Header.astro';
 
        What makes this tool different from the other two: Moore's Strategic
        Triangle explicitly requires weighing strategy against operational
-       capacity and legitimacy/support — so the results page pulls in this
+       capacity and legitimacy/support, so the results page pulls in this
        visitor's saved Revenue & Growth Score and Leadership & Operations
        Score (via localStorage, same-browser only, nothing sent anywhere)
        and presents all three as the Triangle's three legs. If either
@@ -42,7 +42,7 @@ import Header from '../components/Header.astro';
       <div class="container narrow center">
         <p class="eyebrow eyebrow-dark">Free Diagnostic</p>
         <h1>Organizational Sustainability Score</h1>
-        <p class="hero-sub-light">12 questions on strategic clarity, risk management, impact/financial integration, and execution discipline — grounded in Harvard Kennedy School's Strategic Triangle, the COSO risk framework, the nonprofit sector's own "dual bottom line" research, and Harvard Business School's Balanced Scorecard. If you've completed the Revenue &amp; Growth and Leadership scores, this tool ties all three together. Takes about 7 minutes. New here? The free <a href="/assessment">Self-Assessment</a> is a faster 5-minute starting point across all five sustainability dimensions.</p>
+        <p class="hero-sub-light">12 questions on strategic clarity, risk management, impact/financial integration, and execution discipline, grounded in Harvard Kennedy School's Strategic Triangle, the COSO risk framework, the nonprofit sector's own "dual bottom line" research, and Harvard Business School's Balanced Scorecard. If you've completed the Revenue &amp; Growth and Leadership scores, this tool ties all three together. Takes about 7 minutes. New here? The free <a href="/assessment">Self-Assessment</a> is a faster 5-minute starting point across all five sustainability dimensions.</p>
       </div>
     </section>
 
@@ -51,7 +51,7 @@ import Header from '../components/Header.astro';
       <div class="container narrow">
 
         <div class="assessment-progress" id="ss-progress">
-          <p class="assessment-progress-label" id="ss-progress-label">Section 1 of 4 — Strategic Clarity &amp; Public Value</p>
+          <p class="assessment-progress-label" id="ss-progress-label">Section 1 of 4: Strategic Clarity &amp; Public Value</p>
           <span class="assessment-progress-track"><span class="assessment-progress-fill" id="ss-progress-fill"></span></span>
         </div>
 
@@ -96,7 +96,7 @@ import Header from '../components/Header.astro';
             <h2 class="pillar-heading">2. Risk Identification &amp; Management</h2>
             <p class="fh-field-help">Based on the COSO Enterprise Risk Management Framework.</p>
             <fieldset class="likert">
-              <legend>We maintain a written list of our top risks — financial, operational, reputational, and strategic — not just an informal sense of them.</legend>
+              <legend>We maintain a written list of our top risks (financial, operational, reputational, and strategic), not just an informal sense of them.</legend>
               <div class="likert-scale">
                 <label><input type="radio" name="r1" value="1" required /><span>1</span><small>Not at all true</small></label>
                 <label><input type="radio" name="r1" value="2" /><span>2</span><small>Rarely true</small></label>
@@ -239,11 +239,11 @@ import Header from '../components/Header.astro';
           <div class="results-recommendation" id="ss-recommendation"></div>
 
           <div class="results-disclaimer">
-            <p>This is a directional self-assessment based on your own responses, scored against published research and national benchmarks. It is not a formal strategic or risk audit, and every question involves judgment — treat it as a starting point for a real conversation, not a verdict.</p>
+            <p>This is a directional self-assessment based on your own responses, scored against published research and national benchmarks. It is not a formal strategic or risk audit, and every question involves judgment; treat it as a starting point for a real conversation, not a verdict.</p>
           </div>
 
           <div class="results-related">
-            <p>This tool measures strategy, risk, and execution, and blends in your Revenue &amp; Growth and Leadership scores if you've completed them. For a closer look at fundraising program structure specifically — gift portfolios, stewardship, campaigns, and events — see the <a href="/institutional-advancement-score">Institutional Advancement Score</a> (not blended into the Triangle above, since Moore's framework is specifically three-legged, but a useful companion read). For a numbers-based read on funder-specific readiness — scored from your actual filed financial data, not self-reported estimates — <a href="https://grantpass-dashboard.onrender.com" target="_blank" rel="noopener">GrantPass</a> is a separate, purpose-built tool for that.</p>
+            <p>This tool measures strategy, risk, and execution, and blends in your Revenue &amp; Growth and Leadership scores if you've completed them. For a closer look at fundraising program structure specifically (gift portfolios, stewardship, campaigns, and events), see the <a href="/institutional-advancement-score">Institutional Advancement Score</a> (not blended into the Triangle above, since Moore's framework is specifically three-legged, but a useful companion read). For a numbers-based read on funder-specific readiness (scored from your actual filed financial data, not self-reported estimates), <a href="https://grantpass-dashboard.onrender.com" target="_blank" rel="noopener">GrantPass</a> is a separate, purpose-built tool for that.</p>
             <p>Haven't taken the free <a href="/assessment">Nonprofit Sustainability Self-Assessment</a> yet? It covers this and four other areas in about 5 minutes.</p>
           </div>
 
@@ -267,7 +267,7 @@ import Header from '../components/Header.astro';
 </BaseLayout>
 
 <script>
-  // UPDATE THIS once frankly-inspired-backend is deployed to Render — see
+  // UPDATE THIS once frankly-inspired-backend is deployed to Render. See
   // that repo's README.md. Same value as assessment.astro's API_BASE.
   const API_BASE = 'https://frankly-inspired-api.onrender.com';
 
@@ -292,14 +292,14 @@ import Header from '../components/Header.astro';
     {
       key: 'strategy',
       label: 'Strategic Clarity & Public Value',
-      specificHelp: 'This starts with strategic-plan facilitation — getting staff, board, and leadership to describe the same 2-3 priorities in the same terms, so the plan actually functions as a decision-making tool.',
+      specificHelp: 'This starts with strategic-plan facilitation: getting staff, board, and leadership to describe the same 2-3 priorities in the same terms, so the plan actually functions as a decision-making tool.',
       questions: ['st1', 'st2', 'st3'],
       points: [
-        "Without clear agreement on what value the organization creates and for whom, every other strategic decision gets harder. Harvard Kennedy School's public value framework treats this as the starting point of strategy, not an afterthought — worth revisiting before any new planning process begins.",
+        "Without clear agreement on what value the organization creates and for whom, every other strategic decision gets harder. Harvard Kennedy School's public value framework treats this as the starting point of strategy, not an afterthought; worth revisiting before any new planning process begins.",
         "There's a strategy on paper, but it may not be legible to the people executing it day to day. If staff and board can't restate the top 2-3 priorities in similar terms, the strategy isn't yet functioning as a real decision-making tool.",
         "Strategic priorities are reasonably clear. The next step is testing whether they're actually driving resource allocation decisions, not just living in a planning document.",
         "This is a well-articulated strategic direction. Worth checking it's been communicated deeply enough that mid-level staff, not just leadership, could explain it.",
-        "This is genuine strategic clarity — mission, priorities, and the value the organization creates are well understood. That clarity is a real asset when hard tradeoff decisions come up.",
+        "This is genuine strategic clarity: mission, priorities, and the value the organization creates are well understood. That clarity is a real asset when hard tradeoff decisions come up.",
       ],
     },
     {
@@ -308,9 +308,9 @@ import Header from '../components/Header.astro';
       specificHelp: 'The work here is building a formal risk register and a regular review cadence, so risk is tracked on a schedule rather than only surfacing after something goes wrong.',
       questions: ['r1', 'r2', 'r3'],
       points: [
-        "There's no real system for identifying risk before it becomes a crisis. The COSO framework — the world's most widely used risk management standard — starts with something as simple as a written risk register. That's a realistic first step, not a full enterprise risk program.",
+        "There's no real system for identifying risk before it becomes a crisis. The COSO framework, the world's most widely used risk management standard, starts with something as simple as a written risk register. That's a realistic first step, not a full enterprise risk program.",
         "Some risks are known, but likely informally, living in people's heads rather than a shared document. Formalizing even a short list of the top 5-10 risks, reviewed twice a year, closes most of this gap.",
-        "Risk awareness exists. The next step is regularity — COSO's framework treats risk assessment as an ongoing practice, not a one-time exercise done during a crisis or a grant application.",
+        "Risk awareness exists. The next step is regularity: COSO's framework treats risk assessment as an ongoing practice, not a one-time exercise done during a crisis or a grant application.",
         "Risk management is a genuine practice here, ahead of most peer organizations. Worth checking whether it covers reputational and strategic risk, not just financial and operational.",
         "This is mature risk management by any sector's standard. The opportunity now is using it proactively in strategic decisions, not just defensively.",
       ],
@@ -318,27 +318,27 @@ import Header from '../components/Header.astro';
     {
       key: 'integration',
       label: 'Impact & Financial Sustainability Integration',
-      specificHelp: 'This means a program portfolio review — looking at mission impact and financial sustainability together, program by program, rather than as separate conversations.',
+      specificHelp: 'This means a program portfolio review: looking at mission impact and financial sustainability together, program by program, rather than as separate conversations.',
       questions: ['i1', 'i2', 'i3'],
       points: [
-        "Programs are likely being evaluated on mission fit alone, without a clear view of what each one costs relative to what it brings in. The nonprofit sector's own 'dual bottom line' research (Bell, Masaoka & Zimmerman) is built specifically around this blind spot — it's common, and addressable.",
+        "Programs are likely being evaluated on mission fit alone, without a clear view of what each one costs relative to what it brings in. The nonprofit sector's own 'dual bottom line' research (Bell, Masaoka & Zimmerman) is built specifically around this blind spot; it's common, and addressable.",
         "There's some awareness of which programs are financially strained, but it may not be driving real decisions yet. Mapping every program on impact versus financial contribution, even roughly, usually surfaces at least one uncomfortable but necessary conversation.",
         "The organization has a reasonable read on which programs carry their financial weight and which don't. The next step is making that explicit enough to guide next year's resource allocation, not just this year's awareness.",
-        "This is a genuinely integrated view of impact and financial sustainability — most organizations only track one side. Worth revisiting periodically, since a program's position shifts as funding and costs change.",
+        "This is a genuinely integrated view of impact and financial sustainability; most organizations only track one side. Worth revisiting periodically, since a program's position shifts as funding and costs change.",
         "This is the dual-bottom-line thinking the sector's own sustainability research holds up as the goal. The opportunity now is using it explicitly in every major resource decision, not just strategic planning season.",
       ],
     },
     {
       key: 'roadmap',
       label: 'Roadmap & Implementation Discipline',
-      specificHelp: 'This is translating the strategic plan into an actual initiative roadmap — owners, timelines, and a small set of tracked metrics — so it doesn\'t get filed away after the planning retreat.',
+      specificHelp: 'This is translating the strategic plan into an actual initiative roadmap: owners, timelines, and a small set of tracked metrics, so it doesn\'t get filed away after the planning retreat.',
       questions: ['e1', 'e2', 'e3'],
       points: [
-        "Harvard's Robert Kaplan has found that roughly 90% of strategies fail not because the strategy itself was wrong, but because of poor execution. Without a roadmap that translates priorities into tracked initiatives, that's the most likely outcome here too — worth treating execution as its own discipline, separate from planning.",
-        "There's a plan, but it may not be connected to what actually gets tracked day to day. The Balanced Scorecard's core insight is that what gets measured regularly is what gets done — worth checking whether the strategic plan and the metrics anyone actually looks at monthly are the same document.",
-        "There's a real connection between strategy and execution. The next step is cadence — a regular, ideally quarterly, review of progress against the roadmap, not just an annual check-in.",
+        "Harvard's Robert Kaplan has found that roughly 90% of strategies fail not because the strategy itself was wrong, but because of poor execution. Without a roadmap that translates priorities into tracked initiatives, that's the most likely outcome here too; worth treating execution as its own discipline, separate from planning.",
+        "There's a plan, but it may not be connected to what actually gets tracked day to day. The Balanced Scorecard's core insight is that what gets measured regularly is what gets done; worth checking whether the strategic plan and the metrics anyone actually looks at monthly are the same document.",
+        "There's a real connection between strategy and execution. The next step is cadence: a regular, ideally quarterly, review of progress against the roadmap, not just an annual check-in.",
         "Implementation discipline here is ahead of most organizations, which per Kaplan's research puts this organization in a small minority that actually executes what it plans.",
-        "This is genuine strategy-to-execution discipline — rare enough that it's a real competitive advantage, not just good practice.",
+        "This is genuine strategy-to-execution discipline, rare enough that it's a real competitive advantage, not just good practice.",
       ],
     },
   ];
@@ -383,7 +383,7 @@ import Header from '../components/Header.astro';
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             const idx = Number(entry.target.getAttribute('data-pillar-index'));
-            progressLabel.textContent = `Section ${idx} of ${pillarGroups.length} — ${dimensionLabelByIndex[idx] || ''}`;
+            progressLabel.textContent = `Section ${idx} of ${pillarGroups.length}: ${dimensionLabelByIndex[idx] || ''}`;
             progressFill.style.width = (idx / pillarGroups.length) * 100 + '%';
           }
         });
@@ -473,7 +473,7 @@ import Header from '../components/Header.astro';
 
     const triangleData = renderTriangle(strategyPct, strategyBand);
 
-    // Composite blends whichever of the three legs are available — just
+    // Composite blends whichever of the three legs are available, just
     // this tool's own score if the other two haven't been taken, or a true
     // three-way blend if they have.
     const legScores = [strategyPct];
@@ -492,7 +492,7 @@ import Header from '../components/Header.astro';
     if (gaugeBandEl) gaugeBandEl.textContent = BAND_NAMES[compositeBand] + ' (' + BAND_SUBNAMES[compositeBand] + ')';
     const summaryPrefix =
       legScores.length === 3
-        ? 'Blended from all three tools — strategy, revenue and growth capacity, and leadership capacity. '
+        ? 'Blended from all three tools: strategy, revenue and growth capacity, and leadership capacity. '
         : `Based on this tool alone so far (${3 - legScores.length} of 3 legs of the Strategic Triangle not yet completed). `;
     if (summaryEl) summaryEl.textContent = summaryPrefix + COMPOSITE_SUMMARY[compositeBand];
 
@@ -515,7 +515,7 @@ import Header from '../components/Header.astro';
     const recommendationEl = document.getElementById('ss-recommendation');
     if (recommendationEl) {
       // Priority area is drawn from this tool's own 4 dimensions, even when
-      // the composite score above blends in the Leadership/Revenue legs —
+      // the composite score above blends in the Leadership/Revenue legs,
       // those legs are single scores from other tools, not dimensions with
       // their own specificHelp text, so this stays scoped to what this
       // tool itself measures.
@@ -530,7 +530,7 @@ import Header from '../components/Header.astro';
         '<h3 class="subhead">Priority Area: ' + lowest.dimension.label + '</h3>' +
         '<p>' + lowest.dimension.specificHelp + '</p>' +
         '<h3 class="subhead" style="margin-top:1.4rem;">Recommended Starting Point</h3>' +
-        '<p>Based on these results, the <strong>' + tierName + '</strong> is likely the best fit — ' + tierReason + '</p>' +
+        '<p>Based on these results, the <strong>' + tierName + '</strong> is likely the best fit: ' + tierReason + '</p>' +
         '<a class="btn btn-secondary" href="/#pricing-' + recommendedTier + '">See This Retainer</a>';
     }
 
@@ -553,7 +553,7 @@ import Header from '../components/Header.astro';
      the static band description is already visible from renderResults()
      above, so if this call is slow, fails, or the backend has no
      ANTHROPIC_API_KEY configured, the visitor still has a complete,
-     correct set of results — this just quietly upgrades the description
+     correct set of results; this just quietly upgrades the description
      text if and when a narrative comes back. `blendPrefix` (the "blended
      from N of 3 legs" framing) is factual and computed client-side, so it
      is always kept in front of whatever text ends up in the summary,
@@ -575,14 +575,14 @@ import Header from '../components/Header.astro';
         }
       })
       .catch(() => {
-        // Silent by design — static description already shown, nothing to fix.
+        // Silent by design, static description already shown, nothing to fix.
       })
       .finally(() => {
         if (narrativeLoadingEl) narrativeLoadingEl.hidden = true;
       });
   }
 
-  /* Benchmark comparison. An enhancement, not a dependency — if the
+  /* Benchmark comparison. An enhancement, not a dependency: if the
      database isn't reachable, has no data yet, or the sample is too small
      to be meaningful, the results the visitor already sees are unaffected;
      this just quietly adds a comparison line when it can. */
@@ -601,12 +601,12 @@ import Header from '../components/Header.astro';
           overallEl.innerHTML =
             `Your score: <strong>${compositePct}%</strong> &middot; Average so far: <strong>${b.avgScore}%</strong>` +
             (lowSample
-              ? ` <span class="results-avg-caveat">(early data — ${b.count} response${b.count === 1 ? '' : 's'} so far)</span>`
+              ? ` <span class="results-avg-caveat">(early data: ${b.count} response${b.count === 1 ? '' : 's'} so far)</span>`
               : ` (${b.count} responses)`);
         }
       })
       .catch(() => {
-        // Silent by design — same reasoning as fetchNarrative above.
+        // Silent by design, same reasoning as fetchNarrative above.
       });
   }
 
@@ -615,7 +615,7 @@ import Header from '../components/Header.astro';
       e.preventDefault();
       if (!form.checkValidity()) {
         form.reportValidity();
-        if (status) status.textContent = 'Please answer every question — one is still missing.';
+        if (status) status.textContent = 'Please answer every question: one is still missing.';
         return;
       }
       if (status) status.textContent = '';
@@ -634,7 +634,7 @@ import Header from '../components/Header.astro';
       }
       if (progressEl && progressLabel && progressFill) {
         progressEl.hidden = false;
-        progressLabel.textContent = `Section 1 of ${pillarGroups.length} — ${DIMENSIONS[0] ? DIMENSIONS[0].label : ''}`;
+        progressLabel.textContent = `Section 1 of ${pillarGroups.length}: ${DIMENSIONS[0] ? DIMENSIONS[0].label : ''}`;
         progressFill.style.width = 100 / pillarGroups.length + '%';
       }
     });

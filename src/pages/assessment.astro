@@ -29,7 +29,7 @@ import Header from '../components/Header.astro';
              is in view. Hidden automatically once results are shown (no
              form left to track progress through). -->
         <div class="assessment-progress" id="assessment-progress">
-          <p class="assessment-progress-label" id="assessment-progress-label">Section 1 of 5 &mdash; Sustainability Strategy</p>
+          <p class="assessment-progress-label" id="assessment-progress-label">Section 1 of 5: Sustainability Strategy</p>
           <span class="assessment-progress-track"><span class="assessment-progress-fill" id="assessment-progress-fill"></span></span>
         </div>
 
@@ -233,8 +233,8 @@ import Header from '../components/Header.astro';
           </div>
 
           <div class="results-related">
-            <p>Three of these areas also have a deeper, dedicated diagnostic if you want to go further: the <a href="/leadership-health">Leadership &amp; Operations Score</a> (governance and succession research) and the <a href="/sustainability-score">Sustainability Strategy Score</a>, which blends the others into one strategic view. Revenue Diversification has two: the <a href="/revenue-growth-score">Revenue &amp; Growth Score</a> (real budget numbers against sector benchmarks) and the <a href="/institutional-advancement-score">Institutional Advancement Score</a> (the fundraising program behind those numbers — gift portfolios, stewardship, campaigns, and events).</p>
-            <p>If grant funding is a meaningful part of your revenue strategy, <a href="https://grantpass-dashboard.onrender.com" target="_blank" rel="noopener">GrantPass</a> is a separate tool that scores your organization's readiness — including a financial-health read from your actual filed Form 990 data — against a specific funder's stated priorities. The Revenue &amp; Growth Score above is a useful starting point before you bring real numbers into it.</p>
+            <p>Three of these areas also have a deeper, dedicated diagnostic if you want to go further: the <a href="/leadership-health">Leadership &amp; Operations Score</a> (governance and succession research) and the <a href="/sustainability-score">Sustainability Strategy Score</a>, which blends the others into one strategic view. Revenue Diversification has two: the <a href="/revenue-growth-score">Revenue &amp; Growth Score</a> (real budget numbers against sector benchmarks) and the <a href="/institutional-advancement-score">Institutional Advancement Score</a> (the fundraising program behind those numbers: gift portfolios, stewardship, campaigns, and events).</p>
+            <p>If grant funding is a meaningful part of your revenue strategy, <a href="https://grantpass-dashboard.onrender.com" target="_blank" rel="noopener">GrantPass</a> is a separate tool that scores your organization's readiness (including a financial-health read from your actual filed Form 990 data) against a specific funder's stated priorities. The Revenue &amp; Growth Score above is a useful starting point before you bring real numbers into it.</p>
           </div>
 
           <div class="results-cta">
@@ -271,7 +271,7 @@ import Header from '../components/Header.astro';
   // Scoring runs entirely in the browser (no data leaves the page) except
   // two backend calls: an anonymized score log + AI narrative request on
   // completion, and the optional "email me my results" capture at the end.
-  // UPDATE THIS once frankly-inspired-backend is deployed to Render — same
+  // UPDATE THIS once frankly-inspired-backend is deployed to Render, same
   // value as index.astro's API_BASE.
   const API_BASE = 'https://frankly-inspired-api.onrender.com';
 
@@ -283,11 +283,11 @@ import Header from '../components/Header.astro';
   } | null = null;
 
   // Pillar definitions. "service" text is copied verbatim from the
-  // Consulting section on index.astro — keep in sync if that copy ever
+  // Consulting section on index.astro, keep in sync if that copy ever
   // changes. "anchor" points at the matching Service Pillar card's id, so
   // results link straight to that specific service instead of the general
   // Consulting section. "deepDive", where present, points at the dedicated
-  // numbers/research-grounded diagnostic for that same pillar — this quick
+  // numbers/research-grounded diagnostic for that same pillar, this quick
   // 15-question assessment and that deeper tool share a pillar name on
   // purpose (quick version / deep version of the same area), so the
   // priority-area callout below makes that relationship explicit instead
@@ -337,7 +337,7 @@ import Header from '../components/Header.astro';
   // (#pricing-implementation or #pricing-advisory) so the results page can
   // deep-link to the specific retainer that best matches this score band.
   const BANDS = [
-    { max: 30, name: 'Foundational', desc: "This is a common starting point — and exactly where a focused strategy makes the most difference. The priority area below is where to start.", recommendedTier: 'implementation', tierName: 'Strategic Implementation Retainer', tierReason: 'with this many areas to build at once, weekly hands-on support tends to move faster than periodic advisory alone.' },
+    { max: 30, name: 'Foundational', desc: "This is a common starting point, and exactly where a focused strategy makes the most difference. The priority area below is where to start.", recommendedTier: 'implementation', tierName: 'Strategic Implementation Retainer', tierReason: 'with this many areas to build at once, weekly hands-on support tends to move faster than periodic advisory alone.' },
     { max: 55, name: 'Developing', desc: 'Some structure is in place, but meaningful gaps remain in one or more areas. Closing them is very achievable with the right focus.', recommendedTier: 'implementation', tierName: 'Strategic Implementation Retainer', tierReason: 'closing gaps across more than one pillar usually benefits from hands-on implementation, not just advisory guidance.' },
     { max: 80, name: 'Strengthening', desc: "A solid foundation is in place. The opportunity now is to sharpen and connect what's already working.", recommendedTier: 'advisory', tierName: 'Strategic Advisory Retainer', tierReason: 'with a solid foundation already in place, experienced strategic guidance is usually enough to sharpen it further.' },
     { max: 101, name: 'Resilient', desc: 'A strong sustainability posture. The opportunity now is to protect it and extend it as the organization grows.', recommendedTier: 'advisory', tierName: 'Strategic Advisory Retainer', tierReason: 'a strong foundation like this usually just needs a periodic strategic thought partner to protect and extend it.' },
@@ -366,7 +366,7 @@ import Header from '../components/Header.astro';
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             const idx = Number(entry.target.getAttribute('data-pillar-index'));
-            progressLabel.textContent = `Section ${idx} of ${pillarGroups.length} — ${pillarLabelByIndex[idx] || ''}`;
+            progressLabel.textContent = `Section ${idx} of ${pillarGroups.length}: ${pillarLabelByIndex[idx] || ''}`;
             progressFill.style.width = (idx / pillarGroups.length) * 100 + '%';
           }
         });
@@ -443,7 +443,7 @@ import Header from '../components/Header.astro';
     if (recommendationEl) {
       recommendationEl.innerHTML =
         '<h3 class="subhead">Recommended Starting Point</h3>' +
-        `<p>Based on your results, the <strong>${band.tierName}</strong> is likely the best fit — ${band.tierReason}</p>` +
+        `<p>Based on your results, the <strong>${band.tierName}</strong> is likely the best fit: ${band.tierReason}</p>` +
         `<a class="btn btn-secondary" href="/#pricing-${band.recommendedTier}">See This Retainer</a>`;
     }
 
@@ -464,7 +464,7 @@ import Header from '../components/Header.astro';
     fetchBenchmarks(pct);
   }
 
-  /* Benchmark comparison. An enhancement, not a dependency — if the
+  /* Benchmark comparison. An enhancement, not a dependency: if the
      database isn't reachable, has no data yet, or the sample is too small
      to be meaningful, the results the visitor already sees are unaffected;
      this just quietly adds a comparison line and tick marks when it can. */
@@ -475,7 +475,7 @@ import Header from '../components/Header.astro';
       .then((res) => res.json())
       .then((data) => {
         const b = data && data.ok ? data.benchmarks : null;
-        if (!b || !b.count) return; // nothing logged yet — say nothing rather than show a zero
+        if (!b || !b.count) return; // nothing logged yet, say nothing rather than show a zero
 
         if (overallEl) {
           const lowSample = b.count < 5;
@@ -483,7 +483,7 @@ import Header from '../components/Header.astro';
           overallEl.innerHTML =
             `Your score: <strong>${compositePct}%</strong> &middot; Average so far: <strong>${b.avgScore}%</strong>` +
             (lowSample
-              ? ` <span class="results-avg-caveat">(early data — ${b.count} response${b.count === 1 ? '' : 's'} so far)</span>`
+              ? ` <span class="results-avg-caveat">(early data: ${b.count} response${b.count === 1 ? '' : 's'} so far)</span>`
               : ` (${b.count} responses)`);
         }
 
@@ -498,7 +498,7 @@ import Header from '../components/Header.astro';
         });
       })
       .catch(() => {
-        // Silent by design — same reasoning as fetchNarrative below.
+        // Silent by design, same reasoning as fetchNarrative below.
       });
   }
 
@@ -506,7 +506,7 @@ import Header from '../components/Header.astro';
      the static band description is already visible from renderResults()
      above, so if this call is slow, fails, or the backend has no
      ANTHROPIC_API_KEY configured, the visitor still has a complete,
-     correct set of results — this just quietly upgrades the description
+     correct set of results; this just quietly upgrades the description
      text if and when a narrative comes back. */
   function fetchNarrative(results: NonNullable<typeof lastResults>) {
     if (narrativeLoadingEl) narrativeLoadingEl.hidden = false;
@@ -528,7 +528,7 @@ import Header from '../components/Header.astro';
         }
       })
       .catch(() => {
-        // Silent by design — static description already shown, nothing to fix.
+        // Silent by design, static description already shown, nothing to fix.
       })
       .finally(() => {
         if (narrativeLoadingEl) narrativeLoadingEl.hidden = true;
@@ -541,7 +541,7 @@ import Header from '../components/Header.astro';
 
       if (!form.checkValidity()) {
         form.reportValidity();
-        if (status) status.textContent = 'Please answer every question — one is still missing.';
+        if (status) status.textContent = 'Please answer every question: one is still missing.';
         return;
       }
 
@@ -566,7 +566,7 @@ import Header from '../components/Header.astro';
       if (form) form.hidden = false;
       if (progressEl && progressLabel && progressFill) {
         progressEl.hidden = false;
-        progressLabel.textContent = `Section 1 of ${pillarGroups.length} — ${PILLARS[0] ? PILLARS[0].label : ''}`;
+        progressLabel.textContent = `Section 1 of ${pillarGroups.length}: ${PILLARS[0] ? PILLARS[0].label : ''}`;
         progressFill.style.width = 100 / pillarGroups.length + '%';
       }
       form?.reset();
@@ -613,7 +613,7 @@ import Header from '../components/Header.astro';
           if (!result.ok || !result.data.ok) {
             throw new Error((result.data && result.data.error) || 'Something went wrong.');
           }
-          if (emailStatus) emailStatus.textContent = 'Sent — check your inbox.';
+          if (emailStatus) emailStatus.textContent = 'Sent, check your inbox.';
           emailForm.reset();
         })
         .catch((err) => {

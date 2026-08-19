@@ -1,10 +1,10 @@
 /* ==========================================================================
-   Frankly Inspired and Associates, LLC — stylesheet
+   Frankly Inspired and Associates, LLC, stylesheet
    Palette: Navy #11233D | White #FFFFFF | Warm Gold #B28E42 |
             Charcoal #23282D | Light Gray #F3F5F7
    A refined evolution of the original brand system: same identity, more
    depth (layered navy, soft colored shadows), a larger editorial type
-   scale, and more generous rhythm. Every class name below is load-bearing —
+   scale, and more generous rhythm. Every class name below is load-bearing,
    js/*.js and the page markup select against them directly. Extend values,
    don't rename selectors.
    ========================================================================== */
@@ -16,7 +16,7 @@
   --white: #FFFFFF;
   --gold: #B28E42;
   --gold-light: #cba869;
-  /* Same hue as --gold, darkened until it clears 4.5:1 on white (4.60:1) —
+  /* Same hue as --gold, darkened until it clears 4.5:1 on white (4.60:1),
      use this instead of --gold anywhere gold is applied to small/regular
      text on a light background (hover links, labels, status text). The
      brighter --gold stays fine for large text (prices, big numbers) and
@@ -29,7 +29,7 @@
 
   /* Five-band scoring scale shared by the Revenue & Growth, Leadership &
      Operations, and Sustainability Strategy diagnostics (Critical/At Risk/
-     Stable/Strong/Resilient) — red through green, same semantic meaning
+     Stable/Strong/Resilient), red through green, same semantic meaning
      everywhere it appears (gauge arc, metric-row left border, fill bars). */
   --band-0: #b3402c;
   --band-1: #c97a2e;
@@ -60,7 +60,7 @@ html { scroll-behavior: smooth; }
 /* Any component rule that sets `display` (e.g. .contact-form's
    display:grid, .recommended-badge's display:inline-block) is author CSS,
    which overrides the browser's built-in `[hidden] { display: none }` UA
-   rule regardless of selector specificity — so without this, elements
+   rule regardless of selector specificity, so without this, elements
    toggled via the `hidden` attribute/property (the contact form after
    submit, the recommended-tier badges, assessment results panels, etc.)
    would stay visibly displayed. This restores the native hidden behavior
@@ -121,7 +121,7 @@ ul, ol { padding-left: 1.25em; }
   overflow: hidden;
 }
 
-/* Invisible anchor target — used when two pillar ids were merged onto one
+/* Invisible anchor target, used when two pillar ids were merged onto one
    card (Service Pillars consolidation) so old/external links to either id
    still land on the right card without an empty heading. */
 .anchor-offset {
@@ -248,7 +248,7 @@ ul, ol { padding-left: 1.25em; }
 @media (max-width: 400px) {
   /* At the very narrowest phone widths, "Frankly Inspired" + the hamburger
      + the mobile Schedule pill don't all fit on one line at the full brand
-     size — it used to wrap the wordmark onto two lines, which read as
+     size, it used to wrap the wordmark onto two lines, which read as
      cramped. Shrinking it here keeps the header a single tidy row. */
   .brand { font-size: 1.05rem; gap: 0.45rem; }
   .brand-mark { height: 1.6rem; }
@@ -294,7 +294,7 @@ ul, ol { padding-left: 1.25em; }
 .nav-menu a:not(.btn).is-active { color: var(--navy); font-weight: 600; }
 
 /* ---------- Minimal header nav (assessment / privacy / terms) ----------
-   Deliberately its own class, not a reuse of .nav-menu — .nav-menu carries
+   Deliberately its own class, not a reuse of .nav-menu, .nav-menu carries
    the full header's mobile dropdown-panel treatment (position:absolute,
    white background, column layout) under the 860px media query below, and
    forcing it visible with an inline style only overrides `display`, not
@@ -400,7 +400,7 @@ ul, ol { padding-left: 1.25em; }
    Full-bleed abstract background (hero-bg.svg, ambient texture rather than
    the main visual now that a real photo exists) behind a two-part row:
    headline copy left, Franklin's actual headshot right, sized to its real
-   800x800 proportions rather than stretched/cropped into a wide banner —
+   800x800 proportions rather than stretched/cropped into a wide banner,
    it's a tight studio portrait, not an environmental wide shot, so a
    generously-sized framed treatment reads far better than a full-bleed
    crop would. Credentials strip still anchors the bottom of the section. */
@@ -428,7 +428,7 @@ ul, ol { padding-left: 1.25em; }
   z-index: 1;
 }
 .hero-copy { max-width: 600px; flex: 1 1 auto; }
-/* Framed portrait with a soft blurred gold glow behind it — a
+/* Framed portrait with a soft blurred gold glow behind it, a
    depth-of-field cue (sharp photo, soft out-of-focus color behind it) that
    gives the navy hero contrast instead of a flat photo pasted onto it. */
 .hero-portrait {
@@ -490,7 +490,7 @@ ul, ol { padding-left: 1.25em; }
   color: var(--navy);
 }
 
-/* Credentials strip — sits directly on the image at the bottom of the
+/* Credentials strip, sits directly on the image at the bottom of the
    hero, reusing facts already established elsewhere on the site (years of
    experience, the three service pillars) rather than inventing new claims. */
 .hero-credentials {
@@ -530,7 +530,7 @@ ul, ol { padding-left: 1.25em; }
   background: rgba(255, 255, 255, 0.2);
 }
 /* The three pillar credentials double as quick links straight into their
-   score tool — same destinations the old "How Franklin Helps" teaser
+   score tool, same destinations the old "How Franklin Helps" teaser
    section used to point to, folded into a component that's already here
    for proof rather than repeated as its own section. */
 a.hero-credential-link {
@@ -550,7 +550,7 @@ a.hero-credential-link:hover {
 /* ---------- Quick-nav tiles (post-hero routing) ---------- */
 /* Sits right after the hero so a visitor who isn't going to read the whole
    page can immediately jump to the path that matches their intent, instead
-   of the only way down being a long scroll. Three routes, not five — this
+   of the only way down being a long scroll. Three routes, not five, this
    is a shortcut, not a second nav bar. */
 .quicknav-section { padding: clamp(1.5rem, 3vw, 2.25rem) 0 0; }
 .quicknav {
@@ -604,7 +604,7 @@ a.hero-credential-link:hover {
 /* A quiet trust signal right after the intro paragraph, so a skeptical
    visitor sees a credibility marker before reaching the full Experience &
    Impact section on the About page. Reuses the same org names already
-   listed under "Board Leadership & Affiliations" on /about — condensed to
+   listed under "Board Leadership & Affiliations" on /about, condensed to
    a scannable line, not a new claim. */
 .affiliation-strip { padding: clamp(1.75rem, 4vw, 2.5rem) 0; text-align: center; }
 .affiliation-label {
@@ -659,7 +659,7 @@ a.hero-credential-link:hover {
 .link-more:hover { color: var(--gold-accessible); }
 
 /* Shared small-print "Sources:" style, used at the bottom of every
-   assessment tool's results — kept under its original calculator-era name
+   assessment tool's results, kept under its original calculator-era name
    since it's referenced by class in several already-shipped pages. */
 .calculator-caveat {
   font-size: 0.8rem;
@@ -702,7 +702,7 @@ a.hero-credential-link:hover {
 }
 
 /* ---------- Philosophy quote ----------
-   Navy background on about.html — that page is otherwise white/light-gray
+   Navy background on about.html, that page is otherwise white/light-gray
    until its own navy closing CTA at the very bottom, so this gives it a
    dark contrast point near the top too, echoing the hero on index.html. */
 .philosophy {
@@ -819,7 +819,7 @@ a.hero-credential-link:hover {
 .pricing-card.is-recommended {
   box-shadow: 0 0 0 3px var(--gold), var(--shadow-md);
 }
-/* Featured plan uses a navy card instead of a gold-outlined white one — it
+/* Featured plan uses a navy card instead of a gold-outlined white one, it
    both draws the eye to the recommended tier and gives this stretch of the
    page (otherwise all white/light-gray after the hero) a dark contrast
    point for visual balance. */
@@ -873,7 +873,7 @@ a.hero-credential-link:hover {
   font-size: 0.95rem;
 }
 
-/* Single featured card for the Grant Readiness offering — reuses
+/* Single featured card for the Grant Readiness offering, reuses
    .pricing-card/.featured but capped to one column so it doesn't stretch
    full-bleed the way the auto-fit pricing-grid would with only one item. */
 .grantpass-grid {
@@ -893,7 +893,7 @@ a.hero-credential-link:hover {
   margin-bottom: 0.8rem;
 }
 
-/* Navy fill instead of a white card with a navy accent border — another
+/* Navy fill instead of a white card with a navy accent border, another
    contained dark-contrast moment in an otherwise light section, and it
    makes the free-assessment path visually distinct from the paid pricing
    cards above it. */
@@ -1138,7 +1138,7 @@ a.hero-credential-link:hover {
 /* ---------- Responsive nav ---------- */
 /* Raised from the original 860px: the full nav (brand + 5 items + CTA
    button) measured genuinely cramped in the 860-1024px tablet-landscape
-   range during a real-device audit — buttons nearly touching the
+   range during a real-device audit, buttons nearly touching the
    container edge with no breathing room. 1024px matches common
    tablet-landscape widths (iPad 1024, and close to iPad Air/Pro's ~1180),
    so tablets in landscape now reliably get the hamburger instead of a
@@ -1167,7 +1167,7 @@ a.hero-credential-link:hover {
   .nav-menu.is-open { display: flex; }
   .btn-nav { width: 100%; text-align: center; }
 
-  /* Dropdown becomes an inline accordion inside the mobile menu — hover-style
+  /* Dropdown becomes an inline accordion inside the mobile menu, hover-style
      absolute panels don't work on touch, and there's no room for them. */
   .nav-item-dropdown { width: 100%; }
   .nav-dropdown-toggle { width: 100%; justify-content: space-between; padding: 0.25rem 0; }
@@ -1187,7 +1187,7 @@ a.hero-credential-link:hover {
   /* The desktop open-state rule (.nav-item-dropdown.is-open .nav-dropdown-menu
      { transform: translateX(-50%) ... }, above) is two classes deep, so it
      beats the plain .nav-dropdown-menu { transform: none } reset just above
-     on specificity alone — without re-declaring it here, opening the
+     on specificity alone, without re-declaring it here, opening the
      accordion on mobile re-applied that -50% horizontal shift and pushed
      the whole panel off the left edge of the screen. */
   .nav-item-dropdown.is-open .nav-dropdown-menu { display: block; transform: none; }
@@ -1196,7 +1196,7 @@ a.hero-credential-link:hover {
      to size correctly. On the mobile accordion the menu is full-width, not
      panel-width, so nowrap instead forces long labels ("Free Sustainability
      Self-Assessment") past the edge of the screen with no way to read the
-     cut-off text — reset it back to normal wrapping here. */
+     cut-off text, reset it back to normal wrapping here. */
   .nav-dropdown-menu li a { padding: 0.5rem 0.75rem; white-space: normal; }
 }
 
@@ -1224,7 +1224,7 @@ a.hero-credential-link:hover {
   margin: 0 auto;
 }
 /* Without this, a link inside the dark .assessment-intro gradient inherits
-   the site-wide navy link color — navy text on a navy background,
+   the site-wide navy link color, navy text on a navy background,
    effectively invisible. */
 .assessment-intro a {
   color: var(--gold-light);
@@ -1236,7 +1236,7 @@ a.hero-credential-link:hover {
   position: sticky;
   /* --header-height is set by BaseLayout's script from the header's real
      rendered height, since the minimal header can wrap to 2-3 rows on
-     narrow phones — a fixed guess would sit underneath a wrapped header. */
+     narrow phones, a fixed guess would sit underneath a wrapped header. */
   top: calc(var(--header-height, 4.9rem) + 0.4rem);
   z-index: 20;
   background: rgba(255, 255, 255, 0.92);
@@ -1581,7 +1581,7 @@ a.hero-credential-link:hover {
 
 /* ==========================================================================
    NUMBERS-BASED DIAGNOSTICS (revenue-growth-score, leadership-health,
-   sustainability-score) — shared gauge/metric-card infrastructure. The
+   sustainability-score), shared gauge/metric-card infrastructure. The
    fh- prefix is historical (first built for the "Financial Health Score")
    and is now shared, generic scoring UI reused by all three tools; only
    each page's element IDs differ (rg-/lh-/ss-), not these classes.
@@ -1725,7 +1725,7 @@ a.hero-credential-link:hover {
   .fh-metric-head { flex-direction: column; gap: 0.2rem; }
 }
 
-/* Sustainability Strategy Score's "Strategic Triangle" — structurally the
+/* Sustainability Strategy Score's "Strategic Triangle", structurally the
    same .fh-metric-row list as the other two tools, arranged three-across
    instead of stacked. */
 .ss-triangle-intro {
@@ -1749,9 +1749,9 @@ a.hero-credential-link:hover {
 
 /* Assessments section cards link straight into each scored tool
    (assessment, revenue-growth-score, leadership-health,
-   sustainability-score, institutional-advancement-score — see
+   sustainability-score, institutional-advancement-score, see
    index.astro). The Consulting section's Focus Area cards below use the
-   same .card base but are plain divs (.card-static), not links — see that
+   same .card base but are plain divs (.card-static), not links, see that
    rule further down. */
 a.card {
   display: block;
@@ -1767,14 +1767,14 @@ a.card .card-cta {
 }
 a.card:hover .card-cta { text-decoration: underline; }
 
-/* Focus Area tiles (Consulting section) are descriptive only, not links —
+/* Focus Area tiles (Consulting section) are descriptive only, not links,
    drop the hover lift so they don't falsely signal clickability. */
 .card-static:hover {
   transform: none;
   box-shadow: var(--shadow-sm);
 }
 
-/* The "Start Here" card in the Assessments section — same base .card, just
+/* The "Start Here" card in the Assessments section, same base .card, just
    made to stand out among the other four since it's the recommended
    first stop. */
 .featured-tool {

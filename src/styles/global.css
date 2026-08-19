@@ -1214,8 +1214,20 @@ a.hero-credential-link:hover {
     margin-top: 0.5rem;
     padding: 0 0 0 0.25rem;
   }
-  .nav-item-dropdown.is-open .nav-dropdown-menu { display: block; }
-  .nav-dropdown-menu li a { padding: 0.5rem 0.75rem; }
+  /* The desktop open-state rule (.nav-item-dropdown.is-open .nav-dropdown-menu
+     { transform: translateX(-50%) ... }, above) is two classes deep, so it
+     beats the plain .nav-dropdown-menu { transform: none } reset just above
+     on specificity alone — without re-declaring it here, opening the
+     accordion on mobile re-applied that -50% horizontal shift and pushed
+     the whole panel off the left edge of the screen. */
+  .nav-item-dropdown.is-open .nav-dropdown-menu { display: block; transform: none; }
+  /* .nav-dropdown-menu li a inherits white-space: nowrap from the desktop
+     panel styles above, where it's needed for the min-width: 220px panel
+     to size correctly. On the mobile accordion the menu is full-width, not
+     panel-width, so nowrap instead forces long labels ("Free Sustainability
+     Self-Assessment") past the edge of the screen with no way to read the
+     cut-off text — reset it back to normal wrapping here. */
+  .nav-dropdown-menu li a { padding: 0.5rem 0.75rem; white-space: normal; }
 }
 
 /* ==========================================================================

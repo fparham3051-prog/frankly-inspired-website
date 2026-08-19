@@ -923,6 +923,26 @@ a.hero-credential-link:hover {
   font-size: 0.95rem;
 }
 
+/* Single featured card for the Grant Readiness offering — reuses
+   .pricing-card/.featured but capped to one column so it doesn't stretch
+   full-bleed the way the auto-fit pricing-grid would with only one item. */
+.grantpass-grid {
+  grid-template-columns: minmax(265px, 480px);
+}
+.offering-badge {
+  display: inline-block;
+  align-self: flex-start;
+  background: var(--gold-light);
+  color: var(--navy);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding: 0.32em 0.8em;
+  border-radius: 999px;
+  margin-bottom: 0.8rem;
+}
+
 /* Navy fill instead of a white card with a navy accent border — another
    contained dark-contrast moment in an otherwise light section, and it
    makes the free-assessment path visually distinct from the paid pricing

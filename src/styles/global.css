@@ -1797,9 +1797,12 @@ a.hero-credential-link:hover {
   .ss-triangle { grid-template-columns: 1fr; }
 }
 
-/* Service Pillar cards double as links straight into the matching
-   diagnostic tool (revenue-growth-score, leadership-health,
-   sustainability-score — see index.astro). */
+/* Assessments section cards link straight into each scored tool
+   (assessment, revenue-growth-score, leadership-health,
+   sustainability-score, institutional-advancement-score — see
+   index.astro). The Consulting section's Focus Area cards below use the
+   same .card base but are plain divs (.card-static), not links — see that
+   rule further down. */
 a.card {
   display: block;
   text-decoration: none;
@@ -1813,6 +1816,24 @@ a.card .card-cta {
   color: var(--gold-accessible);
 }
 a.card:hover .card-cta { text-decoration: underline; }
+
+/* Focus Area tiles (Consulting section) are descriptive only, not links —
+   drop the hover lift so they don't falsely signal clickability. */
+.card-static:hover {
+  transform: none;
+  box-shadow: var(--shadow-sm);
+}
+
+/* The "Start Here" card in the Assessments section — same base .card, just
+   made to stand out among the other four since it's the recommended
+   first stop. */
+.featured-tool {
+  border-top-width: 4px;
+  box-shadow: var(--shadow-md);
+}
+.featured-tool .offering-badge {
+  margin-bottom: 0.9rem;
+}
 
 @media (max-width: 640px) {
   .likert-scale {

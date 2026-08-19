@@ -56,8 +56,8 @@ import ScrollReveal from '../components/ScrollReveal.astro';
             <span class="qn-label">Consulting &amp; Pricing &rarr;</span>
             <span class="qn-sub">Service pillars and engagement options</span>
           </a>
-          <a class="quicknav-tile" href="/assessment">
-            <span class="qn-label">Free Assessment &rarr;</span>
+          <a class="quicknav-tile" href="#assessments">
+            <span class="qn-label">Free Assessments &rarr;</span>
             <span class="qn-sub">Score your organization in 5 minutes</span>
           </a>
           <a class="quicknav-tile" href="#contact">
@@ -88,6 +88,50 @@ import ScrollReveal from '../components/ScrollReveal.astro';
           <span>Turner Foundation for Community Advocacy</span>
           <span>Howard Rye Institute</span>
           <span>Association of Fundraising Professionals</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ASSESSMENTS (single consolidated entry point) ============ -->
+    <!-- Previously, tool discovery was spread across three places: three of
+         these five tools as clickable Service Pillar cards further down,
+         a separate "Not ready for a conversation yet?" callout box, and the
+         nav dropdown. That meant an uneven, redundant path to the same
+         five tools and no homepage presence at all for the Institutional
+         Advancement Score. This is now the one place they're all listed
+         together, so this section replaces both the old pillar-card links
+         and the old assessment-callout box below. -->
+    <section id="assessments" class="section assessments-section">
+      <div class="container">
+        <h2 class="section-title reveal">Score Your Organization — Free</h2>
+        <p class="section-note reveal">Start with the 5-minute overview, or go straight to the deep-dive tool for the area you already know needs attention. All five are free, instant, and require no sign-up.</p>
+        <div class="card-grid">
+          <a class="card reveal featured-tool" href="/assessment">
+            <span class="offering-badge">Start Here &mdash; 5 Minutes</span>
+            <h4>Nonprofit Sustainability Self-Assessment</h4>
+            <p>A quick overview across all five areas below, with a priority area and next step.</p>
+            <span class="card-cta">Take the Free Assessment &rarr;</span>
+          </a>
+          <a class="card reveal" href="/sustainability-score">
+            <h4>Sustainability Strategy Score</h4>
+            <p>Strategy, risk, and execution, blended with your Revenue &amp; Growth and Leadership scores.</p>
+            <span class="card-cta">Take the Score &rarr;</span>
+          </a>
+          <a class="card reveal" href="/revenue-growth-score">
+            <h4>Revenue &amp; Growth Score</h4>
+            <p>Financial ratios from your own budget, benchmarked against sector norms.</p>
+            <span class="card-cta">Take the Score &rarr;</span>
+          </a>
+          <a class="card reveal" href="/institutional-advancement-score">
+            <h4>Institutional Advancement Score</h4>
+            <p>Gift portfolios, stewardship, campaigns, and events &mdash; the fundraising program itself.</p>
+            <span class="card-cta">Take the Score &rarr;</span>
+          </a>
+          <a class="card reveal" href="/leadership-health">
+            <h4>Leadership &amp; Operations Score</h4>
+            <p>Governance, succession readiness, and organizational alignment.</p>
+            <span class="card-cta">Take the Score &rarr;</span>
+          </a>
         </div>
       </div>
     </section>
@@ -135,26 +179,29 @@ import ScrollReveal from '../components/ScrollReveal.astro';
              in the Self-Assessment. All five pillar-* anchor ids are
              preserved below (two of them as invisible anchors inside a
              merged card) so the assessment results page's per-pillar links
-             still resolve correctly. -->
-        <h3 class="subhead reveal">Service Pillars</h3>
+             still resolve correctly.
+
+             These used to double as links out to the scored tools — now
+             that the Assessments section above is the one clear place to
+             launch those, these are plain description tiles (no href, no
+             card-cta) so a visitor isn't offered the same three tools
+             twice on one page. -->
+        <h3 class="subhead reveal">Focus Areas</h3>
         <div class="card-grid">
-          <a class="card reveal" id="pillar-sustainability" href="/sustainability-score">
+          <div class="card card-static reveal" id="pillar-sustainability">
             <h4>Sustainability Strategy</h4>
             <p>Organizational assessment, strategic priorities, risk identification, sustainability roadmaps, and implementation planning.</p>
-            <span class="card-cta">Take the Sustainability Strategy Score &rarr;</span>
-          </a>
-          <a class="card reveal" id="pillar-revenue" href="/revenue-growth-score">
+          </div>
+          <div class="card card-static reveal" id="pillar-revenue">
             <span id="pillar-partnership" class="anchor-offset"></span>
             <h4>Revenue &amp; Growth</h4>
             <p>Individual donor stewardship and retention, fundraising strategy, grant and public-funding strategy, revenue-pipeline design, and the cross-sector partnerships (education, workforce, government, corporate, philanthropic, and community) that sustain them.</p>
-            <span class="card-cta">Take the Revenue &amp; Growth Score &rarr;</span>
-          </a>
-          <a class="card reveal" id="pillar-leadership" href="/leadership-health">
+          </div>
+          <div class="card card-static reveal" id="pillar-leadership">
             <span id="pillar-operations" class="anchor-offset"></span>
             <h4>Leadership &amp; Operations</h4>
             <p>Executive advising and change leadership, paired with the workflows, KPIs, CRM/Salesforce practices, and AI readiness guidance that keep an organization running well. 1:1 leadership coaching is available as its own engagement.</p>
-            <span class="card-cta">Take the Leadership &amp; Operations Score &rarr;</span>
-          </a>
+          </div>
         </div>
 
         <h3 class="subhead reveal">Engagement Model</h3>
@@ -240,13 +287,7 @@ import ScrollReveal from '../components/ScrollReveal.astro';
           </div>
         </div>
 
-        <div class="assessment-callout reveal">
-          <div class="assessment-callout-text">
-            <h4>Not ready for a conversation yet?</h4>
-            <p>Take the free, 5-minute Nonprofit Sustainability Self-Assessment first. It scores your organization across five underlying dimensions and points to where to focus.</p>
-          </div>
-          <a class="btn btn-secondary" href="/assessment">Take the Free Assessment</a>
-        </div>
+        <p class="pricing-reassurance reveal">Not ready for a conversation yet? <a href="#assessments">Take a free assessment</a> first &mdash; it points to where to focus.</p>
       </div>
     </section>
 

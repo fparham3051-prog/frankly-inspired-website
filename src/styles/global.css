@@ -1871,6 +1871,34 @@ a.card:hover .card-cta { text-decoration: underline; }
   }
 }
 
+/* ---------- InstitutionalOS product page ---------- */
+.io-table-wrap { overflow-x: auto; border-radius: var(--radius); box-shadow: var(--shadow-sm); margin: 1.25rem 0 2rem; }
+.io-table { width: 100%; border-collapse: collapse; background: var(--white); font-size: 0.92rem; min-width: 480px; }
+.io-table caption { caption-side: top; text-align: left; font-weight: 700; color: var(--navy); padding: 0.9rem 1.1rem 0.4rem; font-family: var(--font-heading); font-size: 1.05rem; }
+.io-table th, .io-table td { padding: 0.7rem 1.1rem; text-align: left; border-bottom: 1px solid var(--border); vertical-align: top; }
+.io-table thead th { background: var(--navy); color: var(--white); font-weight: 600; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.04em; }
+.io-table tbody tr:last-child td { border-bottom: none; }
+.io-table td.io-band { font-weight: 700; white-space: nowrap; border-left: 4px solid var(--band-2); }
+.io-table tr[data-band="0"] td.io-band { border-left-color: var(--band-0); color: var(--band-0); }
+.io-table tr[data-band="1"] td.io-band { border-left-color: var(--band-1); color: #96601f; }
+.io-table tr[data-band="2"] td.io-band { border-left-color: var(--band-2); color: var(--gold-accessible); }
+.io-table tr[data-band="3"] td.io-band { border-left-color: var(--band-3); color: #4d7a35; }
+.io-table tr[data-band="4"] td.io-band { border-left-color: var(--band-4); color: var(--band-4); }
+
+.io-dims { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0.9rem; margin: 1.25rem 0 2rem; padding: 0; list-style: none; counter-reset: dim; }
+.io-dims li { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.9rem 1.05rem; box-shadow: var(--shadow-sm); counter-increment: dim; }
+.io-dims li::before { content: counter(dim); display: inline-flex; align-items: center; justify-content: center; width: 1.5em; height: 1.5em; border-radius: 50%; background: var(--gold-soft); color: var(--gold-accessible); font-weight: 700; font-size: 0.82rem; margin-right: 0.55em; }
+
+.io-flywheel { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.1rem; margin: 1.25rem 0 0.5rem; }
+.io-flywheel-step { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.4rem 1.5rem; box-shadow: var(--shadow-sm); }
+.io-flywheel-step .io-flywheel-label { display: block; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--gold-accessible); font-weight: 700; margin-bottom: 0.35rem; }
+.io-flywheel-step h4 { margin: 0 0 0.4rem; }
+.io-flywheel-step p { margin: 0; font-size: 0.92rem; color: #4a545e; }
+.io-flywheel-arrow { display: none; }
+@media (min-width: 900px) {
+  .io-flywheel { grid-template-columns: repeat(3, 1fr); }
+}
+
 /* ---------- Scroll reveal ----------
    Elements with class="reveal" fade and slide up into place as they enter
    the viewport (see ScrollReveal.astro). Wrapped in a prefers-reduced-motion

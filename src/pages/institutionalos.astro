@@ -1,0 +1,199 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import ScrollReveal from '../components/ScrollReveal.astro';
+
+// The dedicated InstitutionalOS product page called for in Franklin's own
+// Strategic Architecture doc (Section 12, "Suggested navigation" +
+// "Recommended next steps" #7: "Create a dedicated InstitutionalOS product
+// page and a Grant Pass FUND page"). Frankly Inspired stays the primary
+// brand; this page introduces InstitutionalOS as the method and technology
+// layer underneath the consulting practice, not a separate company - see
+// Section 02, "The brand hierarchy."
+//
+// Content and structure follow that doc closely on purpose:
+//   - Hero framing, the 5-step method (assess/verify/decide/improve/
+//     reassess), and the closing CTA follow Section 12's "Homepage
+//     narrative" and "Website language guardrails" (no overclaimed case
+//     studies, no guaranteed-funding language, restrained/executive tone).
+//   - The 7 dimensions and scoring rubric mirror Section 08, "Master
+//     Health Index Engine."
+//   - The decision-gate table uses the live language from scoring.py's
+//     decision_band_for() (server.py / demo_scoring.py), not the earlier
+//     draft wording in the architecture doc - so this page matches exactly
+//     what a visitor sees on their own scorecard result, not a paraphrase.
+//   - "Evidence discipline" follows Section 10 and links to the Evidence
+//     Vault feature now live in the Console.
+//   - The three response levels follow Section 11, "Software with a
+//     service."
+---
+
+<BaseLayout
+  title="InstitutionalOS | Frankly Inspired"
+  description="InstitutionalOS is the shared method behind Frankly Inspired's BUILD, FUND, and SUSTAIN pathways: a seven-dimension Health Index, evidence-backed scoring, decision gates, and a 90-day improvement cycle that turns one-time consulting into institutional learning."
+  footerVariant="about"
+>
+  <Header variant="full" />
+
+  <main id="main">
+
+    <!-- ============ HERO ============ -->
+    <section class="assessment-intro">
+      <div class="container narrow center">
+        <p class="eyebrow eyebrow-dark reveal">The Method Behind Frankly Inspired</p>
+        <h1 class="reveal">InstitutionalOS</h1>
+        <p class="hero-sub-light reveal">Frankly Inspired helps leaders build institutions that are clear enough to launch, strong enough to fund, and disciplined enough to endure. InstitutionalOS is the operating system underneath that work: one shared way to diagnose institutional health, verify the evidence behind a score, clear the gates that actually matter, and track whether things get better over time &mdash; not another dashboard promising a shortcut.</p>
+        <div class="hero-ctas reveal" style="justify-content:center; display:flex; flex-wrap:wrap; gap:0.75rem; margin-top:0.5rem;">
+          <a class="btn btn-primary" href="https://grantpass-landing.onrender.com" target="_blank" rel="noopener">Take the Free Scorecard</a>
+          <a class="btn btn-ghost" href="https://calendly.com/fparham/30min" target="_blank" rel="noopener" style="border-color:rgba(255,255,255,0.4); color:#fff;">Schedule a Strategy Conversation</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ THREE PATHWAYS ============ -->
+    <section class="section" id="pathways">
+      <div class="container">
+        <h2 class="section-title reveal">One system, three lifecycle stages</h2>
+        <p class="section-note reveal">Every organization is somewhere on this arc. InstitutionalOS asks a different core question at each stage, but scores all three against the same seven dimensions, so a score means the same thing no matter which stage it came from.</p>
+        <div class="card-grid">
+          <a class="card reveal" href="/#build">
+            <span class="offering-badge">Stage 1</span>
+            <h4>BUILD</h4>
+            <p>Formation Readiness. Is the organization clear and structured enough to launch responsibly &mdash; governance, strategy, and the basics funders and boards look for from day one?</p>
+            <span class="card-cta">See Formation Readiness &rarr;</span>
+          </a>
+          <a class="card reveal" href="/#fund">
+            <span class="offering-badge">Stage 2</span>
+            <h4>FUND</h4>
+            <p>Grant Readiness. Is the case for support, evidence, and financial picture strong enough for a specific funder to say yes &mdash; scored with your actual filed Form 990 data, not self-reported estimates.</p>
+            <span class="card-cta">See Grant Readiness &rarr;</span>
+          </a>
+          <a class="card reveal" href="/#sustain">
+            <span class="offering-badge">Stage 3</span>
+            <h4>SUSTAIN</h4>
+            <p>Institutional Durability. Is the institution resilient enough to keep performing without depending on any one grant, funder, or person &mdash; financial resilience, leadership bench strength, mature operations.</p>
+            <span class="card-cta">See Institutional Durability &rarr;</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ THE METHOD ============ -->
+    <section class="section alt-bg" id="method">
+      <div class="container">
+        <h2 class="section-title reveal">The method: assess, verify, decide, improve, reassess</h2>
+        <p class="section-note reveal">What makes this an operating system rather than a one-time questionnaire is that step five feeds back into step one. A score is a snapshot; the point is what changes between snapshots.</p>
+        <ol class="process-list reveal">
+          <li>Assess &mdash; complete the structured Health Index for your stage</li>
+          <li>Verify &mdash; attach or confirm evidence for every score that claims more than "informal"</li>
+          <li>Decide &mdash; clear the hard gates for your stage, or don't proceed yet</li>
+          <li>Improve &mdash; close roughly a quarter of the gap on your single biggest constraint</li>
+          <li>Reassess &mdash; score again and see what actually moved</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ HEALTH INDEX ENGINE ============ -->
+    <section class="section" id="health-index">
+      <div class="container">
+        <h2 class="section-title reveal">The Health Index Engine</h2>
+        <p class="section-note reveal">Seven dimensions, scored the same way at every stage. What changes stage to stage is which dimensions carry the most weight and which ones gate a "go" decision outright, regardless of the average.</p>
+
+        <h3 class="subhead reveal">Seven common dimensions</h3>
+        <ol class="io-dims reveal">
+          <li>Strategy and Positioning</li>
+          <li>Program and Impact Evidence</li>
+          <li>Revenue and Financial Health</li>
+          <li>Leadership and Organizational Capacity</li>
+          <li>Operations and Infrastructure</li>
+          <li>Partnerships and Ecosystem</li>
+          <li>Governance and Risk</li>
+        </ol>
+
+        <h3 class="subhead reveal">Scoring rubric</h3>
+        <p class="section-note reveal">Higher scores require evidence, not confidence. A score is set by what's documented and demonstrated, not by how the answer is worded.</p>
+        <div class="io-table-wrap reveal">
+          <table class="io-table">
+            <caption>What each score means</caption>
+            <thead><tr><th>Score</th><th>Meaning</th></tr></thead>
+            <tbody>
+              <tr data-band="0"><td class="io-band">0</td><td>Absent &mdash; not in place</td></tr>
+              <tr data-band="1"><td class="io-band">25</td><td>Idea only &mdash; no documentation or track record yet</td></tr>
+              <tr data-band="2"><td class="io-band">50</td><td>Informal or incomplete &mdash; exists, but not documented or consistent</td></tr>
+              <tr data-band="3"><td class="io-band">75</td><td>Documented and demonstrated &mdash; real evidence on file</td></tr>
+              <tr data-band="4"><td class="io-band">100</td><td>Verified, repeatable, and institutionally embedded</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 class="subhead reveal">Decision gates</h3>
+        <p class="section-note reveal">An overall average never produces a green light by itself. Each stage defines a small set of dimensions that must individually clear a floor &mdash; governance, strategy, financial health, or program evidence, depending on the stage &mdash; so a weak spot can't hide behind a strong average.</p>
+        <div class="io-table-wrap reveal">
+          <table class="io-table">
+            <caption>Reading your overall score</caption>
+            <thead><tr><th>Health Index</th><th>What it means</th><th>Posture</th></tr></thead>
+            <tbody>
+              <tr data-band="0"><td class="io-band">0&ndash;59</td><td>Assumption heavy</td><td>Discover or repair</td></tr>
+              <tr data-band="1"><td class="io-band">60&ndash;69</td><td>Promising but uncertain</td><td>Test and develop</td></tr>
+              <tr data-band="2"><td class="io-band">70&ndash;74</td><td>Material progress, some open risks</td><td>Conditional go</td></tr>
+              <tr data-band="3"><td class="io-band">75&ndash;81</td><td>Sufficient evidence for controlled execution</td><td>Ready or proceed</td></tr>
+              <tr data-band="3"><td class="io-band">82&ndash;87</td><td>Strong system evidence</td><td>Launch or expand</td></tr>
+              <tr data-band="4"><td class="io-band">88&ndash;100</td><td>Repeatable and well governed</td><td>Scale</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint" style="color:#55606b; font-size:0.92rem; max-width:640px;">Even inside a "go" band, a single open gate &mdash; ungoverned risk, missing filings, an unresolved dependency &mdash; can hold back a move-forward decision. That check happens in the guided Review, not the self-service scorecard.</p>
+      </div>
+    </section>
+
+    <!-- ============ EVIDENCE DISCIPLINE ============ -->
+    <section class="section alt-bg" id="evidence">
+      <div class="container narrow">
+        <h2 class="section-title reveal">Claims cannot outrun evidence</h2>
+        <p class="reveal">A score with nothing behind it isn't treated the same as a well-documented one, even when the number looks identical. Every dimension you score yourself carries a place for the evidence that justifies it &mdash; a note, a link, a filed document &mdash; and financial health is scored automatically from your actual ingested filing data rather than a self-reported estimate.</p>
+        <p class="reveal">That evidence, and every score you've saved, lives in the Console's Evidence Vault: one place to see what backs each dimension, what's still unsupported, and how the score has moved since the last time you checked. Reassessment turns a one-time diagnostic into institutional memory instead of a number you get once and forget.</p>
+      </div>
+    </section>
+
+    <!-- ============ FROM SELF-SERVICE TO ADVISORY ============ -->
+    <section class="section" id="flywheel">
+      <div class="container">
+        <h2 class="section-title reveal">Software with a service, not instead of one</h2>
+        <p class="section-note reveal">Institutional work takes judgment, facilitation, and context that software alone doesn't replace. InstitutionalOS is built to make that judgment more focused and measurable, not to make it unnecessary &mdash; three levels of response, matched to how much support an organization actually needs.</p>
+        <div class="io-flywheel reveal">
+          <div class="io-flywheel-step">
+            <span class="io-flywheel-label">Self Service</span>
+            <h4>Health Index + 90-Day Plan</h4>
+            <p>Free. Best fit for organizations with enough internal capacity to execute once they know the constraint.</p>
+          </div>
+          <div class="io-flywheel-step">
+            <span class="io-flywheel-label">Guided</span>
+            <h4>Institutional Health Review + Implementation Session</h4>
+            <p>Best fit for organizations that need interpretation, prioritization, and accountability &mdash; not just a number.</p>
+          </div>
+          <div class="io-flywheel-step">
+            <span class="io-flywheel-label">Advisory</span>
+            <h4>90-Day or Retained Engagement</h4>
+            <p>Best fit for complex strategy, revenue, leadership, operational, or governance work that a diagnostic alone can't resolve.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CLOSING CTA ============ -->
+    <section class="section closing-cta">
+      <div class="container narrow center">
+        <h2 class="reveal">Clear enough to launch. Strong enough to fund. Disciplined enough to endure.</h2>
+        <p class="reveal">Start with the free scorecard for wherever your organization actually is, or skip straight to a conversation if you already know what you're navigating.</p>
+        <div class="reveal" style="display:flex; flex-wrap:wrap; gap:0.75rem; justify-content:center;">
+          <a class="btn btn-primary" href="https://grantpass-landing.onrender.com" target="_blank" rel="noopener">Take the Free Scorecard</a>
+          <a class="btn btn-ghost" href="https://calendly.com/fparham/30min" target="_blank" rel="noopener" style="border-color:rgba(255,255,255,0.4); color:#fff;">Schedule a Strategy Conversation</a>
+        </div>
+        <p style="margin-top: 1rem;"><a class="link-more" href="/#pricing">See services and pricing</a></p>
+      </div>
+    </section>
+
+  </main>
+
+  <ScrollReveal />
+</BaseLayout>

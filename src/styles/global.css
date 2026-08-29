@@ -887,6 +887,14 @@ a.hero-credential-link:hover {
 }
 .score-ref-banner strong { color: var(--navy); }
 
+/* The "Continue to a Conversation" CTA the five self-scoring tools show
+   once a score_ref token comes back from /api/assessment-narrative (see
+   each page's fetchNarrative()). Hidden by default via [hidden]. */
+.score-ref-cta {
+  text-align: center;
+  margin: -0.5rem 0 1.5rem;
+}
+
 /* Single featured card for the Grant Readiness offering, reuses
    .pricing-card/.featured but capped to one column so it doesn't stretch
    full-bleed the way the auto-fit pricing-grid would with only one item. */

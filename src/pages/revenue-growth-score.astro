@@ -161,7 +161,7 @@ import Header from '../components/Header.astro';
           </div>
 
           <div class="results-related">
-            <p>This tool measures revenue and growth capacity from your own budget: the financial outcomes. For a read on the fundraising <em>program</em> that produces those numbers (gift portfolio staffing, moves management, campaign readiness, and events strategy), see the <a href="/institutional-advancement-score">Institutional Advancement Score</a>. For a research-backed read on governance, succession readiness, and organizational alignment, see the <a href="/leadership-health">Leadership &amp; Operations Health Score</a>. This score also feeds directly into the <a href="/sustainability-score">Sustainability Strategy Score</a>, which places it alongside leadership capacity and strategic clarity in a single Strategic Triangle view. The ratios behind this score are close cousins of InstitutionalOS's Revenue and Financial Health dimension. If you want to know how ready your organization is for a <em>specific</em> funder's stated priorities, using your actual filed financial data rather than the estimates above, <a href="https://grantpass-landing.pages.dev" target="_blank" rel="noopener">InstitutionalOS</a> is a free, purpose-built scorecard for that.</p>
+            <p>This tool measures revenue and growth capacity from your own budget: the financial outcomes. For a read on the fundraising <em>program</em> that produces those numbers (gift portfolio staffing, moves management, campaign readiness, and events strategy), see the <a href="/institutional-advancement-score">Institutional Advancement Score</a>. For a research-backed read on governance, succession readiness, and organizational alignment, see the <a href="/leadership-health">Leadership &amp; Operations Health Score</a>. This score also feeds directly into the <a href="/sustainability-score">Sustainability Strategy Score</a>, which places it alongside leadership capacity and strategic clarity in a single Strategic Triangle view. The ratios behind this score are close cousins of InstitutionalOS's Revenue and Financial Health dimension. If you want to know how ready your organization is for a <em>specific</em> funder's stated priorities, using your actual filed financial data rather than the estimates above, <a href="https://grantpass-landing.onrender.com" target="_blank" rel="noopener">InstitutionalOS</a> is a free, purpose-built scorecard for that.</p>
             <p>Haven't taken the free <a href="/assessment">Nonprofit Sustainability Self-Assessment</a> yet? It covers this and four other areas in about 5 minutes.</p>
           </div>
 
@@ -173,6 +173,8 @@ import Header from '../components/Header.astro';
               <a class="btn btn-secondary" href="/#pricing">See Pricing</a>
             </div>
           </div>
+
+          <div id="score-ref-cta" class="score-ref-cta" hidden></div>
 
           <p class="calculator-caveat">Sources: Propel Nonprofits' Analyzing Financial Information Using Ratios; the BBB Wise Giving Alliance Standards for Charity Accountability; Charity Navigator's Rating Methodology (2026); the Nonprofit Operating Reserves Initiative (NORI) Workgroup's reserve guidance; and the Fundraising Effectiveness Project (Association of Fundraising Professionals &amp; GivingTuesday) for donor retention benchmarks, the same benchmarks that inform sound revenue and growth strategy. Benchmark figures are sector-wide averages, not specific to any organization Frankly Inspired and Associates, LLC has worked with.</p>
 
@@ -482,6 +484,17 @@ import Header from '../components/Header.astro';
         if (data && data.ok && data.narrative) {
           const summaryEl = document.getElementById('rg-summary');
           if (summaryEl) summaryEl.textContent = data.narrative;
+        }
+      
+        if (data && data.score_ref) {
+          const scoreRefCtaEl = document.getElementById('score-ref-cta');
+          if (scoreRefCtaEl) {
+            scoreRefCtaEl.innerHTML =
+              '<a class="btn btn-primary" href="/?score_ref=' +
+              encodeURIComponent(data.score_ref) +
+              '#contact">Continue to a Conversation &rarr;</a>';
+            scoreRefCtaEl.hidden = false;
+          }
         }
       })
       .catch(() => {

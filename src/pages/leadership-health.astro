@@ -251,6 +251,8 @@ import Header from '../components/Header.astro';
             </div>
           </div>
 
+          <div id="score-ref-cta" class="score-ref-cta" hidden></div>
+
           <p class="calculator-caveat">Sources: BoardSource, "Leading with Intent: BoardSource Index of Nonprofit Board Practices"; CompassPoint Nonprofit Services &amp; the Meyer Foundation, "Daring to Lead" (2006/2011 national studies of nonprofit executive leadership); McKinsey &amp; Company, the Organizational Health Index (OHI); John P. Kotter, "Leading Change" (Harvard Business School Press, 1996) and subsequent research on the 8-Step Change Model. Benchmark figures are sector-wide findings, not specific to any organization Frankly Inspired and Associates, LLC has worked with.</p>
 
           <button type="button" class="results-retake" id="lh-retake">Retake the Assessment</button>
@@ -495,6 +497,17 @@ import Header from '../components/Header.astro';
         if (data && data.ok && data.narrative) {
           const summaryEl = document.getElementById('lh-summary');
           if (summaryEl) summaryEl.textContent = data.narrative;
+        }
+      
+        if (data && data.score_ref) {
+          const scoreRefCtaEl = document.getElementById('score-ref-cta');
+          if (scoreRefCtaEl) {
+            scoreRefCtaEl.innerHTML =
+              '<a class="btn btn-primary" href="/?score_ref=' +
+              encodeURIComponent(data.score_ref) +
+              '#contact">Continue to a Conversation &rarr;</a>';
+            scoreRefCtaEl.hidden = false;
+          }
         }
       })
       .catch(() => {

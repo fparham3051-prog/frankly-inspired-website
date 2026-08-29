@@ -459,7 +459,7 @@ import Header from '../components/Header.astro';
     if (recommendationEl) {
       const lowest = results.reduce((min, r) => (r.pct < min.pct ? r : min), results[0]);
       const recommendedTier = compositeBand <= 1 ? 'implementation' : 'advisory';
-      const tierName = compositeBand <= 1 ? 'Strategic Implementation Retainer' : 'Strategic Advisory Retainer';
+      const tierName = 'Ongoing Advisory and Implementation Retainer';
       const tierReason =
         compositeBand <= 1
           ? 'with gaps across more than one part of the fundraising program, hands-on weekly implementation tends to build the missing structure faster than periodic advisory alone.'

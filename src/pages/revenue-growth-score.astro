@@ -437,7 +437,7 @@ import Header from '../components/Header.astro';
     if (recommendationEl) {
       const lowest = results.reduce((min, r) => (r.score < min.score ? r : min), results[0]);
       const recommendedTier = compositeBand <= 1 ? 'implementation' : 'advisory';
-      const tierName = compositeBand <= 1 ? 'Strategic Implementation Retainer' : 'Strategic Advisory Retainer';
+      const tierName = 'Ongoing Advisory and Implementation Retainer';
       const tierReason =
         compositeBand <= 1
           ? 'with revenue and growth gaps across more than one area, hands-on weekly implementation (including donor stewardship, revenue-pipeline design, and partnership development) tends to stabilize things faster than periodic advisory alone.'

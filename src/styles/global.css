@@ -873,6 +873,20 @@ a.hero-credential-link:hover {
   font-size: 0.95rem;
 }
 
+/* Shown on the Contact section when a visitor arrives with a verified
+   score_ref token from the free InstitutionalOS scorecard (see index.astro's
+   handleScoreRef()). Hidden by default via the [hidden] attribute. */
+.score-ref-banner {
+  margin: 1.2rem 0 1.8rem;
+  padding: 1.1rem 1.4rem;
+  background: var(--gold-soft);
+  border-left: 3px solid var(--gold);
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+  color: var(--navy);
+}
+.score-ref-banner strong { color: var(--navy); }
+
 /* Single featured card for the Grant Readiness offering, reuses
    .pricing-card/.featured but capped to one column so it doesn't stretch
    full-bleed the way the auto-fit pricing-grid would with only one item. */

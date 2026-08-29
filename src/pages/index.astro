@@ -364,6 +364,7 @@ import ScrollReveal from '../components/ScrollReveal.astro';
     <section id="contact" class="section contact alt-bg">
       <div class="container narrow">
         <h2 class="section-title reveal">Start a Conversation</h2>
+        <div id="score-ref-banner" class="score-ref-banner reveal" hidden></div>
         <p class="lede-sm reveal">Strong missions need sustainable institutions. If your organization is navigating growth, revenue pressure, operational complexity, leadership transition, or the need for a clearer sustainability strategy, start with a conversation.</p>
         <p class="reveal">Tell me a little about your organization, where you are today, and what you're working to strengthen. I'll review your inquiry and follow up regarding whether Frankly Inspired may be a good fit.</p>
 
@@ -483,6 +484,38 @@ import ScrollReveal from '../components/ScrollReveal.astro';
   // that repo's README.md. Same value as assessment.astro's API_BASE.
   const API_BASE = 'https://frankly-inspired-api.onrender.com';
 
+  // ---------- Score-ref handoff from the free InstitutionalOS scorecard ----------
+  // A visitor who completes the free scorecard (grantpass-landing) and clicks
+  // "Continue to a Conversation" arrives here with a signed score_ref token in
+  // the URL (see auth.py's make_score_ref). This verifies it against the
+  // backend, shows a short "continuing from your score" banner so they don't
+  // have to re-explain themselves, and carries the raw token into the contact
+  // form submission so Franklin sees the same context in the lead notification
+  // email (see /api/contact + emailTemplates.js's contactNotificationEmail).
+  let scoreRefToken: string | null = null;
+  (function handleScoreRef() {
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get('score_ref');
+    if (!token) return;
+    scoreRefToken = token;
+    fetch(API_BASE + '/api/score-ref?token=' + encodeURIComponent(token))
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (!data || !data.ok) return;
+        const banner = document.getElementById('score-ref-banner');
+        if (!banner) return;
+        const scoreText = data.score != null ? `${data.score}/100` : 'your result';
+        const bandText = data.band ? ` (${data.band})` : '';
+        banner.innerHTML = `<strong>Continuing from your ${data.stage || ''} scorecard:</strong> ${scoreText}${bandText}. No need to re-explain it below, I'll see it with your inquiry.`;
+        banner.hidden = false;
+      })
+      .catch(() => {
+        // A failed lookup (expired token, network hiccup) just means no
+        // banner - the token still rides along with the form submission
+        // below, and the backend re-verifies it independently there.
+      });
+  })();
+
   // ---------- Pricing card CTAs pre-check the matching service area ----------
   // data-plan accepts a comma-separated list, since a single retainer often
   // covers more than one service-area checkbox (e.g. the Implementation
@@ -535,6 +568,7 @@ import ScrollReveal from '../components/ScrollReveal.astro';
         timeline: formData.get('timeline'),
         referral: formData.get('referral'),
         hp_field: formData.get('hp_field'),
+        score_ref: scoreRefToken || undefined,
       };
 
       if (status) status.textContent = 'Sending...';

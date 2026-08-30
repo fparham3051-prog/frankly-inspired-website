@@ -473,6 +473,12 @@ ul, ol { padding-left: 1.25em; }
   color: var(--gold-light);
   margin-bottom: 1.1rem;
 }
+.hero-role {
+  color: #d7dee6;
+  font-size: 1.05rem;
+  font-weight: 500;
+  margin-bottom: 1.1rem;
+}
 .hero h1 { color: var(--white); font-size: clamp(2.75rem, 6.5vw, 5.5rem); }
 .hero-sub {
   color: #d7dee6;

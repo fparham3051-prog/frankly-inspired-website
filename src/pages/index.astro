@@ -621,7 +621,9 @@ import { testimonials, caseStudies } from '../data/proof';
         email: formData.get('email'),
         phone: formData.get('phone'),
         org_website: formData.get('org_website'),
-        support_area: formData.getAll('support_area'),
+        // The backend requires at least one area; the boxes are optional on
+        // the form now, so send a neutral value when none is checked.
+        support_area: formData.getAll('support_area').length ? formData.getAll('support_area') : ['Not specified'],
         challenge: formData.get('challenge'),
         timeline: formData.get('timeline'),
         referral: formData.get('referral'),

@@ -8,8 +8,9 @@
 # `astro-rebuild` on a separate service. Until that original service's settings
 # are switched to build Astro itself (Render dashboard > frankly-inspired-website >
 # Settings: Branch astro-rebuild, Build Command "npm install && npm run build",
-# Publish Directory "dist"), run this after every website change, then deploy
-# that service.
+# Publish Directory "dist"), this runs automatically on every push to
+# astro-rebuild (.github/workflows/publish-to-domain.yml). Run it by hand
+# only if that workflow is disabled.
 #
 # Usage: scripts/publish-to-domain.sh   (from the repo root, on astro-rebuild)
 set -euo pipefail
@@ -64,4 +65,4 @@ git add -A -- "$OUT"
 if git diff --cached --quiet; then echo "No changes to publish."; exit 0; fi
 git commit -qm "Publish Astro site ($SRC_SHA) to the domain's Render service" ${PUBLISH_TRAILER:+-m "$PUBLISH_TRAILER"}
 git push -q origin main
-echo "Published $SRC_SHA to main. Now deploy the 'frankly-inspired-website' Render service."
+echo "Published $SRC_SHA to main. Render deploys the 'frankly-inspired-website' service automatically."

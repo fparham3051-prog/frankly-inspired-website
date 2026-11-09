@@ -2272,3 +2272,16 @@ a.card:hover .card-cta { text-decoration: underline; }
 @media (hover: none) { .stepper-hint { display: none; } }
 .stepper-toggle { margin: 1rem 0 0; text-align: center; }
 .stepper-toggle .link-btn { margin-left: 0; }
+
+/* ---------- Client feedback (/feedback) ---------- */
+.feedback-form { margin-top: 0; }
+.nps { display: grid; grid-template-columns: repeat(11, 1fr); gap: 0.35rem; }
+.nps label { position: relative; cursor: pointer; }
+.nps input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.nps span { display: block; text-align: center; padding: 0.6rem 0; border: 1px solid #c7cdd3; border-radius: var(--radius-sm); background: var(--white); font-weight: 600; color: var(--navy); transition: border-color var(--transition), background var(--transition); }
+.nps label:hover span { border-color: var(--gold); }
+.nps input:checked + span { background: var(--navy); border-color: var(--navy); color: var(--white); }
+.nps input:focus-visible + span { box-shadow: 0 0 0 4px var(--gold-soft); }
+.nps-ends { display: flex; justify-content: space-between; font-size: 0.8rem; color: #6b7480; margin-top: 0.35rem; }
+#fb-thanks { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; text-align: center; }
+@media (max-width: 520px) { .nps { grid-template-columns: repeat(6, 1fr); } }

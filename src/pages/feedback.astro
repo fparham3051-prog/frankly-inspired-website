@@ -1,0 +1,143 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+---
+
+<BaseLayout
+  title="Share How It Went | Frankly Inspired"
+  description="A short form for Frankly Inspired clients to share results and feedback, and to choose whether their words may be published."
+  robotsNoindex={true}
+  footerVariant="legal"
+>
+  <Header variant="full" />
+
+  <main id="main">
+    <section class="section assessment-intro">
+      <div class="container narrow center">
+        <p class="eyebrow eyebrow-dark">Client feedback</p>
+        <h1>How did our work together go?</h1>
+        <p class="hero-sub-light">Three minutes, and it genuinely helps. You decide whether anything you write is shared, and you can change your mind at any time.</p>
+      </div>
+    </section>
+
+    <section class="section alt-bg">
+      <div class="container narrow">
+        <form class="contact-form feedback-form" id="feedback-form" action="#" method="POST" novalidate>
+          <div class="hp-field" aria-hidden="true">
+            <label for="hp_field">Leave this field blank</label>
+            <input type="text" id="hp_field" name="hp_field" tabindex="-1" autocomplete="off" />
+          </div>
+
+          <div class="form-row">
+            <label for="fb-name">Your name*</label>
+            <input id="fb-name" name="name" type="text" autocomplete="name" required />
+          </div>
+          <div class="form-row">
+            <label for="fb-email">Email*</label>
+            <input id="fb-email" name="email" type="email" autocomplete="email" required />
+          </div>
+          <div class="form-row">
+            <label for="fb-role">Your role</label>
+            <input id="fb-role" name="role" type="text" placeholder="Executive Director" autocomplete="organization-title" />
+          </div>
+          <div class="form-row">
+            <label for="fb-org">Organization</label>
+            <input id="fb-org" name="organization" type="text" autocomplete="organization" />
+          </div>
+
+          <fieldset class="form-row full">
+            <legend>How likely are you to recommend Frankly Inspired to a colleague?</legend>
+            <div class="nps" role="radiogroup">
+              {Array.from({ length: 11 }, (_, n) => (
+                <label><input type="radio" name="rating" value={n} /><span>{n}</span></label>
+              ))}
+            </div>
+            <div class="nps-ends"><span>Not likely</span><span>Very likely</span></div>
+          </fieldset>
+
+          <div class="form-row full">
+            <label for="fb-result">What changed for your organization? Numbers help if you have them.</label>
+            <textarea id="fb-result" name="result" rows="4" placeholder="For example: we earned the Candid Gold Seal, closed our first multi-year grant, or the board adopted a reserve policy."></textarea>
+          </div>
+          <div class="form-row full">
+            <label for="fb-quote">In a sentence or two, what would you tell another nonprofit leader about working with Franklin?</label>
+            <textarea id="fb-quote" name="quote" rows="3"></textarea>
+          </div>
+
+          <fieldset class="form-row full">
+            <legend>May we share what you wrote on our website?*</legend>
+            <div class="radio-group">
+              <label><input type="radio" name="permission" value="named" /> Yes, with my name and organization</label>
+              <label><input type="radio" name="permission" value="anonymous" /> Yes, anonymously (my role only)</label>
+              <label><input type="radio" name="permission" value="private" checked /> No, this is for Franklin only</label>
+            </div>
+          </fieldset>
+
+          <button type="submit" class="btn btn-primary">Send feedback</button>
+          <p class="form-status" id="fb-status" role="status" aria-live="polite"></p>
+        </form>
+
+        <div class="form-thanks" id="fb-thanks" hidden tabindex="-1">
+          <h2>Thank you</h2>
+          <p>Your feedback reached Franklin, and a copy of your choices is on its way to your inbox. To change how your words are used, just reply to that email.</p>
+          <p><a class="btn btn-primary" href="/health-index">See your Health Index</a></p>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<script>
+  const API_BASE = 'https://frankly-inspired-api.onrender.com';
+  const form = document.getElementById('feedback-form') as HTMLFormElement | null;
+  const status = document.getElementById('fb-status');
+  const thanks = document.getElementById('fb-thanks');
+
+  // Franklin can send a prefilled link: /feedback?name=...&org=...&email=...
+  const q = new URLSearchParams(location.search);
+  const prefill: Record<string, string> = { name: 'fb-name', org: 'fb-org', email: 'fb-email', role: 'fb-role' };
+  Object.entries(prefill).forEach(([k, id]) => {
+    const v = q.get(k);
+    const el = document.getElementById(id) as HTMLInputElement | null;
+    if (v && el) el.value = v.slice(0, 200);
+  });
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!status) return;
+    const fd = new FormData(form);
+    const val = (k: string) => String(fd.get(k) || '').trim();
+    if (!val('name') || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val('email'))) {
+      status.textContent = 'Please add your name and a valid email address.';
+      return;
+    }
+    if (!val('result') && !val('quote')) {
+      status.textContent = 'Please tell us a little about how it went.';
+      (document.getElementById('fb-result') as HTMLElement)?.focus();
+      return;
+    }
+    const btn = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+    if (btn) btn.disabled = true;
+    status.textContent = 'Sending…';
+    try {
+      const res = await fetch(API_BASE + '/api/feedback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: val('name'), email: val('email'), role: val('role'), organization: val('organization'),
+          rating: fd.get('rating') === null ? null : Number(fd.get('rating')),
+          result: val('result'), quote: val('quote'),
+          permission: val('permission') || 'private',
+          hp_field: val('hp_field'),
+        }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || !data.ok) throw new Error(data.error || 'Something went wrong.');
+      form.hidden = true;
+      if (thanks) { thanks.hidden = false; thanks.focus(); }
+    } catch (err) {
+      status.textContent = (err as Error).message + ' You can also email franklin@franklyinspired.associates.';
+      if (btn) btn.disabled = false;
+    }
+  });
+</script>

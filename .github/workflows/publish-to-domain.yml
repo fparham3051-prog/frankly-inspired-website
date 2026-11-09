@@ -1,0 +1,41 @@
+# Keeps franklyinspired.associates in step with the Astro site automatically.
+#
+# The custom domain is attached to the original Render static site, which
+# serves the folder "frankly-inspired-website 2" from `main` with no build
+# step. On every push to astro-rebuild this builds the site, copies it into
+# that folder on main (scripts/publish-to-domain.sh), and pushes; Render then
+# deploys both services on its own. If the Render service is ever switched
+# to build astro-rebuild directly, this workflow can be deleted.
+name: Publish site to domain
+
+on:
+  push:
+    branches: [astro-rebuild]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish-to-domain
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Publish to main
+        env:
+          PUBLISH_TRAILER: "Automated by .github/workflows/publish-to-domain.yml"
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          bash scripts/publish-to-domain.sh

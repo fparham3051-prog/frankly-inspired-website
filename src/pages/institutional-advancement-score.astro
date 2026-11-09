@@ -2,6 +2,7 @@
 import { CALENDLY_URL } from '../config';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
+import RubricKey from '../components/RubricKey.astro';
 import EmailResultsForm from '../components/EmailResultsForm.astro';
 ---
 
@@ -48,6 +49,7 @@ import EmailResultsForm from '../components/EmailResultsForm.astro';
         </div>
 
         <form id="ia-form" novalidate>
+          <RubricKey />
 
           <div class="pillar-group" data-pillar-index="1">
             <h2 class="pillar-heading">1. Gift Portfolio Strategy &amp; Staffing</h2>
@@ -55,31 +57,31 @@ import EmailResultsForm from '../components/EmailResultsForm.astro';
             <fieldset class="likert">
               <legend>We segment donors into clear gift levels (e.g., broad-based/annual, mid-level, major, principal) and use a different strategy for each, not one blanket approach.</legend>
               <div class="likert-scale">
-                <label><input type="radio" name="gp1" value="1" required /><span>1</span><small>Not at all true</small></label>
-                <label><input type="radio" name="gp1" value="2" /><span>2</span><small>Rarely true</small></label>
-                <label><input type="radio" name="gp1" value="3" /><span>3</span><small>Somewhat true</small></label>
-                <label><input type="radio" name="gp1" value="4" /><span>4</span><small>Mostly true</small></label>
-                <label><input type="radio" name="gp1" value="5" /><span>5</span><small>Very true</small></label>
+                <label><input type="radio" name="gp1" value="1" required /><span>1</span><small>Not in place</small></label>
+                <label><input type="radio" name="gp1" value="2" /><span>2</span><small>Talked about</small></label>
+                <label><input type="radio" name="gp1" value="3" /><span>3</span><small>Informal</small></label>
+                <label><input type="radio" name="gp1" value="4" /><span>4</span><small>Documented</small></label>
+                <label><input type="radio" name="gp1" value="5" /><span>5</span><small>Verified</small></label>
               </div>
             </fieldset>
             <fieldset class="likert">
               <legend>Major and principal gift relationships are assigned to a specific staff member's portfolio, not left to whoever has time.</legend>
               <div class="likert-scale">
-                <label><input type="radio" name="gp2" value="1" required /><span>1</span><small>Not at all true</small></label>
-                <label><input type="radio" name="gp2" value="2" /><span>2</span><small>Rarely true</small></label>
-                <label><input type="radio" name="gp2" value="3" /><span>3</span><small>Somewhat true</small></label>
-                <label><input type="radio" name="gp2" value="4" /><span>4</span><small>Mostly true</small></label>
-                <label><input type="radio" name="gp2" value="5" /><span>5</span><small>Very true</small></label>
+                <label><input type="radio" name="gp2" value="1" required /><span>1</span><small>Not in place</small></label>
+                <label><input type="radio" name="gp2" value="2" /><span>2</span><small>Talked about</small></label>
+                <label><input type="radio" name="gp2" value="3" /><span>3</span><small>Informal</small></label>
+                <label><input type="radio" name="gp2" value="4" /><span>4</span><small>Documented</small></label>
+                <label><input type="radio" name="gp2" value="5" /><span>5</span><small>Verified</small></label>
               </div>
             </fieldset>
             <fieldset class="likert">
-              <legend>Board members and other volunteer leaders are actively engaged in identifying and opening doors to prospects, not just staff.</legend>
+              <legend>Board members and other volunteer leaders have defined roles in identifying prospects and opening doors, not just staff.</legend>
               <div class="likert-scale">
-                <label><input type="radio" name="gp3" value="1" required /><span>1</span><small>Not at all true</small></label>
-                <label><input type="radio" name="gp3" value="2" /><span>2</span><small>Rarely true</small></label>
-                <label><input type="radio" name="gp3" value="3" /><span>3</span><small>Somewhat true</small></label>
-                <label><input type="radio" name="gp3" value="4" /><span>4</span><small>Mostly true</small></label>
-                <label><input type="radio" name="gp3" value="5" /><span>5</span><small>Very true</small></label>
+                <label><input type="radio" name="gp3" value="1" required /><span>1</span><small>Not in place</small></label>
+                <label><input type="radio" name="gp3" value="2" /><span>2</span><small>Talked about</small></label>
+                <label><input type="radio" name="gp3" value="3" /><span>3</span><small>Informal</small></label>
+                <label><input type="radio" name="gp3" value="4" /><span>4</span><small>Documented</small></label>
+                <label><input type="radio" name="gp3" value="5" /><span>5</span><small>Verified</small></label>
               </div>
             </fieldset>
           </div>
@@ -90,31 +92,31 @@ import EmailResultsForm from '../components/EmailResultsForm.astro';
             <fieldset class="likert">
               <legend>We track donors through defined stages (e.g., identification, qualification, cultivation, solicitation, stewardship), not just "contacted" or "not."</legend>
               <div class="likert-scale">
-                <label><input type="radio" name="mm1" value="1" required /><span>1</span><small>Not at all true</small></label>
-                <label><input type="radio" name="mm1" value="2" /><span>2</span><small>Rarely true</small></label>
-                <label><input type="radio" name="mm1" value="3" /><span>3</span><small>Somewhat true</small></label>
-                <label><input type="radio" name="mm1" value="4" /><span>4</span><small>Mostly true</small></label>
-                <label><input type="radio" name="mm1" value="5" /><span>5</span><small>Very true</small></label>
+                <label><input type="radio" name="mm1" value="1" required /><span>1</span><small>Not in place</small></label>
+                <label><input type="radio" name="mm1" value="2" /><span>2</span><small>Talked about</small></label>
+                <label><input type="radio" name="mm1" value="3" /><span>3</span><small>Informal</small></label>
+                <label><input type="radio" name="mm1" value="4" /><span>4</span><small>Documented</small></label>
+                <label><input type="radio" name="mm1" value="5" /><span>5</span><small>Verified</small></label>
               </div>
             </fieldset>
             <fieldset class="likert">
               <legend>Every gift is acknowledged promptly with more than a generic, automated receipt.</legend>
               <div class="likert-scale">
-                <label><input type="radio" name="mm2" value="1" required /><span>1</span><small>Not at all true</small></label>
-                <label><input type="radio" name="mm2" value="2" /><span>2</span><small>Rarely true</small></label>
-                <label><input type="radio" name="mm2" value="3" /><span>3</span><small>Somewhat true</small></label>
-                <label><input type="radio" name="mm2" value="4" /><span>4</span><small>Mostly true</small></label>
-                <label><input type="radio" name="mm2" value="5" /><span>5</span><small>Very true</small></label>
+                <label><input type="radio" name="mm2" value="1" required /><span>1</span><small>Not in place</small></label>
+                <label><input type="radio" name="mm2" value="2" /><span>2</span><small>Talked about</small></label>
+                <label><input type="radio" name="mm2" value="3" /><span>3</span><small>Informal</small></label>
+                <label><input type="radio" name="mm2" value="4" /><span>4</span><small>Documented</small></label>
+                <label><input type="radio" name="mm2" value="5" /><span>5</span><small>Verified</small></label>
               </div>
             </fieldset>
             <fieldset class="likert">
               <legend>We have a deliberate stewardship plan for donors after the ask, not just before it: impact updates, personal touches, recognition tied to gift level.</legend>
               <div class="likert-scale">
-                <label><input type="radio" name="mm3" value="1" required /><span>1</span><small>Not at all true</small></label>
-                <label><input type="radio" name="mm3" value="2" /><span>2</span><small>Rarely true</small></label>
-                <label><input type="radio" name="mm3" value="3" /><span>3</span><small>Somewhat true</small></label>
-                <label><input type="radio" name="mm3" value="4" /><span>4</span><small>Mostly true</small></label>
-                <label><input type="radio" name="mm3" value="5" /><span>5</span><small>Very true</small></label>
+                <label><input type="radio" name="mm3" value="1" required /><span>1</span><small>Not in place</small></label>
+                <label><input type="radio" name="mm3" value="2" /><span>2</span><small>Talked about</small></label>
+                <label><input type="radio" name="mm3" value="3" /><span>3</span><small>Informal</small></label>
+                <label><input type="radio" name="mm3" value="4" /><span>4</span><small>Documented</small></label>
+                <label><input type="radio" name="mm3" value="5" /><span>5</span><small>Verified</small></label>
               </div>
             </fieldset>
           </div>
@@ -126,31 +128,31 @@ import EmailResultsForm from '../components/EmailResultsForm.astro';
             <fieldset class="likert">
               <legend>Before launching a campaign, we run a real feasibility assessment (confidential interviews with top prospects), rather than setting a goal and hoping.</legend>
               <div class="likert-scale">
-                <label><input type="radio" name="cs1" value="1" required /><span>1</span><small>Not at all true</small></label>
-                <label><input type="radio" name="cs1" value="2" /><span>2</span><small>Rarely true</small></label>
-                <label><input type="radio" name="cs1" value="3" /><span>3</span><small>Somewhat true</small></label>
-                <label><input type="radio" name="cs1" value="4" /><span>4</span><small>Mostly true</small></label>
-                <label><input type="radio" name="cs1" value="5" /><span>5</span><small>Very true</small></label>
+                <label><input type="radio" name="cs1" value="1" required /><span>1</span><small>Not in place</small></label>
+                <label><input type="radio" name="cs1" value="2" /><span>2</span><small>Talked about</small></label>
+                <label><input type="radio" name="cs1" value="3" /><span>3</span><small>Informal</small></label>
+                <label><input type="radio" name="cs1" value="4" /><span>4</span><small>Documented</small></label>
+                <label><input type="radio" name="cs1" value="5" /><span>5</span><small>Verified</small></label>
               </div>
             </fieldset>
             <fieldset class="likert">
               <legend>We understand and plan for a quiet/leadership phase, securing a strong majority of the goal from major donors before any public announcement.</legend>
               <div class="likert-scale">
-                <label><input type="radio" name="cs2" value="1" required /><span>1</span><small>Not at all true</small></label>
-                <label><input type="radio" name="cs2" value="2" /><span>2</span><small>Rarely true</small></label>
-                <label><input type="radio" name="cs2" value="3" /><span>3</span><small>Somewhat true</small></label>
-                <label><input type="radio" name="cs2" value="4" /><span>4</span><small>Mostly true</small></label>
-                <label><input type="radio" name="cs2" value="5" /><span>5</span><small>Very true</small></label>
+                <label><input type="radio" name="cs2" value="1" required /><span>1</span><small>Not in place</small></label>
+                <label><input type="radio" name="cs2" value="2" /><span>2</span><small>Talked about</small></label>
+                <label><input type="radio" name="cs2" value="3" /><span>3</span><small>Informal</small></label>
+                <label><input type="radio" name="cs2" value="4" /><span>4</span><small>Documented</small></label>
+                <label><input type="radio" name="cs2" value="5" /><span>5</span><small>Verified</small></label>
               </div>
             </fieldset>
             <fieldset class="likert">
               <legend>We have a realistic campaign timeline and a specific, compelling case for support, not a general "help us" appeal.</legend>
               <div class="likert-scale">
-                <label><input type="radio" name="cs3" value="1" required /><span>1</span><small>Not at all true</small></label>
-                <label><input type="radio" name="cs3" value="2" /><span>2</span><small>Rarely true</small></label>
-                <label><input type="radio" name="cs3" value="3" /><span>3</span><small>Somewhat true</small></label>
-                <label><input type="radio" name="cs3" value="4" /><span>4</span><small>Mostly true</small></label>
-                <label><input type="radio" name="cs3" value="5" /><span>5</span><small>Very true</small></label>
+                <label><input type="radio" name="cs3" value="1" required /><span>1</span><small>Not in place</small></label>
+                <label><input type="radio" name="cs3" value="2" /><span>2</span><small>Talked about</small></label>
+                <label><input type="radio" name="cs3" value="3" /><span>3</span><small>Informal</small></label>
+                <label><input type="radio" name="cs3" value="4" /><span>4</span><small>Documented</small></label>
+                <label><input type="radio" name="cs3" value="5" /><span>5</span><small>Verified</small></label>
               </div>
             </fieldset>
           </div>
@@ -161,31 +163,31 @@ import EmailResultsForm from '../components/EmailResultsForm.astro';
             <fieldset class="likert">
               <legend>We track true net revenue and cost-per-dollar-raised for each event, not just gross revenue.</legend>
               <div class="likert-scale">
-                <label><input type="radio" name="ev1" value="1" required /><span>1</span><small>Not at all true</small></label>
-                <label><input type="radio" name="ev1" value="2" /><span>2</span><small>Rarely true</small></label>
-                <label><input type="radio" name="ev1" value="3" /><span>3</span><small>Somewhat true</small></label>
-                <label><input type="radio" name="ev1" value="4" /><span>4</span><small>Mostly true</small></label>
-                <label><input type="radio" name="ev1" value="5" /><span>5</span><small>Very true</small></label>
+                <label><input type="radio" name="ev1" value="1" required /><span>1</span><small>Not in place</small></label>
+                <label><input type="radio" name="ev1" value="2" /><span>2</span><small>Talked about</small></label>
+                <label><input type="radio" name="ev1" value="3" /><span>3</span><small>Informal</small></label>
+                <label><input type="radio" name="ev1" value="4" /><span>4</span><small>Documented</small></label>
+                <label><input type="radio" name="ev1" value="5" /><span>5</span><small>Verified</small></label>
               </div>
             </fieldset>
             <fieldset class="likert">
-              <legend>Our events are designed as relationship and cultivation touchpoints, not only as fundraising transactions.</legend>
+              <legend>Our events are planned as cultivation touchpoints, with follow-up for key guests, not only as fundraising transactions.</legend>
               <div class="likert-scale">
-                <label><input type="radio" name="ev2" value="1" required /><span>1</span><small>Not at all true</small></label>
-                <label><input type="radio" name="ev2" value="2" /><span>2</span><small>Rarely true</small></label>
-                <label><input type="radio" name="ev2" value="3" /><span>3</span><small>Somewhat true</small></label>
-                <label><input type="radio" name="ev2" value="4" /><span>4</span><small>Mostly true</small></label>
-                <label><input type="radio" name="ev2" value="5" /><span>5</span><small>Very true</small></label>
+                <label><input type="radio" name="ev2" value="1" required /><span>1</span><small>Not in place</small></label>
+                <label><input type="radio" name="ev2" value="2" /><span>2</span><small>Talked about</small></label>
+                <label><input type="radio" name="ev2" value="3" /><span>3</span><small>Informal</small></label>
+                <label><input type="radio" name="ev2" value="4" /><span>4</span><small>Documented</small></label>
+                <label><input type="radio" name="ev2" value="5" /><span>5</span><small>Verified</small></label>
               </div>
             </fieldset>
             <fieldset class="likert">
               <legend>We evaluate whether each event is worth repeating based on ROI and strategic fit, rather than running it again out of habit.</legend>
               <div class="likert-scale">
-                <label><input type="radio" name="ev3" value="1" required /><span>1</span><small>Not at all true</small></label>
-                <label><input type="radio" name="ev3" value="2" /><span>2</span><small>Rarely true</small></label>
-                <label><input type="radio" name="ev3" value="3" /><span>3</span><small>Somewhat true</small></label>
-                <label><input type="radio" name="ev3" value="4" /><span>4</span><small>Mostly true</small></label>
-                <label><input type="radio" name="ev3" value="5" /><span>5</span><small>Very true</small></label>
+                <label><input type="radio" name="ev3" value="1" required /><span>1</span><small>Not in place</small></label>
+                <label><input type="radio" name="ev3" value="2" /><span>2</span><small>Talked about</small></label>
+                <label><input type="radio" name="ev3" value="3" /><span>3</span><small>Informal</small></label>
+                <label><input type="radio" name="ev3" value="4" /><span>4</span><small>Documented</small></label>
+                <label><input type="radio" name="ev3" value="5" /><span>5</span><small>Verified</small></label>
               </div>
             </fieldset>
           </div>
@@ -196,31 +198,31 @@ import EmailResultsForm from '../components/EmailResultsForm.astro';
             <fieldset class="likert">
               <legend>We actively invite donors to consider a bequest or legacy gift, through stewardship conversations, website materials, or a named legacy society, rather than only responding if a donor raises it first.</legend>
               <div class="likert-scale">
-                <label><input type="radio" name="pg1" value="1" required /><span>1</span><small>Not at all true</small></label>
-                <label><input type="radio" name="pg1" value="2" /><span>2</span><small>Rarely true</small></label>
-                <label><input type="radio" name="pg1" value="3" /><span>3</span><small>Somewhat true</small></label>
-                <label><input type="radio" name="pg1" value="4" /><span>4</span><small>Mostly true</small></label>
-                <label><input type="radio" name="pg1" value="5" /><span>5</span><small>Very true</small></label>
+                <label><input type="radio" name="pg1" value="1" required /><span>1</span><small>Not in place</small></label>
+                <label><input type="radio" name="pg1" value="2" /><span>2</span><small>Talked about</small></label>
+                <label><input type="radio" name="pg1" value="3" /><span>3</span><small>Informal</small></label>
+                <label><input type="radio" name="pg1" value="4" /><span>4</span><small>Documented</small></label>
+                <label><input type="radio" name="pg1" value="5" /><span>5</span><small>Verified</small></label>
               </div>
             </fieldset>
             <fieldset class="likert">
-              <legend>We know, at least roughly, which loyal long-tenured donors might be bequest prospects based on giving history and engagement, not just guesswork.</legend>
+              <legend>We keep a list of likely bequest prospects based on giving history and engagement, not guesswork.</legend>
               <div class="likert-scale">
-                <label><input type="radio" name="pg2" value="1" required /><span>1</span><small>Not at all true</small></label>
-                <label><input type="radio" name="pg2" value="2" /><span>2</span><small>Rarely true</small></label>
-                <label><input type="radio" name="pg2" value="3" /><span>3</span><small>Somewhat true</small></label>
-                <label><input type="radio" name="pg2" value="4" /><span>4</span><small>Mostly true</small></label>
-                <label><input type="radio" name="pg2" value="5" /><span>5</span><small>Very true</small></label>
+                <label><input type="radio" name="pg2" value="1" required /><span>1</span><small>Not in place</small></label>
+                <label><input type="radio" name="pg2" value="2" /><span>2</span><small>Talked about</small></label>
+                <label><input type="radio" name="pg2" value="3" /><span>3</span><small>Informal</small></label>
+                <label><input type="radio" name="pg2" value="4" /><span>4</span><small>Documented</small></label>
+                <label><input type="radio" name="pg2" value="5" /><span>5</span><small>Verified</small></label>
               </div>
             </fieldset>
             <fieldset class="likert">
               <legend>When a donor lets us know about a planned or bequest gift, we have a deliberate way to steward that commitment (recognition, updates, a legacy society) not just a thank-you and a file.</legend>
               <div class="likert-scale">
-                <label><input type="radio" name="pg3" value="1" required /><span>1</span><small>Not at all true</small></label>
-                <label><input type="radio" name="pg3" value="2" /><span>2</span><small>Rarely true</small></label>
-                <label><input type="radio" name="pg3" value="3" /><span>3</span><small>Somewhat true</small></label>
-                <label><input type="radio" name="pg3" value="4" /><span>4</span><small>Mostly true</small></label>
-                <label><input type="radio" name="pg3" value="5" /><span>5</span><small>Very true</small></label>
+                <label><input type="radio" name="pg3" value="1" required /><span>1</span><small>Not in place</small></label>
+                <label><input type="radio" name="pg3" value="2" /><span>2</span><small>Talked about</small></label>
+                <label><input type="radio" name="pg3" value="3" /><span>3</span><small>Informal</small></label>
+                <label><input type="radio" name="pg3" value="4" /><span>4</span><small>Documented</small></label>
+                <label><input type="radio" name="pg3" value="5" /><span>5</span><small>Verified</small></label>
               </div>
             </fieldset>
           </div>
@@ -268,7 +270,7 @@ import EmailResultsForm from '../components/EmailResultsForm.astro';
 
           <div class="results-related">
             <p>This tool measures fundraising program structure: staffing, stewardship, campaigns, and events. For the financial-ratio read on revenue health (reserves, spending mix, liquidity, concentration), see the <a href="/revenue-growth-score">Revenue &amp; Growth Score</a>. For the broader strategic view that also weighs leadership capacity, see the <a href="/sustainability-score">Sustainability Strategy Score</a>.</p>
-            <p>Haven't taken the free <a href="/assessment">Nonprofit Sustainability Self-Assessment</a> yet? It covers this and four other areas in about 5 minutes.</p>
+            <p>Haven't taken the free <a href="/assessment">Nonprofit Sustainability Self-Assessment</a> yet? It covers this and the other six Health Index dimensions in about 7 minutes.</p>
           </div>
 
           <div class="results-cta">
@@ -515,7 +517,7 @@ import EmailResultsForm from '../components/EmailResultsForm.astro';
     fetch(API_BASE + '/api/assessment-narrative', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ tool: 'institutional-advancement', ...payload }),
+      body: JSON.stringify({ tool: 'institutional-advancement', scale: 'evidence', ...payload }),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -551,7 +553,7 @@ import EmailResultsForm from '../components/EmailResultsForm.astro';
   function fetchBenchmarks(compositePct: number) {
     const overallEl = document.getElementById('ia-avg-overall') as HTMLElement | null;
 
-    fetch(API_BASE + '/api/benchmarks?tool=institutional-advancement')
+    fetch(API_BASE + '/api/benchmarks?tool=institutional-advancement&scale=evidence')
       .then((res) => res.json())
       .then((data) => {
         const b = data && data.ok ? data.benchmarks : null;

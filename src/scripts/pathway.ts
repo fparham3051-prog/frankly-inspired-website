@@ -43,6 +43,8 @@ const ACTIONS: Record<string, string> = {
   'Leadership & Organizational Development': 'Write a one-page role card for each senior position: its purpose, the decisions it owns, and three measures of success. Review each one in that person’s next check-in.',
   'Operations & Infrastructure': 'Choose five numbers leadership will look at every month, such as cash on hand, people served, and donor retention, and put them on a single page reviewed at each leadership meeting.',
   'Partnership & Ecosystem Strategy': 'List your ten most important partners and mark each as formal, informal, or one-off. Formalize your two most important informal partnerships with a simple memorandum of understanding.',
+  'Program & Impact Evidence': 'Draft a one-page logic model for your largest program: inputs, activities, outputs, and the two or three outcomes you expect. Then pick one outcome and start measuring it with every participant this quarter.',
+  'Governance & Risk': "Pull your last filed Form 990 and check Part VI. Adopt any missing core policy (conflict of interest, whistleblower, document retention), and put the 990 and an annual executive director evaluation on the board calendar.",
   // Leadership & Operations Score
   'Governance Health': 'Reserve the first 30 minutes of your next board meeting for one strategic question, with a one-page brief sent a week ahead, instead of opening with updates.',
   'Leadership Succession & Bench Strength': 'Draft a one-page emergency succession plan: who steps in as interim, who holds signing authority, and where key relationships and passwords are documented. Ask the board to approve it.',

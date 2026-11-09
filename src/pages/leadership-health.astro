@@ -2,6 +2,7 @@
 import { CALENDLY_URL } from '../config';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
+import RubricKey from '../components/RubricKey.astro';
 import EmailResultsForm from '../components/EmailResultsForm.astro';
 ---
 
@@ -44,7 +45,7 @@ import EmailResultsForm from '../components/EmailResultsForm.astro';
       <div class="container narrow center">
         <p class="eyebrow eyebrow-dark">Free Diagnostic</p>
         <h1>Leadership &amp; Operations Score</h1>
-        <p class="hero-sub-light">12 quick questions across governance, leadership succession, organizational alignment, and change capacity, each grounded in named research from BoardSource, the CompassPoint/Meyer Foundation "Daring to Lead" study, McKinsey's Organizational Health Index, and Harvard Business School's Kotter change model. Takes about 7 minutes. This is the deeper follow-up to the Leadership &amp; Organizational Development pillar in the free <a href="/assessment">Self-Assessment</a>: jump in below, or start there first for the faster 5-minute version.</p>
+        <p class="hero-sub-light">12 quick questions across governance, leadership succession, organizational alignment, and change capacity, each grounded in named research from BoardSource, the CompassPoint/Meyer Foundation "Daring to Lead" study, McKinsey's Organizational Health Index, and Harvard Business School's Kotter change model. Takes about 7 minutes. This is the deeper follow-up to the Leadership &amp; Organizational Development pillar in the free <a href="/assessment">Self-Assessment</a>: jump in below, or start there first for the faster 7-minute version.</p>
       </div>
     </section>
 
@@ -58,38 +59,39 @@ import EmailResultsForm from '../components/EmailResultsForm.astro';
         </div>
 
         <form id="lh-form" novalidate>
+          <RubricKey />
 
           <div class="pillar-group" data-pillar-index="1">
             <h2 class="pillar-heading">1. Governance Health</h2>
             <p class="fh-field-help">Based on BoardSource's "Leading with Intent" national board-practices research.</p>
             <fieldset class="likert">
-              <legend>Our board has the right composition and relationships to build trust with the communities we serve.</legend>
+              <legend>Our board recruits deliberately, using a written profile of the skills, perspectives, and community relationships our mission needs.</legend>
               <div class="likert-scale">
-                <label><input type="radio" name="g1" value="1" required /><span>1</span><small>Not at all true</small></label>
-                <label><input type="radio" name="g1" value="2" /><span>2</span><small>Rarely true</small></label>
-                <label><input type="radio" name="g1" value="3" /><span>3</span><small>Somewhat true</small></label>
-                <label><input type="radio" name="g1" value="4" /><span>4</span><small>Mostly true</small></label>
-                <label><input type="radio" name="g1" value="5" /><span>5</span><small>Very true</small></label>
+                <label><input type="radio" name="g1" value="1" required /><span>1</span><small>Not in place</small></label>
+                <label><input type="radio" name="g1" value="2" /><span>2</span><small>Talked about</small></label>
+                <label><input type="radio" name="g1" value="3" /><span>3</span><small>Informal</small></label>
+                <label><input type="radio" name="g1" value="4" /><span>4</span><small>Documented</small></label>
+                <label><input type="radio" name="g1" value="5" /><span>5</span><small>Verified</small></label>
               </div>
             </fieldset>
             <fieldset class="likert">
-              <legend>Board members are actively engaged in advocating for our mission, not just fundraising and compliance.</legend>
+              <legend>Board members have written expectations that include advocating for our mission, not just fundraising and compliance, and they meet them.</legend>
               <div class="likert-scale">
-                <label><input type="radio" name="g2" value="1" required /><span>1</span><small>Not at all true</small></label>
-                <label><input type="radio" name="g2" value="2" /><span>2</span><small>Rarely true</small></label>
-                <label><input type="radio" name="g2" value="3" /><span>3</span><small>Somewhat true</small></label>
-                <label><input type="radio" name="g2" value="4" /><span>4</span><small>Mostly true</small></label>
-                <label><input type="radio" name="g2" value="5" /><span>5</span><small>Very true</small></label>
+                <label><input type="radio" name="g2" value="1" required /><span>1</span><small>Not in place</small></label>
+                <label><input type="radio" name="g2" value="2" /><span>2</span><small>Talked about</small></label>
+                <label><input type="radio" name="g2" value="3" /><span>3</span><small>Informal</small></label>
+                <label><input type="radio" name="g2" value="4" /><span>4</span><small>Documented</small></label>
+                <label><input type="radio" name="g2" value="5" /><span>5</span><small>Verified</small></label>
               </div>
             </fieldset>
             <fieldset class="likert">
-              <legend>Board meetings spend meaningful time on strategy and organizational direction, not just fundraising updates.</legend>
+              <legend>Board agendas set aside real time for strategy and organizational direction at most meetings, not just reports and fundraising updates.</legend>
               <div class="likert-scale">
-                <label><input type="radio" name="g3" value="1" required /><span>1</span><small>Not at all true</small></label>
-                <label><input type="radio" name="g3" value="2" /><span>2</span><small>Rarely true</small></label>
-                <label><input type="radio" name="g3" value="3" /><span>3</span><small>Somewhat true</small></label>
-                <label><input type="radio" name="g3" value="4" /><span>4</span><small>Mostly true</small></label>
-                <label><input type="radio" name="g3" value="5" /><span>5</span><small>Very true</small></label>
+                <label><input type="radio" name="g3" value="1" required /><span>1</span><small>Not in place</small></label>
+                <label><input type="radio" name="g3" value="2" /><span>2</span><small>Talked about</small></label>
+                <label><input type="radio" name="g3" value="3" /><span>3</span><small>Informal</small></label>
+                <label><input type="radio" name="g3" value="4" /><span>4</span><small>Documented</small></label>
+                <label><input type="radio" name="g3" value="5" /><span>5</span><small>Verified</small></label>
               </div>
             </fieldset>
           </div>
@@ -100,31 +102,31 @@ import EmailResultsForm from '../components/EmailResultsForm.astro';
             <fieldset class="likert">
               <legend>We have a documented, board-approved plan for what happens if our Executive Director leaves unexpectedly.</legend>
               <div class="likert-scale">
-                <label><input type="radio" name="s1" value="1" required /><span>1</span><small>Not at all true</small></label>
-                <label><input type="radio" name="s1" value="2" /><span>2</span><small>Rarely true</small></label>
-                <label><input type="radio" name="s1" value="3" /><span>3</span><small>Somewhat true</small></label>
-                <label><input type="radio" name="s1" value="4" /><span>4</span><small>Mostly true</small></label>
-                <label><input type="radio" name="s1" value="5" /><span>5</span><small>Very true</small></label>
+                <label><input type="radio" name="s1" value="1" required /><span>1</span><small>Not in place</small></label>
+                <label><input type="radio" name="s1" value="2" /><span>2</span><small>Talked about</small></label>
+                <label><input type="radio" name="s1" value="3" /><span>3</span><small>Informal</small></label>
+                <label><input type="radio" name="s1" value="4" /><span>4</span><small>Documented</small></label>
+                <label><input type="radio" name="s1" value="5" /><span>5</span><small>Verified</small></label>
               </div>
             </fieldset>
             <fieldset class="likert">
-              <legend>If our Executive Director left tomorrow, at least one other staff member could credibly step in on an interim basis.</legend>
+              <legend>A specific staff member has been named, and prepared, to step in as interim leader if our Executive Director left unexpectedly.</legend>
               <div class="likert-scale">
-                <label><input type="radio" name="s2" value="1" required /><span>1</span><small>Not at all true</small></label>
-                <label><input type="radio" name="s2" value="2" /><span>2</span><small>Rarely true</small></label>
-                <label><input type="radio" name="s2" value="3" /><span>3</span><small>Somewhat true</small></label>
-                <label><input type="radio" name="s2" value="4" /><span>4</span><small>Mostly true</small></label>
-                <label><input type="radio" name="s2" value="5" /><span>5</span><small>Very true</small></label>
+                <label><input type="radio" name="s2" value="1" required /><span>1</span><small>Not in place</small></label>
+                <label><input type="radio" name="s2" value="2" /><span>2</span><small>Talked about</small></label>
+                <label><input type="radio" name="s2" value="3" /><span>3</span><small>Informal</small></label>
+                <label><input type="radio" name="s2" value="4" /><span>4</span><small>Documented</small></label>
+                <label><input type="radio" name="s2" value="5" /><span>5</span><small>Verified</small></label>
               </div>
             </fieldset>
             <fieldset class="likert">
               <legend>Our organization actively invests in developing future leaders (training, mentorship, real delegated authority) rather than concentrating leadership in one person.</legend>
               <div class="likert-scale">
-                <label><input type="radio" name="s3" value="1" required /><span>1</span><small>Not at all true</small></label>
-                <label><input type="radio" name="s3" value="2" /><span>2</span><small>Rarely true</small></label>
-                <label><input type="radio" name="s3" value="3" /><span>3</span><small>Somewhat true</small></label>
-                <label><input type="radio" name="s3" value="4" /><span>4</span><small>Mostly true</small></label>
-                <label><input type="radio" name="s3" value="5" /><span>5</span><small>Very true</small></label>
+                <label><input type="radio" name="s3" value="1" required /><span>1</span><small>Not in place</small></label>
+                <label><input type="radio" name="s3" value="2" /><span>2</span><small>Talked about</small></label>
+                <label><input type="radio" name="s3" value="3" /><span>3</span><small>Informal</small></label>
+                <label><input type="radio" name="s3" value="4" /><span>4</span><small>Documented</small></label>
+                <label><input type="radio" name="s3" value="5" /><span>5</span><small>Verified</small></label>
               </div>
             </fieldset>
           </div>
@@ -133,33 +135,33 @@ import EmailResultsForm from '../components/EmailResultsForm.astro';
             <h2 class="pillar-heading">3. Organizational Alignment &amp; Execution</h2>
             <p class="fh-field-help">Based on three outcomes from McKinsey's Organizational Health Index (OHI): Direction, Accountability, and Capabilities.</p>
             <fieldset class="likert">
-              <legend>Staff at every level could clearly articulate our organization's top priorities for this year.</legend>
+              <legend>Our top priorities for this year are written down and shared with staff at every level, so anyone on the team could name them.</legend>
               <div class="likert-scale">
-                <label><input type="radio" name="a1" value="1" required /><span>1</span><small>Not at all true</small></label>
-                <label><input type="radio" name="a1" value="2" /><span>2</span><small>Rarely true</small></label>
-                <label><input type="radio" name="a1" value="3" /><span>3</span><small>Somewhat true</small></label>
-                <label><input type="radio" name="a1" value="4" /><span>4</span><small>Mostly true</small></label>
-                <label><input type="radio" name="a1" value="5" /><span>5</span><small>Very true</small></label>
+                <label><input type="radio" name="a1" value="1" required /><span>1</span><small>Not in place</small></label>
+                <label><input type="radio" name="a1" value="2" /><span>2</span><small>Talked about</small></label>
+                <label><input type="radio" name="a1" value="3" /><span>3</span><small>Informal</small></label>
+                <label><input type="radio" name="a1" value="4" /><span>4</span><small>Documented</small></label>
+                <label><input type="radio" name="a1" value="5" /><span>5</span><small>Verified</small></label>
               </div>
             </fieldset>
             <fieldset class="likert">
               <legend>Roles, decision rights, and performance expectations are clearly defined and consistently followed.</legend>
               <div class="likert-scale">
-                <label><input type="radio" name="a2" value="1" required /><span>1</span><small>Not at all true</small></label>
-                <label><input type="radio" name="a2" value="2" /><span>2</span><small>Rarely true</small></label>
-                <label><input type="radio" name="a2" value="3" /><span>3</span><small>Somewhat true</small></label>
-                <label><input type="radio" name="a2" value="4" /><span>4</span><small>Mostly true</small></label>
-                <label><input type="radio" name="a2" value="5" /><span>5</span><small>Very true</small></label>
+                <label><input type="radio" name="a2" value="1" required /><span>1</span><small>Not in place</small></label>
+                <label><input type="radio" name="a2" value="2" /><span>2</span><small>Talked about</small></label>
+                <label><input type="radio" name="a2" value="3" /><span>3</span><small>Informal</small></label>
+                <label><input type="radio" name="a2" value="4" /><span>4</span><small>Documented</small></label>
+                <label><input type="radio" name="a2" value="5" /><span>5</span><small>Verified</small></label>
               </div>
             </fieldset>
             <fieldset class="likert">
-              <legend>Staff have the skills, tools, and training they need to do their jobs well, and gaps are actively addressed.</legend>
+              <legend>Staff skills and training needs are reviewed regularly, and gaps are actively addressed.</legend>
               <div class="likert-scale">
-                <label><input type="radio" name="a3" value="1" required /><span>1</span><small>Not at all true</small></label>
-                <label><input type="radio" name="a3" value="2" /><span>2</span><small>Rarely true</small></label>
-                <label><input type="radio" name="a3" value="3" /><span>3</span><small>Somewhat true</small></label>
-                <label><input type="radio" name="a3" value="4" /><span>4</span><small>Mostly true</small></label>
-                <label><input type="radio" name="a3" value="5" /><span>5</span><small>Very true</small></label>
+                <label><input type="radio" name="a3" value="1" required /><span>1</span><small>Not in place</small></label>
+                <label><input type="radio" name="a3" value="2" /><span>2</span><small>Talked about</small></label>
+                <label><input type="radio" name="a3" value="3" /><span>3</span><small>Informal</small></label>
+                <label><input type="radio" name="a3" value="4" /><span>4</span><small>Documented</small></label>
+                <label><input type="radio" name="a3" value="5" /><span>5</span><small>Verified</small></label>
               </div>
             </fieldset>
           </div>
@@ -168,33 +170,33 @@ import EmailResultsForm from '../components/EmailResultsForm.astro';
             <h2 class="pillar-heading">4. Change Leadership Capacity</h2>
             <p class="fh-field-help">Based on John Kotter's 8-Step Change Model (Harvard Business School, "Leading Change").</p>
             <fieldset class="likert">
-              <legend>When we've pursued major changes, leadership built a genuine sense of urgency and a real coalition to drive it, rather than mandating it top-down.</legend>
+              <legend>When we take on a major change, leadership deliberately builds urgency and a guiding coalition to drive it, rather than mandating it top-down.</legend>
               <div class="likert-scale">
-                <label><input type="radio" name="c1" value="1" required /><span>1</span><small>Not at all true</small></label>
-                <label><input type="radio" name="c1" value="2" /><span>2</span><small>Rarely true</small></label>
-                <label><input type="radio" name="c1" value="3" /><span>3</span><small>Somewhat true</small></label>
-                <label><input type="radio" name="c1" value="4" /><span>4</span><small>Mostly true</small></label>
-                <label><input type="radio" name="c1" value="5" /><span>5</span><small>Very true</small></label>
+                <label><input type="radio" name="c1" value="1" required /><span>1</span><small>Not in place</small></label>
+                <label><input type="radio" name="c1" value="2" /><span>2</span><small>Talked about</small></label>
+                <label><input type="radio" name="c1" value="3" /><span>3</span><small>Informal</small></label>
+                <label><input type="radio" name="c1" value="4" /><span>4</span><small>Documented</small></label>
+                <label><input type="radio" name="c1" value="5" /><span>5</span><small>Verified</small></label>
               </div>
             </fieldset>
             <fieldset class="likert">
               <legend>We communicate a clear vision for change and track visible short-term wins along the way, not just a distant end goal.</legend>
               <div class="likert-scale">
-                <label><input type="radio" name="c2" value="1" required /><span>1</span><small>Not at all true</small></label>
-                <label><input type="radio" name="c2" value="2" /><span>2</span><small>Rarely true</small></label>
-                <label><input type="radio" name="c2" value="3" /><span>3</span><small>Somewhat true</small></label>
-                <label><input type="radio" name="c2" value="4" /><span>4</span><small>Mostly true</small></label>
-                <label><input type="radio" name="c2" value="5" /><span>5</span><small>Very true</small></label>
+                <label><input type="radio" name="c2" value="1" required /><span>1</span><small>Not in place</small></label>
+                <label><input type="radio" name="c2" value="2" /><span>2</span><small>Talked about</small></label>
+                <label><input type="radio" name="c2" value="3" /><span>3</span><small>Informal</small></label>
+                <label><input type="radio" name="c2" value="4" /><span>4</span><small>Documented</small></label>
+                <label><input type="radio" name="c2" value="5" /><span>5</span><small>Verified</small></label>
               </div>
             </fieldset>
             <fieldset class="likert">
-              <legend>Past changes have stuck: they became part of how we normally operate, not reverted once attention moved elsewhere.</legend>
+              <legend>We make changes stick by building them into roles, routines, and policies, so they hold after attention moves elsewhere.</legend>
               <div class="likert-scale">
-                <label><input type="radio" name="c3" value="1" required /><span>1</span><small>Not at all true</small></label>
-                <label><input type="radio" name="c3" value="2" /><span>2</span><small>Rarely true</small></label>
-                <label><input type="radio" name="c3" value="3" /><span>3</span><small>Somewhat true</small></label>
-                <label><input type="radio" name="c3" value="4" /><span>4</span><small>Mostly true</small></label>
-                <label><input type="radio" name="c3" value="5" /><span>5</span><small>Very true</small></label>
+                <label><input type="radio" name="c3" value="1" required /><span>1</span><small>Not in place</small></label>
+                <label><input type="radio" name="c3" value="2" /><span>2</span><small>Talked about</small></label>
+                <label><input type="radio" name="c3" value="3" /><span>3</span><small>Informal</small></label>
+                <label><input type="radio" name="c3" value="4" /><span>4</span><small>Documented</small></label>
+                <label><input type="radio" name="c3" value="5" /><span>5</span><small>Verified</small></label>
               </div>
             </fieldset>
           </div>
@@ -242,7 +244,7 @@ import EmailResultsForm from '../components/EmailResultsForm.astro';
 
           <div class="results-related">
             <p>This tool measures leadership and organizational capacity. For a numbers-based read on revenue and growth capacity (reserves, spending mix, revenue diversification, and liquidity), see the <a href="/revenue-growth-score">Revenue &amp; Growth Score</a>. This score also feeds directly into the <a href="/sustainability-score">Sustainability Strategy Score</a>, which places it alongside revenue and growth capacity and strategic clarity in a single Strategic Triangle view.</p>
-            <p>Haven't taken the free <a href="/assessment">Nonprofit Sustainability Self-Assessment</a> yet? It covers this and four other areas in about 5 minutes.</p>
+            <p>Haven't taken the free <a href="/assessment">Nonprofit Sustainability Self-Assessment</a> yet? It covers this and the other six Health Index dimensions in about 7 minutes.</p>
           </div>
 
           <div class="results-cta">
@@ -487,7 +489,7 @@ import EmailResultsForm from '../components/EmailResultsForm.astro';
     fetch(API_BASE + '/api/assessment-narrative', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ tool: 'leadership', ...payload }),
+      body: JSON.stringify({ tool: 'leadership', scale: 'evidence', ...payload }),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -523,7 +525,7 @@ import EmailResultsForm from '../components/EmailResultsForm.astro';
   function fetchBenchmarks(compositePct: number) {
     const overallEl = document.getElementById('lh-avg-overall') as HTMLElement | null;
 
-    fetch(API_BASE + '/api/benchmarks?tool=leadership')
+    fetch(API_BASE + '/api/benchmarks?tool=leadership&scale=evidence')
       .then((res) => res.json())
       .then((data) => {
         const b = data && data.ok ? data.benchmarks : null;

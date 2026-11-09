@@ -1999,3 +1999,40 @@ a.card:hover .card-cta { text-decoration: underline; }
 .pillar-group.is-skipped .likert { opacity: 0.4; }
 .stage-choice.is-selected { background: var(--gold); border-color: var(--gold); }
 .stage-choice.is-selected strong, .stage-choice.is-selected span { color: var(--navy-deep); }
+
+/* Evidence rubric key (RubricKey.astro), shown at the top of every
+   question-based tool. */
+.rubric-key {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--gold);
+  border-radius: var(--radius-sm);
+  padding: 1rem 1.15rem;
+  margin: 0 0 2rem;
+}
+.rubric-key summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--navy);
+}
+.rubric-key dl {
+  display: grid;
+  gap: 0.45rem;
+  margin: 0.85rem 0 0.6rem;
+}
+.rubric-key dl div {
+  display: grid;
+  grid-template-columns: 9.5rem 1fr;
+  gap: 0.75rem;
+}
+.rubric-key dt { font-weight: 600; color: var(--navy); font-size: 0.92rem; }
+.rubric-key dd { margin: 0; font-size: 0.92rem; color: var(--charcoal); }
+.rubric-key p { font-size: 0.85rem; color: #5b6470; margin: 0; }
+@media (max-width: 560px) {
+  .rubric-key dl div { grid-template-columns: 1fr; gap: 0.1rem; }
+}
+/* Links inside the dark results panel (deep-dive tool links). */
+.results-recommendation a.link-more,
+.results-recommendation p a:not(.btn) { color: var(--gold-light); }
+.results-recommendation a.link-more:hover,
+.results-recommendation p a:not(.btn):hover { color: var(--white); }

@@ -2,11 +2,12 @@
 import { SCORECARD_URL, CALENDLY_URL } from '../config';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
+import RubricKey from '../components/RubricKey.astro';
 ---
 
 <BaseLayout
   title="Nonprofit Sustainability Self-Assessment | Frankly Inspired"
-  description="A free, 15-question self-assessment to help nonprofit leaders gauge their organization's sustainability across strategy, revenue, leadership, operations, and partnerships."
+  description="A free, 21-question self-assessment that scores your nonprofit on all seven InstitutionalOS Health Index dimensions by the evidence you could show, then names your likely constraint and a 90-day action."
   footerVariant="assessment"
 >
   <Header variant="minimal" />
@@ -18,7 +19,7 @@ import Header from '../components/Header.astro';
       <div class="container narrow center">
         <p class="eyebrow eyebrow-dark">Free Tool</p>
         <h1>Nonprofit Sustainability Self-Assessment</h1>
-        <p class="hero-sub-light">15 quick questions across the five areas that determine whether an organization is built to last: strategy, revenue, leadership, operations, and partnerships. Takes about 5 minutes. Your answers stay in your browser unless you choose to email yourself the results. Three of these areas also have a deeper, dedicated diagnostic if you want to go further afterward.</p>
+        <p class="hero-sub-light">21 quick questions across all seven InstitutionalOS Health Index dimensions: strategy, program and impact evidence, revenue, leadership, operations, partnerships, and governance and risk. Takes about 7 minutes. Each answer is a level of evidence, from &ldquo;not in place&rdquo; to &ldquo;verified,&rdquo; the same rubric the paid diagnostic checks. Your answers stay in your browser unless you choose to email yourself the results. Three of these areas also have a deeper, dedicated diagnostic if you want to go further afterward.</p>
       </div>
     </section>
 
@@ -30,42 +31,43 @@ import Header from '../components/Header.astro';
              is in view. Hidden automatically once results are shown (no
              form left to track progress through). -->
         <div class="assessment-progress" id="assessment-progress">
-          <p class="assessment-progress-label" id="assessment-progress-label">Section 1 of 5: Sustainability Strategy</p>
+          <p class="assessment-progress-label" id="assessment-progress-label">Section 1 of 7: Sustainability Strategy</p>
           <span class="assessment-progress-track"><span class="assessment-progress-fill" id="assessment-progress-fill"></span></span>
         </div>
 
         <form id="assessment-form" novalidate>
+          <RubricKey />
 
           <div class="pillar-group" data-pillar-index="1">
             <h2 class="pillar-heading">1. Sustainability Strategy</h2>
             <fieldset class="likert">
               <legend>Our organization has a clear, written strategic plan that guides major decisions.</legend>
               <div class="likert-scale">
-                <label><input type="radio" name="p1q1" value="1" required /><span>1</span><small>Not at all true</small></label>
-                <label><input type="radio" name="p1q1" value="2" /><span>2</span><small>Rarely true</small></label>
-                <label><input type="radio" name="p1q1" value="3" /><span>3</span><small>Somewhat true</small></label>
-                <label><input type="radio" name="p1q1" value="4" /><span>4</span><small>Mostly true</small></label>
-                <label><input type="radio" name="p1q1" value="5" /><span>5</span><small>Very true</small></label>
+                <label><input type="radio" name="p1q1" value="1" required /><span>1</span><small>Not in place</small></label>
+                <label><input type="radio" name="p1q1" value="2" /><span>2</span><small>Talked about</small></label>
+                <label><input type="radio" name="p1q1" value="3" /><span>3</span><small>Informal</small></label>
+                <label><input type="radio" name="p1q1" value="4" /><span>4</span><small>Documented</small></label>
+                <label><input type="radio" name="p1q1" value="5" /><span>5</span><small>Verified</small></label>
               </div>
             </fieldset>
             <fieldset class="likert">
               <legend>Leadership regularly reviews organizational risks and has a plan to address them.</legend>
               <div class="likert-scale">
-                <label><input type="radio" name="p1q2" value="1" required /><span>1</span><small>Not at all true</small></label>
-                <label><input type="radio" name="p1q2" value="2" /><span>2</span><small>Rarely true</small></label>
-                <label><input type="radio" name="p1q2" value="3" /><span>3</span><small>Somewhat true</small></label>
-                <label><input type="radio" name="p1q2" value="4" /><span>4</span><small>Mostly true</small></label>
-                <label><input type="radio" name="p1q2" value="5" /><span>5</span><small>Very true</small></label>
+                <label><input type="radio" name="p1q2" value="1" required /><span>1</span><small>Not in place</small></label>
+                <label><input type="radio" name="p1q2" value="2" /><span>2</span><small>Talked about</small></label>
+                <label><input type="radio" name="p1q2" value="3" /><span>3</span><small>Informal</small></label>
+                <label><input type="radio" name="p1q2" value="4" /><span>4</span><small>Documented</small></label>
+                <label><input type="radio" name="p1q2" value="5" /><span>5</span><small>Verified</small></label>
               </div>
             </fieldset>
             <fieldset class="likert">
               <legend>We have a defined sustainability roadmap for the next 1-3 years.</legend>
               <div class="likert-scale">
-                <label><input type="radio" name="p1q3" value="1" required /><span>1</span><small>Not at all true</small></label>
-                <label><input type="radio" name="p1q3" value="2" /><span>2</span><small>Rarely true</small></label>
-                <label><input type="radio" name="p1q3" value="3" /><span>3</span><small>Somewhat true</small></label>
-                <label><input type="radio" name="p1q3" value="4" /><span>4</span><small>Mostly true</small></label>
-                <label><input type="radio" name="p1q3" value="5" /><span>5</span><small>Very true</small></label>
+                <label><input type="radio" name="p1q3" value="1" required /><span>1</span><small>Not in place</small></label>
+                <label><input type="radio" name="p1q3" value="2" /><span>2</span><small>Talked about</small></label>
+                <label><input type="radio" name="p1q3" value="3" /><span>3</span><small>Informal</small></label>
+                <label><input type="radio" name="p1q3" value="4" /><span>4</span><small>Documented</small></label>
+                <label><input type="radio" name="p1q3" value="5" /><span>5</span><small>Verified</small></label>
               </div>
             </fieldset>
           </div>
@@ -73,33 +75,33 @@ import Header from '../components/Header.astro';
           <div class="pillar-group" data-pillar-index="2">
             <h2 class="pillar-heading">2. Revenue Diversification</h2>
             <fieldset class="likert">
-              <legend>Our revenue comes from more than one major source, so no single grant or donor makes up most of our budget.</legend>
+              <legend>We track how much of our budget depends on any single funder, and act before one source grows too large a share.</legend>
               <div class="likert-scale">
-                <label><input type="radio" name="p2q1" value="1" required /><span>1</span><small>Not at all true</small></label>
-                <label><input type="radio" name="p2q1" value="2" /><span>2</span><small>Rarely true</small></label>
-                <label><input type="radio" name="p2q1" value="3" /><span>3</span><small>Somewhat true</small></label>
-                <label><input type="radio" name="p2q1" value="4" /><span>4</span><small>Mostly true</small></label>
-                <label><input type="radio" name="p2q1" value="5" /><span>5</span><small>Very true</small></label>
+                <label><input type="radio" name="p2q1" value="1" required /><span>1</span><small>Not in place</small></label>
+                <label><input type="radio" name="p2q1" value="2" /><span>2</span><small>Talked about</small></label>
+                <label><input type="radio" name="p2q1" value="3" /><span>3</span><small>Informal</small></label>
+                <label><input type="radio" name="p2q1" value="4" /><span>4</span><small>Documented</small></label>
+                <label><input type="radio" name="p2q1" value="5" /><span>5</span><small>Verified</small></label>
               </div>
             </fieldset>
             <fieldset class="likert">
               <legend>We have active strategies for grants, corporate partnerships, and earned or contracted revenue.</legend>
               <div class="likert-scale">
-                <label><input type="radio" name="p2q2" value="1" required /><span>1</span><small>Not at all true</small></label>
-                <label><input type="radio" name="p2q2" value="2" /><span>2</span><small>Rarely true</small></label>
-                <label><input type="radio" name="p2q2" value="3" /><span>3</span><small>Somewhat true</small></label>
-                <label><input type="radio" name="p2q2" value="4" /><span>4</span><small>Mostly true</small></label>
-                <label><input type="radio" name="p2q2" value="5" /><span>5</span><small>Very true</small></label>
+                <label><input type="radio" name="p2q2" value="1" required /><span>1</span><small>Not in place</small></label>
+                <label><input type="radio" name="p2q2" value="2" /><span>2</span><small>Talked about</small></label>
+                <label><input type="radio" name="p2q2" value="3" /><span>3</span><small>Informal</small></label>
+                <label><input type="radio" name="p2q2" value="4" /><span>4</span><small>Documented</small></label>
+                <label><input type="radio" name="p2q2" value="5" /><span>5</span><small>Verified</small></label>
               </div>
             </fieldset>
             <fieldset class="likert">
               <legend>We track and forecast our revenue pipeline at least quarterly.</legend>
               <div class="likert-scale">
-                <label><input type="radio" name="p2q3" value="1" required /><span>1</span><small>Not at all true</small></label>
-                <label><input type="radio" name="p2q3" value="2" /><span>2</span><small>Rarely true</small></label>
-                <label><input type="radio" name="p2q3" value="3" /><span>3</span><small>Somewhat true</small></label>
-                <label><input type="radio" name="p2q3" value="4" /><span>4</span><small>Mostly true</small></label>
-                <label><input type="radio" name="p2q3" value="5" /><span>5</span><small>Very true</small></label>
+                <label><input type="radio" name="p2q3" value="1" required /><span>1</span><small>Not in place</small></label>
+                <label><input type="radio" name="p2q3" value="2" /><span>2</span><small>Talked about</small></label>
+                <label><input type="radio" name="p2q3" value="3" /><span>3</span><small>Informal</small></label>
+                <label><input type="radio" name="p2q3" value="4" /><span>4</span><small>Documented</small></label>
+                <label><input type="radio" name="p2q3" value="5" /><span>5</span><small>Verified</small></label>
               </div>
             </fieldset>
           </div>
@@ -109,31 +111,31 @@ import Header from '../components/Header.astro';
             <fieldset class="likert">
               <legend>Roles and performance expectations are clearly defined across the organization.</legend>
               <div class="likert-scale">
-                <label><input type="radio" name="p3q1" value="1" required /><span>1</span><small>Not at all true</small></label>
-                <label><input type="radio" name="p3q1" value="2" /><span>2</span><small>Rarely true</small></label>
-                <label><input type="radio" name="p3q1" value="3" /><span>3</span><small>Somewhat true</small></label>
-                <label><input type="radio" name="p3q1" value="4" /><span>4</span><small>Mostly true</small></label>
-                <label><input type="radio" name="p3q1" value="5" /><span>5</span><small>Very true</small></label>
+                <label><input type="radio" name="p3q1" value="1" required /><span>1</span><small>Not in place</small></label>
+                <label><input type="radio" name="p3q1" value="2" /><span>2</span><small>Talked about</small></label>
+                <label><input type="radio" name="p3q1" value="3" /><span>3</span><small>Informal</small></label>
+                <label><input type="radio" name="p3q1" value="4" /><span>4</span><small>Documented</small></label>
+                <label><input type="radio" name="p3q1" value="5" /><span>5</span><small>Verified</small></label>
               </div>
             </fieldset>
             <fieldset class="likert">
               <legend>Leadership has a plan for developing staff and building bench strength.</legend>
               <div class="likert-scale">
-                <label><input type="radio" name="p3q2" value="1" required /><span>1</span><small>Not at all true</small></label>
-                <label><input type="radio" name="p3q2" value="2" /><span>2</span><small>Rarely true</small></label>
-                <label><input type="radio" name="p3q2" value="3" /><span>3</span><small>Somewhat true</small></label>
-                <label><input type="radio" name="p3q2" value="4" /><span>4</span><small>Mostly true</small></label>
-                <label><input type="radio" name="p3q2" value="5" /><span>5</span><small>Very true</small></label>
+                <label><input type="radio" name="p3q2" value="1" required /><span>1</span><small>Not in place</small></label>
+                <label><input type="radio" name="p3q2" value="2" /><span>2</span><small>Talked about</small></label>
+                <label><input type="radio" name="p3q2" value="3" /><span>3</span><small>Informal</small></label>
+                <label><input type="radio" name="p3q2" value="4" /><span>4</span><small>Documented</small></label>
+                <label><input type="radio" name="p3q2" value="5" /><span>5</span><small>Verified</small></label>
               </div>
             </fieldset>
             <fieldset class="likert">
-              <legend>The board and executive team are aligned on strategic priorities.</legend>
+              <legend>The board and executive team agree on strategic priorities in writing and revisit them together at least once a year.</legend>
               <div class="likert-scale">
-                <label><input type="radio" name="p3q3" value="1" required /><span>1</span><small>Not at all true</small></label>
-                <label><input type="radio" name="p3q3" value="2" /><span>2</span><small>Rarely true</small></label>
-                <label><input type="radio" name="p3q3" value="3" /><span>3</span><small>Somewhat true</small></label>
-                <label><input type="radio" name="p3q3" value="4" /><span>4</span><small>Mostly true</small></label>
-                <label><input type="radio" name="p3q3" value="5" /><span>5</span><small>Very true</small></label>
+                <label><input type="radio" name="p3q3" value="1" required /><span>1</span><small>Not in place</small></label>
+                <label><input type="radio" name="p3q3" value="2" /><span>2</span><small>Talked about</small></label>
+                <label><input type="radio" name="p3q3" value="3" /><span>3</span><small>Informal</small></label>
+                <label><input type="radio" name="p3q3" value="4" /><span>4</span><small>Documented</small></label>
+                <label><input type="radio" name="p3q3" value="5" /><span>5</span><small>Verified</small></label>
               </div>
             </fieldset>
           </div>
@@ -143,31 +145,31 @@ import Header from '../components/Header.astro';
             <fieldset class="likert">
               <legend>We use consistent systems (CRM, project management, etc.) to track our work and data.</legend>
               <div class="likert-scale">
-                <label><input type="radio" name="p4q1" value="1" required /><span>1</span><small>Not at all true</small></label>
-                <label><input type="radio" name="p4q1" value="2" /><span>2</span><small>Rarely true</small></label>
-                <label><input type="radio" name="p4q1" value="3" /><span>3</span><small>Somewhat true</small></label>
-                <label><input type="radio" name="p4q1" value="4" /><span>4</span><small>Mostly true</small></label>
-                <label><input type="radio" name="p4q1" value="5" /><span>5</span><small>Very true</small></label>
+                <label><input type="radio" name="p4q1" value="1" required /><span>1</span><small>Not in place</small></label>
+                <label><input type="radio" name="p4q1" value="2" /><span>2</span><small>Talked about</small></label>
+                <label><input type="radio" name="p4q1" value="3" /><span>3</span><small>Informal</small></label>
+                <label><input type="radio" name="p4q1" value="4" /><span>4</span><small>Documented</small></label>
+                <label><input type="radio" name="p4q1" value="5" /><span>5</span><small>Verified</small></label>
               </div>
             </fieldset>
             <fieldset class="likert">
               <legend>We have KPIs or dashboards that leadership reviews regularly.</legend>
               <div class="likert-scale">
-                <label><input type="radio" name="p4q2" value="1" required /><span>1</span><small>Not at all true</small></label>
-                <label><input type="radio" name="p4q2" value="2" /><span>2</span><small>Rarely true</small></label>
-                <label><input type="radio" name="p4q2" value="3" /><span>3</span><small>Somewhat true</small></label>
-                <label><input type="radio" name="p4q2" value="4" /><span>4</span><small>Mostly true</small></label>
-                <label><input type="radio" name="p4q2" value="5" /><span>5</span><small>Very true</small></label>
+                <label><input type="radio" name="p4q2" value="1" required /><span>1</span><small>Not in place</small></label>
+                <label><input type="radio" name="p4q2" value="2" /><span>2</span><small>Talked about</small></label>
+                <label><input type="radio" name="p4q2" value="3" /><span>3</span><small>Informal</small></label>
+                <label><input type="radio" name="p4q2" value="4" /><span>4</span><small>Documented</small></label>
+                <label><input type="radio" name="p4q2" value="5" /><span>5</span><small>Verified</small></label>
               </div>
             </fieldset>
             <fieldset class="likert">
               <legend>Our operational workflows are documented well enough that a new hire could follow them.</legend>
               <div class="likert-scale">
-                <label><input type="radio" name="p4q3" value="1" required /><span>1</span><small>Not at all true</small></label>
-                <label><input type="radio" name="p4q3" value="2" /><span>2</span><small>Rarely true</small></label>
-                <label><input type="radio" name="p4q3" value="3" /><span>3</span><small>Somewhat true</small></label>
-                <label><input type="radio" name="p4q3" value="4" /><span>4</span><small>Mostly true</small></label>
-                <label><input type="radio" name="p4q3" value="5" /><span>5</span><small>Very true</small></label>
+                <label><input type="radio" name="p4q3" value="1" required /><span>1</span><small>Not in place</small></label>
+                <label><input type="radio" name="p4q3" value="2" /><span>2</span><small>Talked about</small></label>
+                <label><input type="radio" name="p4q3" value="3" /><span>3</span><small>Informal</small></label>
+                <label><input type="radio" name="p4q3" value="4" /><span>4</span><small>Documented</small></label>
+                <label><input type="radio" name="p4q3" value="5" /><span>5</span><small>Verified</small></label>
               </div>
             </fieldset>
           </div>
@@ -175,33 +177,103 @@ import Header from '../components/Header.astro';
           <div class="pillar-group" data-pillar-index="5">
             <h2 class="pillar-heading">5. Partnership &amp; Ecosystem Strategy</h2>
             <fieldset class="likert">
-              <legend>We have active partnerships across sectors: education, workforce, government, corporate, community.</legend>
+              <legend>We maintain active partnerships across sectors (education, workforce, government, corporate, community) and know what each one contributes.</legend>
               <div class="likert-scale">
-                <label><input type="radio" name="p5q1" value="1" required /><span>1</span><small>Not at all true</small></label>
-                <label><input type="radio" name="p5q1" value="2" /><span>2</span><small>Rarely true</small></label>
-                <label><input type="radio" name="p5q1" value="3" /><span>3</span><small>Somewhat true</small></label>
-                <label><input type="radio" name="p5q1" value="4" /><span>4</span><small>Mostly true</small></label>
-                <label><input type="radio" name="p5q1" value="5" /><span>5</span><small>Very true</small></label>
+                <label><input type="radio" name="p5q1" value="1" required /><span>1</span><small>Not in place</small></label>
+                <label><input type="radio" name="p5q1" value="2" /><span>2</span><small>Talked about</small></label>
+                <label><input type="radio" name="p5q1" value="3" /><span>3</span><small>Informal</small></label>
+                <label><input type="radio" name="p5q1" value="4" /><span>4</span><small>Documented</small></label>
+                <label><input type="radio" name="p5q1" value="5" /><span>5</span><small>Verified</small></label>
               </div>
             </fieldset>
             <fieldset class="likert">
               <legend>We have a deliberate strategy for building and stewarding partnerships, not just ad hoc relationships.</legend>
               <div class="likert-scale">
-                <label><input type="radio" name="p5q2" value="1" required /><span>1</span><small>Not at all true</small></label>
-                <label><input type="radio" name="p5q2" value="2" /><span>2</span><small>Rarely true</small></label>
-                <label><input type="radio" name="p5q2" value="3" /><span>3</span><small>Somewhat true</small></label>
-                <label><input type="radio" name="p5q2" value="4" /><span>4</span><small>Mostly true</small></label>
-                <label><input type="radio" name="p5q2" value="5" /><span>5</span><small>Very true</small></label>
+                <label><input type="radio" name="p5q2" value="1" required /><span>1</span><small>Not in place</small></label>
+                <label><input type="radio" name="p5q2" value="2" /><span>2</span><small>Talked about</small></label>
+                <label><input type="radio" name="p5q2" value="3" /><span>3</span><small>Informal</small></label>
+                <label><input type="radio" name="p5q2" value="4" /><span>4</span><small>Documented</small></label>
+                <label><input type="radio" name="p5q2" value="5" /><span>5</span><small>Verified</small></label>
               </div>
             </fieldset>
             <fieldset class="likert">
               <legend>Our key partnerships are formalized (MOUs or agreements) where appropriate.</legend>
               <div class="likert-scale">
-                <label><input type="radio" name="p5q3" value="1" required /><span>1</span><small>Not at all true</small></label>
-                <label><input type="radio" name="p5q3" value="2" /><span>2</span><small>Rarely true</small></label>
-                <label><input type="radio" name="p5q3" value="3" /><span>3</span><small>Somewhat true</small></label>
-                <label><input type="radio" name="p5q3" value="4" /><span>4</span><small>Mostly true</small></label>
-                <label><input type="radio" name="p5q3" value="5" /><span>5</span><small>Very true</small></label>
+                <label><input type="radio" name="p5q3" value="1" required /><span>1</span><small>Not in place</small></label>
+                <label><input type="radio" name="p5q3" value="2" /><span>2</span><small>Talked about</small></label>
+                <label><input type="radio" name="p5q3" value="3" /><span>3</span><small>Informal</small></label>
+                <label><input type="radio" name="p5q3" value="4" /><span>4</span><small>Documented</small></label>
+                <label><input type="radio" name="p5q3" value="5" /><span>5</span><small>Verified</small></label>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="pillar-group" data-pillar-index="6">
+            <h2 class="pillar-heading">6. Program &amp; Impact Evidence</h2>
+            <p class="section-note">Based on the Performance Imperative framework from the Leap Ambassadors Community and standard outcome-measurement practice.</p>
+            <fieldset class="likert">
+              <legend>Each major program has a written logic model or theory of change linking its activities to the outcomes we expect.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="p6q1" value="1" required /><span>1</span><small>Not in place</small></label>
+                <label><input type="radio" name="p6q1" value="2" /><span>2</span><small>Talked about</small></label>
+                <label><input type="radio" name="p6q1" value="3" /><span>3</span><small>Informal</small></label>
+                <label><input type="radio" name="p6q1" value="4" /><span>4</span><small>Documented</small></label>
+                <label><input type="radio" name="p6q1" value="5" /><span>5</span><small>Verified</small></label>
+              </div>
+            </fieldset>
+            <fieldset class="likert">
+              <legend>We regularly collect outcome data (changes in participants&rsquo; lives), not just outputs such as people served or sessions held.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="p6q2" value="1" required /><span>1</span><small>Not in place</small></label>
+                <label><input type="radio" name="p6q2" value="2" /><span>2</span><small>Talked about</small></label>
+                <label><input type="radio" name="p6q2" value="3" /><span>3</span><small>Informal</small></label>
+                <label><input type="radio" name="p6q2" value="4" /><span>4</span><small>Documented</small></label>
+                <label><input type="radio" name="p6q2" value="5" /><span>5</span><small>Verified</small></label>
+              </div>
+            </fieldset>
+            <fieldset class="likert">
+              <legend>We use our results to improve or change programs, and could show a funder an example of when we did.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="p6q3" value="1" required /><span>1</span><small>Not in place</small></label>
+                <label><input type="radio" name="p6q3" value="2" /><span>2</span><small>Talked about</small></label>
+                <label><input type="radio" name="p6q3" value="3" /><span>3</span><small>Informal</small></label>
+                <label><input type="radio" name="p6q3" value="4" /><span>4</span><small>Documented</small></label>
+                <label><input type="radio" name="p6q3" value="5" /><span>5</span><small>Verified</small></label>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="pillar-group" data-pillar-index="7">
+            <h2 class="pillar-heading">7. Governance &amp; Risk</h2>
+            <p class="section-note">Based on the governance questions in Part VI of IRS Form 990 and BoardSource research on board practice.</p>
+            <fieldset class="likert">
+              <legend>Our board has adopted the core policies Form 990 asks about: conflict of interest, whistleblower, and document retention.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="p7q1" value="1" required /><span>1</span><small>Not in place</small></label>
+                <label><input type="radio" name="p7q1" value="2" /><span>2</span><small>Talked about</small></label>
+                <label><input type="radio" name="p7q1" value="3" /><span>3</span><small>Informal</small></label>
+                <label><input type="radio" name="p7q1" value="4" /><span>4</span><small>Documented</small></label>
+                <label><input type="radio" name="p7q1" value="5" /><span>5</span><small>Verified</small></label>
+              </div>
+            </fieldset>
+            <fieldset class="likert">
+              <legend>The full board receives our Form 990 before it&rsquo;s filed and reviews our annual financial statements or audit.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="p7q2" value="1" required /><span>1</span><small>Not in place</small></label>
+                <label><input type="radio" name="p7q2" value="2" /><span>2</span><small>Talked about</small></label>
+                <label><input type="radio" name="p7q2" value="3" /><span>3</span><small>Informal</small></label>
+                <label><input type="radio" name="p7q2" value="4" /><span>4</span><small>Documented</small></label>
+                <label><input type="radio" name="p7q2" value="5" /><span>5</span><small>Verified</small></label>
+              </div>
+            </fieldset>
+            <fieldset class="likert">
+              <legend>The board formally evaluates the executive director at least once a year.</legend>
+              <div class="likert-scale">
+                <label><input type="radio" name="p7q3" value="1" required /><span>1</span><small>Not in place</small></label>
+                <label><input type="radio" name="p7q3" value="2" /><span>2</span><small>Talked about</small></label>
+                <label><input type="radio" name="p7q3" value="3" /><span>3</span><small>Informal</small></label>
+                <label><input type="radio" name="p7q3" value="4" /><span>4</span><small>Documented</small></label>
+                <label><input type="radio" name="p7q3" value="5" /><span>5</span><small>Verified</small></label>
               </div>
             </fieldset>
           </div>
@@ -235,7 +307,7 @@ import Header from '../components/Header.astro';
 
           <div class="results-related">
             <p>Three of these areas also have a deeper, dedicated diagnostic if you want to go further: the <a href="/leadership-health">Leadership &amp; Operations Score</a> (governance and succession research) and the <a href="/sustainability-score">Sustainability Strategy Score</a>, which blends the others into one strategic view. Revenue Diversification has two: the <a href="/revenue-growth-score">Revenue &amp; Growth Score</a> (real budget numbers against sector benchmarks) and the <a href="/institutional-advancement-score">Institutional Advancement Score</a> (the fundraising program behind those numbers: gift portfolios, stewardship, campaigns, and events).</p>
-            <p>This assessment covers five of the seven Health Index dimensions. For all seven in one score, take the free <a href={SCORECARD_URL} target="_blank" rel="noopener">InstitutionalOS Scorecard</a>.</p>
+            <p>This assessment covers all seven Health Index dimensions from your own answers. For a second read built from a description of your organization, take the free <a href={SCORECARD_URL} target="_blank" rel="noopener">InstitutionalOS Scorecard</a>.</p>
           </div>
 
           <div class="results-cta">
@@ -293,7 +365,7 @@ import Header from '../components/Header.astro';
   // results link straight to that specific service instead of the general
   // Consulting section. "deepDive", where present, points at the dedicated
   // numbers/research-grounded diagnostic for that same pillar, this quick
-  // 15-question assessment and that deeper tool share a pillar name on
+  // 21-question assessment and that deeper tool share a pillar name on
   // purpose (quick version / deep version of the same area), so the
   // priority-area callout below makes that relationship explicit instead
   // of leaving a visitor to discover a same-named tool on their own.
@@ -335,6 +407,23 @@ import Header from '../components/Header.astro';
       service: 'Education, workforce, government, corporate, philanthropic, and community partnership development.',
       anchor: 'pillar-partnership',
       deepDive: [],
+    },
+    {
+      num: 6,
+      label: 'Program & Impact Evidence',
+      service: 'Logic models, outcome measurement, and evidence of results that funders and boards trust.',
+      anchor: 'pillar-program',
+      deepDive: [],
+    },
+    {
+      num: 7,
+      label: 'Governance & Risk',
+      service: 'Board practice, core policies, Form 990 governance, executive oversight, and the risks a funder will ask about.',
+      anchor: 'pillar-governance',
+      deepDive: [
+        { href: '/leadership-health', label: 'Leadership & Operations Score' },
+        { href: '/sustainability-score', label: 'Sustainability Strategy Score' },
+      ],
     },
   ];
 
@@ -399,8 +488,11 @@ import Header from '../components/Header.astro';
   }
 
   function renderResults(pillarScores: { num: number; label: string; service: string; anchor: string; deepDive: { href: string; label: string }[]; score: number }[]) {
-    const composite = pillarScores.reduce((sum, p) => sum + p.score, 0); // 15-75
-    const pct = Math.round(((composite - 15) / 60) * 100);
+    // Each area is 3 questions scored 1-5 (3-15). Composite runs from 3n
+    // to 15n for n areas, mapped to 0-100% (evidence rubric: 0/25/50/75/100).
+    const n = pillarScores.length;
+    const composite = pillarScores.reduce((sum, p) => sum + p.score, 0);
+    const pct = Math.round(((composite - 3 * n) / (12 * n)) * 100);
     const band = bandFor(pct);
 
     const scoreNumEl = document.getElementById('results-score-num');
@@ -439,6 +531,7 @@ import Header from '../components/Header.astro';
       items: scoredPillars.map((p) => ({ label: p.label, pct: p.pct, help: p.service })),
       compositePct: pct,
       basis: 'answers',
+      coversAllSeven: true,
       extraHtml: lowest.deepDive.length
         ? `<p class="section-note">For a deeper read on this area, take the ${deepDiveLinks}.</p>`
         : '',
@@ -468,7 +561,7 @@ import Header from '../components/Header.astro';
   function fetchBenchmarks(compositePct: number) {
     const overallEl = document.getElementById('results-avg-overall') as HTMLElement | null;
 
-    fetch(API_BASE + '/api/benchmarks')
+    fetch(API_BASE + '/api/benchmarks?scale=evidence')
       .then((res) => res.json())
       .then((data) => {
         const b = data && data.ok ? data.benchmarks : null;
@@ -512,6 +605,7 @@ import Header from '../components/Header.astro';
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
+        scale: 'evidence',
         scorePct: results.scorePct,
         band: results.band,
         pillarScores: results.pillarScores,

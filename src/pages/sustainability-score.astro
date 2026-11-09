@@ -2,6 +2,7 @@
 import { SCORECARD_URL, CALENDLY_URL } from '../config';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
+import RubricKey from '../components/RubricKey.astro';
 import EmailResultsForm from '../components/EmailResultsForm.astro';
 ---
 
@@ -44,7 +45,7 @@ import EmailResultsForm from '../components/EmailResultsForm.astro';
       <div class="container narrow center">
         <p class="eyebrow eyebrow-dark">Free Diagnostic</p>
         <h1>Sustainability Strategy Score</h1>
-        <p class="hero-sub-light">12 questions on strategic clarity, risk management, impact/financial integration, and execution discipline, grounded in Harvard Kennedy School's Strategic Triangle, the COSO risk framework, the nonprofit sector's own "dual bottom line" research, and Harvard Business School's Balanced Scorecard. If you've completed the Revenue &amp; Growth and Leadership scores, this tool ties all three together. Takes about 7 minutes. New here? The free <a href="/assessment">Self-Assessment</a> is a faster 5-minute starting point across all five sustainability dimensions.</p>
+        <p class="hero-sub-light">12 questions on strategic clarity, risk management, impact/financial integration, and execution discipline, grounded in Harvard Kennedy School's Strategic Triangle, the COSO risk framework, the nonprofit sector's own "dual bottom line" research, and Harvard Business School's Balanced Scorecard. If you've completed the Revenue &amp; Growth and Leadership scores, this tool ties all three together. Takes about 7 minutes. New here? The free <a href="/assessment">Self-Assessment</a> is a faster 7-minute starting point across all seven Health Index dimensions.</p>
       </div>
     </section>
 
@@ -58,38 +59,39 @@ import EmailResultsForm from '../components/EmailResultsForm.astro';
         </div>
 
         <form id="ss-form" novalidate>
+          <RubricKey />
 
           <div class="pillar-group" data-pillar-index="1">
             <h2 class="pillar-heading">1. Strategic Clarity &amp; Public Value</h2>
             <p class="fh-field-help">Based on Mark Moore's Strategic Triangle (Harvard Kennedy School).</p>
             <fieldset class="likert">
-              <legend>Staff, board, and leadership could each independently describe our top 2-3 strategic priorities in similar terms.</legend>
+              <legend>Our top two or three strategic priorities are written down and used consistently by staff, board, and leadership.</legend>
               <div class="likert-scale">
-                <label><input type="radio" name="st1" value="1" required /><span>1</span><small>Not at all true</small></label>
-                <label><input type="radio" name="st1" value="2" /><span>2</span><small>Rarely true</small></label>
-                <label><input type="radio" name="st1" value="3" /><span>3</span><small>Somewhat true</small></label>
-                <label><input type="radio" name="st1" value="4" /><span>4</span><small>Mostly true</small></label>
-                <label><input type="radio" name="st1" value="5" /><span>5</span><small>Very true</small></label>
+                <label><input type="radio" name="st1" value="1" required /><span>1</span><small>Not in place</small></label>
+                <label><input type="radio" name="st1" value="2" /><span>2</span><small>Talked about</small></label>
+                <label><input type="radio" name="st1" value="3" /><span>3</span><small>Informal</small></label>
+                <label><input type="radio" name="st1" value="4" /><span>4</span><small>Documented</small></label>
+                <label><input type="radio" name="st1" value="5" /><span>5</span><small>Verified</small></label>
               </div>
             </fieldset>
             <fieldset class="likert">
               <legend>Our strategy clearly identifies who benefits from our work and what specific value we create for them.</legend>
               <div class="likert-scale">
-                <label><input type="radio" name="st2" value="1" required /><span>1</span><small>Not at all true</small></label>
-                <label><input type="radio" name="st2" value="2" /><span>2</span><small>Rarely true</small></label>
-                <label><input type="radio" name="st2" value="3" /><span>3</span><small>Somewhat true</small></label>
-                <label><input type="radio" name="st2" value="4" /><span>4</span><small>Mostly true</small></label>
-                <label><input type="radio" name="st2" value="5" /><span>5</span><small>Very true</small></label>
+                <label><input type="radio" name="st2" value="1" required /><span>1</span><small>Not in place</small></label>
+                <label><input type="radio" name="st2" value="2" /><span>2</span><small>Talked about</small></label>
+                <label><input type="radio" name="st2" value="3" /><span>3</span><small>Informal</small></label>
+                <label><input type="radio" name="st2" value="4" /><span>4</span><small>Documented</small></label>
+                <label><input type="radio" name="st2" value="5" /><span>5</span><small>Verified</small></label>
               </div>
             </fieldset>
             <fieldset class="likert">
-              <legend>When a new opportunity or request comes in, it's clear whether it fits our strategic priorities or not.</legend>
+              <legend>We have written criteria for deciding whether a new opportunity or request fits our strategic priorities.</legend>
               <div class="likert-scale">
-                <label><input type="radio" name="st3" value="1" required /><span>1</span><small>Not at all true</small></label>
-                <label><input type="radio" name="st3" value="2" /><span>2</span><small>Rarely true</small></label>
-                <label><input type="radio" name="st3" value="3" /><span>3</span><small>Somewhat true</small></label>
-                <label><input type="radio" name="st3" value="4" /><span>4</span><small>Mostly true</small></label>
-                <label><input type="radio" name="st3" value="5" /><span>5</span><small>Very true</small></label>
+                <label><input type="radio" name="st3" value="1" required /><span>1</span><small>Not in place</small></label>
+                <label><input type="radio" name="st3" value="2" /><span>2</span><small>Talked about</small></label>
+                <label><input type="radio" name="st3" value="3" /><span>3</span><small>Informal</small></label>
+                <label><input type="radio" name="st3" value="4" /><span>4</span><small>Documented</small></label>
+                <label><input type="radio" name="st3" value="5" /><span>5</span><small>Verified</small></label>
               </div>
             </fieldset>
           </div>
@@ -100,31 +102,31 @@ import EmailResultsForm from '../components/EmailResultsForm.astro';
             <fieldset class="likert">
               <legend>We maintain a written list of our top risks (financial, operational, reputational, and strategic), not just an informal sense of them.</legend>
               <div class="likert-scale">
-                <label><input type="radio" name="r1" value="1" required /><span>1</span><small>Not at all true</small></label>
-                <label><input type="radio" name="r1" value="2" /><span>2</span><small>Rarely true</small></label>
-                <label><input type="radio" name="r1" value="3" /><span>3</span><small>Somewhat true</small></label>
-                <label><input type="radio" name="r1" value="4" /><span>4</span><small>Mostly true</small></label>
-                <label><input type="radio" name="r1" value="5" /><span>5</span><small>Very true</small></label>
+                <label><input type="radio" name="r1" value="1" required /><span>1</span><small>Not in place</small></label>
+                <label><input type="radio" name="r1" value="2" /><span>2</span><small>Talked about</small></label>
+                <label><input type="radio" name="r1" value="3" /><span>3</span><small>Informal</small></label>
+                <label><input type="radio" name="r1" value="4" /><span>4</span><small>Documented</small></label>
+                <label><input type="radio" name="r1" value="5" /><span>5</span><small>Verified</small></label>
               </div>
             </fieldset>
             <fieldset class="likert">
               <legend>Risk is reviewed on a regular, scheduled basis, not just when something goes wrong or during a funding application.</legend>
               <div class="likert-scale">
-                <label><input type="radio" name="r2" value="1" required /><span>1</span><small>Not at all true</small></label>
-                <label><input type="radio" name="r2" value="2" /><span>2</span><small>Rarely true</small></label>
-                <label><input type="radio" name="r2" value="3" /><span>3</span><small>Somewhat true</small></label>
-                <label><input type="radio" name="r2" value="4" /><span>4</span><small>Mostly true</small></label>
-                <label><input type="radio" name="r2" value="5" /><span>5</span><small>Very true</small></label>
+                <label><input type="radio" name="r2" value="1" required /><span>1</span><small>Not in place</small></label>
+                <label><input type="radio" name="r2" value="2" /><span>2</span><small>Talked about</small></label>
+                <label><input type="radio" name="r2" value="3" /><span>3</span><small>Informal</small></label>
+                <label><input type="radio" name="r2" value="4" /><span>4</span><small>Documented</small></label>
+                <label><input type="radio" name="r2" value="5" /><span>5</span><small>Verified</small></label>
               </div>
             </fieldset>
             <fieldset class="likert">
-              <legend>Leadership and the board have discussed what we would do if our largest funding source or a key leader left suddenly.</legend>
+              <legend>We have a written contingency plan for losing our largest funding source or a key leader suddenly.</legend>
               <div class="likert-scale">
-                <label><input type="radio" name="r3" value="1" required /><span>1</span><small>Not at all true</small></label>
-                <label><input type="radio" name="r3" value="2" /><span>2</span><small>Rarely true</small></label>
-                <label><input type="radio" name="r3" value="3" /><span>3</span><small>Somewhat true</small></label>
-                <label><input type="radio" name="r3" value="4" /><span>4</span><small>Mostly true</small></label>
-                <label><input type="radio" name="r3" value="5" /><span>5</span><small>Very true</small></label>
+                <label><input type="radio" name="r3" value="1" required /><span>1</span><small>Not in place</small></label>
+                <label><input type="radio" name="r3" value="2" /><span>2</span><small>Talked about</small></label>
+                <label><input type="radio" name="r3" value="3" /><span>3</span><small>Informal</small></label>
+                <label><input type="radio" name="r3" value="4" /><span>4</span><small>Documented</small></label>
+                <label><input type="radio" name="r3" value="5" /><span>5</span><small>Verified</small></label>
               </div>
             </fieldset>
           </div>
@@ -133,33 +135,33 @@ import EmailResultsForm from '../components/EmailResultsForm.astro';
             <h2 class="pillar-heading">3. Impact &amp; Financial Sustainability Integration</h2>
             <p class="fh-field-help">Based on the Matrix Map / "dual bottom line" model (Bell, Masaoka &amp; Zimmerman, "Nonprofit Sustainability").</p>
             <fieldset class="likert">
-              <legend>We know, program by program, which ones are financially self-sustaining and which are subsidized by other revenue.</legend>
+              <legend>We track, program by program, which programs are financially self-sustaining and which are subsidized by other revenue.</legend>
               <div class="likert-scale">
-                <label><input type="radio" name="i1" value="1" required /><span>1</span><small>Not at all true</small></label>
-                <label><input type="radio" name="i1" value="2" /><span>2</span><small>Rarely true</small></label>
-                <label><input type="radio" name="i1" value="3" /><span>3</span><small>Somewhat true</small></label>
-                <label><input type="radio" name="i1" value="4" /><span>4</span><small>Mostly true</small></label>
-                <label><input type="radio" name="i1" value="5" /><span>5</span><small>Very true</small></label>
+                <label><input type="radio" name="i1" value="1" required /><span>1</span><small>Not in place</small></label>
+                <label><input type="radio" name="i1" value="2" /><span>2</span><small>Talked about</small></label>
+                <label><input type="radio" name="i1" value="3" /><span>3</span><small>Informal</small></label>
+                <label><input type="radio" name="i1" value="4" /><span>4</span><small>Documented</small></label>
+                <label><input type="radio" name="i1" value="5" /><span>5</span><small>Verified</small></label>
               </div>
             </fieldset>
             <fieldset class="likert">
               <legend>Decisions about which programs to grow, maintain, or sunset weigh both mission impact and financial contribution together.</legend>
               <div class="likert-scale">
-                <label><input type="radio" name="i2" value="1" required /><span>1</span><small>Not at all true</small></label>
-                <label><input type="radio" name="i2" value="2" /><span>2</span><small>Rarely true</small></label>
-                <label><input type="radio" name="i2" value="3" /><span>3</span><small>Somewhat true</small></label>
-                <label><input type="radio" name="i2" value="4" /><span>4</span><small>Mostly true</small></label>
-                <label><input type="radio" name="i2" value="5" /><span>5</span><small>Very true</small></label>
+                <label><input type="radio" name="i2" value="1" required /><span>1</span><small>Not in place</small></label>
+                <label><input type="radio" name="i2" value="2" /><span>2</span><small>Talked about</small></label>
+                <label><input type="radio" name="i2" value="3" /><span>3</span><small>Informal</small></label>
+                <label><input type="radio" name="i2" value="4" /><span>4</span><small>Documented</small></label>
+                <label><input type="radio" name="i2" value="5" /><span>5</span><small>Verified</small></label>
               </div>
             </fieldset>
             <fieldset class="likert">
-              <legend>Leadership and the board have had an honest conversation about programs that are mission-critical but not financially sustainable on their own.</legend>
+              <legend>Leadership and the board review, at least once a year, which mission-critical programs aren't financially sustainable on their own and how they'll be funded.</legend>
               <div class="likert-scale">
-                <label><input type="radio" name="i3" value="1" required /><span>1</span><small>Not at all true</small></label>
-                <label><input type="radio" name="i3" value="2" /><span>2</span><small>Rarely true</small></label>
-                <label><input type="radio" name="i3" value="3" /><span>3</span><small>Somewhat true</small></label>
-                <label><input type="radio" name="i3" value="4" /><span>4</span><small>Mostly true</small></label>
-                <label><input type="radio" name="i3" value="5" /><span>5</span><small>Very true</small></label>
+                <label><input type="radio" name="i3" value="1" required /><span>1</span><small>Not in place</small></label>
+                <label><input type="radio" name="i3" value="2" /><span>2</span><small>Talked about</small></label>
+                <label><input type="radio" name="i3" value="3" /><span>3</span><small>Informal</small></label>
+                <label><input type="radio" name="i3" value="4" /><span>4</span><small>Documented</small></label>
+                <label><input type="radio" name="i3" value="5" /><span>5</span><small>Verified</small></label>
               </div>
             </fieldset>
           </div>
@@ -170,31 +172,31 @@ import EmailResultsForm from '../components/EmailResultsForm.astro';
             <fieldset class="likert">
               <legend>Our strategic priorities are translated into specific initiatives with owners and timelines, not just stated goals.</legend>
               <div class="likert-scale">
-                <label><input type="radio" name="e1" value="1" required /><span>1</span><small>Not at all true</small></label>
-                <label><input type="radio" name="e1" value="2" /><span>2</span><small>Rarely true</small></label>
-                <label><input type="radio" name="e1" value="3" /><span>3</span><small>Somewhat true</small></label>
-                <label><input type="radio" name="e1" value="4" /><span>4</span><small>Mostly true</small></label>
-                <label><input type="radio" name="e1" value="5" /><span>5</span><small>Very true</small></label>
+                <label><input type="radio" name="e1" value="1" required /><span>1</span><small>Not in place</small></label>
+                <label><input type="radio" name="e1" value="2" /><span>2</span><small>Talked about</small></label>
+                <label><input type="radio" name="e1" value="3" /><span>3</span><small>Informal</small></label>
+                <label><input type="radio" name="e1" value="4" /><span>4</span><small>Documented</small></label>
+                <label><input type="radio" name="e1" value="5" /><span>5</span><small>Verified</small></label>
               </div>
             </fieldset>
             <fieldset class="likert">
               <legend>We track a small set of key metrics regularly (at least quarterly) that show whether we're actually executing the strategy.</legend>
               <div class="likert-scale">
-                <label><input type="radio" name="e2" value="1" required /><span>1</span><small>Not at all true</small></label>
-                <label><input type="radio" name="e2" value="2" /><span>2</span><small>Rarely true</small></label>
-                <label><input type="radio" name="e2" value="3" /><span>3</span><small>Somewhat true</small></label>
-                <label><input type="radio" name="e2" value="4" /><span>4</span><small>Mostly true</small></label>
-                <label><input type="radio" name="e2" value="5" /><span>5</span><small>Very true</small></label>
+                <label><input type="radio" name="e2" value="1" required /><span>1</span><small>Not in place</small></label>
+                <label><input type="radio" name="e2" value="2" /><span>2</span><small>Talked about</small></label>
+                <label><input type="radio" name="e2" value="3" /><span>3</span><small>Informal</small></label>
+                <label><input type="radio" name="e2" value="4" /><span>4</span><small>Documented</small></label>
+                <label><input type="radio" name="e2" value="5" /><span>5</span><small>Verified</small></label>
               </div>
             </fieldset>
             <fieldset class="likert">
               <legend>Progress against our strategic plan is reviewed and adjusted at least once or twice a year, not filed away until the next planning cycle.</legend>
               <div class="likert-scale">
-                <label><input type="radio" name="e3" value="1" required /><span>1</span><small>Not at all true</small></label>
-                <label><input type="radio" name="e3" value="2" /><span>2</span><small>Rarely true</small></label>
-                <label><input type="radio" name="e3" value="3" /><span>3</span><small>Somewhat true</small></label>
-                <label><input type="radio" name="e3" value="4" /><span>4</span><small>Mostly true</small></label>
-                <label><input type="radio" name="e3" value="5" /><span>5</span><small>Very true</small></label>
+                <label><input type="radio" name="e3" value="1" required /><span>1</span><small>Not in place</small></label>
+                <label><input type="radio" name="e3" value="2" /><span>2</span><small>Talked about</small></label>
+                <label><input type="radio" name="e3" value="3" /><span>3</span><small>Informal</small></label>
+                <label><input type="radio" name="e3" value="4" /><span>4</span><small>Documented</small></label>
+                <label><input type="radio" name="e3" value="5" /><span>5</span><small>Verified</small></label>
               </div>
             </fieldset>
           </div>
@@ -246,7 +248,7 @@ import EmailResultsForm from '../components/EmailResultsForm.astro';
 
           <div class="results-related">
             <p>This tool measures strategy, risk, and execution, and blends in your Revenue &amp; Growth and Leadership scores if you've completed them. For a closer look at fundraising program structure specifically (gift portfolios, stewardship, campaigns, and events), see the <a href="/institutional-advancement-score">Institutional Advancement Score</a> (not blended into the Triangle above, since Moore's framework is specifically three-legged, but a useful companion read). For a numbers-based read on funder-specific grant readiness, <a href={SCORECARD_URL} target="_blank" rel="noopener">InstitutionalOS</a> is a free, purpose-built scorecard for that, scored from your actual filed financial data in the full guided Review, not self-reported estimates.</p>
-            <p>Haven't taken the free <a href="/assessment">Nonprofit Sustainability Self-Assessment</a> yet? It covers this and four other areas in about 5 minutes.</p>
+            <p>Haven't taken the free <a href="/assessment">Nonprofit Sustainability Self-Assessment</a> yet? It covers this and the other six Health Index dimensions in about 7 minutes.</p>
           </div>
 
           <div class="results-cta">
@@ -558,7 +560,7 @@ import EmailResultsForm from '../components/EmailResultsForm.astro';
     fetch(API_BASE + '/api/assessment-narrative', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ tool: 'sustainability', ...payload }),
+      body: JSON.stringify({ tool: 'sustainability', scale: 'evidence', ...payload }),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -594,7 +596,7 @@ import EmailResultsForm from '../components/EmailResultsForm.astro';
   function fetchBenchmarks(compositePct: number) {
     const overallEl = document.getElementById('ss-avg-overall') as HTMLElement | null;
 
-    fetch(API_BASE + '/api/benchmarks?tool=sustainability')
+    fetch(API_BASE + '/api/benchmarks?tool=sustainability&scale=evidence')
       .then((res) => res.json())
       .then((data) => {
         const b = data && data.ok ? data.benchmarks : null;

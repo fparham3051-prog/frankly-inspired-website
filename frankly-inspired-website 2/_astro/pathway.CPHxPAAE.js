@@ -5,7 +5,7 @@ import{o as e}from"./healthEngine.C9eHo8wF.js";var t={build:{name:`Build`,full:`
     ${r}
     <div class="hero-ctas">
       <a class="btn btn-primary" href="/#contact" data-track="pathway_diagnostic_click">Discuss Your Diagnostic</a>
-      <a class="btn btn-secondary" href="/#pricing">See Pricing</a>
+      <a class="btn btn-secondary" href="/consulting#pricing">See Pricing</a>
     </div>`}function c(t,n){if(!t||!n.items.length)return;let c=n.items.reduce((e,t)=>t.pct<e.pct?t:e,n.items[0]),l=n.compositePct>=60&&c.pct<40,u=n.items.every(e=>Math.abs(e.pct-c.pct)<5),d=a[c.label]||a[c.label.trim()]||``,f=n.basis===`figures`?`This score is built from figures you entered, against sector benchmarks.`:`This score is one person’s self-rating.`;t.innerHTML=`
     <div class="pathway">
       <h3 class="subhead">${u?`Where to start`:`Your likely constraint`}: ${o(c.label)}</h3>
@@ -27,4 +27,4 @@ import{o as e}from"./healthEngine.C9eHo8wF.js";var t={build:{name:`Build`,full:`
 
       <div class="pathway-next" data-pathway-next>${s(r())}</div>
       ${n.profile===!1?``:e()}
-    </div>`;let p=t.querySelector(`[data-pathway-next]`),m=()=>{p?.querySelectorAll(`.stage-choice`).forEach(e=>{e.addEventListener(`click`,()=>{let t=e.dataset.stage;i(t),window.fiTrack?.(`stage_selected`,{stage:t,tool:n.tool}),p&&(p.innerHTML=s(t),m())})})};m()}export{c as t};
+    </div>`;let p=t.querySelector(`[data-pathway-next]`),m=()=>{p?.querySelectorAll(`.stage-choice`).forEach(e=>{e.addEventListener(`click`,()=>{let t=e.dataset.stage;i(t),window.fiTrack?.(`stage_selected`,{stage:t,tool:n.tool}),p&&(p.innerHTML=s(t),m())})})};m()}export{c as n,r as t};

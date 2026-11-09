@@ -3,6 +3,7 @@ import { CALENDLY_URL } from '../config';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import RubricKey from '../components/RubricKey.astro';
+import QuestionSection from '../components/QuestionSection.astro';
 import EmailResultsForm from '../components/EmailResultsForm.astro';
 ---
 
@@ -51,181 +52,15 @@ import EmailResultsForm from '../components/EmailResultsForm.astro';
         <form id="ia-form" novalidate>
           <RubricKey />
 
-          <div class="pillar-group" data-pillar-index="1">
-            <h2 class="pillar-heading">1. Gift Portfolio Strategy &amp; Staffing</h2>
-            <p class="fh-field-help">Based on AFP's fundraising staffing and portfolio-size benchmarks.</p>
-            <fieldset class="likert">
-              <legend>We segment donors into clear gift levels (e.g., broad-based/annual, mid-level, major, principal) and use a different strategy for each, not one blanket approach.</legend>
-              <div class="likert-scale">
-                <label><input type="radio" name="gp1" value="1" required /><span>1</span><small>Not in place</small></label>
-                <label><input type="radio" name="gp1" value="2" /><span>2</span><small>Talked about</small></label>
-                <label><input type="radio" name="gp1" value="3" /><span>3</span><small>Informal</small></label>
-                <label><input type="radio" name="gp1" value="4" /><span>4</span><small>Documented</small></label>
-                <label><input type="radio" name="gp1" value="5" /><span>5</span><small>Verified</small></label>
-              </div>
-            </fieldset>
-            <fieldset class="likert">
-              <legend>Major and principal gift relationships are assigned to a specific staff member's portfolio, not left to whoever has time.</legend>
-              <div class="likert-scale">
-                <label><input type="radio" name="gp2" value="1" required /><span>1</span><small>Not in place</small></label>
-                <label><input type="radio" name="gp2" value="2" /><span>2</span><small>Talked about</small></label>
-                <label><input type="radio" name="gp2" value="3" /><span>3</span><small>Informal</small></label>
-                <label><input type="radio" name="gp2" value="4" /><span>4</span><small>Documented</small></label>
-                <label><input type="radio" name="gp2" value="5" /><span>5</span><small>Verified</small></label>
-              </div>
-            </fieldset>
-            <fieldset class="likert">
-              <legend>Board members and other volunteer leaders have defined roles in identifying prospects and opening doors, not just staff.</legend>
-              <div class="likert-scale">
-                <label><input type="radio" name="gp3" value="1" required /><span>1</span><small>Not in place</small></label>
-                <label><input type="radio" name="gp3" value="2" /><span>2</span><small>Talked about</small></label>
-                <label><input type="radio" name="gp3" value="3" /><span>3</span><small>Informal</small></label>
-                <label><input type="radio" name="gp3" value="4" /><span>4</span><small>Documented</small></label>
-                <label><input type="radio" name="gp3" value="5" /><span>5</span><small>Verified</small></label>
-              </div>
-            </fieldset>
-          </div>
+          <QuestionSection tool="institutional-advancement" index={1} />
 
-          <div class="pillar-group" data-pillar-index="2">
-            <h2 class="pillar-heading">2. Moves Management &amp; Stewardship</h2>
-            <p class="fh-field-help">Based on Cornell's moves-management framework and Penelope Burk's donor-centered fundraising research.</p>
-            <fieldset class="likert">
-              <legend>We track donors through defined stages (e.g., identification, qualification, cultivation, solicitation, stewardship), not just "contacted" or "not."</legend>
-              <div class="likert-scale">
-                <label><input type="radio" name="mm1" value="1" required /><span>1</span><small>Not in place</small></label>
-                <label><input type="radio" name="mm1" value="2" /><span>2</span><small>Talked about</small></label>
-                <label><input type="radio" name="mm1" value="3" /><span>3</span><small>Informal</small></label>
-                <label><input type="radio" name="mm1" value="4" /><span>4</span><small>Documented</small></label>
-                <label><input type="radio" name="mm1" value="5" /><span>5</span><small>Verified</small></label>
-              </div>
-            </fieldset>
-            <fieldset class="likert">
-              <legend>Every gift is acknowledged promptly with more than a generic, automated receipt.</legend>
-              <div class="likert-scale">
-                <label><input type="radio" name="mm2" value="1" required /><span>1</span><small>Not in place</small></label>
-                <label><input type="radio" name="mm2" value="2" /><span>2</span><small>Talked about</small></label>
-                <label><input type="radio" name="mm2" value="3" /><span>3</span><small>Informal</small></label>
-                <label><input type="radio" name="mm2" value="4" /><span>4</span><small>Documented</small></label>
-                <label><input type="radio" name="mm2" value="5" /><span>5</span><small>Verified</small></label>
-              </div>
-            </fieldset>
-            <fieldset class="likert">
-              <legend>We have a deliberate stewardship plan for donors after the ask, not just before it: impact updates, personal touches, recognition tied to gift level.</legend>
-              <div class="likert-scale">
-                <label><input type="radio" name="mm3" value="1" required /><span>1</span><small>Not in place</small></label>
-                <label><input type="radio" name="mm3" value="2" /><span>2</span><small>Talked about</small></label>
-                <label><input type="radio" name="mm3" value="3" /><span>3</span><small>Informal</small></label>
-                <label><input type="radio" name="mm3" value="4" /><span>4</span><small>Documented</small></label>
-                <label><input type="radio" name="mm3" value="5" /><span>5</span><small>Verified</small></label>
-              </div>
-            </fieldset>
-          </div>
+          <QuestionSection tool="institutional-advancement" index={2} />
 
-          <div class="pillar-group" data-pillar-index="3">
-            <h2 class="pillar-heading">3. Campaign Structure &amp; Readiness</h2>
-            <p class="fh-field-help">Based on standard capital-campaign phase methodology (feasibility, quiet phase, public phase).</p>
-            <label class="na-toggle"><input type="checkbox" id="cs-na" /> We don't have a campaign planned in the next two years. Skip this section.</label>
-            <fieldset class="likert">
-              <legend>Before launching a campaign, we run a real feasibility assessment (confidential interviews with top prospects), rather than setting a goal and hoping.</legend>
-              <div class="likert-scale">
-                <label><input type="radio" name="cs1" value="1" required /><span>1</span><small>Not in place</small></label>
-                <label><input type="radio" name="cs1" value="2" /><span>2</span><small>Talked about</small></label>
-                <label><input type="radio" name="cs1" value="3" /><span>3</span><small>Informal</small></label>
-                <label><input type="radio" name="cs1" value="4" /><span>4</span><small>Documented</small></label>
-                <label><input type="radio" name="cs1" value="5" /><span>5</span><small>Verified</small></label>
-              </div>
-            </fieldset>
-            <fieldset class="likert">
-              <legend>We understand and plan for a quiet/leadership phase, securing a strong majority of the goal from major donors before any public announcement.</legend>
-              <div class="likert-scale">
-                <label><input type="radio" name="cs2" value="1" required /><span>1</span><small>Not in place</small></label>
-                <label><input type="radio" name="cs2" value="2" /><span>2</span><small>Talked about</small></label>
-                <label><input type="radio" name="cs2" value="3" /><span>3</span><small>Informal</small></label>
-                <label><input type="radio" name="cs2" value="4" /><span>4</span><small>Documented</small></label>
-                <label><input type="radio" name="cs2" value="5" /><span>5</span><small>Verified</small></label>
-              </div>
-            </fieldset>
-            <fieldset class="likert">
-              <legend>We have a realistic campaign timeline and a specific, compelling case for support, not a general "help us" appeal.</legend>
-              <div class="likert-scale">
-                <label><input type="radio" name="cs3" value="1" required /><span>1</span><small>Not in place</small></label>
-                <label><input type="radio" name="cs3" value="2" /><span>2</span><small>Talked about</small></label>
-                <label><input type="radio" name="cs3" value="3" /><span>3</span><small>Informal</small></label>
-                <label><input type="radio" name="cs3" value="4" /><span>4</span><small>Documented</small></label>
-                <label><input type="radio" name="cs3" value="5" /><span>5</span><small>Verified</small></label>
-              </div>
-            </fieldset>
-          </div>
+          <QuestionSection tool="institutional-advancement" index={3} />
 
-          <div class="pillar-group" data-pillar-index="4">
-            <h2 class="pillar-heading">4. Events as Strategy</h2>
-            <p class="fh-field-help">Based on standard nonprofit fundraising event ROI benchmarks.</p>
-            <fieldset class="likert">
-              <legend>We track true net revenue and cost-per-dollar-raised for each event, not just gross revenue.</legend>
-              <div class="likert-scale">
-                <label><input type="radio" name="ev1" value="1" required /><span>1</span><small>Not in place</small></label>
-                <label><input type="radio" name="ev1" value="2" /><span>2</span><small>Talked about</small></label>
-                <label><input type="radio" name="ev1" value="3" /><span>3</span><small>Informal</small></label>
-                <label><input type="radio" name="ev1" value="4" /><span>4</span><small>Documented</small></label>
-                <label><input type="radio" name="ev1" value="5" /><span>5</span><small>Verified</small></label>
-              </div>
-            </fieldset>
-            <fieldset class="likert">
-              <legend>Our events are planned as cultivation touchpoints, with follow-up for key guests, not only as fundraising transactions.</legend>
-              <div class="likert-scale">
-                <label><input type="radio" name="ev2" value="1" required /><span>1</span><small>Not in place</small></label>
-                <label><input type="radio" name="ev2" value="2" /><span>2</span><small>Talked about</small></label>
-                <label><input type="radio" name="ev2" value="3" /><span>3</span><small>Informal</small></label>
-                <label><input type="radio" name="ev2" value="4" /><span>4</span><small>Documented</small></label>
-                <label><input type="radio" name="ev2" value="5" /><span>5</span><small>Verified</small></label>
-              </div>
-            </fieldset>
-            <fieldset class="likert">
-              <legend>We evaluate whether each event is worth repeating based on ROI and strategic fit, rather than running it again out of habit.</legend>
-              <div class="likert-scale">
-                <label><input type="radio" name="ev3" value="1" required /><span>1</span><small>Not in place</small></label>
-                <label><input type="radio" name="ev3" value="2" /><span>2</span><small>Talked about</small></label>
-                <label><input type="radio" name="ev3" value="3" /><span>3</span><small>Informal</small></label>
-                <label><input type="radio" name="ev3" value="4" /><span>4</span><small>Documented</small></label>
-                <label><input type="radio" name="ev3" value="5" /><span>5</span><small>Verified</small></label>
-              </div>
-            </fieldset>
-          </div>
+          <QuestionSection tool="institutional-advancement" index={4} />
 
-          <div class="pillar-group" data-pillar-index="5">
-            <h2 class="pillar-heading">5. Planned &amp; Legacy Giving</h2>
-            <p class="fh-field-help">Based on Giving USA's bequest-giving data, the Chronicle of Philanthropy's planned-giving research, and FreeWill's donor bequest data.</p>
-            <fieldset class="likert">
-              <legend>We actively invite donors to consider a bequest or legacy gift, through stewardship conversations, website materials, or a named legacy society, rather than only responding if a donor raises it first.</legend>
-              <div class="likert-scale">
-                <label><input type="radio" name="pg1" value="1" required /><span>1</span><small>Not in place</small></label>
-                <label><input type="radio" name="pg1" value="2" /><span>2</span><small>Talked about</small></label>
-                <label><input type="radio" name="pg1" value="3" /><span>3</span><small>Informal</small></label>
-                <label><input type="radio" name="pg1" value="4" /><span>4</span><small>Documented</small></label>
-                <label><input type="radio" name="pg1" value="5" /><span>5</span><small>Verified</small></label>
-              </div>
-            </fieldset>
-            <fieldset class="likert">
-              <legend>We keep a list of likely bequest prospects based on giving history and engagement, not guesswork.</legend>
-              <div class="likert-scale">
-                <label><input type="radio" name="pg2" value="1" required /><span>1</span><small>Not in place</small></label>
-                <label><input type="radio" name="pg2" value="2" /><span>2</span><small>Talked about</small></label>
-                <label><input type="radio" name="pg2" value="3" /><span>3</span><small>Informal</small></label>
-                <label><input type="radio" name="pg2" value="4" /><span>4</span><small>Documented</small></label>
-                <label><input type="radio" name="pg2" value="5" /><span>5</span><small>Verified</small></label>
-              </div>
-            </fieldset>
-            <fieldset class="likert">
-              <legend>When a donor lets us know about a planned or bequest gift, we have a deliberate way to steward that commitment (recognition, updates, a legacy society) not just a thank-you and a file.</legend>
-              <div class="likert-scale">
-                <label><input type="radio" name="pg3" value="1" required /><span>1</span><small>Not in place</small></label>
-                <label><input type="radio" name="pg3" value="2" /><span>2</span><small>Talked about</small></label>
-                <label><input type="radio" name="pg3" value="3" /><span>3</span><small>Informal</small></label>
-                <label><input type="radio" name="pg3" value="4" /><span>4</span><small>Documented</small></label>
-                <label><input type="radio" name="pg3" value="5" /><span>5</span><small>Verified</small></label>
-              </div>
-            </fieldset>
-          </div>
+          <QuestionSection tool="institutional-advancement" index={5} />
 
           <div class="assessment-submit">
             <button type="submit" class="btn btn-primary">See My Institutional Advancement Score</button>
@@ -298,6 +133,7 @@ import EmailResultsForm from '../components/EmailResultsForm.astro';
 
 <script>
   import { renderPathway } from '../scripts/pathway';
+  import { recordAnswers } from '../scripts/healthEngine';
   // UPDATE THIS once frankly-inspired-backend is deployed to Render. See
   // that repo's README.md. Same value as assessment.astro's API_BASE.
   const API_BASE = 'https://frankly-inspired-api.onrender.com';
@@ -481,6 +317,7 @@ import EmailResultsForm from '../components/EmailResultsForm.astro';
       });
     }
 
+    if (form) recordAnswers('institutional-advancement', form, composite);
     renderPathway(document.getElementById('ia-recommendation'), {
       tool: 'Institutional Advancement Score',
       items: results.map((r) => ({ label: r.dimension.label, pct: r.pct, help: r.dimension.specificHelp })),

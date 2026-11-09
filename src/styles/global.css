@@ -1142,6 +1142,15 @@ a.hero-credential-link:hover {
   font-family: var(--font-heading);
 }
 .footer-meta { margin-bottom: 0.8rem; }
+.footer-meta a { color: #c3ccd6; margin: 0 0.45rem; }
+.footer-meta a:hover { color: var(--gold-light); }
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  row-gap: 0.4rem;
+}
 .footer-links a {
   color: #c3ccd6;
   margin: 0 0.45rem;
@@ -2036,3 +2045,80 @@ a.card:hover .card-cta { text-decoration: underline; }
 .results-recommendation p a:not(.btn) { color: var(--gold-light); }
 .results-recommendation a.link-more:hover,
 .results-recommendation p a:not(.btn):hover { color: var(--white); }
+
+/* ---------- Health Index (tier 2) ---------- */
+/* Teaser at the end of each tool's results (inside the dark panel). */
+.hi-teaser { margin-top: 1.75rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.14); }
+.hi-mini { list-style: none; padding: 0; margin: 0 0 1.1rem; display: grid; gap: 0.45rem; }
+.hi-mini-row { display: grid; grid-template-columns: minmax(0, 1fr) 6.5rem 3.2rem; align-items: center; gap: 0.75rem; font-size: 0.88rem; color: #d7dee6; }
+.hi-mini-track { height: 6px; border-radius: 3px; background: rgba(255,255,255,0.14); overflow: hidden; }
+.hi-mini-track span { display: block; height: 100%; background: var(--gold-light); }
+.hi-mini-val { text-align: right; font-weight: 600; color: var(--white); }
+.hi-mini-row.is-empty { grid-template-columns: minmax(0, 1fr) auto; color: #9aa6b4; }
+.hi-mini-row.is-empty .hi-mini-val { font-weight: 400; color: #9aa6b4; }
+@media (max-width: 560px) { .hi-mini-row { grid-template-columns: minmax(0, 1fr) 4.5rem 2.8rem; } }
+
+/* /health-index page */
+.hi-empty { text-align: center; padding: 1rem 0; }
+.hi-empty .hero-ctas { justify-content: center; }
+.hi-org { margin-bottom: 2rem; }
+.hi-dims { display: grid; gap: 1.1rem; margin-bottom: 2.25rem; }
+.hi-dim-head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; margin-bottom: 0.35rem; }
+.hi-dim .results-bar-track { display: block; background: var(--white); box-shadow: inset 0 0 0 1px var(--border); }
+.hi-dim-meta { font-size: 0.85rem; color: #5b6470; margin: 0.35rem 0 0; }
+.hi-dim.is-empty .results-bar-label { color: #6b7480; }
+.hi-actions { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; margin-top: 1.5rem; }
+
+/* Organization lookup + public 990 snapshot */
+.org-lookup-wrap { margin-bottom: 1.5rem; }
+.org-lookup { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 1.1rem 1.2rem; }
+.org-lookup label { font-weight: 600; color: var(--navy); }
+.org-lookup .optional { font-weight: 400; color: #6b7480; }
+.org-search-row { display: flex; gap: 0.6rem; }
+.org-search-row input { flex: 1; min-width: 0; padding: 0.7rem 0.85rem; border: 1px solid var(--border); border-radius: var(--radius-sm); font: inherit; }
+.org-results { list-style: none; padding: 0; margin: 0.5rem 0 0; display: grid; gap: 0.4rem; }
+.org-results button { width: 100%; text-align: left; background: var(--light-gray); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.6rem 0.8rem; cursor: pointer; font: inherit; display: flex; flex-direction: column; gap: 0.15rem; }
+.org-results button:hover, .org-results button:focus-visible { border-color: var(--gold); }
+.org-results span { font-size: 0.82rem; color: #5b6470; }
+.org-snapshot { background: var(--white); border: 1px solid var(--border); border-left: 4px solid var(--navy); border-radius: var(--radius-sm); padding: 1.1rem 1.2rem; }
+.org-snapshot h4 { margin: 1rem 0 0.5rem; color: var(--navy); font-size: 1rem; }
+.org-snapshot-name { margin: 0 0 0.75rem; }
+.link-btn { background: none; border: none; padding: 0; margin-left: 0.5rem; color: var(--gold-accessible); font: inherit; font-size: 0.88rem; font-weight: 600; cursor: pointer; text-decoration: underline; }
+.org-table-wrap { overflow-x: auto; }
+.org-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+.org-table th, .org-table td { text-align: right; padding: 0.45rem 0.6rem; border-bottom: 1px solid var(--border); white-space: nowrap; }
+.org-table th:first-child, .org-table td:first-child { text-align: left; }
+.org-table th { font-weight: 600; color: var(--navy); font-size: 0.82rem; }
+.org-table td.is-neg { color: #a33a2b; }
+.org-signals { margin: 0; padding-left: 1.1rem; display: grid; gap: 0.35rem; font-size: 0.92rem; }
+.org-signals .sig-watch::marker { color: #a33a2b; }
+.org-signals .sig-good::marker { color: #2f7a4f; }
+.org-source { font-size: 0.8rem; color: #5b6470; margin: 0.9rem 0 0; }
+
+/* /methodology */
+.method .subhead { margin-top: 2.25rem; }
+.method .subhead:first-child { margin-top: 0; }
+.method-table td, .method-table th { white-space: normal; text-align: left; }
+.method-table td:last-child, .method-table th:last-child { text-align: right; white-space: nowrap; }
+.method-dims { padding-left: 1.3rem; }
+.method-dim { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.85rem 1.1rem; margin-bottom: 0.6rem; }
+.method-dim summary { cursor: pointer; display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; color: var(--navy); }
+.method-dim summary span { color: #5b6470; font-size: 0.88rem; }
+.method-area { margin-top: 1rem; }
+.method-area h3 { font-size: 1rem; margin: 0 0 0.25rem; color: var(--navy); font-family: var(--font-body); }
+.method-area h3 span { font-weight: 400; font-size: 0.88rem; }
+.method-basis { font-size: 0.85rem; color: #5b6470; margin: 0 0 0.4rem; }
+.method-area ol { margin: 0; padding-left: 1.2rem; display: grid; gap: 0.3rem; font-size: 0.93rem; }
+
+/* Print: the Health Index as a one-page board handout */
+@media print {
+  header, footer, .site-header, .site-footer, .cookie-banner, .closing-cta, .results-email-form, .hi-actions, .stage-choices, .hero-ctas, .org-lookup, .link-btn, .skip-link { display: none !important; }
+  body { background: #fff !important; }
+  .section { padding: 0.75rem 0 !important; }
+  .assessment-intro { background: none !important; color: #000 !important; }
+  .assessment-intro h1, .assessment-intro p { color: #000 !important; }
+  .results-recommendation { background: #fff !important; color: #000 !important; box-shadow: none !important; border: 1px solid #999; }
+  .results-recommendation p, .results-recommendation .subhead, .results-recommendation li { color: #000 !important; }
+  .results-bar-fill { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .hi-dim { break-inside: avoid; }
+}

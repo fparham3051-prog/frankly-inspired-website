@@ -11,6 +11,8 @@
 // The stage is asked here, in the results, and remembered across tools in
 // this browser (localStorage key fi_stage). Nothing leaves the browser.
 
+import { profileTeaserHtml } from './healthEngine';
+
 export type StageKey = 'build' | 'fund' | 'sustain';
 
 export const STAGES: Record<StageKey, { name: string; full: string; price: string; question: string }> = {
@@ -44,7 +46,15 @@ const ACTIONS: Record<string, string> = {
   'Operations & Infrastructure': 'Choose five numbers leadership will look at every month, such as cash on hand, people served, and donor retention, and put them on a single page reviewed at each leadership meeting.',
   'Partnership & Ecosystem Strategy': 'List your ten most important partners and mark each as formal, informal, or one-off. Formalize your two most important informal partnerships with a simple memorandum of understanding.',
   'Program & Impact Evidence': 'Draft a one-page logic model for your largest program: inputs, activities, outputs, and the two or three outcomes you expect. Then pick one outcome and start measuring it with every participant this quarter.',
-  'Governance & Risk': "Pull your last filed Form 990 and check Part VI. Adopt any missing core policy (conflict of interest, whistleblower, document retention), and put the 990 and an annual executive director evaluation on the board calendar.",
+  'Governance & Risk': "Pull your last filed Form 990 and check Part VI. Adopt any missing core policy (conflict of interest, whistleblower, document retention), and put the 990 and an annual executive director evaluation on the board calendar. Then claim your free Candid profile and earn a Seal of Transparency: Candid's research found Seal holders received, on average, 62% more in contributions.",
+  // Combined Health Index (dimension labels, used on /health-index)
+  'Strategy and Positioning': 'Hold a 90-minute session with your board chair and two senior staff to agree your top three priorities for the next 12 months, in writing. For the rest of the quarter, test every new request or opportunity against those three.',
+  'Program and Impact Evidence': 'Draft a one-page logic model for your largest program: inputs, activities, outputs, and the two or three outcomes you expect. Then pick one outcome and start measuring it with every participant this quarter.',
+  'Revenue and Financial Health': "List every revenue source with its share of last year's revenue. If any single source is above 30%, the commonly cited risk threshold, open two funding conversations outside that source this quarter, and adopt a written reserve target.",
+  'Leadership and Organizational Capacity': 'Draft a one-page emergency succession plan: who steps in as interim, who holds signing authority, and where key relationships and passwords are documented. Ask the board to approve it.',
+  'Operations and Infrastructure': 'Choose five numbers leadership will look at every month, such as cash on hand, people served, and donor retention, and put them on a single page reviewed at each leadership meeting.',
+  'Partnerships and Ecosystem': 'List your ten most important partners and mark each as formal, informal, or one-off. Formalize your two most important informal partnerships with a simple memorandum of understanding.',
+  'Governance and Risk': "Pull your last filed Form 990 and check Part VI. Adopt any missing core policy (conflict of interest, whistleblower, document retention), and put the 990 and an annual executive director evaluation on the board calendar. Then claim your free Candid profile and earn a Seal of Transparency: Candid's research found Seal holders received, on average, 62% more in contributions.",
   // Leadership & Operations Score
   'Governance Health': 'Reserve the first 30 minutes of your next board meeting for one strategic question, with a one-page brief sent a week ahead, instead of opening with updates.',
   'Leadership Succession & Bench Strength': 'Draft a one-page emergency succession plan: who steps in as interim, who holds signing authority, and where key relationships and passwords are documented. Ask the board to approve it.',
@@ -77,6 +87,7 @@ export interface PathwayOptions {
   basis?: 'answers' | 'figures';
   coversAllSeven?: boolean;
   extraHtml?: string;      // tool-specific links shown under the constraint
+  profile?: boolean;       // show the 'Health Index so far' block (default true)
 }
 
 function esc(s: string): string {
@@ -139,6 +150,7 @@ export function renderPathway(el: HTMLElement | null, opts: PathwayOptions) {
       <p>That is what the InstitutionalOS Diagnostic verifies, directly with you.</p>
 
       <div class="pathway-next" data-pathway-next>${recommendationHtml(getStage())}</div>
+      ${opts.profile === false ? '' : profileTeaserHtml()}
     </div>`;
 
   const next = el.querySelector<HTMLElement>('[data-pathway-next]');

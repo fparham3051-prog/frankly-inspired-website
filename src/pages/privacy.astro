@@ -36,6 +36,9 @@ import Header from '../components/Header.astro';
         </ul>
         <p>We encourage visitors not to submit confidential, sensitive, financial, health, student, employee, donor, or legally privileged information through the general website inquiry form.</p>
 
+        <h2>Free Tools and Your Health Index</h2>
+        <p>Answers to the free assessment tools, and the combined Health Index built from them, are stored in your own browser (local storage), not on our servers. To generate a written summary and show anonymous comparisons, the tools send only your scores, without your name, email, or organization. If you use the optional organization lookup, the name or EIN you type is sent to our server and on to ProPublica's public Nonprofit Explorer to find your public Form 990 filings; we don't store your searches. Your email, scores, and the organization you selected are sent to us only if you choose to email yourself your results. You can delete your saved answers at any time from the Health Index page. See <a href="/methodology">How scoring works</a> for details.</p>
+
         <h2>Information Related to Paid Diagnostic Engagements</h2>
         <p>If you engage Frankly Inspired and Associates, LLC for a Formation Readiness, Grant Readiness, or Institutional Durability Diagnostic, the information involved is broader than a general website inquiry, and is handled differently.</p>
         <p>For the Grant Readiness Diagnostic specifically, the Financial Health dimension is scored using your organization's IRS Form 990 filings, retrieved from ProPublica's public Nonprofit Explorer database and the IRS's public e-file data. These are publicly available records, not documents you need to submit to us.</p>
@@ -64,6 +67,7 @@ import Header from '../components/Header.astro';
           <li><strong>Resend</strong>: transactional email delivery</li>
           <li><strong>Neon</strong>: database storage for anonymized assessment benchmark data</li>
           <li><strong>Anthropic (Claude)</strong>: generates the personalized narrative summary on self-assessment tools; this only ever receives your numeric scores, never your name or organization</li>
+          <li><strong>ProPublica Nonprofit Explorer</strong>: public IRS Form 990 data for the optional organization lookup</li>
           <li><strong>Calendly</strong>: scheduling</li>
           <li><strong>Google Workspace</strong>: business email and document handling</li>
         </ul>

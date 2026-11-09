@@ -12,7 +12,7 @@ const deepDives = [
     dims: 'Revenue and Financial Health',
     name: 'Revenue & Growth Score',
     time: '10 minutes',
-    what: 'Nine numbers from your budget and donor database, scored against reserve, liquidity, diversification, and donor-retention benchmarks.',
+    what: 'Nine numbers from your budget and donor database, scored against reserve, liquidity, diversification, and donor-retention benchmarks. Look up your organization to start from your filed Form 990.',
     best: 'Best if you have your financials handy.',
   },
   {
@@ -81,7 +81,7 @@ const deepDives = [
     <section class="section">
       <div class="container">
         <h2 class="section-title reveal">Go deeper on one area</h2>
-        <p class="section-note reveal">Each goes further on one or two of the seven dimensions, grounded in its own named research.</p>
+        <p class="section-note reveal">Each goes further on one or two of the seven dimensions, grounded in its own named research. Every tool you take adds to <a href="/health-index">your Health Index</a>: one profile on all seven dimensions, saved only in your browser. <a href="/methodology">How scoring works</a>.</p>
         <div class="card-grid">
           {deepDives.map((t) => (
             <a class="card reveal" href={t.href} data-track="tool_start" data-tool={t.href.slice(1)}>

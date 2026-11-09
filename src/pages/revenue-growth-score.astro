@@ -54,6 +54,12 @@ import EmailResultsForm from '../components/EmailResultsForm.astro';
           <p>Have your most recent annual budget, financial statements or Form 990, and a donor count from your CRM or donor database on hand. Every figure below is a single line item or count you can pull directly from one of those, nothing needs to be calculated first.</p>
         </div>
 
+        <!-- Optional public-990 starting point (ProPublica Nonprofit Explorer
+             via the backend). Prefills revenue and expenses; the visitor
+             still confirms every figure against current books. -->
+        <div class="org-lookup-wrap" id="rg-org"></div>
+        <p class="fh-field-help" id="rg-org-note" hidden></p>
+
         <form id="rg-form" novalidate>
 
           <div class="fh-field-group">
@@ -192,6 +198,26 @@ import EmailResultsForm from '../components/EmailResultsForm.astro';
 
 <script>
   import { renderPathway } from '../scripts/pathway';
+  import { recordMetrics } from '../scripts/healthEngine';
+  import { mountOrgLookup } from '../scripts/orgLookup';
+  // Prefill revenue and expenses from the latest filed 990, only into
+  // fields that are empty or that this lookup filled earlier.
+  mountOrgLookup(document.getElementById('rg-org'), (snap) => {
+    const y = snap.years[0];
+    const note = document.getElementById('rg-org-note');
+    if (!y) return;
+    const fill = (id: string, v: number | null) => {
+      const el = document.getElementById(id) as HTMLInputElement | null;
+      if (!el || v == null) return;
+      if (el.value === '' || el.dataset.from990 === '1') { el.value = String(Math.round(v)); el.dataset.from990 = '1'; }
+    };
+    fill('rg-total-revenue', y.revenue);
+    fill('rg-total-expenses', y.expenses);
+    if (note) {
+      note.hidden = false;
+      note.textContent = `Total revenue and expenses below were filled from your FY${y.year} Form ${y.form}. Filings run a year or two behind, so update them to your current budget if they've changed.`;
+    }
+  });
   // UPDATE THIS once frankly-inspired-backend is deployed to Render. See
   // that repo's README.md. Same value as assessment.astro's API_BASE.
   const API_BASE = 'https://frankly-inspired-api.onrender.com';
@@ -438,6 +464,7 @@ import EmailResultsForm from '../components/EmailResultsForm.astro';
       });
     }
 
+    recordMetrics('revenue-growth', results.map((r) => ({ label: r.metric.label, pct: r.score })), composite);
     renderPathway(document.getElementById('rg-recommendation'), {
       tool: 'Revenue & Growth Score',
       items: results.map((r) => ({ label: r.metric.label, pct: r.score, help: r.metric.specificHelp })),

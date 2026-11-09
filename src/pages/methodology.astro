@@ -1,0 +1,111 @@
+---
+import { CALENDLY_URL } from '../config';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import { DIMENSIONS, AREAS, ITEMS, TOOLS, RUBRIC } from '../data/questionBank';
+
+// Generated from the same question bank the tools render from, so this
+// page can't drift from what visitors are actually asked.
+const toolName = (k: string) => TOOLS.find((t) => t.key === k)?.name || k;
+const toolHref = (k: string) => TOOLS.find((t) => t.key === k)?.href || '/tools';
+const byDim = DIMENSIONS.map((d) => {
+  const areas = AREAS.filter((a) => a.dimension === d.key).map((a) => ({
+    ...a,
+    items: ITEMS.filter((i) => i.area === a.key),
+  }));
+  return { ...d, areas, count: areas.reduce((s, a) => s + a.items.length, 0) };
+});
+const RUBRIC_DESC = [
+  "We don't do this.",
+  'Discussed or planned, but not started.',
+  "It happens, but isn't written down or consistent.",
+  'Written down and in regular use; you could show it.',
+  'Routine and reviewed; it would hold up if a funder or board checked.',
+];
+---
+
+<BaseLayout
+  title="How Scoring Works | Frankly Inspired"
+  description="The methodology behind Frankly Inspired's free nonprofit tools and the InstitutionalOS Health Index: the seven dimensions, the evidence rubric, every question and its research basis, and how your data is handled."
+  footerVariant="home"
+>
+  <Header variant="full" />
+
+  <main id="main">
+    <section class="section assessment-intro">
+      <div class="container narrow center">
+        <p class="eyebrow eyebrow-dark">Methodology</p>
+        <h1>How scoring works</h1>
+        <p class="hero-sub-light">Every free tool and every paid diagnostic scores the same seven dimensions on the same evidence rubric. This page shows exactly how, including every question we ask and where it comes from.</p>
+      </div>
+    </section>
+
+    <section class="section alt-bg">
+      <div class="container narrow method">
+        <h2 class="subhead">1. The seven dimensions</h2>
+        <p>The InstitutionalOS Health Index rates an organization on seven dimensions. Together they cover what a funder, board, or auditor would examine to judge whether an organization can last.</p>
+        <ol class="method-dims">
+          {DIMENSIONS.map((d) => <li><a href={`/#${d.anchor}`}>{d.label}</a></li>)}
+        </ol>
+
+        <h2 class="subhead">2. The evidence rubric</h2>
+        <p>Questions describe a practice, and you choose the level you could <em>show evidence for</em>, not how much you agree. If you're between two levels, choose the lower one.</p>
+        <div class="org-table-wrap"><table class="org-table method-table">
+          <thead><tr><th>Answer</th><th>Means</th><th>Scores</th></tr></thead>
+          <tbody>
+            {RUBRIC.map((r, i) => <tr><td><strong>{i + 1} · {r}</strong></td><td>{RUBRIC_DESC[i]}</td><td>{i * 25}%</td></tr>)}
+          </tbody>
+        </table></div>
+
+        <h2 class="subhead">3. How scores are calculated</h2>
+        <ul class="bullet-list">
+          <li><strong>Each area</strong> is the average of its questions on the rubric above (0 to 100%).</li>
+          <li><strong>Each tool's overall score</strong> is the average of its areas.</li>
+          <li><strong>The Revenue &amp; Growth Score</strong> uses your figures instead of answers. Each ratio is scored against a published benchmark: operating reserves (Nonprofit Operating Reserves Initiative and Propel Nonprofits guidance), program expense ratio (BBB Wise Giving Alliance and Charity Navigator), revenue concentration (a single source above 30% is the commonly cited risk threshold), liquidity (current ratio), and donor retention (the Fundraising Effectiveness Project).</li>
+          <li><strong>Your Health Index</strong> combines every tool you've taken. Each dimension is the average of every answer that maps to it, with your latest answer used for each question. The overall score averages the dimensions you've covered.</li>
+          <li><strong>Your likely constraint</strong> is your lowest-scoring area. If your overall score is 60% or higher but one area is under 40%, we flag it: a strong average doesn't cancel out a weak spot, and the weak spot usually limits everything else.</li>
+          <li><strong>Bands:</strong> Foundational (up to 30%), Developing (31 to 55%), Strengthening (56 to 80%), and Resilient (above 80%). The deeper tools use five bands: Critical, At Risk, Stable, Strong, and Resilient, with cutoffs at 20, 40, 60, and 80%.</li>
+        </ul>
+
+        <h2 class="subhead">4. Comparisons with other organizations</h2>
+        <p>When you finish a tool, your scores are logged anonymously, with no name, email, or organization attached, so we can show how you compare with everyone else who has taken it. We only compare answers given on the same rubric. If fewer than five organizations have taken a tool, we label the comparison as early data.</p>
+
+        <h2 class="subhead">5. Public Form 990 data</h2>
+        <p>If you look up your organization, we pull the summary financials from your filed IRS Form 990s through <a href="https://projects.propublica.org/nonprofits/" target="_blank" rel="noopener">ProPublica's Nonprofit Explorer</a>. These are the same public records a grantmaker reads. Filings run one to two years behind. Net assets include restricted funds, so they overstate the reserves you can actually spend. Organizations that file the 990-N postcard have no figures to show.</p>
+
+        <h2 class="subhead">6. Your data</h2>
+        <ul class="bullet-list">
+          <li>Your answers and your Health Index stay in your browser. Clearing your browser data, or using "Clear my saved answers" on <a href="/health-index">your Health Index</a>, removes them.</li>
+          <li>To write your summary and show comparisons, we send only your scores, never your name or organization.</li>
+          <li>Your email, scores, and the organization you looked up reach Franklin only if you choose to email yourself your results. There's no mailing list. See the <a href="/privacy">privacy policy</a>.</li>
+        </ul>
+
+        <h2 class="subhead">7. What free tools can't tell you</h2>
+        <p>A free tool can only report what you tell it. The <a href="/#pricing">InstitutionalOS Diagnostic</a> goes further: it checks the evidence behind each answer, reads your Form 990 the way a funder would, tests you against the gates for your stage (Build, Fund, or Sustain), and names the single binding constraint in a written memo with a 90-day plan.</p>
+
+        <h2 class="subhead" id="questions">8. Every question, by dimension</h2>
+        <p>{ITEMS.length} questions across {AREAS.length} areas and {TOOLS.length} tools, plus the Revenue &amp; Growth Score's figures.</p>
+        {byDim.map((d) => (
+          <details class="method-dim">
+            <summary><strong>{d.num}. {d.label}</strong> <span>{d.count} questions{d.key === 'revenue' ? ', plus Revenue & Growth Score figures' : ''}</span></summary>
+            {d.areas.map((a) => (
+              <div class="method-area">
+                <h3>{a.label} <span>· <a href={toolHref(a.tool)}>{toolName(a.tool)}</a></span></h3>
+                <p class="method-basis">{a.basis}</p>
+                <ol>{a.items.map((i) => <li>{i.text}</li>)}</ol>
+              </div>
+            ))}
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <section class="section closing-cta">
+      <div class="container narrow center">
+        <h2>Questions about the method?</h2>
+        <p>Franklin is glad to walk through how any score was reached.</p>
+        <a class="btn btn-primary" href={CALENDLY_URL} target="_blank" rel="noopener" data-track="schedule_click">Schedule a Strategy Conversation</a>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

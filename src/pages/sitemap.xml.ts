@@ -4,7 +4,7 @@ import { SITE_URL } from '../config';
 const pages = [
   '/', '/about', '/institutionalos', '/tools', '/insights', '/assessment',
   '/revenue-growth-score', '/institutional-advancement-score',
-  '/leadership-health', '/sustainability-score',
+  '/leadership-health', '/sustainability-score', '/health-index', '/methodology',
 ];
 
 export function GET() {

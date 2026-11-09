@@ -1,0 +1,165 @@
+---
+import { CALENDLY_URL } from '../config';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import EmailResultsForm from '../components/EmailResultsForm.astro';
+import { DIMENSIONS } from '../data/questionBank';
+---
+
+<BaseLayout
+  title="Your Health Index | Frankly Inspired"
+  description="Your combined InstitutionalOS Health Index: every free Frankly Inspired tool you've taken, rolled into one score on the seven dimensions the paid diagnostic uses."
+  footerVariant="score"
+>
+  <Header variant="full" />
+
+  <main id="main">
+    <section class="section assessment-intro">
+      <div class="container narrow center">
+        <p class="eyebrow eyebrow-dark">InstitutionalOS Health Index</p>
+        <h1>Your Health Index</h1>
+        <p class="hero-sub-light">Every free tool you take adds to one profile on the same seven dimensions the paid diagnostic uses. Each dimension is the average of every answer you've given that maps to it. Your profile is saved only in this browser.</p>
+      </div>
+    </section>
+
+    <section class="section alt-bg">
+      <div class="container narrow">
+
+        <div id="hi-empty" class="hi-empty" hidden>
+          <h2 class="subhead">You haven't scored any dimensions yet</h2>
+          <p>Start with the free self-assessment. It covers all seven dimensions in about 7 minutes, and every deeper tool you take afterward sharpens the same profile.</p>
+          <div class="hero-ctas">
+            <a class="btn btn-primary" href="/assessment" data-track="tool_start" data-tool="self-assessment">Take the Self-Assessment</a>
+            <a class="btn btn-secondary" href="/tools">See All Free Tools</a>
+          </div>
+        </div>
+
+        <div id="hi-profile" hidden>
+          <div class="hi-org" id="hi-org"></div>
+
+          <div class="results-score">
+            <span class="results-score-num" id="hi-score"></span>
+            <span class="results-score-band" id="hi-band"></span>
+          </div>
+          <p class="results-band-desc" id="hi-coverage"></p>
+
+          <h2 class="subhead">By dimension</h2>
+          <div class="hi-dims" id="hi-dims">
+            {DIMENSIONS.map((d) => (
+              <div class="hi-dim" data-dim={d.key}>
+                <div class="hi-dim-head">
+                  <a class="results-bar-label" href={`/#${d.anchor}`}>{d.num}. {d.label}</a>
+                  <span class="results-bar-pct" data-dim-pct></span>
+                </div>
+                <span class="results-bar-track"><span class="results-bar-fill" data-dim-fill></span></span>
+                <p class="hi-dim-meta" data-dim-meta></p>
+              </div>
+            ))}
+          </div>
+
+          <div class="results-recommendation" id="hi-recommendation"></div>
+
+          <div class="results-disclaimer">
+            <p>An indicative, self-reported reading, not a verified score. Verified Health Index scores come from the InstitutionalOS Diagnostic, which checks the evidence behind each answer. <a href="/methodology">How scoring works</a>.</p>
+          </div>
+
+          <EmailResultsForm id="hi-email" />
+
+          <div class="hi-actions">
+            <button type="button" class="btn btn-secondary" id="hi-print">Print or Save as PDF for Your Board</button>
+            <button type="button" class="results-retake" id="hi-clear">Clear my saved answers</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section closing-cta">
+      <div class="container narrow center">
+        <h2>Want the verified version?</h2>
+        <p>The InstitutionalOS Diagnostic checks the evidence behind every dimension, names your binding constraint in a written memo, and ends with a 90-day plan.</p>
+        <a class="btn btn-primary" href={CALENDLY_URL} target="_blank" rel="noopener" data-track="schedule_click">Schedule a Strategy Conversation</a>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<script>
+  import { dimensionScores, loadProfile, clearProfile, FILL_TOOL } from '../scripts/healthEngine';
+  import { renderPathway } from '../scripts/pathway';
+  import { mountOrgLookup } from '../scripts/orgLookup';
+  import { TOOLS } from '../data/questionBank';
+
+  const BANDS = [
+    { max: 30, name: 'Foundational' },
+    { max: 55, name: 'Developing' },
+    { max: 80, name: 'Strengthening' },
+    { max: 101, name: 'Resilient' },
+  ];
+  const esc = (v: unknown) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[c] as string));
+
+  function render() {
+    const profile = loadProfile();
+    const dims = dimensionScores(profile);
+    const covered = dims.filter((d) => d.pct !== null);
+    const empty = document.getElementById('hi-empty') as HTMLElement;
+    const wrap = document.getElementById('hi-profile') as HTMLElement;
+    empty.hidden = covered.length > 0;
+    wrap.hidden = covered.length === 0;
+    if (!covered.length) return;
+
+    const overall = Math.round(covered.reduce((s, d) => s + (d.pct as number), 0) / covered.length);
+    const band = BANDS.find((b) => overall <= b.max)!.name;
+    const answers = covered.reduce((s, d) => s + d.count, 0);
+    const toolNames = Object.keys(profile.tools).map((k) => TOOLS.find((t) => t.key === k)?.name || k);
+    document.getElementById('hi-score')!.textContent = overall + '%';
+    document.getElementById('hi-band')!.textContent = band;
+    document.getElementById('hi-coverage')!.textContent =
+      `${covered.length} of 7 dimensions scored, from ${answers} answer${answers === 1 ? '' : 's'} across ${toolNames.length} tool${toolNames.length === 1 ? '' : 's'}: ${toolNames.join(', ')}.` +
+      (covered.length < 7 ? ' The overall score averages only the dimensions scored so far.' : '');
+
+    dims.forEach((d) => {
+      const row = document.querySelector<HTMLElement>(`.hi-dim[data-dim="${d.key}"]`);
+      if (!row) return;
+      const pctEl = row.querySelector<HTMLElement>('[data-dim-pct]')!;
+      const fill = row.querySelector<HTMLElement>('[data-dim-fill]')!;
+      const meta = row.querySelector<HTMLElement>('[data-dim-meta]')!;
+      row.classList.toggle('is-empty', d.pct === null);
+      if (d.pct === null) {
+        const t = FILL_TOOL[d.key];
+        pctEl.textContent = '–';
+        fill.style.width = '0';
+        meta.innerHTML = `Not scored yet. <a class="link-more" href="${t.href}">Score it with the ${esc(t.name)} &rarr;</a>`;
+      } else {
+        pctEl.textContent = d.pct + '%';
+        fill.style.width = d.pct + '%';
+        meta.textContent = `From ${d.count} answer${d.count === 1 ? '' : 's'}: ${d.tools.join(', ')}`;
+      }
+    });
+
+    renderPathway(document.getElementById('hi-recommendation'), {
+      tool: 'InstitutionalOS Health Index',
+      items: covered.map((d) => ({ label: d.label, pct: d.pct as number })),
+      compositePct: overall,
+      basis: 'answers',
+      coversAllSeven: covered.length === 7,
+      profile: false,
+    });
+
+    (window as any).__fiLastResults = {
+      tool: 'health-index',
+      scorePct: overall,
+      band,
+      pillarScores: covered.map((d) => ({ label: d.label, pct: d.pct })),
+    };
+  }
+
+  render();
+  mountOrgLookup(document.getElementById('hi-org'));
+
+  document.getElementById('hi-print')?.addEventListener('click', () => window.print());
+  document.getElementById('hi-clear')?.addEventListener('click', () => {
+    clearProfile();
+    try { localStorage.removeItem('fi_stage'); } catch { /* ignore */ }
+    render();
+  });
+</script>

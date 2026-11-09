@@ -1,0 +1,25 @@
+---
+// Renders one area of a tool from the shared question bank, with the
+// evidence-rubric answer scale. Input names stay the per-tool names
+// (e.g. "g1") so each tool's own scoring and band copy keep working.
+import { AREAS, itemsFor, RUBRIC } from '../data/questionBank';
+interface Props { tool: string; index: number }
+const { tool, index } = Astro.props;
+const area = AREAS.find((a) => a.tool === tool && a.index === index);
+if (!area) throw new Error(`No question-bank area for ${tool} #${index}`);
+const items = itemsFor(area.key);
+---
+<div class="pillar-group" data-pillar-index={index} data-dimension={area.dimension}>
+  <h2 class="pillar-heading">{index}. {area.label}</h2>
+  {area.help && <p class={area.helpClass}>{area.help}</p>}
+  {items.map((q) => (
+    <fieldset class="likert" data-item={q.id}>
+      <legend>{q.text}</legend>
+      <div class="likert-scale">
+        {RUBRIC.map((label, i) => (
+          <label><input type="radio" name={q.name} value={String(i + 1)} required={i === 0} /><span>{i + 1}</span><small>{label}</small></label>
+        ))}
+      </div>
+    </fieldset>
+  ))}
+</div>

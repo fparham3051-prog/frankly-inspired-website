@@ -1976,3 +1976,9 @@ a.card:hover .card-cta { text-decoration: underline; }
 .insight-article h2 { margin-bottom: 0.75rem; }
 .insight-article p { color: #333c45; }
 .results-email-consent { margin: 0.5rem 0 0; font-size: 0.8rem; color: #6b7480; }
+.leader-callout { display: flex; gap: 1.5rem; align-items: center; justify-content: space-between; flex-wrap: wrap; margin-top: 2rem; padding: 1.5rem 1.75rem; background: var(--white); border: 1px solid var(--border); border-left: 3px solid var(--gold); border-radius: var(--radius); }
+.leader-callout > div { flex: 1 1 420px; }
+.leader-callout h4 { margin: 0.25rem 0 0.5rem; }
+.leader-callout p { margin: 0; color: #4a545e; }
+.leader-callout-label { font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold-accessible) !important; font-weight: 700; }
+.tool-dims { margin-top: 0.6rem !important; font-size: 0.8rem !important; color: var(--gold-accessible) !important; font-weight: 600; }

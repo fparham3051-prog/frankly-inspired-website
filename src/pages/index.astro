@@ -25,7 +25,7 @@ import { testimonials, caseStudies } from '../data/proof';
           <p class="hero-sub reveal">Evidence-based strategy and sustainability consulting for nonprofit leaders. Every engagement scores your organization, names its single binding constraint, and ends with a plan concrete enough to act on Monday morning.</p>
           <div class="hero-ctas reveal">
             <a class="btn btn-primary" href={CALENDLY_URL} target="_blank" rel="noopener" data-track="schedule_click">Schedule a Strategy Conversation</a>
-            <a class="btn btn-secondary" href="/assessment" data-track="hero_assessment_click">Take the 5-Minute Assessment</a>
+            <a class="btn btn-secondary" href={SCORECARD_URL} target="_blank" rel="noopener" data-track="hero_scorecard_click">Get Your Free Health Index Score</a>
           </div>
         </div>
         <div class="hero-portrait reveal">
@@ -40,11 +40,9 @@ import { testimonials, caseStudies } from '../data/proof';
       <div class="hero-credentials reveal">
         <div class="hero-credential"><span class="hero-credential-num">20+</span><span>Years Leadership Experience</span></div>
         <div class="hero-credential-divider" aria-hidden="true"></div>
-        <a class="hero-credential hero-credential-link" href="/sustainability-score"><span>Sustainability Strategy</span></a>
+        <a class="hero-credential hero-credential-link" href="#dimensions"><span>7-Dimension Health Index</span></a>
         <div class="hero-credential-divider" aria-hidden="true"></div>
-        <a class="hero-credential hero-credential-link" href="/revenue-growth-score"><span>Revenue &amp; Growth</span></a>
-        <div class="hero-credential-divider" aria-hidden="true"></div>
-        <a class="hero-credential hero-credential-link" href="/leadership-health"><span>Leadership &amp; Operations</span></a>
+        <a class="hero-credential hero-credential-link" href="#pricing"><span>Diagnostic from $2,000</span></a>
       </div>
     </section>
 
@@ -61,8 +59,8 @@ import { testimonials, caseStudies } from '../data/proof';
             <span class="qn-sub">Service pillars and engagement options</span>
           </a>
           <a class="quicknav-tile" href="/tools">
-            <span class="qn-label">Free Assessments &rarr;</span>
-            <span class="qn-sub">Score your organization in 5 minutes</span>
+            <span class="qn-label">Free Health Index Score &rarr;</span>
+            <span class="qn-sub">All seven dimensions, no sign-up</span>
           </a>
           <a class="quicknav-tile" href="#contact">
             <span class="qn-label">Contact &rarr;</span>
@@ -157,20 +155,20 @@ import { testimonials, caseStudies } from '../data/proof';
     <section id="who" class="section who alt-bg">
       <div class="container">
         <h2 class="section-title reveal">Who I Work With</h2>
-        <p class="section-note reveal">Executive directors, founders, board chairs, and development leaders of mission-driven organizations, at whichever of three stages fits.</p>
+        <p class="section-note reveal">Executive directors, founders, board chairs, and development leaders of mission-driven organizations, at one of three stages: Build, Fund, or Sustain.</p>
         <div class="card-grid">
           <div class="card card-static reveal">
-            <span class="offering-badge">Building</span>
+            <span class="offering-badge">Build</span>
             <h4>New and early-stage organizations</h4>
             <p>You're forming or recently launched and want governance, strategy, and the basics funders and boards expect in place from day one.</p>
           </div>
           <div class="card card-static reveal">
-            <span class="offering-badge">Funding</span>
+            <span class="offering-badge">Fund</span>
             <h4>Organizations pursuing grants</h4>
             <p>You're preparing for a specific funder and need your case for support, evidence, and financial picture strong enough for a yes.</p>
           </div>
           <div class="card card-static reveal">
-            <span class="offering-badge">Sustaining</span>
+            <span class="offering-badge">Sustain</span>
             <h4>Established organizations</h4>
             <p>You're operating, but too dependent on one grant, funder, or person, or facing a leadership transition, and want to last.</p>
           </div>
@@ -190,28 +188,16 @@ import { testimonials, caseStudies } from '../data/proof';
     <section id="assessments" class="section assessments-section">
       <div class="container">
         <h2 class="section-title reveal">Score Your Organization for Free</h2>
-        <p class="section-note reveal">Two places to start: a five minute overview, or the single comprehensive read across all seven InstitutionalOS Health Index dimensions. Both are free, instant, and require no sign up.</p>
+        <p class="section-note reveal">Start with the InstitutionalOS Scorecard: describe your organization in a paragraph and get a free score on all seven Health Index dimensions, the same system behind the paid diagnostic. No sign-up.</p>
         <div class="card-grid">
-          <a class="card reveal featured-tool" href="/assessment">
-            <span class="offering-badge">Start Here: 5 Minutes</span>
-            <h4>Nonprofit Sustainability Self-Assessment</h4>
-            <p>A quick overview across five areas, with a priority area and next step.</p>
-            <span class="card-cta">Take the Free Assessment &rarr;</span>
-          </a>
-          <a class="card reveal featured-tool" href={SCORECARD_URL} target="_blank" rel="noopener">
-            <span class="offering-badge">The Comprehensive Read</span>
+          <a class="card reveal featured-tool" href={SCORECARD_URL} target="_blank" rel="noopener" data-track="tool_start" data-tool="institutionalos-scorecard">
+            <span class="offering-badge">Start Here</span>
             <h4>InstitutionalOS Scorecard</h4>
-            <p>All seven Health Index dimensions in one score, the same system behind every paid diagnostic below.</p>
-            <span class="card-cta">Take the Free Scorecard &rarr;</span>
+            <p>All seven dimensions in one score, with your lowest dimension flagged and a 90-day target.</p>
+            <span class="card-cta">Get Your Free Score &rarr;</span>
           </a>
         </div>
-        <p class="section-note reveal" style="margin-top:1.75rem;">Want to go deeper on one specific area first? Four focused tools score a single dimension in depth, each grounded in its own named research.</p>
-        <div class="affiliation-list reveal" style="margin-top:0.6rem;">
-          <a class="link-more" href="/sustainability-score">Sustainability Strategy Score</a>
-          <a class="link-more" href="/revenue-growth-score">Revenue &amp; Growth Score</a>
-          <a class="link-more" href="/institutional-advancement-score">Institutional Advancement Score</a>
-          <a class="link-more" href="/leadership-health">Leadership &amp; Operations Score</a>
-        </div>
+        <p class="section-note reveal" style="margin-top:1.75rem;">Prefer answering questions? The <a href="/assessment">5-minute self-assessment</a> covers five of the dimensions. Four deeper tools each go further on one or two dimensions.</p>
         <p class="reveal" style="margin-top:1.25rem;"><a class="link-more" href="/tools">Not sure which? Compare all free tools &rarr;</a></p>
       </div>
     </section>
@@ -257,35 +243,46 @@ import { testimonials, caseStudies } from '../data/proof';
         <h2 class="section-title reveal">Strategy for organizations that want to last.</h2>
         <p class="section-note reveal">Frankly Inspired and Associates, LLC works with mission-driven institutions that need more than a short-term fix. Engagements are designed around the organization's context, capacity, leadership needs, and sustainability goals.</p>
 
-        <!-- Three headline offerings, not five. The underlying five-dimension
-             measurement framework (Sustainability Strategy / Revenue
-             Diversification / Leadership & Org Dev / Operations &
-             Infrastructure / Partnership & Ecosystem) still lives, unchanged,
-             in the Self-Assessment. All five pillar-* anchor ids are
-             preserved below (two of them as invisible anchors inside a
-             merged card) so the assessment results page's per-pillar links
-             still resolve correctly.
-
-             These used to double as links out to the scored tools; now
-             that the Assessments section above is the one clear place to
-             launch those, these are plain description tiles (no href, no
-             card-cta) so a visitor isn't offered the same three tools
-             twice on one page. -->
-        <h3 class="subhead reveal">Focus Areas</h3>
+        <!-- One framework everywhere: the seven InstitutionalOS Health Index
+             dimensions. The pillar-* ids on these cards are kept because the
+             self-assessment's results link to them per pillar. -->
+        <h3 id="dimensions" class="subhead reveal">The Seven Dimensions</h3>
+        <p class="section-note reveal">Every free tool, every diagnostic, and every engagement works on the same seven dimensions, so a score means the same thing everywhere.</p>
         <div class="card-grid">
           <div class="card card-static reveal" id="pillar-sustainability">
-            <h4>Sustainability Strategy</h4>
-            <p>Organizational assessment, strategic priorities, risk identification, sustainability roadmaps, and implementation planning.</p>
+            <span class="offering-badge">1</span>
+            <h4>Strategy and Positioning</h4>
+            <p>Strategic priorities, risk, and a roadmap that guides real decisions.</p>
+          </div>
+          <div class="card card-static reveal">
+            <span class="offering-badge">2</span>
+            <h4>Program and Impact Evidence</h4>
+            <p>Showing what your programs achieve, in terms funders and boards trust.</p>
           </div>
           <div class="card card-static reveal" id="pillar-revenue">
-            <span id="pillar-partnership" class="anchor-offset"></span>
-            <h4>Revenue &amp; Growth</h4>
-            <p>Individual donor stewardship and retention, fundraising strategy, grant and public-funding strategy, revenue-pipeline design, and the cross-sector partnerships (education, workforce, government, corporate, philanthropic, and community) that sustain them.</p>
+            <span class="offering-badge">3</span>
+            <h4>Revenue and Financial Health</h4>
+            <p>Diversified revenue, reserves, donor retention, grants, and fundraising strategy.</p>
           </div>
           <div class="card card-static reveal" id="pillar-leadership">
-            <span id="pillar-operations" class="anchor-offset"></span>
-            <h4>Leadership &amp; Operations</h4>
-            <p>Executive advising and change leadership, paired with the workflows, KPIs, CRM/Salesforce practices, and AI readiness guidance that keep an organization running well. 1:1 leadership coaching is available as its own engagement.</p>
+            <span class="offering-badge">4</span>
+            <h4>Leadership and Organizational Capacity</h4>
+            <p>Bench strength, succession, alignment, and executive advising through change.</p>
+          </div>
+          <div class="card card-static reveal" id="pillar-operations">
+            <span class="offering-badge">5</span>
+            <h4>Operations and Infrastructure</h4>
+            <p>Workflows, KPIs, CRM and Salesforce practice, and AI readiness.</p>
+          </div>
+          <div class="card card-static reveal" id="pillar-partnership">
+            <span class="offering-badge">6</span>
+            <h4>Partnerships and Ecosystem</h4>
+            <p>Cross-sector partnerships with education, workforce, government, corporate, and philanthropic partners.</p>
+          </div>
+          <div class="card card-static reveal">
+            <span class="offering-badge">7</span>
+            <h4>Governance and Risk</h4>
+            <p>Board practice, policies, filings, and the risks a funder will ask about.</p>
           </div>
         </div>
 
@@ -303,16 +300,23 @@ import { testimonials, caseStudies } from '../data/proof';
         <h3 id="pricing" class="subhead reveal">Engagement Options</h3>
         <p class="section-note reveal">Every paid engagement begins with the InstitutionalOS Diagnostic. It is the single entry point regardless of your organization's stage, and it is the foundation the work below builds on.</p>
         <div class="pricing-grid">
+          <div class="pricing-card reveal" style="align-self:start;">
+            <span class="offering-badge">Free</span>
+            <h4>Start with the Scorecard</h4>
+            <p class="price">$0<span>no sign-up</span></p>
+            <p class="plan-fit">Not ready for a diagnostic? Get a free read on all seven dimensions first, then decide.</p>
+            <a class="btn btn-secondary" href={SCORECARD_URL} target="_blank" rel="noopener" data-track="tool_start" data-tool="institutionalos-scorecard">Get Your Free Score</a>
+          </div>
           <div class="pricing-card featured reveal" id="build">
             <span id="fund" class="anchor-offset"></span>
             <span id="sustain" class="anchor-offset"></span>
-            <span class="offering-badge">The Entry Point</span>
+            <span class="offering-badge">Step 1: The Entry Point</span>
             <h4>InstitutionalOS Diagnostic</h4>
             <p class="price">$2,000 to $2,500<span>flat fee, by stage</span></p>
             <p class="plan-fit">One diagnostic, three stages. The stage you're at sets the price and the emphasis, not the product.</p>
-            <p><strong>Formation, $2,000.</strong> Governance and Strategy scored first, so the foundation holds as you grow.</p>
-            <p><strong>Grant Readiness, $2,500.</strong> Financial Health scored from your actual filed IRS Form 990 data, not self reported estimates, ranked against your target funders.</p>
-            <p><strong>Institutional Durability, $2,500.</strong> A scored, trackable read on financial resilience, leadership succession, and operational maturity.</p>
+            <p><strong>Build (Formation Readiness), $2,000.</strong> Governance and Strategy scored first, so the foundation holds as you grow.</p>
+            <p><strong>Fund (Grant Readiness), $2,500.</strong> Financial Health scored from your actual filed IRS Form 990 data, not self reported estimates, ranked against your target funders.</p>
+            <p><strong>Sustain (Institutional Durability), $2,500.</strong> A scored, trackable read on financial resilience, leadership succession, and operational maturity.</p>
             <ul class="bullet-list">
               <li>All seven Health Index dimensions scored against your stage's benchmarks</li>
               <li>A written memo naming your single binding constraint</li>
@@ -320,12 +324,12 @@ import { testimonials, caseStudies } from '../data/proof';
               <li>A live readout session, plus ongoing access to track your score</li>
             </ul>
             <a class="btn btn-primary plan-cta" href="#contact" data-plan="InstitutionalOS Diagnostic">Discuss Your Diagnostic</a>
-            <a class="btn btn-ghost plan-cta" href={SCORECARD_URL} target="_blank" rel="noopener">Try the Free Scorecard</a>
           </div>
           <div class="pricing-card reveal" id="pricing-advisory">
             <span id="pricing-implementation" class="anchor-offset"></span>
             <span class="recommended-badge" hidden>Recommended for you</span>
-            <h4>Ongoing Advisory and Implementation Retainer</h4>
+            <span class="offering-badge">Step 2</span>
+            <h4>Implementation Retainer</h4>
             <p class="price">$2,500 to $3,500<span>per month</span></p>
             <p class="plan-fit">Best fit once the diagnostic has named your binding constraint and you want ongoing support closing it. Cadence and scope are set together at the readout, from periodic strategic guidance through weekly hands on implementation.</p>
             <ul class="bullet-list">
@@ -336,29 +340,20 @@ import { testimonials, caseStudies } from '../data/proof';
               <li>Leadership alignment and expanded project support at the implementation level</li>
               <li>Three month recommended minimum</li>
             </ul>
+            <p class="plan-fit"><strong>Prefer a fixed scope?</strong> The same work can be done as a defined project, such as a revenue diversification plan or partnership strategy, priced to scope.</p>
             <a class="btn btn-primary plan-cta" href="#contact" data-plan="Ongoing Advisory and Implementation">Start This Retainer</a>
+            <a class="btn btn-ghost plan-cta" href="#contact" data-plan="Project Based Engagement">Discuss a Project</a>
           </div>
-          <div class="pricing-card reveal">
-            <h4>Project Based Engagement</h4>
-            <p class="price">Custom<span>scope and fee</span></p>
-            <p class="plan-fit">Best fit for a single, clearly defined project rather than an ongoing retainer.</p>
-            <ul class="bullet-list">
-              <li>For defined projects such as sustainability assessments, revenue diversification plans, operating systems, partnership strategies, and leadership planning.</li>
-            </ul>
-            <a class="btn btn-secondary plan-cta" href="#contact" data-plan="Project Based Engagement">Discuss a Project</a>
+        </div>
+        <!-- Coaching is for the leader, not the organization: a different buyer,
+             so it sits outside the organizational ladder above. -->
+        <div class="leader-callout reveal" id="coaching">
+          <div>
+            <p class="leader-callout-label">For the leader</p>
+            <h4>1:1 Executive Coaching &middot; $350 per session</h4>
+            <p>Confidential 60-minute sessions for executive directors and senior leaders: decision making, change leadership, and a space outside board and staff dynamics. Book as needed, no minimum, on its own or alongside any engagement.</p>
           </div>
-          <div class="pricing-card reveal">
-            <h4>1:1 Executive Coaching</h4>
-            <p class="price">$350<span>per session</span></p>
-            <p class="plan-fit">Best fit as a standalone engagement or alongside the retainer above, for leaders who want dedicated, confidential support.</p>
-            <ul class="bullet-list">
-              <li>60 minute 1:1 sessions</li>
-              <li>Executive decision making and change leadership</li>
-              <li>Confidential space outside board and staff dynamics</li>
-              <li>Scheduled as needed, no monthly minimum</li>
-            </ul>
-            <a class="btn btn-secondary plan-cta" href="#contact" data-plan="1:1 Executive Coaching">Book a Coaching Session</a>
-          </div>
+          <a class="btn btn-secondary plan-cta" href="#contact" data-plan="1:1 Executive Coaching">Book a Coaching Session</a>
         </div>
         <p class="pricing-reassurance reveal">Not sure which option fits? <a href="#contact">Start with a conversation</a>, and I'll help you figure out the right scope.</p>
 

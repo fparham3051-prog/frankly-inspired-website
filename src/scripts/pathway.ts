@@ -112,7 +112,7 @@ function recommendationHtml(stage: StageKey | null): string {
     ${rec}
     <div class="hero-ctas">
       <a class="btn btn-primary" href="/#contact" data-track="pathway_diagnostic_click">Discuss Your Diagnostic</a>
-      <a class="btn btn-secondary" href="/#pricing">See Pricing</a>
+      <a class="btn btn-secondary" href="/consulting#pricing">See Pricing</a>
     </div>`;
 }
 

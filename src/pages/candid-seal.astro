@@ -169,7 +169,7 @@ import { LEVELS, SEAL_ITEMS, SEAL_YEAR } from '../data/candidSeal';
       const ev = evidenceFor(i);
       const mismatch = answers[i.id] === 'no' && ev !== null && ev >= 75
         ? `<br><span class="seal-mismatch">Your Health Index answers rate this as ${RUBRIC[Math.round(ev / 25)].toLowerCase()}, so it may already exist. Check before starting from scratch.</span>` : '';
-      return `<li><strong>${esc(i.field)}</strong> <span class="seal-tag">${esc(LEVELS.find((l) => l.key === i.level)!.name)}</span><br>${esc(i.step)}${mismatch}<br><span class="seal-dim">Health Index: <a href="/#${d.anchor}">${esc(d.label)}</a></span></li>`;
+      return `<li><strong>${esc(i.field)}</strong> <span class="seal-tag">${esc(LEVELS.find((l) => l.key === i.level)!.name)}</span><br>${esc(i.step)}${mismatch}<br><span class="seal-dim">Health Index: <a href="/consulting#${d.anchor}">${esc(d.label)}</a></span></li>`;
     };
     // Only what's needed, in level order; in-order earning means the lowest
     // incomplete level is always the first priority.
@@ -198,7 +198,7 @@ import { LEVELS, SEAL_ITEMS, SEAL_YEAR } from '../data/candidSeal';
         <div class="hero-ctas"><a class="btn btn-secondary" href="${t.href}">Score it with the ${esc(t.name)}</a><a class="link-more" href="/health-index">See your Health Index &rarr;</a></div>
         <h3 class="subhead">Recommended next step</h3>
         <p>The InstitutionalOS Diagnostic verifies the evidence behind every dimension and builds your next Seal level into its 90-day plan.</p>
-        <div class="hero-ctas"><a class="btn btn-primary" href="/#contact" data-track="pathway_diagnostic_click">Discuss Your Diagnostic</a><a class="btn btn-secondary" href="/#pricing">See Pricing</a></div>
+        <div class="hero-ctas"><a class="btn btn-primary" href="/#contact" data-track="pathway_diagnostic_click">Discuss Your Diagnostic</a><a class="btn btn-secondary" href="/consulting#pricing">See Pricing</a></div>
         ${profileTeaserHtml()}
       </div>`;
     } else {

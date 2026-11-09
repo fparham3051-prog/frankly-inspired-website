@@ -49,7 +49,7 @@ import { DIMENSIONS } from '../data/questionBank';
             {DIMENSIONS.map((d) => (
               <div class="hi-dim" data-dim={d.key}>
                 <div class="hi-dim-head">
-                  <a class="results-bar-label" href={`/#${d.anchor}`}>{d.num}. {d.label}</a>
+                  <a class="results-bar-label" href={`/consulting#${d.anchor}`}>{d.num}. {d.label}</a>
                   <span class="results-bar-pct" data-dim-pct></span>
                 </div>
                 <span class="results-bar-track"><span class="results-bar-fill" data-dim-fill></span></span>
@@ -62,6 +62,26 @@ import { DIMENSIONS } from '../data/questionBank';
 
           <div class="results-recommendation" id="hi-recommendation"></div>
 
+          <!-- Ask about your results: answers grounded only in this page's
+               scores (backend /api/ask). Nothing is stored. -->
+          <div class="hi-ask" id="hi-ask">
+            <h2 class="subhead">Ask about your results</h2>
+            <p>Ask anything about your scores: what to fix first, how two dimensions connect, or what your board will ask. Answers use only your scores, never your organization's name.</p>
+            <div class="hi-ask-suggest">
+              <button type="button" class="chip" data-q="What should we work on first, and why?">What should we work on first?</button>
+              <button type="button" class="chip" data-q="What will a funder notice first in these scores?">What will a funder notice?</button>
+              <button type="button" class="chip" data-q="How do I explain these results to my board?">How do I explain this to my board?</button>
+              <button type="button" class="chip" data-q="What would it take to reach the next Candid Seal level?">How do we reach the next Seal?</button>
+            </div>
+            <form class="hi-ask-form" id="hi-ask-form" novalidate>
+              <label class="visually-hidden" for="hi-ask-q">Your question</label>
+              <input type="text" id="hi-ask-q" maxlength="500" placeholder="Type a question about your results" autocomplete="off" />
+              <button type="submit" class="btn btn-primary">Ask</button>
+            </form>
+            <div class="hi-ask-answer" id="hi-ask-answer" aria-live="polite" hidden></div>
+            <p class="hi-ask-note">AI-generated from your self-reported scores; not legal, tax, or financial advice. For a verified read, <a href="/consulting#pricing">see the Diagnostic</a>.</p>
+          </div>
+
           <div class="hi-recheck">
             <h2 class="subhead">Re-check in 90 days</h2>
             <p>Your answers are saved in this browser. Retake the tools in 90 days and this page will show what moved since today.</p>
@@ -69,6 +89,15 @@ import { DIMENSIONS } from '../data/questionBank';
               <a class="btn btn-secondary" id="hi-gcal" href="#" target="_blank" rel="noopener" data-track="recheck_reminder">Add to Google Calendar</a>
               <button type="button" class="btn btn-secondary" id="hi-ics" data-track="recheck_reminder">Download Calendar Reminder (.ics)</button>
             </div>
+            <form class="hi-remind-form" id="hi-remind-form" novalidate>
+              <label for="hi-remind-email">Or get one email reminder in 90 days</label>
+              <div class="results-email-row">
+                <input type="email" id="hi-remind-email" placeholder="Email address" required />
+                <button type="submit" class="btn btn-secondary" data-track="recheck_reminder">Remind Me</button>
+              </div>
+              <p class="results-email-consent">Sent once, then your address is deleted. Nothing else.</p>
+              <p class="form-status" id="hi-remind-status" role="status" aria-live="polite"></p>
+            </form>
           </div>
 
           <div class="results-disclaimer">
@@ -219,6 +248,74 @@ import { DIMENSIONS } from '../data/questionBank';
 
   render();
   mountOrgLookup(document.getElementById('hi-org'));
+
+  const API = 'https://frankly-inspired-api.onrender.com';
+
+  // ---------- Ask about your results ----------
+  (function askAssistant() {
+    const form = document.getElementById('hi-ask-form') as HTMLFormElement | null;
+    const input = document.getElementById('hi-ask-q') as HTMLInputElement | null;
+    const out = document.getElementById('hi-ask-answer') as HTMLElement | null;
+    if (!form || !input || !out) return;
+    const ask = (q: string) => {
+      const profile = loadProfile();
+      const scores = dimensionScores(profile).filter((d) => d.pct !== null).map((d) => ({ label: d.label, pct: d.pct as number }));
+      if (!scores.length) return;
+      const seal = sealSummary(profile);
+      const btn = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+      out.hidden = false;
+      out.innerHTML = `<p class="hi-ask-q">${esc(q)}</p><p class="dim">Thinking...</p>`;
+      if (btn) btn.disabled = true;
+      fetch(API + '/api/ask', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          question: q,
+          scores,
+          seal: seal ? seal.current : null,
+          stage: (() => { try { return localStorage.getItem('fi_stage'); } catch { return null; } })(),
+        }),
+      })
+        .then((r) => r.json().then((d) => ({ ok: r.ok, d })))
+        .then(({ ok, d }) => {
+          if (!ok || !d.ok) throw new Error((d && d.error) || 'The assistant is unavailable right now.');
+          out.innerHTML = `<p class="hi-ask-q">${esc(q)}</p>` + String(d.answer).split(/\n{2,}/).map((p: string) => `<p>${esc(p)}</p>`).join('');
+          (window as any).fiTrack?.('results_question', {});
+        })
+        .catch((e) => { out.innerHTML = `<p class="hi-ask-q">${esc(q)}</p><p>${esc(e.message)} You can also <a href="https://calendly.com/fparham/30min" target="_blank" rel="noopener">ask Franklin directly</a>.</p>`; })
+        .finally(() => { if (btn) btn.disabled = false; });
+    };
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const q = input.value.trim();
+      if (q.length >= 3) { ask(q); input.value = ''; }
+    });
+    document.querySelectorAll<HTMLButtonElement>('.hi-ask-suggest .chip').forEach((b) => b.addEventListener('click', () => ask(b.dataset.q || b.textContent || '')));
+  })();
+
+  // ---------- One-time 90-day email reminder ----------
+  document.getElementById('hi-remind-form')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const form = e.currentTarget as HTMLFormElement;
+    const input = document.getElementById('hi-remind-email') as HTMLInputElement;
+    const status = document.getElementById('hi-remind-status');
+    if (!input.checkValidity()) { input.reportValidity(); return; }
+    if (status) status.textContent = 'Saving...';
+    fetch(API + '/api/reminders', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: input.value, tool: 'health-index' }) })
+      .then((r) => r.json().then((d) => ({ ok: r.ok, d })))
+      .then(({ ok, d }) => {
+        if (!ok || !d.ok) throw new Error((d && d.error) || 'Could not save the reminder.');
+        if (status) {
+          status.textContent = "Done. You'll get one email in 90 days. ";
+          const a = document.createElement('a'); a.href = d.cancelUrl; a.textContent = 'Cancel it'; a.target = '_blank'; a.rel = 'noopener';
+          status.appendChild(a);
+        }
+        form.reset();
+        (window as any).fiTrack?.('recheck_reminder_email', {});
+      })
+      .catch((err) => { if (status) status.textContent = err.message; });
+  });
+
 
   document.getElementById('hi-print')?.addEventListener('click', () => window.print());
   document.getElementById('hi-clear')?.addEventListener('click', () => {

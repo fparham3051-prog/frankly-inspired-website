@@ -17,7 +17,8 @@ const { id } = Astro.props;
     <input type="email" id={`${id}-email`} name="email" placeholder="Email address" required />
     <button type="submit" class="btn btn-secondary">Email My Results</button>
   </div>
-  <p class="results-email-consent">Franklin may follow up personally about your results. No mailing list.</p>
+  <label class="results-email-remind"><input type="checkbox" name="remind" value="1" /> Also send me one reminder in 90 days to re-check my progress</label>
+  <p class="results-email-consent">Franklin may follow up personally about your results. No mailing list; a reminder is sent once, then your address is deleted.</p>
   <p class="form-status" role="status" aria-live="polite"></p>
 </form>
 
@@ -55,12 +56,20 @@ const { id } = Astro.props;
           org: profile.org || undefined,
           toolsTaken: Object.keys(profile.tools).map((k) => TOOLS.find((t) => t.key === k)?.name || k),
           seal: (() => { const s = sealSummary(profile); return s ? { current: s.current, next: s.next } : undefined; })(),
+          remind: fd.get('remind') === '1',
         }),
       })
         .then((res) => res.json().then((data) => ({ ok: res.ok, data })))
         .then((r) => {
           if (!r.ok || !r.data.ok) throw new Error((r.data && r.data.error) || 'Something went wrong.');
-          if (status) status.textContent = 'Sent, check your inbox.';
+          if (status) {
+            status.textContent = r.data.reminder ? 'Sent, check your inbox. Your 90-day reminder is set. ' : 'Sent, check your inbox.';
+            if (r.data.cancelUrl) {
+              const a = document.createElement('a');
+              a.href = r.data.cancelUrl; a.textContent = 'Cancel the reminder'; a.target = '_blank'; a.rel = 'noopener';
+              status.appendChild(a);
+            }
+          }
           (window as any).fiTrack?.('results_emailed', { tool: results.tool });
           form.reset();
         })

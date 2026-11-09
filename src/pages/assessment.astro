@@ -90,7 +90,7 @@ import QuestionSection from '../components/QuestionSection.astro';
             <p>A short conversation is the fastest way to turn this into a plan.</p>
             <div class="hero-ctas center">
               <a class="btn btn-primary" href={CALENDLY_URL} target="_blank" rel="noopener">Schedule a Strategy Conversation</a>
-              <a class="btn btn-secondary" href="/#pricing">See Pricing</a>
+              <a class="btn btn-secondary" href="/consulting#pricing">See Pricing</a>
             </div>
           </div>
 
@@ -106,7 +106,8 @@ import QuestionSection from '../components/QuestionSection.astro';
               <input type="email" id="results-email" name="email" placeholder="Email address" required />
               <button type="submit" class="btn btn-secondary">Email My Results</button>
             </div>
-            <p class="results-email-consent">Franklin may follow up personally about your results. No mailing list.</p>
+            <label class="results-email-remind"><input type="checkbox" id="results-email-remind" /> Also send me one reminder in 90 days to re-check my progress</label>
+            <p class="results-email-consent">Franklin may follow up personally about your results. No mailing list; a reminder is sent once, then your address is deleted.</p>
             <p class="form-status" id="email-status" role="status" aria-live="polite"></p>
           </form>
 
@@ -285,7 +286,7 @@ import QuestionSection from '../components/QuestionSection.astro';
         const row = document.createElement('div');
         row.className = 'results-bar-row';
         row.innerHTML =
-          `<a class="results-bar-label" href="/#${p.anchor}">${p.label}</a>` +
+          `<a class="results-bar-label" href="/consulting#${p.anchor}">${p.label}</a>` +
           '<span class="results-bar-track">' +
           `<span class="results-bar-fill" style="width:${scaledPct}%"></span>` +
           `<span class="results-bar-avg-marker" data-avg-marker="${p.label}" hidden></span>` +
@@ -482,6 +483,7 @@ import QuestionSection from '../components/QuestionSection.astro';
         org: loadProfile().org || undefined,
         toolsTaken: Object.keys(loadProfile().tools).map((k) => TOOLS.find((t) => t.key === k)?.name || k),
         seal: (() => { const s = sealSummary(); return s ? { current: s.current, next: s.next } : undefined; })(),
+        remind: (document.querySelector<HTMLInputElement>('#results-email-remind')?.checked) || false,
       };
 
       const submitBtn = emailForm.querySelector<HTMLButtonElement>('button[type="submit"]');
@@ -498,7 +500,14 @@ import QuestionSection from '../components/QuestionSection.astro';
           if (!result.ok || !result.data.ok) {
             throw new Error((result.data && result.data.error) || 'Something went wrong.');
           }
-          if (emailStatus) emailStatus.textContent = 'Sent, check your inbox.';
+          if (emailStatus) {
+            emailStatus.textContent = result.data.reminder ? 'Sent, check your inbox. Your 90-day reminder is set. ' : 'Sent, check your inbox.';
+            if (result.data.cancelUrl) {
+              const a = document.createElement('a');
+              a.href = result.data.cancelUrl; a.textContent = 'Cancel the reminder'; a.target = '_blank'; a.rel = 'noopener';
+              emailStatus.appendChild(a);
+            }
+          }
           emailForm.reset();
         })
         .catch((err) => {

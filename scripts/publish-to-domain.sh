@@ -31,7 +31,11 @@ cp -R "$ROOT/dist/." "$OUT/"
 
 # Old .html addresses from the original site -> new pages, so existing
 # links, bookmarks, and search results keep working.
+# Targets end in "/" so they always resolve to the page's folder
+# (about/index.html), never back to this stub, whatever extension rules the
+# host applies.
 redirect() {  # $1 = old file, $2 = new path
+  set -- "$1" "$2/"
   cat > "$OUT/$1" <<HTML
 <!doctype html><html lang="en"><head><meta charset="utf-8">
 <title>Moved</title><meta name="robots" content="noindex">

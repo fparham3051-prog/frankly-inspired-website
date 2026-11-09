@@ -145,6 +145,8 @@ import EmailResultsForm from '../components/EmailResultsForm.astro';
 
 <script>
   import { renderPathway } from '../scripts/pathway';
+  import { enableStepper } from '../scripts/stepper';
+  enableStepper(document.getElementById('ss-form') as HTMLFormElement | null);
   import { recordAnswers } from '../scripts/healthEngine';
   // UPDATE THIS once frankly-inspired-backend is deployed to Render. See
   // that repo's README.md. Same value as assessment.astro's API_BASE.

@@ -133,6 +133,8 @@ import EmailResultsForm from '../components/EmailResultsForm.astro';
 
 <script>
   import { renderPathway } from '../scripts/pathway';
+  import { enableStepper } from '../scripts/stepper';
+  enableStepper(document.getElementById('ia-form') as HTMLFormElement | null);
   import { recordAnswers } from '../scripts/healthEngine';
   // UPDATE THIS once frankly-inspired-backend is deployed to Render. See
   // that repo's README.md. Same value as assessment.astro's API_BASE.
@@ -269,6 +271,11 @@ import EmailResultsForm from '../components/EmailResultsForm.astro';
         if (box.checked) i.checked = false;
       });
       box.closest('.pillar-group')?.classList.toggle('is-skipped', box.checked);
+    });
+    // Retake resets the checkbox without a change event; re-sync so the
+    // campaign questions come back (and the stepper recounts).
+    box.form?.addEventListener('reset', () => {
+      window.setTimeout(() => box.dispatchEvent(new Event('change', { bubbles: true })), 0);
     });
   })();
 

@@ -2235,3 +2235,40 @@ a.card:hover .card-cta { text-decoration: underline; }
 .results-email-remind { display: flex; gap: 0.5rem; align-items: flex-start; font-size: 0.88rem; margin: 0.6rem 0 0.2rem; cursor: pointer; }
 .results-email-remind input { margin-top: 0.2rem; }
 @media print { .hi-ask, .hi-remind-form, .hi-recheck { display: none !important; } }
+
+/* ---------- One-question-per-screen tools (stepper.ts) ---------- */
+.stepper-active .assessment-progress { display: none !important; }
+.stepper-bar { padding: 0.75rem 0 0.6rem; margin: 0 0 1.25rem; }
+.stepper-meta { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; margin-bottom: 0.45rem; }
+.stepper-section { font-weight: 600; color: var(--navy); font-size: 0.95rem; }
+.stepper-count { font-size: 0.85rem; color: #5b6470; white-space: nowrap; }
+.stepper-track { display: block; height: 6px; border-radius: 3px; background: var(--white); box-shadow: inset 0 0 0 1px var(--border); overflow: hidden; }
+.stepper-fill { display: block; height: 100%; background: var(--gold); width: 0; transition: width 260ms ease; }
+.is-stepping .pillar-group { border: 0; padding-top: 0; margin-top: 0; }
+.is-stepping .pillar-group + .pillar-group { border-top: 0; padding-top: 0; margin-top: 0; }
+.is-stepping .pillar-group.stepper-later .pillar-heading,
+.is-stepping .pillar-group.stepper-later .fh-field-help,
+.is-stepping .pillar-group.stepper-later .section-note { display: none; }
+.is-stepping fieldset.likert { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.6rem 1.5rem 1.4rem; box-shadow: var(--shadow-sm); margin-bottom: 0; animation: stepIn 220ms ease; }
+.is-stepping fieldset.likert legend { float: left; width: 100%; font-size: clamp(1.1rem, 2.2vw, 1.3rem); line-height: 1.45; margin-bottom: 1.1rem; }
+.is-stepping fieldset.likert .likert-scale { clear: both; }
+.is-stepping .pillar-group { margin-bottom: 0; }
+/* On phones, one question per screen leaves room for the full answer
+   labels: show them as a vertical list of large tap targets. */
+@media (max-width: 640px) {
+  .is-stepping fieldset.likert { padding: 1.2rem 1rem 1rem; }
+  .is-stepping .likert-scale { grid-template-columns: 1fr; gap: 0.5rem; }
+  .is-stepping .likert-scale label { flex-direction: row; justify-content: flex-start; gap: 0.75rem; padding: 0.8rem 0.9rem; text-align: left; }
+  .is-stepping .likert-scale label:hover { transform: none; }
+  .is-stepping .likert-scale input { margin: 0; }
+  .is-stepping .likert-scale small { display: inline; font-size: 0.92rem; color: var(--charcoal); }
+}
+@keyframes stepIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .is-stepping fieldset.likert { animation: none; } .stepper-fill { transition: none; } }
+.stepper-nav { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; margin: 1.1rem 0 0.5rem; }
+.stepper-nav .stepper-next { margin-left: auto; }
+.stepper-nav button:disabled { opacity: 0.45; cursor: not-allowed; }
+.stepper-hint { flex-basis: 100%; margin: 0; font-size: 0.8rem; color: #8a94a0; }
+@media (hover: none) { .stepper-hint { display: none; } }
+.stepper-toggle { margin: 1rem 0 0; text-align: center; }
+.stepper-toggle .link-btn { margin-left: 0; }

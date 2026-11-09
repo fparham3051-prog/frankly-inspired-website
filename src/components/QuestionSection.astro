@@ -12,6 +12,7 @@ const items = itemsFor(area.key);
 <div class="pillar-group" data-pillar-index={index} data-dimension={area.dimension}>
   <h2 class="pillar-heading">{index}. {area.label}</h2>
   {area.help && <p class={area.helpClass}>{area.help}</p>}
+  {area.skip && <label class="na-toggle"><input type="checkbox" id={area.skip.id} /> {area.skip.label}</label>}
   {items.map((q) => (
     <fieldset class="likert" data-item={q.id}>
       <legend>{q.text}</legend>

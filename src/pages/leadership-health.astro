@@ -141,6 +141,8 @@ import EmailResultsForm from '../components/EmailResultsForm.astro';
 
 <script>
   import { renderPathway } from '../scripts/pathway';
+  import { enableStepper } from '../scripts/stepper';
+  enableStepper(document.getElementById('lh-form') as HTMLFormElement | null);
   import { recordAnswers } from '../scripts/healthEngine';
   // Scores four dimensions, each a simplified, cited slice of a named
   // research framework rather than a generic HR checklist:

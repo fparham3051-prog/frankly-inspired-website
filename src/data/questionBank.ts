@@ -11,7 +11,7 @@ export type DimensionKey = 'strategy' | 'program' | 'revenue' | 'leadership' | '
 
 export interface Dimension { key: DimensionKey; num: number; label: string; short: string; anchor: string }
 export interface Tool { key: string; name: string; href: string }
-export interface Area { key: string; tool: string; index: number; label: string; dimension: DimensionKey; help: string; helpClass: string; basis: string }
+export interface Area { key: string; tool: string; index: number; label: string; dimension: DimensionKey; help: string; helpClass: string; basis: string; skip?: { id: string; label: string } }
 export interface Item { id: string; tool: string; name: string; area: string; text: string }
 
 // Same order, names, and numbering as the homepage and the paid diagnostic.
@@ -193,7 +193,8 @@ export const AREAS: Area[] = [
     "dimension": "revenue",
     "help": "Based on standard capital-campaign phase methodology (feasibility, quiet phase, public phase).",
     "helpClass": "fh-field-help",
-    "basis": "Based on standard capital-campaign phase methodology (feasibility, quiet phase, public phase)."
+    "basis": "Based on standard capital-campaign phase methodology (feasibility, quiet phase, public phase).",
+    "skip": { "id": "cs-na", "label": "We don't have a campaign planned in the next two years. Skip this section." }
   },
   {
     "key": "institutional-advancement:4",

@@ -1,4 +1,5 @@
 ---
+import { CALENDLY_URL } from '../config';
 // The original static site has four distinct footer configurations, not
 // two, preserved exactly here rather than collapsed into Header's
 // full/minimal split:
@@ -33,19 +34,15 @@ const { variant = 'home' } = Astro.props;
       <p class="footer-links">
         <a href="/about">About &amp; Experience</a>
         <span aria-hidden="true">&middot;</span>
+        <a href="/tools">Free Tools</a>
+        <span aria-hidden="true">&middot;</span>
+        <a href="/insights">Insights</a>
+        <span aria-hidden="true">&middot;</span>
+        <a href="/institutionalos">InstitutionalOS</a>
+        <span aria-hidden="true">&middot;</span>
         <a href="https://www.linkedin.com/in/franklin-parham-b7a545382" target="_blank" rel="noopener">LinkedIn</a>
         <span aria-hidden="true">&middot;</span>
-        <a href="/assessment">Free Assessment</a>
-        <span aria-hidden="true">&middot;</span>
-        <a href="/revenue-growth-score">Revenue &amp; Growth Score</a>
-        <span aria-hidden="true">&middot;</span>
-        <a href="/institutional-advancement-score">Institutional Advancement Score</a>
-        <span aria-hidden="true">&middot;</span>
-        <a href="/leadership-health">Leadership &amp; Operations Score</a>
-        <span aria-hidden="true">&middot;</span>
-        <a href="/sustainability-score">Sustainability Strategy Score</a>
-        <span aria-hidden="true">&middot;</span>
-        <a href="https://calendly.com/fparham/30min" target="_blank" rel="noopener">Schedule a Strategy Conversation</a>
+        <a href={CALENDLY_URL} target="_blank" rel="noopener">Schedule a Strategy Conversation</a>
         <span aria-hidden="true">&middot;</span>
         <a href="/#contact">Contact</a>
       </p>
@@ -55,9 +52,11 @@ const { variant = 'home' } = Astro.props;
       <p class="footer-links">
         <a href="https://www.linkedin.com/in/franklin-parham-b7a545382" target="_blank" rel="noopener">LinkedIn</a>
         <span aria-hidden="true">&middot;</span>
-        <a href="/assessment">Free Assessment</a>
+        <a href="/tools">Free Tools</a>
         <span aria-hidden="true">&middot;</span>
-        <a href="https://calendly.com/fparham/30min" target="_blank" rel="noopener">Schedule a Strategy Conversation</a>
+        <a href="/insights">Insights</a>
+        <span aria-hidden="true">&middot;</span>
+        <a href={CALENDLY_URL} target="_blank" rel="noopener">Schedule a Strategy Conversation</a>
         <span aria-hidden="true">&middot;</span>
         <a href="/#contact">Contact</a>
       </p>
@@ -67,7 +66,7 @@ const { variant = 'home' } = Astro.props;
       <p class="footer-links">
         <a href="/">Back to Site</a>
         <span aria-hidden="true">&middot;</span>
-        <a href="https://calendly.com/fparham/30min" target="_blank" rel="noopener">Schedule a Strategy Conversation</a>
+        <a href={CALENDLY_URL} target="_blank" rel="noopener">Schedule a Strategy Conversation</a>
       </p>
     )}
 
@@ -75,7 +74,7 @@ const { variant = 'home' } = Astro.props;
       <p class="footer-links">
         <a href="/">Back to Site</a>
         <span aria-hidden="true">&middot;</span>
-        <a href="/assessment">Free Assessment</a>
+        <a href="/tools">All Free Tools</a>
         <span aria-hidden="true">&middot;</span>
         <a href="/revenue-growth-score">Revenue &amp; Growth Score</a>
         <span aria-hidden="true">&middot;</span>
@@ -85,7 +84,7 @@ const { variant = 'home' } = Astro.props;
         <span aria-hidden="true">&middot;</span>
         <a href="/sustainability-score">Sustainability Strategy Score</a>
         <span aria-hidden="true">&middot;</span>
-        <a href="https://calendly.com/fparham/30min" target="_blank" rel="noopener">Schedule a Strategy Conversation</a>
+        <a href={CALENDLY_URL} target="_blank" rel="noopener">Schedule a Strategy Conversation</a>
       </p>
     )}
 

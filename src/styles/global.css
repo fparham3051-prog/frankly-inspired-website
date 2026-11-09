@@ -1948,3 +1948,30 @@ a.card:hover .card-cta { text-decoration: underline; }
     transform: translateY(0);
   }
 }
+
+/* ---------- Site improvements (Nov 2026) ---------- */
+.hero h1.hero-h1-long { font-size: clamp(2.2rem, 4.8vw, 4rem); line-height: 1.08; }
+.testimonial blockquote { margin: 0 0 1rem; font-family: var(--font-heading); font-size: 1.15rem; line-height: 1.45; color: var(--navy); }
+.testimonial figcaption { display: flex; flex-direction: column; font-size: 0.9rem; color: #4a545e; }
+.faq-list { margin-top: 1.25rem; border-top: 1px solid var(--border); }
+.faq-list details { border-bottom: 1px solid var(--border); padding: 1.1rem 0; }
+.faq-list summary { cursor: pointer; font-weight: 600; color: var(--navy); list-style: none; display: flex; justify-content: space-between; gap: 1rem; }
+.faq-list summary::-webkit-details-marker { display: none; }
+.faq-list summary::after { content: '+'; color: var(--gold-accessible); font-size: 1.3rem; line-height: 1; transition: transform var(--transition); }
+.faq-list details[open] summary::after { transform: rotate(45deg); }
+.faq-list details p { margin: 0.75rem 0 0; color: #4a545e; }
+.faq-list summary:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+.form-more { display: block; border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.85rem 1rem; background: var(--white); }
+.form-more > summary { cursor: pointer; font-weight: 600; color: var(--navy); }
+.form-more[open] > summary { margin-bottom: 1rem; }
+.form-more-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem 1.5rem; }
+@media (max-width: 760px) { .form-more-grid { grid-template-columns: 1fr; } }
+.scheduler-alt { margin: 0.6rem 0 0; font-size: 0.85rem; }
+.scheduler { margin-top: 1rem; border-radius: var(--radius); overflow: hidden; background: var(--white); }
+.btn-ghost { background: transparent; color: var(--navy); border: 1px solid transparent; text-decoration: underline; text-decoration-color: var(--gold); text-underline-offset: 4px; }
+.btn-ghost:hover { color: var(--gold-accessible); }
+.insight-article { padding: 2rem 0; border-bottom: 1px solid var(--border); }
+.insight-article:first-child { padding-top: 0; }
+.insight-article:last-child { border-bottom: none; }
+.insight-article h2 { margin-bottom: 0.75rem; }
+.insight-article p { color: #333c45; }

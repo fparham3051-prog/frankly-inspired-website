@@ -1,10 +1,11 @@
 ---
+import { CALENDLY_URL } from '../config';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 ---
 
 <BaseLayout
-  title="Leadership & Operations Health Score | Frankly Inspired"
+  title="Leadership & Operations Score | Frankly Inspired"
   description="A free diagnostic that scores your nonprofit's governance, leadership succession, organizational alignment, and change capacity against research from BoardSource, McKinsey, and Harvard Business School."
   footerVariant="score"
 >
@@ -40,7 +41,7 @@ import Header from '../components/Header.astro';
     <section class="section assessment-intro">
       <div class="container narrow center">
         <p class="eyebrow eyebrow-dark">Free Diagnostic</p>
-        <h1>Leadership &amp; Operations Health Score</h1>
+        <h1>Leadership &amp; Operations Score</h1>
         <p class="hero-sub-light">12 quick questions across governance, leadership succession, organizational alignment, and change capacity, each grounded in named research from BoardSource, the CompassPoint/Meyer Foundation "Daring to Lead" study, McKinsey's Organizational Health Index, and Harvard Business School's Kotter change model. Takes about 7 minutes. This is the deeper follow-up to the Leadership &amp; Organizational Development pillar in the free <a href="/assessment">Self-Assessment</a>: jump in below, or start there first for the faster 5-minute version.</p>
       </div>
     </section>
@@ -197,7 +198,7 @@ import Header from '../components/Header.astro';
           </div>
 
           <div class="assessment-submit">
-            <button type="submit" class="btn btn-primary">See My Leadership &amp; Operations Health Score</button>
+            <button type="submit" class="btn btn-primary">See My Leadership &amp; Operations Score</button>
             <p class="form-status" id="lh-status" role="status" aria-live="polite"></p>
           </div>
         </form>
@@ -246,7 +247,7 @@ import Header from '../components/Header.astro';
             <h3>Want to talk through these results?</h3>
             <p>A short conversation is the fastest way to turn this into a plan.</p>
             <div class="hero-ctas center">
-              <a class="btn btn-primary" href="https://calendly.com/fparham/30min" target="_blank" rel="noopener">Schedule a Strategy Conversation</a>
+              <a class="btn btn-primary" href={CALENDLY_URL} target="_blank" rel="noopener">Schedule a Strategy Conversation</a>
               <a class="btn btn-secondary" href="/#pricing">See Pricing</a>
             </div>
           </div>

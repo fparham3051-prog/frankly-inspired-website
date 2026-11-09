@@ -1,0 +1,105 @@
+---
+import { SCORECARD_URL, CALENDLY_URL } from '../config';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import ScrollReveal from '../components/ScrollReveal.astro';
+
+// One place to choose a free tool. Order matters: one clear first step,
+// then the comprehensive read, then the four single-area deep dives.
+const deepDives = [
+  {
+    href: '/revenue-growth-score',
+    name: 'Revenue & Growth Score',
+    time: '10 minutes',
+    what: 'Nine numbers from your budget and donor database, scored against reserve, liquidity, diversification, and donor-retention benchmarks.',
+    best: 'Best if you have your financials handy.',
+  },
+  {
+    href: '/institutional-advancement-score',
+    name: 'Institutional Advancement Score',
+    time: '8 minutes',
+    what: 'The fundraising program behind the numbers: gift portfolios, stewardship, campaign readiness, events, and planned giving.',
+    best: 'Best for development leaders.',
+  },
+  {
+    href: '/leadership-health',
+    name: 'Leadership & Operations Score',
+    time: '7 minutes',
+    what: 'Governance, succession and bench strength, organizational alignment, and capacity for change.',
+    best: 'Best before a leadership transition.',
+  },
+  {
+    href: '/sustainability-score',
+    name: 'Sustainability Strategy Score',
+    time: '7 minutes',
+    what: 'Strategic clarity, risk management, and execution, combined with your Revenue & Growth and Leadership scores into one strategic view.',
+    best: 'Best taken last, after the two above.',
+  },
+];
+---
+
+<BaseLayout
+  title="Free Nonprofit Assessment Tools | Frankly Inspired"
+  description="Free, research-grounded tools that score your nonprofit's sustainability, revenue, fundraising program, leadership, and strategy. No sign-up required."
+  footerVariant="home"
+>
+  <Header variant="full" />
+
+  <main id="main">
+    <section class="section assessment-intro">
+      <div class="container narrow center">
+        <p class="eyebrow eyebrow-dark">Free Tools</p>
+        <h1>Score your organization for free</h1>
+        <p class="hero-sub-light">Not sure where to start? Begin with the 5-minute self-assessment. It names your priority area and points you to the deeper tool that fits. Every tool is free, with no sign-up.</p>
+      </div>
+    </section>
+
+    <section class="section alt-bg">
+      <div class="container">
+        <h2 class="section-title reveal">Start here</h2>
+        <div class="card-grid">
+          <a class="card reveal featured-tool" href="/assessment" data-track="tool_start" data-tool="self-assessment">
+            <span class="offering-badge">Step 1 &middot; 5 minutes</span>
+            <h4>Nonprofit Sustainability Self-Assessment</h4>
+            <p>15 questions across strategy, revenue, leadership, operations, and partnerships. You'll get a score for each area, your priority area, and a next step.</p>
+            <span class="card-cta">Take the Self-Assessment &rarr;</span>
+          </a>
+          <a class="card reveal featured-tool" href={SCORECARD_URL} target="_blank" rel="noopener" data-track="tool_start" data-tool="institutionalos-scorecard">
+            <span class="offering-badge">Step 2 &middot; The comprehensive read</span>
+            <h4>InstitutionalOS Scorecard</h4>
+            <p>All seven Health Index dimensions in one score, using the same system as the paid diagnostic.</p>
+            <span class="card-cta">Take the Scorecard &rarr;</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title reveal">Go deeper on one area</h2>
+        <p class="section-note reveal">Each of these scores a single area in depth, grounded in its own named research.</p>
+        <div class="card-grid">
+          {deepDives.map((t) => (
+            <a class="card reveal" href={t.href} data-track="tool_start" data-tool={t.href.slice(1)}>
+              <span class="offering-badge">{t.time}</span>
+              <h4>{t.name}</h4>
+              <p>{t.what}</p>
+              <p style="margin-top:0.6rem;"><em>{t.best}</em></p>
+              <span class="card-cta">Start &rarr;</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section closing-cta alt-bg">
+      <div class="container narrow center">
+        <h2 class="reveal">Rather talk it through?</h2>
+        <p class="reveal">A 30-minute conversation is the fastest way to find where to focus.</p>
+        <a class="btn btn-primary reveal" href={CALENDLY_URL} target="_blank" rel="noopener" data-track="schedule_click">Schedule a Strategy Conversation</a>
+      </div>
+    </section>
+  </main>
+
+  <ScrollReveal />
+</BaseLayout>

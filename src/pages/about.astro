@@ -1,7 +1,10 @@
 ---
+import { CALENDLY_URL } from '../config';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import ScrollReveal from '../components/ScrollReveal.astro';
+import { LINKEDIN_URL, EMAIL } from '../config';
+import { talks } from '../data/proof';
 ---
 
 <BaseLayout
@@ -90,9 +93,38 @@ import ScrollReveal from '../components/ScrollReveal.astro';
 
     <!-- ============ SPEAKING AND OPPORTUNITY ============ -->
     <section id="speaking" class="section speaking alt-bg">
-      <div class="container narrow center">
+      <div class="container">
         <h2 class="section-title reveal">Speaking &amp; Board Service</h2>
-        <p class="section-note reveal">Franklin is also open to selected speaking, board service, and advisory opportunities. <a href="/#contact">Get in touch</a> to discuss fit.</p>
+        <p class="section-note reveal">Franklin speaks with nonprofit boards, staff teams, and sector convenings, and is open to selected board service and advisory roles.</p>
+        <h3 class="subhead reveal">Topics</h3>
+        <div class="card-grid">
+          <div class="card card-static reveal">
+            <h4>Find the Binding Constraint</h4>
+            <p>Why most organizations work on the wrong problem, and how evidence-based scoring names the one thing actually limiting progress.</p>
+          </div>
+          <div class="card card-static reveal">
+            <h4>Beyond the First Gift</h4>
+            <p>Donor retention, recurring giving, and planned giving: the underused levers behind durable revenue.</p>
+          </div>
+          <div class="card card-static reveal">
+            <h4>Building Institutions That Outlast Their Founders</h4>
+            <p>Leadership bench strength, succession planning, and the systems that keep an organization running through transition.</p>
+          </div>
+          <div class="card card-static reveal">
+            <h4>Cross-Sector Partnerships That Last</h4>
+            <p>Building and stewarding education, workforce, corporate, government, and philanthropic partnerships that sustain programs.</p>
+          </div>
+        </div>
+        <p class="reveal" style="margin-top:1.25rem;"><strong>Formats:</strong> keynotes, workshops, panels, and board or staff retreats.</p>
+        {talks.length > 0 && (
+          <>
+            <h3 class="subhead reveal">Recent Engagements</h3>
+            <ul class="bullet-list reveal">
+              {talks.map((t) => <li><strong>{t.title}</strong>, {t.event}{t.date && <>, {t.date}</>}</li>)}
+            </ul>
+          </>
+        )}
+        <a class="btn btn-secondary reveal" href="/#contact" data-track="speaking_inquiry">Invite Franklin to Speak</a>
       </div>
     </section>
 
@@ -105,8 +137,11 @@ import ScrollReveal from '../components/ScrollReveal.astro';
     <section id="resume" class="section resume">
       <div class="container narrow center">
         <h2 class="section-title reveal">Resume</h2>
-        <p class="reveal">Franklin's full resume, covering education, employment history, and leadership experience, is available on request while the download is being finalized.</p>
-        <a class="btn btn-secondary reveal" href="mailto:franklin@franklyinspired.associates?subject=Resume%20Request">Request the Resume</a>
+        <p class="reveal">Franklin's full work history is on LinkedIn, and a complete resume is available on request.</p>
+        <div class="hero-ctas center reveal">
+          <a class="btn btn-secondary" href={LINKEDIN_URL} target="_blank" rel="noopener" data-track="linkedin_click">View on LinkedIn</a>
+          <a class="btn btn-secondary" href={`mailto:${EMAIL}?subject=Resume%20Request`} data-track="resume_request">Request the Resume</a>
+        </div>
       </div>
     </section>
 
@@ -118,7 +153,7 @@ import ScrollReveal from '../components/ScrollReveal.astro';
       <div class="container narrow center">
         <h2 class="reveal">Strong missions need sustainable institutions.</h2>
         <p class="reveal">If your organization is navigating growth, revenue pressure, operational complexity, leadership transition, or the need for a clearer sustainability strategy, start with a conversation.</p>
-        <a class="btn btn-primary reveal" href="https://calendly.com/fparham/30min" target="_blank" rel="noopener">Schedule a Strategy Conversation</a>
+        <a class="btn btn-primary reveal" href={CALENDLY_URL} target="_blank" rel="noopener">Schedule a Strategy Conversation</a>
         <p style="margin-top: 1rem;"><a class="link-more" href="/#consulting">See services and pricing</a></p>
       </div>
     </section>

@@ -1,7 +1,9 @@
 ---
+import { SCORECARD_URL, CALENDLY_URL } from '../config';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import ScrollReveal from '../components/ScrollReveal.astro';
+import { testimonials, caseStudies } from '../data/proof';
 ---
 
 <BaseLayout
@@ -19,10 +21,11 @@ import ScrollReveal from '../components/ScrollReveal.astro';
         <div class="hero-copy">
           <p class="eyebrow reveal" style="margin-bottom:0.35rem;">Franklin D. Parham</p>
           <p class="hero-role reveal">Founder and Principal, Frankly Inspired and Associates</p>
-          <h1 class="reveal">Building stronger nonprofits for long-term impact.</h1>
-          <p class="hero-sub reveal">Executive strategy and sustainability consulting for leaders of mission-driven institutions seeking stronger revenue models, organizational systems, leadership capacity, and cross-sector partnerships.</p>
+          <h1 class="hero-h1-long reveal">Find the one thing holding your nonprofit back, and a 90-day plan to close the gap.</h1>
+          <p class="hero-sub reveal">Evidence-based strategy and sustainability consulting for nonprofit leaders. Every engagement scores your organization, names its single binding constraint, and ends with a plan concrete enough to act on Monday morning.</p>
           <div class="hero-ctas reveal">
-            <a class="btn btn-primary" href="https://calendly.com/fparham/30min" target="_blank" rel="noopener">Schedule a Strategy Conversation</a>
+            <a class="btn btn-primary" href={CALENDLY_URL} target="_blank" rel="noopener" data-track="schedule_click">Schedule a Strategy Conversation</a>
+            <a class="btn btn-secondary" href="/assessment" data-track="hero_assessment_click">Take the 5-Minute Assessment</a>
           </div>
         </div>
         <div class="hero-portrait reveal">
@@ -57,7 +60,7 @@ import ScrollReveal from '../components/ScrollReveal.astro';
             <span class="qn-label">Consulting &amp; Pricing &rarr;</span>
             <span class="qn-sub">Service pillars and engagement options</span>
           </a>
-          <a class="quicknav-tile" href="#assessments">
+          <a class="quicknav-tile" href="/tools">
             <span class="qn-label">Free Assessments &rarr;</span>
             <span class="qn-sub">Score your organization in 5 minutes</span>
           </a>
@@ -93,6 +96,88 @@ import ScrollReveal from '../components/ScrollReveal.astro';
       </div>
     </section>
 
+    <!-- ============ TRACK RECORD ============ -->
+    <!-- Same verified figures as /about's "Impact by the Numbers", surfaced
+         on the homepage as early proof. Keep the two in sync. -->
+    <section id="track-record" class="section track-record">
+      <div class="container">
+        <h2 class="section-title reveal">Track Record</h2>
+        <p class="section-note reveal">From Franklin's most recent role as Regional Director, Mid-Atlantic, for The Hidden Genius Project.</p>
+        <div class="stat-grid">
+          <div class="stat reveal"><span class="stat-num">$1.3M</span><span class="stat-label">in combined regional operating budgets managed</span></div>
+          <div class="stat reveal"><span class="stat-num">20+</span><span class="stat-label">cross-sector partnerships built and stewarded</span></div>
+          <div class="stat reveal"><span class="stat-num">400+</span><span class="stat-label">youth and families served across Baltimore and Philadelphia</span></div>
+          <div class="stat reveal"><span class="stat-num">$500K+</span><span class="stat-label">in scholarships and financial aid secured, with 100% college enrollment for the senior cohort</span></div>
+        </div>
+        <p class="reveal" style="margin-top:1.25rem;"><a class="link-more" href="/about#experience">Full experience and impact &rarr;</a></p>
+      </div>
+    </section>
+
+    {testimonials.length > 0 && (
+      <section id="testimonials" class="section testimonials alt-bg">
+        <div class="container">
+          <h2 class="section-title reveal">What Leaders Say</h2>
+          <div class="card-grid">
+            {testimonials.map((t) => (
+              <figure class="card card-static testimonial reveal">
+                <blockquote>&ldquo;{t.quote}&rdquo;</blockquote>
+                <figcaption>
+                  {t.name && <strong>{t.name}</strong>}
+                  <span>{[t.role, t.org].filter(Boolean).join(', ')}</span>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+
+    {caseStudies.length > 0 && (
+      <section id="case-studies" class="section case-studies">
+        <div class="container">
+          <h2 class="section-title reveal">Client Results</h2>
+          <div class="card-grid">
+            {caseStudies.map((c) => (
+              <div class="card card-static reveal">
+                <span class="offering-badge">{c.stage}</span>
+                <h4>{c.org}</h4>
+                <p><strong>Constraint:</strong> {c.constraint}</p>
+                <p><strong>What we did:</strong> {c.action}</p>
+                <p><strong>Result:</strong> {c.result}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- ============ WHO I WORK WITH ============ -->
+    <!-- Maps to the three InstitutionalOS lifecycle stages so a visitor can
+         self-identify before reaching pricing. -->
+    <section id="who" class="section who alt-bg">
+      <div class="container">
+        <h2 class="section-title reveal">Who I Work With</h2>
+        <p class="section-note reveal">Executive directors, founders, board chairs, and development leaders of mission-driven organizations, at whichever of three stages fits.</p>
+        <div class="card-grid">
+          <div class="card card-static reveal">
+            <span class="offering-badge">Building</span>
+            <h4>New and early-stage organizations</h4>
+            <p>You're forming or recently launched and want governance, strategy, and the basics funders and boards expect in place from day one.</p>
+          </div>
+          <div class="card card-static reveal">
+            <span class="offering-badge">Funding</span>
+            <h4>Organizations pursuing grants</h4>
+            <p>You're preparing for a specific funder and need your case for support, evidence, and financial picture strong enough for a yes.</p>
+          </div>
+          <div class="card card-static reveal">
+            <span class="offering-badge">Sustaining</span>
+            <h4>Established organizations</h4>
+            <p>You're operating, but too dependent on one grant, funder, or person, or facing a leadership transition, and want to last.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ============ ASSESSMENTS (single consolidated entry point) ============ -->
     <!-- Previously, tool discovery was spread across three places: three of
          these five tools as clickable Service Pillar cards further down,
@@ -113,7 +198,7 @@ import ScrollReveal from '../components/ScrollReveal.astro';
             <p>A quick overview across five areas, with a priority area and next step.</p>
             <span class="card-cta">Take the Free Assessment &rarr;</span>
           </a>
-          <a class="card reveal featured-tool" href="https://grantpass-landing.onrender.com" target="_blank" rel="noopener">
+          <a class="card reveal featured-tool" href={SCORECARD_URL} target="_blank" rel="noopener">
             <span class="offering-badge">The Comprehensive Read</span>
             <h4>InstitutionalOS Scorecard</h4>
             <p>All seven Health Index dimensions in one score, the same system behind every paid diagnostic below.</p>
@@ -127,6 +212,7 @@ import ScrollReveal from '../components/ScrollReveal.astro';
           <a class="link-more" href="/institutional-advancement-score">Institutional Advancement Score</a>
           <a class="link-more" href="/leadership-health">Leadership &amp; Operations Score</a>
         </div>
+        <p class="reveal" style="margin-top:1.25rem;"><a class="link-more" href="/tools">Not sure which? Compare all free tools &rarr;</a></p>
       </div>
     </section>
 
@@ -161,6 +247,7 @@ import ScrollReveal from '../components/ScrollReveal.astro';
             <a class="link-more" href="/institutional-advancement-score">See where your fundraising program stands &rarr;</a>
           </div>
         </div>
+        <p class="reveal" style="margin-top:1.25rem;"><a class="link-more" href="/insights">All research and insights &rarr;</a></p>
       </div>
     </section>
 
@@ -233,7 +320,7 @@ import ScrollReveal from '../components/ScrollReveal.astro';
               <li>A live readout session, plus ongoing access to track your score</li>
             </ul>
             <a class="btn btn-primary plan-cta" href="#contact" data-plan="InstitutionalOS Diagnostic">Discuss Your Diagnostic</a>
-            <a class="btn btn-ghost plan-cta" href="https://grantpass-landing.onrender.com" target="_blank" rel="noopener">Try the Free Scorecard</a>
+            <a class="btn btn-ghost plan-cta" href={SCORECARD_URL} target="_blank" rel="noopener">Try the Free Scorecard</a>
           </div>
           <div class="pricing-card reveal" id="pricing-advisory">
             <span id="pricing-implementation" class="anchor-offset"></span>
@@ -274,7 +361,6 @@ import ScrollReveal from '../components/ScrollReveal.astro';
           </div>
         </div>
         <p class="pricing-reassurance reveal">Not sure which option fits? <a href="#contact">Start with a conversation</a>, and I'll help you figure out the right scope.</p>
-        <p class="section-note reveal">Every diagnostic is evidence based, not aspirational: a score reflects what can be verified, not what sounds good. This isn't legal, accounting, or safeguarding review; where a finding touches those areas, it comes with a recommendation to bring in the right specialist, not a substitute opinion.</p>
 
         <h3 id="sample-diagnostic" class="subhead reveal">What You Actually Receive</h3>
         <p class="section-note reveal"><em>Illustrative example, not a real client. This shows the format of a completed diagnostic, not a claimed result.</em></p>
@@ -294,6 +380,46 @@ import ScrollReveal from '../components/ScrollReveal.astro';
       </div>
     </section>
 
+    <!-- ============ FAQ ============ -->
+    <!-- Answers drawn only from facts stated elsewhere on the site and in
+         the privacy policy. Add remote/in-person and payment-terms answers
+         once confirmed. -->
+    <section id="faq" class="section faq">
+      <div class="container narrow">
+        <h2 class="section-title reveal">Frequently Asked Questions</h2>
+        <div class="faq-list reveal">
+          <details>
+            <summary>Where does working together start?</summary>
+            <p>With a free 30-minute conversation, then the InstitutionalOS Diagnostic: $2,000 for Formation, $2,500 for Grant Readiness or Institutional Durability. It's the single entry point for every paid engagement.</p>
+          </details>
+          <details>
+            <summary>What do I get from the diagnostic?</summary>
+            <p>All seven Health Index dimensions scored against your stage's benchmarks, a written memo naming your single binding constraint, a 90-day plan, a live readout session, and ongoing access to track your score. <a href="#sample-diagnostic">See a sample</a>.</p>
+          </details>
+          <details>
+            <summary>What documents will I need to share?</summary>
+            <p>For Grant Readiness, financial health is scored from your public IRS Form 990 filings, so you don't need to send them. For any diagnostic, you can choose to share governance policies, board materials, financial statements, or strategic plans to support the evidence review.</p>
+          </details>
+          <details>
+            <summary>How is my organization's information handled?</summary>
+            <p>What you share is used only to complete your diagnostic. It's never sold or reused for another engagement without your knowledge, and you can ask for shared source materials to be deleted once the engagement ends. See the <a href="/privacy">Privacy Policy</a>.</p>
+          </details>
+          <details>
+            <summary>Is there a minimum commitment?</summary>
+            <p>The advisory retainer has a three-month recommended minimum. Executive coaching is $350 per 60-minute session, scheduled as needed with no minimum.</p>
+          </details>
+          <details>
+            <summary>Is this legal or accounting advice?</summary>
+            <p>No. Where a finding touches legal, accounting, or safeguarding matters, you'll get a recommendation to bring in the right specialist rather than a substitute opinion.</p>
+          </details>
+          <details>
+            <summary>We're not ready to pay for a diagnostic. Where should we start?</summary>
+            <p>Take one of the <a href="/tools">free tools</a>. The 5-minute self-assessment points you to your priority area, and the InstitutionalOS Scorecard gives you a full Health Index score.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
     <!-- ============ CONTACT ============ -->
     <section id="contact" class="section contact alt-bg">
       <div class="container narrow">
@@ -310,7 +436,9 @@ import ScrollReveal from '../components/ScrollReveal.astro';
 
         <div class="schedule-cta schedule-cta-primary reveal">
           <p class="schedule-cta-label">Already know you'd like to talk?</p>
-          <a class="btn btn-primary" href="https://calendly.com/fparham/30min" target="_blank" rel="noopener">Schedule a 30 Minute Conversation</a>
+          <button type="button" class="btn btn-primary" id="show-scheduler" data-track="schedule_inline_open">See Available Times</button>
+          <p class="scheduler-alt"><a href={CALENDLY_URL} target="_blank" rel="noopener" data-track="schedule_click">or open the scheduler in a new tab</a></p>
+          <div id="scheduler" class="scheduler" hidden data-url={CALENDLY_URL}></div>
         </div>
 
         <p class="form-divider">Prefer to write it out first? Share a few details below and I'll follow up.</p>
@@ -336,13 +464,21 @@ import ScrollReveal from '../components/ScrollReveal.astro';
             <input type="text" id="organization" name="organization" placeholder="Organization name" required />
           </div>
           <div class="form-row">
-            <label for="title">Title / Role*</label>
-            <input type="text" id="title" name="title" placeholder="Your role" required />
+            <label for="title">Title / Role</label>
+            <input type="text" id="title" name="title" placeholder="Optional" />
           </div>
           <div class="form-row">
             <label for="email">Email*</label>
             <input type="email" id="email" name="email" placeholder="Email address" required />
           </div>
+          <div class="form-row full">
+            <label for="challenge">What challenge or opportunity are you currently navigating?*</label>
+            <textarea id="challenge" name="challenge" rows="4" placeholder="A few sentences is plenty" required></textarea>
+          </div>
+
+          <details class="form-row full form-more">
+          <summary>Add more details (optional)</summary>
+          <div class="form-more-grid">
           <div class="form-row">
             <label for="phone">Phone</label>
             <input type="tel" id="phone" name="phone" placeholder="Optional" />
@@ -353,7 +489,7 @@ import ScrollReveal from '../components/ScrollReveal.astro';
           </div>
 
           <fieldset class="form-row full">
-            <legend>How can I support your organization?*</legend>
+            <legend>How can I support your organization?</legend>
             <div class="checkbox-group">
               <label><input type="checkbox" name="support_area" value="InstitutionalOS Diagnostic" /> InstitutionalOS Diagnostic</label>
               <label><input type="checkbox" name="support_area" value="Ongoing Advisory and Implementation" /> Ongoing Advisory and Implementation</label>
@@ -363,11 +499,6 @@ import ScrollReveal from '../components/ScrollReveal.astro';
               <label><input type="checkbox" name="support_area" value="Other" /> Other</label>
             </div>
           </fieldset>
-
-          <div class="form-row full">
-            <label for="challenge">What challenge or opportunity are you currently navigating?*</label>
-            <textarea id="challenge" name="challenge" rows="4" placeholder="Open text field" required></textarea>
-          </div>
 
           <fieldset class="form-row full">
             <legend>What is your desired timeline?</legend>
@@ -384,6 +515,8 @@ import ScrollReveal from '../components/ScrollReveal.astro';
             <label for="referral">How did you hear about Frankly Inspired?</label>
             <input type="text" id="referral" name="referral" />
           </div>
+          </div>
+          </details>
 
           <p class="form-row full disclaimer">By submitting this form, you agree that Frankly Inspired and Associates, LLC may use the information provided to respond to your inquiry and communicate with you regarding potential services. Submitting this form does not create a consultant client relationship.</p>
 
@@ -396,7 +529,7 @@ import ScrollReveal from '../components/ScrollReveal.astro';
           <h3>Thank you for reaching out.</h3>
           <p>Your inquiry has been received. I appreciate your interest in working with Frankly Inspired and Associates, LLC. I'll review the information you've provided and follow up regarding next steps.</p>
           <p>If you'd like to reserve time now, you can schedule a 30 minute introductory conversation below.</p>
-          <a class="btn btn-secondary" href="https://calendly.com/fparham/30min" target="_blank" rel="noopener">Schedule a Conversation &rarr;</a>
+          <a class="btn btn-secondary" href={CALENDLY_URL} target="_blank" rel="noopener">Schedule a Conversation &rarr;</a>
         </div>
       </div>
     </section>
@@ -456,7 +589,10 @@ import ScrollReveal from '../components/ScrollReveal.astro';
         const checkbox = document.querySelector<HTMLInputElement>(
           `input[name="support_area"][value="${plan.trim()}"]`
         );
-        if (checkbox) checkbox.checked = true;
+        if (checkbox) {
+          checkbox.checked = true;
+          checkbox.closest('details')?.setAttribute('open', '');
+        }
       });
     });
   });
@@ -471,12 +607,6 @@ import ScrollReveal from '../components/ScrollReveal.astro';
     form.addEventListener('submit', (e) => {
       e.preventDefault();
 
-      const checked = form.querySelectorAll('input[name="support_area"]:checked');
-      if (checked.length === 0) {
-        if (status) status.textContent = 'Please select at least one option under "How can I support your organization?"';
-        return;
-      }
-
       if (!form.checkValidity()) {
         form.reportValidity();
         return;
@@ -486,7 +616,8 @@ import ScrollReveal from '../components/ScrollReveal.astro';
       const payload = {
         name: formData.get('name'),
         organization: formData.get('organization'),
-        title: formData.get('title'),
+        // The backend requires a title, but it's optional on the form now.
+        title: String(formData.get('title') || '').trim() || 'Not provided',
         email: formData.get('email'),
         phone: formData.get('phone'),
         org_website: formData.get('org_website'),
@@ -512,6 +643,7 @@ import ScrollReveal from '../components/ScrollReveal.astro';
             throw new Error((result.data && result.data.error) || 'Something went wrong.');
           }
           if (status) status.textContent = '';
+          (window as any).fiTrack?.('contact_form_submit');
           form.hidden = true;
           if (thankYou) thankYou.hidden = false;
         })
@@ -523,6 +655,25 @@ import ScrollReveal from '../components/ScrollReveal.astro';
         });
     });
   }
+
+  // ---------- Inline scheduler ----------
+  // Calendly's embed script only loads after the visitor asks for it, so
+  // nobody gets third-party scripts or cookies just by visiting the page.
+  (function inlineScheduler() {
+    const btn = document.getElementById('show-scheduler');
+    const box = document.getElementById('scheduler');
+    if (!btn || !box) return;
+    btn.addEventListener('click', () => {
+      box.hidden = false;
+      btn.hidden = true;
+      const url = box.dataset.url || '';
+      box.innerHTML = '<div class="calendly-inline-widget" data-url="' + url + '?hide_gdpr_banner=1" style="min-width:300px;height:700px;"></div>';
+      const script = document.createElement('script');
+      script.src = 'https://assets.calendly.com/assets/external/widget.js';
+      script.async = true;
+      document.body.appendChild(script);
+    });
+  })();
 
   // ---------- Recommended-tier highlight ----------
   // The self-assessment results page links to /#pricing-advisory or

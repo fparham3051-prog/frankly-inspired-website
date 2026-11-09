@@ -1,0 +1,82 @@
+---
+import { CALENDLY_URL } from '../config';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import ScrollReveal from '../components/ScrollReveal.astro';
+
+// Research notes. Add new entries at the top. Each links forward to the
+// free tool that scores that area, so readers have a next step.
+const insights = [
+  {
+    id: 'first-gift-cliff',
+    title: 'The First-Gift Cliff',
+    body: [
+      "Nationally, roughly 4 in 5 first-time donors never make a second gift: first-time donor retention sits around 18%, well below the 43% overall average.",
+      "A structured stewardship process in a donor's first 90 days is one of the highest-leverage, lowest-cost fixes most nonprofits have available.",
+    ],
+    source: 'Fundraising Effectiveness Project, Association of Fundraising Professionals & GivingTuesday',
+    next: { href: '/revenue-growth-score', label: 'Score your donor retention' },
+  },
+  {
+    id: 'recurring-giving',
+    title: 'The Recurring-Giving Advantage',
+    body: [
+      'After one year, 71% of monthly donors are still giving, compared to just 24% of new one-time donors.',
+      'Converting even a portion of one-time donors into monthly sustainers does more for long-term revenue stability than acquiring new donors at the same rate.',
+    ],
+    source: 'M+R Benchmarks, an annual digital fundraising study',
+    next: { href: '/revenue-growth-score', label: 'See where your revenue stands' },
+  },
+  {
+    id: 'planned-giving-gap',
+    title: 'The Planned-Giving Gap',
+    body: [
+      "Charitable bequests have made up roughly 7-9% of all U.S. giving in most years over the past four decades, and reached just over 10% in 2025, yet most nonprofits still don't have even a basic planned-giving program.",
+      "At one studied institution, realized bequest gifts averaged 21 times a donor's lifetime annual giving, so a planned-giving conversation is also a marker of a donor's deepest capacity, not just a future line item.",
+    ],
+    source: 'Giving USA; the Chronicle of Philanthropy; PG Calc planned-giving research',
+    next: { href: '/institutional-advancement-score', label: 'Score your fundraising program' },
+  },
+];
+---
+
+<BaseLayout
+  title="Nonprofit Research & Insights | Frankly Inspired"
+  description="Short, sourced research notes on donor retention, recurring giving, planned giving, and nonprofit sustainability, each with a free tool to see where your organization stands."
+  footerVariant="home"
+>
+  <Header variant="full" />
+
+  <main id="main">
+    <section class="section assessment-intro">
+      <div class="container narrow center">
+        <p class="eyebrow eyebrow-dark">Insights</p>
+        <h1>What the research shows</h1>
+        <p class="hero-sub-light">Short, sourced notes on the levers that most affect whether a nonprofit lasts, each paired with a free tool to see where your organization stands.</p>
+      </div>
+    </section>
+
+    <section class="section alt-bg">
+      <div class="container narrow">
+        {insights.map((i) => (
+          <article id={i.id} class="insight-article reveal">
+            <h2>{i.title}</h2>
+            {i.body.map((p) => <p>{p}</p>)}
+            <p class="insight-source">Source: {i.source}</p>
+            <a class="link-more" href={i.next.href}>{i.next.label} &rarr;</a>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="section closing-cta">
+      <div class="container narrow center">
+        <h2 class="reveal">Want to know which of these matters most for you?</h2>
+        <p class="reveal">A 30-minute conversation is the fastest way to find out.</p>
+        <a class="btn btn-primary reveal" href={CALENDLY_URL} target="_blank" rel="noopener" data-track="schedule_click">Schedule a Strategy Conversation</a>
+      </div>
+    </section>
+  </main>
+
+  <ScrollReveal />
+</BaseLayout>

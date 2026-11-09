@@ -1,4 +1,5 @@
 ---
+import { SCORECARD_URL, CALENDLY_URL } from '../config';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 ---
@@ -234,14 +235,14 @@ import Header from '../components/Header.astro';
 
           <div class="results-related">
             <p>Three of these areas also have a deeper, dedicated diagnostic if you want to go further: the <a href="/leadership-health">Leadership &amp; Operations Score</a> (governance and succession research) and the <a href="/sustainability-score">Sustainability Strategy Score</a>, which blends the others into one strategic view. Revenue Diversification has two: the <a href="/revenue-growth-score">Revenue &amp; Growth Score</a> (real budget numbers against sector benchmarks) and the <a href="/institutional-advancement-score">Institutional Advancement Score</a> (the fundraising program behind those numbers: gift portfolios, stewardship, campaigns, and events).</p>
-            <p>If grant funding is a meaningful part of your revenue strategy, <a href="https://grantpass-landing.onrender.com" target="_blank" rel="noopener">InstitutionalOS</a> scores your organization's grant readiness free, in seconds, across the seven dimensions funders actually weigh. The full guided Grant Readiness Review below adds a financial-health read from your actual filed Form 990 data against a specific funder's stated priorities. The Revenue &amp; Growth Score above is a useful starting point before you bring real numbers into it.</p>
+            <p>If grant funding is a meaningful part of your revenue strategy, <a href={SCORECARD_URL} target="_blank" rel="noopener">InstitutionalOS</a> scores your organization's grant readiness free, in seconds, across the seven dimensions funders actually weigh. The full guided Grant Readiness Review below adds a financial-health read from your actual filed Form 990 data against a specific funder's stated priorities. The Revenue &amp; Growth Score above is a useful starting point before you bring real numbers into it.</p>
           </div>
 
           <div class="results-cta">
             <h3>Not sure where to start?</h3>
             <p>A short conversation is the fastest way to turn this into a plan.</p>
             <div class="hero-ctas center">
-              <a class="btn btn-primary" href="https://calendly.com/fparham/30min" target="_blank" rel="noopener">Schedule a Strategy Conversation</a>
+              <a class="btn btn-primary" href={CALENDLY_URL} target="_blank" rel="noopener">Schedule a Strategy Conversation</a>
               <a class="btn btn-secondary" href="/#pricing">See Pricing</a>
             </div>
           </div>

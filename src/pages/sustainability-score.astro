@@ -1,10 +1,11 @@
 ---
+import { SCORECARD_URL, CALENDLY_URL } from '../config';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 ---
 
 <BaseLayout
-  title="Organizational Sustainability Score | Frankly Inspired"
+  title="Sustainability Strategy Score | Frankly Inspired"
   description="A free diagnostic that scores your nonprofit's strategic clarity, risk management, impact/financial integration, and execution discipline, and ties the result to your Revenue & Growth and Leadership scores using Harvard Kennedy School's Strategic Triangle."
   footerVariant="score"
 >
@@ -41,7 +42,7 @@ import Header from '../components/Header.astro';
     <section class="section assessment-intro">
       <div class="container narrow center">
         <p class="eyebrow eyebrow-dark">Free Diagnostic</p>
-        <h1>Organizational Sustainability Score</h1>
+        <h1>Sustainability Strategy Score</h1>
         <p class="hero-sub-light">12 questions on strategic clarity, risk management, impact/financial integration, and execution discipline, grounded in Harvard Kennedy School's Strategic Triangle, the COSO risk framework, the nonprofit sector's own "dual bottom line" research, and Harvard Business School's Balanced Scorecard. If you've completed the Revenue &amp; Growth and Leadership scores, this tool ties all three together. Takes about 7 minutes. New here? The free <a href="/assessment">Self-Assessment</a> is a faster 5-minute starting point across all five sustainability dimensions.</p>
       </div>
     </section>
@@ -198,7 +199,7 @@ import Header from '../components/Header.astro';
           </div>
 
           <div class="assessment-submit">
-            <button type="submit" class="btn btn-primary">See My Sustainability Score</button>
+            <button type="submit" class="btn btn-primary">See My Sustainability Strategy Score</button>
             <p class="form-status" id="ss-status" role="status" aria-live="polite"></p>
           </div>
         </form>
@@ -243,7 +244,7 @@ import Header from '../components/Header.astro';
           </div>
 
           <div class="results-related">
-            <p>This tool measures strategy, risk, and execution, and blends in your Revenue &amp; Growth and Leadership scores if you've completed them. For a closer look at fundraising program structure specifically (gift portfolios, stewardship, campaigns, and events), see the <a href="/institutional-advancement-score">Institutional Advancement Score</a> (not blended into the Triangle above, since Moore's framework is specifically three-legged, but a useful companion read). For a numbers-based read on funder-specific grant readiness, <a href="https://grantpass-landing.onrender.com" target="_blank" rel="noopener">InstitutionalOS</a> is a free, purpose-built scorecard for that, scored from your actual filed financial data in the full guided Review, not self-reported estimates.</p>
+            <p>This tool measures strategy, risk, and execution, and blends in your Revenue &amp; Growth and Leadership scores if you've completed them. For a closer look at fundraising program structure specifically (gift portfolios, stewardship, campaigns, and events), see the <a href="/institutional-advancement-score">Institutional Advancement Score</a> (not blended into the Triangle above, since Moore's framework is specifically three-legged, but a useful companion read). For a numbers-based read on funder-specific grant readiness, <a href={SCORECARD_URL} target="_blank" rel="noopener">InstitutionalOS</a> is a free, purpose-built scorecard for that, scored from your actual filed financial data in the full guided Review, not self-reported estimates.</p>
             <p>Haven't taken the free <a href="/assessment">Nonprofit Sustainability Self-Assessment</a> yet? It covers this and four other areas in about 5 minutes.</p>
           </div>
 
@@ -251,7 +252,7 @@ import Header from '../components/Header.astro';
             <h3>Want to talk through these results?</h3>
             <p>A short conversation is the fastest way to turn this into a plan.</p>
             <div class="hero-ctas center">
-              <a class="btn btn-primary" href="https://calendly.com/fparham/30min" target="_blank" rel="noopener">Schedule a Strategy Conversation</a>
+              <a class="btn btn-primary" href={CALENDLY_URL} target="_blank" rel="noopener">Schedule a Strategy Conversation</a>
               <a class="btn btn-secondary" href="/#pricing">See Pricing</a>
             </div>
           </div>

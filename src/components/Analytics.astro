@@ -46,6 +46,26 @@ const GA_MEASUREMENT_ID = ''; // e.g. 'G-XXXXXXXXXX'
       });
     }
 
+    // ---------- Conversion events ----------
+    // fiTrack sends an event to Google Analytics only if GA has loaded
+    // (i.e. an ID is set above AND the visitor accepted cookies);
+    // otherwise it does nothing. Any link or button with data-track="name"
+    // is tracked automatically on click, and every tool form submit is
+    // tracked as tool_complete.
+    window.fiTrack = function (name, params) {
+      if (typeof window.gtag === 'function') window.gtag('event', name, params || {});
+    };
+    document.addEventListener('click', function (e) {
+      var el = e.target && e.target.closest ? e.target.closest('[data-track]') : null;
+      if (el) window.fiTrack(el.getAttribute('data-track'), { page: location.pathname, tool: el.getAttribute('data-tool') || undefined });
+      var a = e.target && e.target.closest ? e.target.closest('a[href*="calendly.com"]') : null;
+      if (a && !a.hasAttribute('data-track')) window.fiTrack('schedule_click', { page: location.pathname });
+    });
+    document.addEventListener('submit', function (e) {
+      var f = e.target;
+      if (f && f.id && f.id !== 'contact-form') window.fiTrack('tool_complete', { page: location.pathname, form: f.id });
+    }, true);
+
     document.addEventListener('DOMContentLoaded', init);
   })();
 </script>

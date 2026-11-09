@@ -3,6 +3,7 @@ import '../styles/global.css';
 import Footer from '../components/Footer.astro';
 import CookieConsentBanner from '../components/CookieConsentBanner.astro';
 import Analytics from '../components/Analytics.astro';
+import { SITE_URL, EMAIL, PHONE_TEL, LINKEDIN_URL } from '../config';
 
 interface Props {
   title: string;
@@ -13,6 +14,41 @@ interface Props {
 }
 
 const { title, description, bodyClass, robotsNoindex = false, footerVariant = 'home' } = Astro.props;
+
+const canonical = new URL(Astro.url.pathname.replace(/\/$/, '') || '/', SITE_URL).href;
+const ogImage = SITE_URL + '/assets/images/franklin-parham-headshot.jpg';
+
+// Structured data so search engines understand who this is and where they
+// work (shows up in rich results and local search).
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'ProfessionalService',
+      '@id': SITE_URL + '/#business',
+      name: 'Frankly Inspired and Associates, LLC',
+      url: SITE_URL,
+      email: EMAIL,
+      telephone: PHONE_TEL,
+      image: ogImage,
+      description: 'Nonprofit strategy and sustainability consulting: evidence-based diagnostics, revenue and fundraising strategy, leadership and operations advising.',
+      address: { '@type': 'PostalAddress', addressLocality: 'Lanham', addressRegion: 'MD', addressCountry: 'US' },
+      areaServed: ['Washington DC metropolitan area', 'Maryland', 'Virginia', 'United States'],
+      founder: { '@id': SITE_URL + '/#franklin' },
+      priceRange: '$350 to $3,500',
+    },
+    {
+      '@type': 'Person',
+      '@id': SITE_URL + '/#franklin',
+      name: 'Franklin D. Parham',
+      jobTitle: 'Founder and Principal',
+      worksFor: { '@id': SITE_URL + '/#business' },
+      url: SITE_URL + '/about',
+      sameAs: [LINKEDIN_URL],
+      alumniOf: 'Alabama State University',
+    },
+  ],
+};
 ---
 
 <html lang="en" class="no-js">
@@ -26,6 +62,15 @@ const { title, description, bodyClass, robotsNoindex = false, footerVariant = 'h
     <title>{title}</title>
     <meta name="description" content={description} />
     {robotsNoindex && <meta name="robots" content="noindex" />}
+    {!robotsNoindex && <link rel="canonical" href={canonical} />}
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Frankly Inspired and Associates" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary" />
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />

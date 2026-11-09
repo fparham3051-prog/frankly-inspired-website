@@ -90,6 +90,10 @@ const structuredData = {
     <Analytics />
 
     <script>
+      import { enableInlineBooking } from '../scripts/booking';
+      enableInlineBooking();
+    </script>
+    <script>
       // Exposes the sticky header's real rendered height as --header-height,
       // since it isn't a fixed number: the minimal header (assessment/
       // privacy/terms) can wrap to 2-3 rows on narrow phones, and the full

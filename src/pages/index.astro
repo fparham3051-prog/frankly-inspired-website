@@ -334,7 +334,7 @@ import { testimonials, caseStudies } from '../data/proof';
             <span id="pricing-implementation" class="anchor-offset"></span>
             <span class="recommended-badge" hidden>Recommended for you</span>
             <span class="offering-badge">Step 2</span>
-            <h4>Implementation Retainer</h4>
+            <h4>Advisory and Implementation Retainer</h4>
             <p class="price">$2,500 to $3,500<span>per month</span></p>
             <p class="plan-fit">Best fit once the diagnostic has named your binding constraint and you want ongoing support closing it. Cadence and scope are set together at the readout, from periodic strategic guidance through weekly hands on implementation.</p>
             <ul class="bullet-list">
@@ -346,7 +346,7 @@ import { testimonials, caseStudies } from '../data/proof';
               <li>Three month recommended minimum</li>
             </ul>
             <p class="plan-fit"><strong>Prefer a fixed scope?</strong> The same work can be done as a defined project, such as a revenue diversification plan or partnership strategy, priced to scope.</p>
-            <a class="btn btn-primary plan-cta" href="#contact" data-plan="Ongoing Advisory and Implementation">Start This Retainer</a>
+            <a class="btn btn-primary plan-cta" href="#contact" data-plan="Advisory and Implementation Retainer">Start This Retainer</a>
             <a class="btn btn-ghost plan-cta" href="#contact" data-plan="Project Based Engagement">Discuss a Project</a>
           </div>
         </div>
@@ -365,15 +365,20 @@ import { testimonials, caseStudies } from '../data/proof';
         <h3 id="sample-diagnostic" class="subhead reveal">What You Actually Receive</h3>
         <p class="section-note reveal"><em>Illustrative example, not a real client. This shows the format of a completed diagnostic, not a claimed result.</em></p>
         <p><strong>Organization:</strong> Sample Community Youth Alliance (fictional, for illustration only)<br />
-        <strong>Pathway:</strong> Institutional Durability Diagnostic (SUSTAIN)</p>
+        <strong>Pathway:</strong> Sustain (Institutional Durability) Diagnostic<br />
+        <strong>Candid Seal today:</strong> Silver</p>
         <ul class="bullet-list">
-          <li><strong>Financial Health (58/100).</strong> Two years of filed financials reviewed; no reserve policy on file.</li>
-          <li><strong>Governance (71/100).</strong> Board bylaws current; succession plan not documented.</li>
-          <li><strong>Leadership Bench Strength (44/100).</strong> Single point of failure identified in program leadership.</li>
-          <li><strong>Operational Maturity (66/100).</strong> Core workflows documented; no KPI dashboard in use.</li>
+          <li><strong>1. Strategy and Positioning (68/100).</strong> Written strategic plan in use; no written criteria for saying no to new opportunities.</li>
+          <li><strong>2. Program and Impact Evidence (52/100).</strong> Outputs tracked for every program; outcomes measured for only one.</li>
+          <li><strong>3. Revenue and Financial Health (58/100).</strong> Two years of filed financials reviewed; no reserve policy on file.</li>
+          <li><strong>4. Leadership and Organizational Capacity (44/100).</strong> Single point of failure identified in program leadership.</li>
+          <li><strong>5. Operations and Infrastructure (66/100).</strong> Core workflows documented; no KPI dashboard in use.</li>
+          <li><strong>6. Partnerships and Ecosystem (63/100).</strong> Strong partners, but only two of eight formalized.</li>
+          <li><strong>7. Governance and Risk (71/100).</strong> Bylaws and Form 990 policies current; succession plan not documented.</li>
         </ul>
         <p><strong>Constraint identified:</strong> Leadership bench strength is the binding constraint, not financial health, which is often assumed to be the problem.</p>
         <p><strong>90-day target:</strong> 44 to 58 (closing 25% of the gap to 100), via a documented succession plan for the top two program roles and one cross-trained backup per critical function.</p>
+        <p><strong>Candid Seal step:</strong> Silver to Gold by uploading the latest filed Form 990 and completing the leader demographic fields, both already in hand.</p>
         <p><strong>What you get:</strong> the full scorecard above, a written memo explaining each score, and a 60-90 minute session walking through the plan, delivered whether the news is good or hard to hear.</p>
 
         <p class="pricing-reassurance reveal">Not ready for a conversation yet? <a href="#assessments">Take a free assessment</a> first, it points to where to focus.</p>
@@ -500,7 +505,7 @@ import { testimonials, caseStudies } from '../data/proof';
             <legend>How can I support your organization?</legend>
             <div class="checkbox-group">
               <label><input type="checkbox" name="support_area" value="InstitutionalOS Diagnostic" /> InstitutionalOS Diagnostic</label>
-              <label><input type="checkbox" name="support_area" value="Ongoing Advisory and Implementation" /> Ongoing Advisory and Implementation</label>
+              <label><input type="checkbox" name="support_area" value="Advisory and Implementation Retainer" /> Advisory and Implementation Retainer</label>
               <label><input type="checkbox" name="support_area" value="Project Based Engagement" /> Project Based Engagement</label>
               <label><input type="checkbox" name="support_area" value="1:1 Executive Coaching" /> 1:1 Executive Coaching</label>
               <label><input type="checkbox" name="support_area" value="Speaking and Board Service" /> Speaking and Board Service</label>
@@ -637,6 +642,10 @@ import { testimonials, caseStudies } from '../data/proof';
         referral: formData.get('referral'),
         hp_field: formData.get('hp_field'),
         score_ref: scoreRefToken || undefined,
+        // Stage (build/fund/sustain) the visitor picked in any free tool's
+        // results, so the lead arrives in the operations app with the right
+        // Diagnostic already attached.
+        stage: (() => { try { return localStorage.getItem('fi_stage') || undefined; } catch { return undefined; } })(),
       };
 
       if (status) status.textContent = 'Sending...';

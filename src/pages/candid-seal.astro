@@ -1,0 +1,243 @@
+---
+import { CALENDLY_URL } from '../config';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import EmailResultsForm from '../components/EmailResultsForm.astro';
+import { LEVELS, SEAL_ITEMS, SEAL_YEAR } from '../data/candidSeal';
+---
+
+<BaseLayout
+  title="Your Path to a Candid Platinum Seal | Frankly Inspired"
+  description="A free checklist that shows where your nonprofit stands on Candid's Seals of Transparency, what to post now, and the operational work that gets you to Platinum."
+  footerVariant="score"
+>
+  <Header variant="full" />
+
+  <main id="main">
+    <section class="section assessment-intro">
+      <div class="container narrow center">
+        <p class="eyebrow eyebrow-dark">Free Tool &middot; Candid Seal Path</p>
+        <h1>Your path to a Candid Platinum Seal</h1>
+        <p class="hero-sub-light">Candid's Seals of Transparency are free, and they're earned in four levels: Bronze, Silver, Gold, and Platinum. Funders use them to screen applicants, and in Candid's research, Seal holders received on average 62% more in contributions. This checklist shows where you stand, what you can post today, and the work behind each level, so posting your profile and strengthening your organization become the same path. Takes about 5 minutes.</p>
+      </div>
+    </section>
+
+    <section class="section alt-bg">
+      <div class="container narrow">
+        <div class="fh-intro-note">
+          <p><strong>How Seals work:</strong> each level builds on the one before, so you earn them in order. They expire unless you update your profile every year. Requirements below follow Candid's {SEAL_YEAR} Seals of Transparency guide. Confirm the details in your Candid profile editor. Frankly Inspired is not affiliated with Candid.</p>
+        </div>
+
+        <div class="org-lookup-wrap" id="seal-org"></div>
+
+        <form id="seal-form" novalidate>
+          <details class="rubric-key" open>
+            <summary>For each requirement, choose one</summary>
+            <dl>
+              <div><dt>On our profile</dt><dd>Already posted on our Candid profile.</dd></div>
+              <div><dt>Ready</dt><dd>We have it, but haven't posted it yet.</dd></div>
+              <div><dt>Not ready</dt><dd>We don't have this yet, or it isn't written down.</dd></div>
+            </dl>
+          </details>
+
+          {LEVELS.map((lvl, li) => (
+            <div class="pillar-group seal-level" data-level={lvl.key}>
+              <h2 class="pillar-heading">{li + 1}. {lvl.name}</h2>
+              <p class="fh-field-help">{lvl.purpose}</p>
+              {SEAL_ITEMS.filter((i) => i.level === lvl.key).map((item) => (
+                <fieldset class="seal-item" data-seal-item={item.id}>
+                  <legend>{item.field}</legend>
+                  <p class="seal-work">What it takes: {item.work}</p>
+                  <p class="seal-evidence" data-seal-evidence hidden></p>
+                  <div class="seal-choices">
+                    <label><input type="radio" name={`seal-${item.id}`} value="posted" required /><span>On our profile</span></label>
+                    <label><input type="radio" name={`seal-${item.id}`} value="ready" /><span>Ready</span></label>
+                    <label><input type="radio" name={`seal-${item.id}`} value="no" /><span>Not ready</span></label>
+                  </div>
+                </fieldset>
+              ))}
+            </div>
+          ))}
+
+          <div class="assessment-submit">
+            <button type="submit" class="btn btn-primary">See My Seal Path</button>
+            <p class="form-status" id="seal-status" role="status" aria-live="polite"></p>
+          </div>
+        </form>
+
+        <div class="assessment-results" id="seal-results" hidden>
+          <div class="seal-ladder" id="seal-ladder"></div>
+          <div class="results-score">
+            <span class="results-score-num" id="seal-current"></span>
+            <span class="results-score-band" id="seal-current-label"></span>
+          </div>
+          <p class="results-band-desc" id="seal-summary"></p>
+
+          <div id="seal-steps"></div>
+
+          <div class="results-recommendation" id="seal-recommendation"></div>
+
+          <div class="results-disclaimer">
+            <p>Seal requirements are summarized from Candid's {SEAL_YEAR} guide and can change each year; Candid decides every Seal. The 62% figure is from Candid's own research and shows an association, not a guarantee. Frankly Inspired is not affiliated with Candid.</p>
+          </div>
+
+          <EmailResultsForm id="seal-email" />
+          <button type="button" class="results-retake" id="seal-retake">Change my answers</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section closing-cta">
+      <div class="container narrow center">
+        <h2>Want help getting to Platinum?</h2>
+        <p>The InstitutionalOS Diagnostic's 90-day plan includes the steps to your next Candid Seal level, alongside your binding constraint.</p>
+        <a class="btn btn-primary" href={CALENDLY_URL} target="_blank" rel="noopener" data-track="schedule_click">Schedule a Strategy Conversation</a>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<script>
+  import { SEAL_ITEMS, LEVELS, sealStatus, levelName, type SealAnswer } from '../data/candidSeal';
+  import { dimension } from '../data/questionBank';
+  import { loadProfile, saveSeal, itemPct, FILL_TOOL, profileTeaserHtml } from '../scripts/healthEngine';
+  import { mountOrgLookup } from '../scripts/orgLookup';
+
+  const RUBRIC = ['Not in place', 'Talked about', 'Informal', 'Documented', 'Verified'];
+  const esc = (v: unknown) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[c] as string));
+  const form = document.getElementById('seal-form') as HTMLFormElement;
+  const results = document.getElementById('seal-results') as HTMLElement;
+
+  mountOrgLookup(document.getElementById('seal-org'));
+
+  // Restore earlier answers, and show what the visitor's Health Index
+  // answers already say about the work behind each requirement.
+  const profile = loadProfile();
+  SEAL_ITEMS.forEach((item) => {
+    const prev = profile.seal?.answers[item.id];
+    if (prev) {
+      const r = form.querySelector<HTMLInputElement>(`input[name="seal-${item.id}"][value="${prev}"]`);
+      if (r) r.checked = true;
+    }
+    const scores = (item.evidence || []).map((id) => itemPct(id, profile)).filter((v): v is number => v !== null);
+    if (scores.length) {
+      const avg = Math.round(scores.reduce((a, b) => a + b, 0) / scores.length);
+      const el = form.querySelector<HTMLElement>(`[data-seal-item="${item.id}"] [data-seal-evidence]`);
+      if (el) {
+        el.hidden = false;
+        el.textContent = `Your Health Index answers on this: ${RUBRIC[Math.round(avg / 25)]} (${avg}%).` +
+          (avg >= 75 ? ' That suggests it exists and may be ready to post.' : avg <= 25 ? ' That suggests the work comes first.' : '');
+      }
+    }
+  });
+
+  function answersFromForm(): Record<string, SealAnswer> {
+    const a: Record<string, SealAnswer> = {};
+    SEAL_ITEMS.forEach((i) => {
+      const c = form.querySelector<HTMLInputElement>(`input[name="seal-${i.id}"]:checked`);
+      if (c) a[i.id] = c.value as SealAnswer;
+    });
+    return a;
+  }
+
+  function render(answers: Record<string, SealAnswer>) {
+    const st = sealStatus(answers);
+    const ORDER = LEVELS.map((l) => l.key);
+    const curIdx = st.current ? ORDER.indexOf(st.current) : -1;
+    const readyIdx = st.ready ? ORDER.indexOf(st.ready) : -1;
+
+    document.getElementById('seal-ladder')!.innerHTML = LEVELS.map((l, i) =>
+      `<span class="seal-step${i <= curIdx ? ' is-done' : i <= readyIdx ? ' is-ready' : ''}">${l.name}</span>`).join('<span class="seal-arrow" aria-hidden="true">&rarr;</span>');
+    document.getElementById('seal-current')!.textContent = levelName(st.current);
+    document.getElementById('seal-current-label')!.textContent = st.current ? 'Seal level you qualify for now' : 'No Seal level yet';
+
+    const postNow = SEAL_ITEMS.filter((i) => answers[i.id] === 'ready');
+    const buildFirst = SEAL_ITEMS.filter((i) => answers[i.id] === 'no');
+    let summary: string;
+    if (st.current === 'platinum') summary = 'Every Platinum requirement is on your profile. Keep the Seal by updating your profile every year, and add a new metric value each year.';
+    else if (readyIdx > curIdx) summary = `You could reach ${levelName(st.ready)} as soon as you post what you already have: ${postNow.length} item${postNow.length === 1 ? '' : 's'} marked ready.` + (st.ready !== 'platinum' ? ` After that, ${levelName(ORDER[readyIdx + 1] as any)} needs the work below.` : '');
+    else summary = `Your next level is ${levelName(st.next)}. Its requirements need some work first; the steps are below.`;
+    document.getElementById('seal-summary')!.textContent = summary;
+
+    // Average Health Index evidence for a requirement, if answered.
+    const evidenceFor = (i: typeof SEAL_ITEMS[number]) => {
+      const sc = (i.evidence || []).map((id) => itemPct(id)).filter((v): v is number => v !== null);
+      return sc.length ? Math.round(sc.reduce((a, b) => a + b, 0) / sc.length) : null;
+    };
+    const row = (i: typeof SEAL_ITEMS[number]) => {
+      const d = dimension(i.dimension);
+      const ev = evidenceFor(i);
+      const mismatch = answers[i.id] === 'no' && ev !== null && ev >= 75
+        ? `<br><span class="seal-mismatch">Your Health Index answers rate this as ${RUBRIC[Math.round(ev / 25)].toLowerCase()}, so it may already exist. Check before starting from scratch.</span>` : '';
+      return `<li><strong>${esc(i.field)}</strong> <span class="seal-tag">${esc(LEVELS.find((l) => l.key === i.level)!.name)}</span><br>${esc(i.step)}${mismatch}<br><span class="seal-dim">Health Index: <a href="/#${d.anchor}">${esc(d.label)}</a></span></li>`;
+    };
+    // Only what's needed, in level order; in-order earning means the lowest
+    // incomplete level is always the first priority.
+    const pending = (list: typeof SEAL_ITEMS) => list.sort((a, b) => ORDER.indexOf(a.level) - ORDER.indexOf(b.level));
+    const steps = document.getElementById('seal-steps')!;
+    steps.innerHTML =
+      (postNow.length ? `<h3 class="subhead">Post these now</h3><p>You marked these ready. Posting them is usually an afternoon's work.</p><ol class="seal-steps">${pending(postNow).map(row).join('')}</ol>` : '') +
+      (buildFirst.length ? `<h3 class="subhead">Build these first</h3><p>Each is a piece of real organizational work. Doing it strengthens the organization, not just the profile.</p><ol class="seal-steps">${pending(buildFirst).map(row).join('')}</ol>` : '');
+
+    // The dimension holding back the most unfinished requirements is where
+    // the Seal path and the Health Index meet.
+    const counts: Record<string, number> = {};
+    buildFirst.forEach((i) => { counts[i.dimension] = (counts[i.dimension] || 0) + 1; });
+    const max = Math.max(0, ...Object.values(counts));
+    const topDims = Object.keys(counts).filter((k) => counts[k] === max);
+    const topDim = topDims.length ? [topDims[0], max] as [string, number] : undefined;
+    const rec = document.getElementById('seal-recommendation')!;
+    if (topDim) {
+      const d = dimension(topDim[0] as any);
+      const t = FILL_TOOL[d.key];
+      rec.innerHTML = `<div class="pathway">
+        <h3 class="subhead">Where the Seal path meets your Health Index</h3>
+        <p>${topDims.length > 1
+          ? `What stands between you and Platinum is spread across ${(() => { const n = topDims.map((k) => `<strong>${esc(dimension(k as any).label)}</strong>`); return n.length > 2 ? n.slice(0, -1).join(', ') + ', and ' + n[n.length - 1] : n.join(' and '); })()}. Start with ${esc(d.label)}; strengthening these dimensions moves your Seal and your operations forward together.`
+          : `Most of what stands between you and Platinum sits in <strong>${esc(d.label)}</strong> (${topDim[1]} requirement${topDim[1] === 1 ? '' : 's'}). Strengthening that dimension moves your Seal and your operations forward together.`}</p>
+        <div class="hero-ctas"><a class="btn btn-secondary" href="${t.href}">Score it with the ${esc(t.name)}</a><a class="link-more" href="/health-index">See your Health Index &rarr;</a></div>
+        <h3 class="subhead">Recommended next step</h3>
+        <p>The InstitutionalOS Diagnostic verifies the evidence behind every dimension and builds your next Seal level into its 90-day plan.</p>
+        <div class="hero-ctas"><a class="btn btn-primary" href="/#contact" data-track="pathway_diagnostic_click">Discuss Your Diagnostic</a><a class="btn btn-secondary" href="/#pricing">See Pricing</a></div>
+        ${profileTeaserHtml()}
+      </div>`;
+    } else {
+      rec.innerHTML = `<div class="pathway"><h3 class="subhead">Keep it current</h3><p>Seals expire unless your profile is updated every year. Put a yearly reminder on the calendar for the month your Form 990 is filed, and add a new value for each impact metric.</p>${profileTeaserHtml()}</div>`;
+    }
+
+    // Emailed results: completion of each level, in order.
+    (window as any).__fiLastResults = {
+      tool: 'candid-seal',
+      scorePct: Math.round((Object.values(answers).filter((v) => v === 'posted').length / SEAL_ITEMS.length) * 100),
+      band: `Current Seal: ${levelName(st.current)}; next: ${st.next ? levelName(st.next) : 'keep Platinum current'}`,
+      pillarScores: LEVELS.map((l) => {
+        const its = SEAL_ITEMS.filter((i) => i.level === l.key);
+        return { label: `${l.name} requirements posted`, pct: Math.round((its.filter((i) => answers[i.id] === 'posted').length / its.length) * 100) };
+      }),
+    };
+  }
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const status = document.getElementById('seal-status');
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      if (status) status.textContent = 'Please choose an answer for every requirement.';
+      return;
+    }
+    if (status) status.textContent = '';
+    const answers = answersFromForm();
+    saveSeal(answers);
+    render(answers);
+    (window as any).fiTrack?.('seal_path_completed', { level: sealStatus(answers).current || 'none' });
+    form.hidden = true;
+    results.hidden = false;
+    results.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  document.getElementById('seal-retake')?.addEventListener('click', () => {
+    results.hidden = true;
+    form.hidden = false;
+    form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+</script>

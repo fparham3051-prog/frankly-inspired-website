@@ -10,6 +10,7 @@
 // until the visitor chooses to email it.
 
 import { ITEMS, DIMENSIONS, TOOLS, METRIC_DIMENSION, dimension, areasFor, type DimensionKey } from '../data/questionBank';
+import { sealStatus, levelName, type SealAnswer, type SealLevel } from '../data/candidSeal';
 
 const KEY = 'fi_health_profile';
 
@@ -20,6 +21,11 @@ export interface Profile {
   metrics: Record<string, { pct: number; at: string }>;
   tools: Record<string, { at: string; scorePct: number }>;
   org?: Org;
+  // Candid Seal path answers (tier 3): requirement id -> posted/ready/no
+  seal?: { answers: Record<string, SealAnswer>; at: string };
+  // One snapshot per day of the seven dimension scores and Seal level, so
+  // a re-check shows progress over time.
+  history?: { at: string; dims: Partial<Record<DimensionKey, number>>; seal?: SealLevel | null }[];
 }
 export interface DimScore {
   key: DimensionKey; num: number; label: string; anchor: string;
@@ -37,7 +43,50 @@ export function loadProfile(): Profile {
 }
 
 function save(p: Profile) {
+  snapshot(p);
   try { localStorage.setItem(KEY, JSON.stringify(p)); } catch { /* still works for this page */ }
+}
+
+// Keep one snapshot per calendar day (the latest that day), up to 24.
+function snapshot(p: Profile) {
+  const dims: Partial<Record<DimensionKey, number>> = {};
+  dimensionScores(p).forEach((d) => { if (d.pct !== null) dims[d.key] = d.pct; });
+  if (!Object.keys(dims).length && !p.seal) return;
+  const today = new Date().toISOString().slice(0, 10);
+  const h = (p.history ||= []);
+  const entry = { at: today, dims, seal: p.seal ? sealStatus(p.seal.answers).current : undefined };
+  if (h.length && h[h.length - 1].at === today) h[h.length - 1] = entry; else h.push(entry);
+  if (h.length > 24) h.splice(0, h.length - 24);
+}
+
+/** First snapshot (baseline) and the change in each dimension since then. */
+export function progress(p: Profile = loadProfile()) {
+  const h = p.history || [];
+  if (h.length < 2) return null;
+  const first = h[0], last = h[h.length - 1];
+  const change: Partial<Record<DimensionKey, number>> = {};
+  (Object.keys(last.dims) as DimensionKey[]).forEach((k) => {
+    if (typeof first.dims[k] === 'number') change[k] = (last.dims[k] as number) - (first.dims[k] as number);
+  });
+  return { since: first.at, change, sealFrom: first.seal ?? null, sealTo: last.seal ?? null };
+}
+
+/** Score of one question-bank item (0-100), or null if not answered. */
+export function itemPct(id: string, p: Profile = loadProfile()): number | null {
+  const a = p.items[id];
+  return a ? (a.v - 1) * 25 : null;
+}
+
+export function saveSeal(answers: Record<string, SealAnswer>) {
+  const p = loadProfile();
+  p.seal = { answers, at: new Date().toISOString() };
+  save(p);
+}
+
+export function sealSummary(p: Profile = loadProfile()) {
+  if (!p.seal) return null;
+  const st = sealStatus(p.seal.answers);
+  return { ...st, currentName: levelName(st.current), nextName: st.next ? levelName(st.next) : null, readyName: levelName(st.ready) };
 }
 
 export function clearProfile() {
@@ -125,11 +174,18 @@ export function profileTeaserHtml(): string {
     : `<li class="hi-mini-row"><span>${d.num}. ${d.label}</span><span class="hi-mini-track"><span style="width:${d.pct}%"></span></span><span class="hi-mini-val">${d.pct}%</span></li>`).join('');
   const missing = dims.filter((d) => d.pct === null);
   const next = missing.length ? FILL_TOOL[missing[0].key] : null;
+  const seal = sealSummary();
+  const sealLine = seal
+    ? (seal.next
+      ? `<p class="hi-seal-line"><strong>Candid Seal path:</strong> ${seal.current ? seal.currentName + ' now' : 'no Seal yet'}; next up is ${seal.nextName}. <a class="link-more" href="/candid-seal">See your steps &rarr;</a></p>`
+      : `<p class="hi-seal-line"><strong>Candid Seal path:</strong> Platinum. Keep it by updating your profile every year. <a class="link-more" href="/candid-seal">Review &rarr;</a></p>`)
+    : `<p class="hi-seal-line"><strong>Next, the Candid Seal:</strong> funders use Candid's free Seals of Transparency to screen applicants, and Seal holders received about 62% more in contributions in Candid's research. <a class="link-more" href="/candid-seal">Find your path to Platinum &rarr;</a></p>`;
   return `
     <div class="hi-teaser">
       <h3 class="subhead">Your Health Index so far: ${covered.length} of 7 dimensions</h3>
       <p>Every free tool adds to one profile on the same seven dimensions the paid diagnostic uses. It's saved only in this browser.</p>
       <ul class="hi-mini">${bars}</ul>
+      ${sealLine}
       <div class="hero-ctas">
         <a class="btn btn-secondary" href="/health-index" data-track="health_index_open">See Your Full Health Index</a>
         ${next ? `<a class="link-more" href="${next.href}">Next: fill ${dimension(missing[0].key).label} with the ${next.name} &rarr;</a>` : ''}

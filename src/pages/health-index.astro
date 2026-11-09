@@ -42,6 +42,7 @@ import { DIMENSIONS } from '../data/questionBank';
             <span class="results-score-band" id="hi-band"></span>
           </div>
           <p class="results-band-desc" id="hi-coverage"></p>
+          <p class="hi-progress" id="hi-progress" hidden></p>
 
           <h2 class="subhead">By dimension</h2>
           <div class="hi-dims" id="hi-dims">
@@ -57,7 +58,18 @@ import { DIMENSIONS } from '../data/questionBank';
             ))}
           </div>
 
+          <div class="hi-seal" id="hi-seal"></div>
+
           <div class="results-recommendation" id="hi-recommendation"></div>
+
+          <div class="hi-recheck">
+            <h2 class="subhead">Re-check in 90 days</h2>
+            <p>Your answers are saved in this browser. Retake the tools in 90 days and this page will show what moved since today.</p>
+            <div class="hero-ctas">
+              <a class="btn btn-secondary" id="hi-gcal" href="#" target="_blank" rel="noopener" data-track="recheck_reminder">Add to Google Calendar</a>
+              <button type="button" class="btn btn-secondary" id="hi-ics" data-track="recheck_reminder">Download Calendar Reminder (.ics)</button>
+            </div>
+          </div>
 
           <div class="results-disclaimer">
             <p>An indicative, self-reported reading, not a verified score. Verified Health Index scores come from the InstitutionalOS Diagnostic, which checks the evidence behind each answer. <a href="/methodology">How scoring works</a>.</p>
@@ -84,7 +96,8 @@ import { DIMENSIONS } from '../data/questionBank';
 </BaseLayout>
 
 <script>
-  import { dimensionScores, loadProfile, clearProfile, FILL_TOOL } from '../scripts/healthEngine';
+  import { dimensionScores, loadProfile, clearProfile, FILL_TOOL, progress, sealSummary } from '../scripts/healthEngine';
+  import { LEVELS } from '../data/candidSeal';
   import { renderPathway } from '../scripts/pathway';
   import { mountOrgLookup } from '../scripts/orgLookup';
   import { TOOLS } from '../data/questionBank';
@@ -135,6 +148,57 @@ import { DIMENSIONS } from '../data/questionBank';
         meta.textContent = `From ${d.count} answer${d.count === 1 ? '' : 's'}: ${d.tools.join(', ')}`;
       }
     });
+
+    // Progress since the first saved check.
+    const pr = progress(profile);
+    const prEl = document.getElementById('hi-progress') as HTMLElement;
+    const fmtDate = (d: string) => new Date(d + 'T12:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+    if (pr) {
+      const moves = dims.filter((d) => typeof pr.change[d.key] === 'number' && pr.change[d.key] !== 0)
+        .map((d) => `${d.label} ${(pr.change[d.key] as number) > 0 ? '+' : ''}${pr.change[d.key]}`);
+      prEl.hidden = false;
+      prEl.innerHTML = `<strong>Since your first check on ${fmtDate(pr.since)}:</strong> ` +
+        (moves.length ? esc(moves.join(' · ')) + ' points.' : 'no change yet.') +
+        (pr.sealTo && pr.sealTo !== pr.sealFrom ? ` Candid Seal: ${esc(pr.sealFrom ? LEVELS.find((l) => l.key === pr.sealFrom)!.name : 'none')} to ${esc(LEVELS.find((l) => l.key === pr.sealTo)!.name)}.` : '');
+      dims.forEach((d) => {
+        const c = pr.change[d.key];
+        const meta = document.querySelector<HTMLElement>(`.hi-dim[data-dim="${d.key}"] [data-dim-meta]`);
+        if (meta && typeof c === 'number' && c !== 0) meta.textContent += ` · ${c > 0 ? '+' : ''}${c} since ${fmtDate(pr.since)}`;
+      });
+    } else prEl.hidden = true;
+
+    // Candid Seal path.
+    const seal = sealSummary(profile);
+    const sealEl = document.getElementById('hi-seal')!;
+    const ladder = (cur: string | null) => {
+      const ci = cur ? LEVELS.findIndex((l) => l.key === cur) : -1;
+      return `<div class="seal-ladder">${LEVELS.map((l, i) => `<span class="seal-step${i <= ci ? ' is-done' : ''}">${l.name}</span>`).join('<span class="seal-arrow" aria-hidden="true">&rarr;</span>')}</div>`;
+    };
+    sealEl.innerHTML = seal
+      ? `<h2 class="subhead">Your Candid Seal path</h2>${ladder(seal.current)}
+         <p>${seal.current ? `You qualify for <strong>${esc(seal.currentName)}</strong>.` : 'You don\'t qualify for a Seal yet.'} ${seal.next ? `Next up: <strong>${esc(seal.nextName)}</strong>.` : 'Keep Platinum by updating your profile every year.'} <a class="link-more" href="/candid-seal">See your steps &rarr;</a></p>`
+      : `<h2 class="subhead">Your Candid Seal path</h2>${ladder(null)}
+         <p>Candid's free Seals of Transparency (Bronze to Platinum) are what funders check, and in Candid's research Seal holders received about 62% more in contributions. The same work raises your Health Index. <a class="link-more" href="/candid-seal">Find your path to Platinum &rarr;</a></p>`;
+
+    // 90-day re-check reminder.
+    const due = new Date(Date.now() + 90 * 864e5);
+    const ymd = (d: Date) => d.toISOString().slice(0, 10).replace(/-/g, '');
+    const end = new Date(due.getTime() + 864e5);
+    const title = 'Re-check our Health Index and Candid Seal';
+    const details = 'Retake the free tools at https://franklyinspired.associates/tools, review https://franklyinspired.associates/health-index, and update your Candid profile.';
+    (document.getElementById('hi-gcal') as HTMLAnchorElement).href =
+      `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${ymd(due)}/${ymd(end)}&details=${encodeURIComponent(details)}`;
+    const ics = document.getElementById('hi-ics')!;
+    ics.onclick = () => {
+      const body = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Frankly Inspired//Health Index//EN', 'BEGIN:VEVENT',
+        `UID:${Date.now()}@franklyinspired.associates`, `DTSTAMP:${new Date().toISOString().replace(/[-:]/g, '').slice(0, 15)}Z`,
+        `DTSTART;VALUE=DATE:${ymd(due)}`, `DTEND;VALUE=DATE:${ymd(end)}`, `SUMMARY:${title}`, `DESCRIPTION:${details}`,
+        'END:VEVENT', 'END:VCALENDAR'].join('\r\n');
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(new Blob([body], { type: 'text/calendar' }));
+      a.download = 'health-index-recheck.ics';
+      a.click();
+    };
 
     renderPathway(document.getElementById('hi-recommendation'), {
       tool: 'InstitutionalOS Health Index',

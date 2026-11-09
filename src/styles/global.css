@@ -2122,3 +2122,33 @@ a.card:hover .card-cta { text-decoration: underline; }
   .results-bar-fill { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .hi-dim { break-inside: avoid; }
 }
+
+/* ---------- Candid Seal path (tier 3) ---------- */
+.seal-item { border: 1px solid var(--border); background: var(--white); border-radius: var(--radius-sm); padding: 1rem 1.1rem; margin: 0 0 0.9rem; }
+.seal-item legend { font-weight: 600; color: var(--charcoal); padding: 0; float: left; width: 100%; margin-bottom: 0.35rem; }
+.seal-item legend + * { clear: both; }
+.seal-work { font-size: 0.88rem; color: #5b6470; margin: 0 0 0.5rem; }
+.seal-evidence { font-size: 0.85rem; color: var(--gold-accessible); margin: 0 0 0.5rem; font-weight: 500; }
+.seal-choices { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
+.seal-choices label { display: flex; align-items: center; gap: 0.45rem; border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.55rem 0.7rem; cursor: pointer; font-size: 0.9rem; }
+.seal-choices label:has(input:checked) { border-color: var(--gold); background: #fbf6ec; box-shadow: 0 0 0 3px var(--gold-soft); }
+@media (max-width: 560px) { .seal-choices { grid-template-columns: 1fr; } }
+.seal-ladder { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0.4rem; margin: 0 0 1.25rem; }
+.seal-step { border: 1px solid var(--border); background: var(--white); color: #6b7480; border-radius: 999px; padding: 0.35rem 0.9rem; font-size: 0.85rem; font-weight: 600; }
+.seal-step.is-ready { border-color: var(--gold); color: var(--gold-accessible); border-style: dashed; }
+.seal-step.is-done { background: var(--navy); border-color: var(--navy); color: var(--white); }
+.seal-arrow { color: #9aa6b4; }
+.seal-steps { padding-left: 1.2rem; display: grid; gap: 0.9rem; margin-bottom: 1.5rem; }
+.seal-steps li { line-height: 1.55; }
+.seal-tag { display: inline-block; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--gold-accessible); margin-left: 0.3rem; }
+.seal-dim { font-size: 0.85rem; color: #5b6470; }
+.hi-seal { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 1.1rem 1.2rem; margin-bottom: 2rem; }
+.hi-seal .subhead { margin-top: 0; }
+.hi-seal .seal-ladder { justify-content: flex-start; }
+.hi-progress { text-align: center; font-size: 0.92rem; color: #2f5a3f; background: #eef6f0; border-radius: var(--radius-sm); padding: 0.6rem 0.9rem; }
+.hi-recheck { margin: 0 0 2rem; }
+.hi-seal-line { font-size: 0.9rem; }
+.seal-callout { margin-top: 2rem; background: var(--white); border: 1px solid var(--border); border-left: 4px solid var(--gold); border-radius: var(--radius-sm); padding: 1.25rem 1.4rem; text-align: left; }
+.seal-callout h3 { margin: 0 0 0.5rem; color: var(--navy); font-size: 1.15rem; }
+.seal-callout p { margin: 0 0 0.6rem; }
+.seal-mismatch { font-size: 0.86rem; color: var(--gold-accessible); font-weight: 500; }

@@ -22,7 +22,7 @@ const { id } = Astro.props;
 </form>
 
 <script>
-  import { loadProfile } from '../scripts/healthEngine';
+  import { loadProfile, sealSummary } from '../scripts/healthEngine';
   import { TOOLS } from '../data/questionBank';
   const API_BASE = 'https://frankly-inspired-api.onrender.com';
   document.querySelectorAll<HTMLFormElement>('form[data-email-results]').forEach((form) => {
@@ -54,6 +54,7 @@ const { id } = Astro.props;
           narrative: results.narrative || null,
           org: profile.org || undefined,
           toolsTaken: Object.keys(profile.tools).map((k) => TOOLS.find((t) => t.key === k)?.name || k),
+          seal: (() => { const s = sealSummary(profile); return s ? { current: s.current, next: s.next } : undefined; })(),
         }),
       })
         .then((res) => res.json().then((data) => ({ ok: res.ok, data })))

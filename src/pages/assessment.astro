@@ -120,7 +120,7 @@ import QuestionSection from '../components/QuestionSection.astro';
 
 <script>
   import { renderPathway } from '../scripts/pathway';
-  import { recordAnswers, loadProfile } from '../scripts/healthEngine';
+  import { recordAnswers, loadProfile, sealSummary } from '../scripts/healthEngine';
   import { TOOLS } from '../data/questionBank';
   // Scoring runs entirely in the browser (no data leaves the page) except
   // two backend calls: an anonymized score log + AI narrative request on
@@ -481,6 +481,7 @@ import QuestionSection from '../components/QuestionSection.astro';
         narrative: lastResults.narrative || null,
         org: loadProfile().org || undefined,
         toolsTaken: Object.keys(loadProfile().tools).map((k) => TOOLS.find((t) => t.key === k)?.name || k),
+        seal: (() => { const s = sealSummary(); return s ? { current: s.current, next: s.next } : undefined; })(),
       };
 
       const submitBtn = emailForm.querySelector<HTMLButtonElement>('button[type="submit"]');

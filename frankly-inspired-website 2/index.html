@@ -1,400 +1,92 @@
-<!DOCTYPE html>
-<html lang="en" class="no-js">
-<head>
-  <meta charset="UTF-8">
-  <!-- Flips no-js -> js immediately so CSS can gate the scroll-reveal
-       effect behind confirmed JS support (see .reveal in styles.css).
-       If JS is off, this never runs and content just stays visible. -->
-  <script>document.documentElement.classList.replace('no-js', 'js');</script>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Franklin D. Parham | Nonprofit Strategy &amp; Sustainability</title>
-  <meta name="description" content="Franklin D. Parham helps nonprofit leaders strengthen sustainability through strategy, diversified revenue, organizational development, operations, and cross-sector partnerships.">
-
-  <!-- ================================================================
-       EDITING NOTE FOR BRIAN: This file is the lean landing page/funnel —
-       Hero, Positioning, Consulting/Pricing, and Contact only. Bio,
-       Experience & Impact, Speaking, and Resume content now live on
-       about.html, reachable from the "More" dropdown in the nav below.
-       Each major section has an HTML comment banner so you can jump to
-       it quickly. Styling lives in css/styles.css. Interactivity (mobile
-       nav, dropdown, smooth scroll, form) lives in js/main.js.
-       See README.md for a full guide.
-       ================================================================ -->
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
-
-  <a class="skip-link" href="#main">Skip to main content</a>
-
-  <!-- ============ HEADER / NAVIGATION ============ -->
-  <header class="site-header">
-    <div class="nav-wrap">
-      <a href="#top" class="brand"><img src="assets/images/logo-mark.svg" alt="" class="brand-mark" width="28" height="40">Frankly Inspired</a>
-
-      <div class="nav-actions">
-        <!-- Always-visible on mobile, independent of the hamburger menu,
-             so the primary CTA is never hidden behind a tap. -->
-        <a class="btn btn-primary btn-nav-mobile" href="https://calendly.com/fparham/30min" target="_blank" rel="noopener">Schedule</a>
-
-        <nav class="site-nav" aria-label="Primary">
-          <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu">
-            <span class="sr-only">Menu</span>
-            <span class="nav-toggle-bar"></span>
-          </button>
-          <ul id="nav-menu" class="nav-menu">
-            <li><a href="#consulting">Consulting</a></li>
-            <li class="nav-item-dropdown">
-              <button type="button" class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">Assessments <span class="nav-caret" aria-hidden="true">&#9662;</span></button>
-              <ul class="nav-dropdown-menu">
-                <li><a href="assessment.html">Free Sustainability Self-Assessment</a></li>
-                <li><a href="revenue-growth-score.html">Revenue &amp; Growth Score</a></li>
-                <li><a href="leadership-health.html">Leadership &amp; Operations Score</a></li>
-                <li><a href="sustainability-score.html">Sustainability Strategy Score</a></li>
-              </ul>
-            </li>
-            <li class="nav-item-dropdown">
-              <button type="button" class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">About <span class="nav-caret" aria-hidden="true">&#9662;</span></button>
-              <ul class="nav-dropdown-menu">
-                <li><a href="about.html#about">About Franklin</a></li>
-                <li><a href="about.html#experience">Experience &amp; Impact</a></li>
-                <li><a href="about.html#speaking">Speaking</a></li>
-                <li><a href="about.html#resume">Resume</a></li>
-              </ul>
-            </li>
-            <li><a href="#contact">Contact</a></li>
-            <li><a class="btn btn-primary btn-nav" href="https://calendly.com/fparham/30min" target="_blank" rel="noopener">Schedule a Conversation</a></li>
-          </ul>
-        </nav>
-      </div>
-    </div>
-  </header>
-
-  <main id="main">
-
-    <!-- ============ HERO ============ -->
-    <section id="top" class="hero">
-      <div class="hero-inner">
-        <div class="hero-copy">
-          <p class="eyebrow reveal">Franklin D. Parham</p>
-          <h1 class="reveal">Building stronger nonprofits for long-term impact.</h1>
-          <p class="hero-sub reveal">Executive strategy and sustainability consulting for leaders of mission-driven institutions seeking stronger revenue models, organizational systems, leadership capacity, and cross-sector partnerships.</p>
-          <div class="hero-ctas reveal">
-            <a class="btn btn-primary" href="https://calendly.com/fparham/30min" target="_blank" rel="noopener">Schedule a Strategy Conversation</a>
-            <a class="btn btn-secondary" href="#pricing">See Pricing</a>
-          </div>
-        </div>
-        <div class="hero-portrait reveal">
-          <img src="assets/images/franklin-parham-headshot-polished.jpg" alt="Franklin D. Parham, Founder and Principal of Frankly Inspired and Associates, LLC" width="800" height="800">
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ POSITIONING / INTRO ============ -->
-    <section class="section positioning">
-      <div class="container narrow">
-        <p class="lede reveal">Franklin D. Parham is an institution builder and nonprofit executive with more than 20 years of leadership experience. Through Frankly Inspired and Associates, LLC, he helps mission-driven institutions translate purpose into sustainable strategy, stronger systems, and durable community impact.</p>
-        <a class="link-more reveal" href="about.html">More about Franklin's background</a>
-      </div>
-    </section>
-
-    <!-- ============ SERVICE PILLARS (homepage preview) ============ -->
-    <!-- Deliberately a scannable teaser, not a second copy of the Consulting
-         section's descriptions — full detail on each pillar lives at
-         #consulting so this doesn't repeat that content twice on one page. -->
-    <section class="section services-preview alt-bg">
-      <div class="container center">
-        <h2 class="section-title reveal">How Franklin Helps</h2>
-        <div class="pillar-tags reveal">
-          <a class="pillar-tag" href="sustainability-score.html">Sustainability Strategy</a>
-          <a class="pillar-tag" href="revenue-growth-score.html">Revenue &amp; Growth</a>
-          <a class="pillar-tag" href="leadership-health.html">Leadership &amp; Operations</a>
-        </div>
-        <p class="section-note reveal">Each one links to its own free diagnostic. <a class="link-more" href="#consulting">See how the engagement itself works</a></p>
-      </div>
-    </section>
-
-    <!-- ============ CONSULTING AND ADVISORY ============ -->
-    <section id="consulting" class="section consulting alt-bg">
-      <div class="container">
-        <h2 class="section-title reveal">Strategy for organizations that want to last.</h2>
-        <p class="section-note reveal">Frankly Inspired and Associates, LLC works with mission-driven institutions that need more than a short-term fix. Engagements are designed around the organization's context, capacity, leadership needs, and sustainability goals.</p>
-
-        <!-- Three headline offerings, not five-plus-AI-plus-Speaking. The
-             underlying five-dimension measurement framework (Sustainability
-             Strategy / Revenue Diversification / Leadership & Org Dev /
-             Operations & Infrastructure / Partnership & Ecosystem) still
-             lives, unchanged, in the Self-Assessment and the Engagement
-             Tracker — this only simplifies what a first-time visitor sees.
-             All five pillar-* anchor ids are preserved below (two of them
-             as invisible anchors inside a merged card) so the assessment
-             results page's per-pillar links still resolve correctly. -->
-        <h3 class="subhead reveal">Service Pillars</h3>
-        <!-- Each card is a link straight into its matching free diagnostic
-             tool (per Franklin's request to connect each Service Pillar to
-             an assessment). Revenue & Growth links to the Revenue & Growth
-             Score (renamed from "Financial Health Score" to match this
-             pillar's language) — its reserve/revenue-concentration/
-             liquidity metrics are the numbers-based read on this pillar. -->
-        <div class="card-grid">
-          <a class="card reveal" id="pillar-sustainability" href="sustainability-score.html">
-            <h4>Sustainability Strategy</h4>
-            <p>Organizational assessment, strategic priorities, risk identification, sustainability roadmaps, and implementation planning.</p>
-            <span class="card-cta">Take the Sustainability Strategy Score &rarr;</span>
-          </a>
-          <a class="card reveal" id="pillar-revenue" href="revenue-growth-score.html">
-            <span id="pillar-partnership" class="anchor-offset"></span>
-            <h4>Revenue &amp; Growth</h4>
-            <p>Individual donor stewardship and retention, fundraising strategy, grant and public-funding strategy, revenue-pipeline design, and the cross-sector partnerships (education, workforce, government, corporate, philanthropic, and community) that sustain them.</p>
-            <span class="card-cta">Take the Revenue &amp; Growth Score &rarr;</span>
-          </a>
-          <a class="card reveal" id="pillar-leadership" href="leadership-health.html">
-            <span id="pillar-operations" class="anchor-offset"></span>
-            <h4>Leadership &amp; Operations</h4>
-            <p>Executive advising and change leadership, paired with the workflows, KPIs, CRM/Salesforce practices, and AI readiness guidance that keep an organization running well. 1:1 leadership coaching is available as its own engagement.</p>
-            <span class="card-cta">Take the Leadership &amp; Operations Score &rarr;</span>
-          </a>
-        </div>
-
-        <h3 class="subhead reveal">Engagement Model</h3>
-        <ol class="process-list reveal">
-          <li>Discovery Conversation</li>
-          <li>Organizational Assessment</li>
-          <li>Recommended Scope</li>
-          <li>Engagement</li>
-          <li>Review and Next Steps</li>
-        </ol>
-
-        <h3 id="pricing" class="subhead reveal">Engagement Options</h3>
-        <div class="pricing-grid">
-          <div class="pricing-card reveal" id="pricing-advisory">
-            <span class="recommended-badge" hidden>Recommended for you</span>
-            <h4>Strategic Advisory Retainer</h4>
-            <p class="price">$2,500<span>/month</span></p>
-            <p class="plan-fit">Best fit if you need experienced strategic guidance, not full hands-on implementation.</p>
-            <ul class="bullet-list">
-              <li>Two executive strategy sessions</li>
-              <li>Sustainability and revenue guidance</li>
-              <li>Stakeholder strategy</li>
-              <li>Document review</li>
-              <li>Limited email support</li>
-              <li>Three-month recommended minimum</li>
-            </ul>
-            <a class="btn btn-secondary plan-cta" href="#contact" data-plan="Nonprofit Sustainability Strategy,Fundraising and Revenue Diversification">Start with This Retainer</a>
-          </div>
-          <div class="pricing-card featured reveal" id="pricing-implementation">
-            <span class="recommended-badge" hidden>Recommended for you</span>
-            <h4>Strategic Implementation Retainer</h4>
-            <p class="price">$3,500<span>/month</span></p>
-            <p class="plan-fit">Best fit if you're ready to implement across sustainability, revenue, and operations at the same time.</p>
-            <ul class="bullet-list">
-              <li>Weekly engagement</li>
-              <li>Sustainability roadmap implementation</li>
-              <li>Revenue pipeline strategy and donor stewardship systems</li>
-              <li>Operational systems / KPIs</li>
-              <li>Leadership alignment</li>
-              <li>Expanded project support</li>
-            </ul>
-            <a class="btn btn-primary plan-cta" href="#contact" data-plan="Nonprofit Sustainability Strategy,Fundraising and Revenue Diversification,Organizational Development and Operations,Executive and Leadership Advisory">Start with This Retainer</a>
-          </div>
-          <div class="pricing-card reveal">
-            <h4>Project-Based Engagements</h4>
-            <p class="price">Custom<span>scope &amp; fee</span></p>
-            <p class="plan-fit">Best fit for a single, clearly defined project rather than an ongoing retainer.</p>
-            <ul class="bullet-list">
-              <li>For defined projects such as sustainability assessments, revenue diversification plans, operating systems, partnership strategies, and leadership planning.</li>
-            </ul>
-            <a class="btn btn-secondary plan-cta" href="#contact" data-plan="Other">Discuss a Project</a>
-          </div>
-          <div class="pricing-card reveal">
-            <h4>1:1 Executive Coaching</h4>
-            <p class="price">$350<span>/session</span></p>
-            <p class="plan-fit">Best fit as a standalone engagement or alongside either retainer, for leaders who want dedicated, confidential support.</p>
-            <ul class="bullet-list">
-              <li>60-minute 1:1 sessions</li>
-              <li>Executive decision-making and change leadership</li>
-              <li>Confidential space outside board and staff dynamics</li>
-              <li>Scheduled as needed, no monthly minimum</li>
-            </ul>
-            <a class="btn btn-secondary plan-cta" href="#contact" data-plan="1:1 Leadership Coaching">Book a Coaching Session</a>
-          </div>
-        </div>
-        <p class="pricing-reassurance reveal">Not sure which option fits? <a href="#contact">Start with a conversation</a>, and I'll help you figure out the right scope.</p>
-
-        <div class="assessment-callout reveal">
-          <div class="assessment-callout-text">
-            <h4>Not ready for a conversation yet?</h4>
-            <p>Take the free, 5-minute Nonprofit Sustainability Self-Assessment first. It scores your organization across five underlying dimensions and points to where to focus.</p>
-          </div>
-          <a class="btn btn-secondary" href="assessment.html">Take the Free Assessment</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ CONTACT ============ -->
-    <!-- The standalone "Closing CTA" section that used to sit here was
-         folded into this section's intro — it and the schedule-cta block
-         directly below were both just "schedule a conversation" prompts
-         back to back, so this is now the single consolidated moment for
-         that ask instead of saying it twice in a row. -->
-    <section id="contact" class="section contact alt-bg">
-      <div class="container narrow">
-        <h2 class="section-title reveal">Start a Conversation</h2>
-        <p class="lede-sm reveal">Strong missions need sustainable institutions. If your organization is navigating growth, revenue pressure, operational complexity, leadership transition, or the need for a clearer sustainability strategy, start with a conversation.</p>
-        <p class="reveal">Tell me a little about your organization, where you are today, and what you're working to strengthen. I'll review your inquiry and follow up regarding whether Frankly Inspired may be a good fit.</p>
-
-        <p class="direct-contact reveal">
-          <a href="mailto:franklin@franklyinspired.associates">franklin@franklyinspired.associates</a>
-          <span aria-hidden="true">·</span>
-          <a href="tel:+12403918283">240-391-8283</a>
-        </p>
-
-        <div class="schedule-cta schedule-cta-primary reveal">
-          <p class="schedule-cta-label">Already know you'd like to talk?</p>
-          <a class="btn btn-primary" href="https://calendly.com/fparham/30min" target="_blank" rel="noopener">Schedule a 30 Minute Conversation</a>
-        </div>
-
-        <p class="form-divider">Prefer to write it out first? Share a few details below and I'll follow up.</p>
-
-        <!-- This form is live: js/main.js posts to the frankly-inspired-backend
+<!DOCTYPE html><html lang="en" class="no-js"><head><meta charset="UTF-8"><!-- Flips no-js -> js immediately so CSS can gate the scroll-reveal
+         effect behind confirmed JS support (see .reveal in global.css).
+         If JS is off, this never runs and content just stays visible. --><script>document.documentElement.classList.replace('no-js', 'js');</script><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Franklin D. Parham | Nonprofit Strategy &amp; Sustainability</title><meta name="description" content="Franklin D. Parham helps nonprofit leaders strengthen sustainability through strategy, diversified revenue, organizational development, operations, and cross-sector partnerships."><link rel="canonical" href="https://franklyinspired.associates/"><meta property="og:type" content="website"><meta property="og:site_name" content="Frankly Inspired and Associates"><meta property="og:title" content="Franklin D. Parham | Nonprofit Strategy &amp; Sustainability"><meta property="og:description" content="Franklin D. Parham helps nonprofit leaders strengthen sustainability through strategy, diversified revenue, organizational development, operations, and cross-sector partnerships."><meta property="og:url" content="https://franklyinspired.associates/"><meta property="og:image" content="https://franklyinspired.associates/assets/images/franklin-parham-headshot.jpg"><meta name="twitter:card" content="summary"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"ProfessionalService","@id":"https://franklyinspired.associates/#business","name":"Frankly Inspired and Associates, LLC","url":"https://franklyinspired.associates","email":"franklin@franklyinspired.associates","telephone":"+12403918283","image":"https://franklyinspired.associates/assets/images/franklin-parham-headshot.jpg","description":"Nonprofit strategy and sustainability consulting: evidence-based diagnostics, revenue and fundraising strategy, leadership and operations advising.","address":{"@type":"PostalAddress","addressLocality":"Lanham","addressRegion":"MD","addressCountry":"US"},"areaServed":["Washington DC metropolitan area","Maryland","Virginia","United States"],"founder":{"@id":"https://franklyinspired.associates/#franklin"},"priceRange":"$350 to $3,500"},{"@type":"Person","@id":"https://franklyinspired.associates/#franklin","name":"Franklin D. Parham","jobTitle":"Founder and Principal","worksFor":{"@id":"https://franklyinspired.associates/#business"},"url":"https://franklyinspired.associates/about","sameAs":["https://www.linkedin.com/in/franklin-parham-b7a545382"],"alumniOf":"Alabama State University"}]}</script><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="/_astro/Header.D7X_Om6C.css"></head><body><a class="skip-link" href="#main">Skip to main content</a><header class="site-header"><div class="nav-wrap"><a href="/#top" class="brand"><img src="/assets/images/logo-mark.svg" alt="" class="brand-mark" width="28" height="40">Frankly Inspired</a><div class="nav-actions"><a class="btn btn-primary btn-nav-mobile" href="https://calendly.com/fparham/30min" target="_blank" rel="noopener">Schedule</a><nav class="site-nav" aria-label="Primary"><button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu"><span class="sr-only">Menu</span><span class="nav-toggle-bar"></span></button><ul id="nav-menu" class="nav-menu"><li><a href="/#consulting">Consulting</a></li><li><a href="/institutionalos">InstitutionalOS</a></li><li class="nav-item-dropdown"><button type="button" class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">Free Tools <span class="nav-caret" aria-hidden="true">&#9662;</span></button><ul class="nav-dropdown-menu"><li><a href="/tools"><strong>All Free Tools: Start Here</strong></a></li><li><a href="/assessment">Nonprofit Sustainability Self-Assessment</a></li><li><a href="/revenue-growth-score">Revenue &amp; Growth Score</a></li><li><a href="/institutional-advancement-score">Institutional Advancement Score</a></li><li><a href="/leadership-health">Leadership &amp; Operations Score</a></li><li><a href="/sustainability-score">Sustainability Strategy Score</a></li><li><a href="/candid-seal">Candid Seal Path</a></li><li><a href="/health-index"><strong>Your Health Index</strong></a></li></ul></li><li class="nav-item-dropdown"><button type="button" class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">About <span class="nav-caret" aria-hidden="true">&#9662;</span></button><ul class="nav-dropdown-menu"><li><a href="/about#about">About Franklin</a></li><li><a href="/about#experience">Experience &amp; Impact</a></li><li><a href="/about#speaking">Speaking</a></li><li><a href="/about#resume">Resume</a></li></ul></li><li><a href="/#contact">Contact</a></li><li><a class="btn btn-primary btn-nav" href="https://calendly.com/fparham/30min" target="_blank" rel="noopener">Schedule a Conversation</a></li></ul></nav></div></div></header><script type="module">var e=document.querySelector(`.nav-toggle`),t=document.getElementById(`nav-menu`);e&&t&&(e.addEventListener(`click`,()=>{let n=t.classList.toggle(`is-open`);e.setAttribute(`aria-expanded`,n?`true`:`false`)}),t.querySelectorAll(`a`).forEach(n=>{n.addEventListener(`click`,()=>{t.classList.remove(`is-open`),e.setAttribute(`aria-expanded`,`false`)})}));var n=document.querySelectorAll(`main section[id]`),r=document.querySelectorAll(`.nav-menu a[href*="#"]`);if(n.length&&r.length&&`IntersectionObserver`in window){let e=new IntersectionObserver(e=>{e.forEach(e=>{if(e.isIntersecting){let t=e.target.getAttribute(`id`);r.forEach(e=>{let n=e.getAttribute(`href`)?.split(`#`)[1];e.classList.toggle(`is-active`,n===t)})}})},{rootMargin:`-45% 0px -50% 0px`});n.forEach(t=>e.observe(t))}var i=document.querySelectorAll(`.nav-item-dropdown`);i.forEach(e=>{let t=e.querySelector(`.nav-dropdown-toggle`),n=e.querySelector(`.nav-dropdown-menu`);if(!t||!n)return;let r=()=>{e.classList.remove(`is-open`),t.setAttribute(`aria-expanded`,`false`)},a=()=>{i.forEach(t=>{t!==e&&(t.classList.remove(`is-open`),t.querySelector(`.nav-dropdown-toggle`)?.setAttribute(`aria-expanded`,`false`))}),e.classList.add(`is-open`),t.setAttribute(`aria-expanded`,`true`)};t.addEventListener(`click`,t=>{t.stopPropagation(),e.classList.contains(`is-open`)?r():a()}),document.addEventListener(`click`,t=>{e.contains(t.target)||r()}),document.addEventListener(`keydown`,e=>{e.key===`Escape`&&r()})});</script><main id="main"><!-- ============ HERO ============ --><section id="top" class="hero"><div class="hero-inner"><div class="hero-copy"><p class="eyebrow reveal" style="margin-bottom:0.35rem;">Franklin D. Parham</p><p class="hero-role reveal">Founder and Principal, Frankly Inspired and Associates</p><h1 class="hero-h1-long reveal">Find the one thing holding your nonprofit back, and a 90-day plan to close the gap.</h1><p class="hero-sub reveal">Evidence-based strategy and sustainability consulting for nonprofit leaders. Every engagement scores your organization, names its single binding constraint, and ends with a plan concrete enough to act on Monday morning.</p><div class="hero-ctas reveal"><a class="btn btn-primary" href="https://calendly.com/fparham/30min" target="_blank" rel="noopener" data-track="schedule_click">Schedule a Strategy Conversation</a><a class="btn btn-secondary" href="https://grantpass-landing.onrender.com" target="_blank" rel="noopener" data-track="hero_scorecard_click">Get Your Free Health Index Score</a></div></div><div class="hero-portrait reveal"><img src="/assets/images/franklin-parham-headshot.jpg" alt="Franklin D. Parham, Founder and Principal of Frankly Inspired and Associates, LLC" width="800" height="800"></div></div><div class="hero-credentials reveal"><div class="hero-credential"><span class="hero-credential-num">20+</span><span>Years Leadership Experience</span></div><div class="hero-credential-divider" aria-hidden="true"></div><a class="hero-credential hero-credential-link" href="#dimensions"><span>7-Dimension Health Index</span></a><div class="hero-credential-divider" aria-hidden="true"></div><a class="hero-credential hero-credential-link" href="#pricing"><span>Diagnostic from $2,000</span></a></div></section><!-- ============ QUICK-NAV TILES ============ --><!-- Lets a visitor who won't read the whole page jump straight to the
+         path that matches their intent. Added after the Pinterest-inspired
+         design review flagged this as a flow gap: Free Assessment and
+         Contact were both more than a scroll away from the hero. --><section class="section quicknav-section"><div class="container"><nav class="quicknav" aria-label="Quick links"><a class="quicknav-tile" href="#consulting"><span class="qn-label">Consulting &amp; Pricing &rarr;</span><span class="qn-sub">Service pillars and engagement options</span></a><a class="quicknav-tile" href="/tools"><span class="qn-label">Free Health Index Score &rarr;</span><span class="qn-sub">All seven dimensions, no sign-up</span></a><a class="quicknav-tile" href="#contact"><span class="qn-label">Contact &rarr;</span><span class="qn-sub">Start a conversation</span></a></nav></div></section><!-- ============ POSITIONING / INTRO ============ --><section class="section positioning"><div class="container narrow"><p class="lede reveal">Franklin D. Parham is an institution builder and nonprofit executive with more than 20 years of leadership experience. Through Frankly Inspired and Associates, LLC, he helps mission-driven institutions translate purpose into sustainable strategy, stronger systems, and durable community impact.</p><a class="link-more reveal" href="/about">More about Franklin's background</a></div></section><!-- ============ AFFILIATION STRIP ============ --><!-- Early credibility signal, borrowed from the design review, same
+         board/affiliation names already listed on /about under "Board
+         Leadership & Affiliations", just surfaced sooner. --><section class="section affiliation-strip alt-bg"><div class="container"><p class="affiliation-label reveal">Board Leadership &amp; Affiliations</p><div class="affiliation-list reveal"><span>Ora Lee Smith Cancer Research Foundation</span><span>Turner Foundation for Community Advocacy</span><span>Howard Rye Institute</span><span>Association of Fundraising Professionals</span></div></div></section><!-- ============ TRACK RECORD ============ --><!-- Same verified figures as /about's "Impact by the Numbers", surfaced
+         on the homepage as early proof. Keep the two in sync. --><section id="track-record" class="section track-record"><div class="container"><h2 class="section-title reveal">Track Record</h2><p class="section-note reveal">From Franklin's most recent role as Regional Director, Mid-Atlantic, for The Hidden Genius Project.</p><div class="stat-grid"><div class="stat reveal"><span class="stat-num">$1.3M</span><span class="stat-label">in combined regional operating budgets managed</span></div><div class="stat reveal"><span class="stat-num">20+</span><span class="stat-label">cross-sector partnerships built and stewarded</span></div><div class="stat reveal"><span class="stat-num">400+</span><span class="stat-label">youth and families served across Baltimore and Philadelphia</span></div><div class="stat reveal"><span class="stat-num">$500K+</span><span class="stat-label">in scholarships and financial aid secured, with 100% college enrollment for the senior cohort</span></div></div><p class="reveal" style="margin-top:1.25rem;"><a class="link-more" href="/about#experience">Full experience and impact &rarr;</a></p></div></section><!-- ============ WHO I WORK WITH ============ --><!-- Maps to the three InstitutionalOS lifecycle stages so a visitor can
+         self-identify before reaching pricing. --><section id="who" class="section who alt-bg"><div class="container"><h2 class="section-title reveal">Who I Work With</h2><p class="section-note reveal">Executive directors, founders, board chairs, and development leaders of mission-driven organizations, at one of three stages: Build, Fund, or Sustain.</p><div class="card-grid"><div class="card card-static reveal"><span class="offering-badge">Build</span><h4>New and early-stage organizations</h4><p>You're forming or recently launched and want governance, strategy, and the basics funders and boards expect in place from day one.</p></div><div class="card card-static reveal"><span class="offering-badge">Fund</span><h4>Organizations pursuing grants</h4><p>You're preparing for a specific funder and need your case for support, evidence, and financial picture strong enough for a yes.</p></div><div class="card card-static reveal"><span class="offering-badge">Sustain</span><h4>Established organizations</h4><p>You're operating, but too dependent on one grant, funder, or person, or facing a leadership transition, and want to last.</p></div></div></div></section><!-- ============ ASSESSMENTS (single consolidated entry point) ============ --><!-- Previously, tool discovery was spread across three places: three of
+         these five tools as clickable Service Pillar cards further down,
+         a separate "Not ready for a conversation yet?" callout box, and the
+         nav dropdown. That meant an uneven, redundant path to the same
+         five tools and no homepage presence at all for the Institutional
+         Advancement Score. This is now the one place they're all listed
+         together, so this section replaces both the old pillar-card links
+         and the old assessment-callout box below. --><section id="assessments" class="section assessments-section"><div class="container"><h2 class="section-title reveal">Score Your Organization for Free</h2><p class="section-note reveal">Start with the InstitutionalOS Scorecard: describe your organization in a paragraph and get a free score on all seven Health Index dimensions, the same system behind the paid diagnostic. No sign-up.</p><div class="card-grid"><a class="card reveal featured-tool" href="https://grantpass-landing.onrender.com" target="_blank" rel="noopener" data-track="tool_start" data-tool="institutionalos-scorecard"><span class="offering-badge">Start Here</span><h4>InstitutionalOS Scorecard</h4><p>All seven dimensions in one score, with your lowest dimension flagged and a 90-day target.</p><span class="card-cta">Get Your Free Score &rarr;</span></a></div><p class="section-note reveal" style="margin-top:1.75rem;">Prefer answering questions? The <a href="/assessment">7-minute self-assessment</a> covers all seven dimensions on the same evidence rubric. Four deeper tools each go further on one or two dimensions.</p><div class="seal-callout reveal"><h3>Every path leads toward a Candid Platinum Seal</h3><p>Candid's free Seals of Transparency are how funders check whether a nonprofit is open about its programs, finances, leadership, and results. In Candid's research, Seal holders received on average 62% more in contributions. Every Frankly Inspired tool and engagement points you toward Platinum, Candid's highest level, because the work it requires is the same work that makes an organization last.</p><a class="link-more" href="/candid-seal" data-track="tool_start" data-tool="candid-seal">Find your path to Platinum &rarr;</a></div><p class="reveal" style="margin-top:1.25rem;"><a class="link-more" href="/tools">Not sure which? Compare all free tools &rarr;</a></p></div></section><!-- ============ RESEARCH & INSIGHTS ============ --><!-- Replaces the donor churn calculator, which only mapped to one
+         dimension of one tool (Revenue & Growth's Donor Retention) and read
+         as an interactive marketing gadget sitting next to five
+         research-grounded diagnostic tools: a scope and tone mismatch.
+         This is cited, non-interactive prose in the same analytical voice
+         as the assessment tools' band commentary, with each brief linking
+         forward to the specific tool that scores that area. --><section class="section insights-section"><div class="container"><h2 class="section-title reveal">What the Research Shows</h2><div class="card-grid"><div class="card reveal"><h4>The First-Gift Cliff</h4><p>Nationally, roughly 4 in 5 first-time donors never make a second gift: first-time donor retention sits around 18%, well below the 43% overall average. A structured stewardship process in a donor's first 90 days is one of the highest-leverage, lowest-cost fixes most nonprofits have available.</p><p class="insight-source">Fundraising Effectiveness Project, Association of Fundraising Professionals &amp; GivingTuesday</p><a class="link-more" href="/revenue-growth-score">See where your organization stands &rarr;</a></div><div class="card reveal"><h4>The Recurring-Giving Advantage</h4><p>After one year, 71% of monthly donors are still giving, compared to just 24% of new one-time donors, a gap wide enough to make recurring giving one of the highest-leverage levers most nonprofits underuse. Converting even a portion of one-time donors into monthly sustainers does more for long-term revenue stability than acquiring new donors at the same rate.</p><p class="insight-source">M+R Benchmarks, an annual digital fundraising study</p><a class="link-more" href="/revenue-growth-score">See where your organization stands &rarr;</a></div><div class="card reveal"><h4>The Planned-Giving Gap</h4><p>Charitable bequests have made up roughly 7-9% of all U.S. giving in most years over the past four decades, and reached just over 10% in 2025, yet most nonprofits still don't have even a basic planned-giving program. The gap matters beyond the eventual gift: at one studied institution, realized bequest gifts averaged 21 times a donor's lifetime annual giving, meaning a planned-giving conversation is also a marker of a donor's deepest capacity, not just a future line item.</p><p class="insight-source">Giving USA; the Chronicle of Philanthropy; PG Calc planned-giving research</p><a class="link-more" href="/institutional-advancement-score">See where your fundraising program stands &rarr;</a></div></div><p class="reveal" style="margin-top:1.25rem;"><a class="link-more" href="/insights">All research and insights &rarr;</a></p></div></section><!-- ============ CONSULTING AND ADVISORY ============ --><section id="consulting" class="section consulting alt-bg"><div class="container"><h2 class="section-title reveal">Strategy for organizations that want to last.</h2><p class="section-note reveal">Frankly Inspired and Associates, LLC works with mission-driven institutions that need more than a short-term fix. Engagements are designed around the organization's context, capacity, leadership needs, and sustainability goals.</p><!-- One framework everywhere: the seven InstitutionalOS Health Index
+             dimensions. The pillar-* ids on these cards are kept because the
+             self-assessment's results link to them per pillar. --><h3 id="dimensions" class="subhead reveal">The Seven Dimensions</h3><p class="section-note reveal">Every free tool, every diagnostic, and every engagement works on the same seven dimensions, so a score means the same thing everywhere.</p><div class="card-grid"><div class="card card-static reveal" id="pillar-sustainability"><span class="offering-badge">1</span><h4>Strategy and Positioning</h4><p>Strategic priorities, risk, and a roadmap that guides real decisions.</p></div><div class="card card-static reveal" id="pillar-program"><span class="offering-badge">2</span><h4>Program and Impact Evidence</h4><p>Showing what your programs achieve, in terms funders and boards trust.</p></div><div class="card card-static reveal" id="pillar-revenue"><span class="offering-badge">3</span><h4>Revenue and Financial Health</h4><p>Diversified revenue, reserves, donor retention, grants, and fundraising strategy.</p></div><div class="card card-static reveal" id="pillar-leadership"><span class="offering-badge">4</span><h4>Leadership and Organizational Capacity</h4><p>Bench strength, succession, alignment, and executive advising through change.</p></div><div class="card card-static reveal" id="pillar-operations"><span class="offering-badge">5</span><h4>Operations and Infrastructure</h4><p>Workflows, KPIs, CRM and Salesforce practice, and AI readiness.</p></div><div class="card card-static reveal" id="pillar-partnership"><span class="offering-badge">6</span><h4>Partnerships and Ecosystem</h4><p>Cross-sector partnerships with education, workforce, government, corporate, and philanthropic partners.</p></div><div class="card card-static reveal" id="pillar-governance"><span class="offering-badge">7</span><h4>Governance and Risk</h4><p>Board practice, policies, filings, and the risks a funder will ask about.</p></div></div><h3 class="subhead reveal">How We Work Together</h3><p class="section-note reveal">Every engagement starts the same way: a discovery conversation, followed by the InstitutionalOS Diagnostic scored for your organization's actual lifecycle stage. From there, the method never changes, whether the priority is formation, funding, or long term durability.</p><ol class="process-list reveal"><li><strong>Assess.</strong> Structured scoring across the dimensions that matter at your stage, never a generic checklist.</li><li><strong>Verify.</strong> Higher scores require evidence: a documented policy, an observed practice, a filed financial statement, not self reported optimism. A strong score means something because it had to be earned.</li><li><strong>Decide.</strong> Every organization has one binding constraint right now, the single thing limiting progress more than any other. Naming it specifically is the job, not producing a wall of generic recommendations.</li><li><strong>Improve.</strong> A 90 day target for closing a meaningful share of the gap, concrete enough to act on Monday morning.</li><li><strong>Reassess.</strong> Your score is tracked over time through InstitutionalOS, so progress is measured, not just described.</li></ol><p class="section-note reveal">This is the same method behind every free scorecard on this site. A paid diagnostic goes further: it verifies the evidence directly with you and ends in a working session, not just a number.</p><h3 id="pricing" class="subhead reveal">Engagement Options</h3><p class="section-note reveal">Every paid engagement begins with the InstitutionalOS Diagnostic. It is the single entry point regardless of your organization's stage, and it is the foundation the work below builds on.</p><div class="pricing-grid"><div class="pricing-card reveal" style="align-self:start;"><span class="offering-badge">Free</span><h4>Start with the Scorecard</h4><p class="price">$0<span>no sign-up</span></p><p class="plan-fit">Not ready for a diagnostic? Get a free read on all seven dimensions first, then decide.</p><a class="btn btn-secondary" href="https://grantpass-landing.onrender.com" target="_blank" rel="noopener" data-track="tool_start" data-tool="institutionalos-scorecard">Get Your Free Score</a></div><div class="pricing-card featured reveal" id="build"><span id="fund" class="anchor-offset"></span><span id="sustain" class="anchor-offset"></span><span class="offering-badge">Step 1: The Entry Point</span><h4>InstitutionalOS Diagnostic</h4><p class="price">$2,000 to $2,500<span>flat fee, by stage</span></p><p class="plan-fit">One diagnostic, three stages. The stage you're at sets the price and the emphasis, not the product.</p><p><strong>Build (Formation Readiness), $2,000.</strong> Governance and Strategy scored first, so the foundation holds as you grow.</p><p><strong>Fund (Grant Readiness), $2,500.</strong> Financial Health scored from your actual filed IRS Form 990 data, not self reported estimates, ranked against your target funders.</p><p><strong>Sustain (Institutional Durability), $2,500.</strong> A scored, trackable read on financial resilience, leadership succession, and operational maturity.</p><ul class="bullet-list"><li>All seven Health Index dimensions scored against your stage's benchmarks</li><li>A written memo naming your single binding constraint</li><li>A 90 day plan built on the InstitutionalOS lift formula, including the steps to your next Candid Seal of Transparency level</li><li>A live readout session, plus ongoing access to track your score</li></ul><a class="btn btn-primary plan-cta" href="#contact" data-plan="InstitutionalOS Diagnostic">Discuss Your Diagnostic</a></div><div class="pricing-card reveal" id="pricing-advisory"><span id="pricing-implementation" class="anchor-offset"></span><span class="recommended-badge" hidden>Recommended for you</span><span class="offering-badge">Step 2</span><h4>Advisory and Implementation Retainer</h4><p class="price">$2,500 to $3,500<span>per month</span></p><p class="plan-fit">Best fit once the diagnostic has named your binding constraint and you want ongoing support closing it. Cadence and scope are set together at the readout, from periodic strategic guidance through weekly hands on implementation.</p><ul class="bullet-list"><li>Executive strategy sessions, periodic or weekly depending on scope</li><li>Sustainability, revenue, and operations guidance</li><li>Stakeholder strategy and document review</li><li>Roadmap and revenue pipeline implementation when weekly cadence is the right fit</li><li>Leadership alignment and expanded project support at the implementation level</li><li>Three month recommended minimum</li></ul><p class="plan-fit"><strong>Prefer a fixed scope?</strong> The same work can be done as a defined project, such as a revenue diversification plan or partnership strategy, priced to scope.</p><a class="btn btn-primary plan-cta" href="#contact" data-plan="Advisory and Implementation Retainer">Start This Retainer</a><a class="btn btn-ghost plan-cta" href="#contact" data-plan="Project Based Engagement">Discuss a Project</a></div></div><!-- Coaching is for the leader, not the organization: a different buyer,
+             so it sits outside the organizational ladder above. --><div class="leader-callout reveal" id="coaching"><div><p class="leader-callout-label">For the leader</p><h4>1:1 Executive Coaching &middot; $350 per session</h4><p>Confidential 60-minute sessions for executive directors and senior leaders: decision making, change leadership, and a space outside board and staff dynamics. Book as needed, no minimum, on its own or alongside any engagement.</p></div><a class="btn btn-secondary plan-cta" href="#contact" data-plan="1:1 Executive Coaching">Book a Coaching Session</a></div><p class="pricing-reassurance reveal">Not sure which option fits? <a href="#contact">Start with a conversation</a>, and I'll help you figure out the right scope.</p><h3 id="sample-diagnostic" class="subhead reveal">What You Actually Receive</h3><p class="section-note reveal"><em>Illustrative example, not a real client. This shows the format of a completed diagnostic, not a claimed result.</em></p><p><strong>Organization:</strong> Sample Community Youth Alliance (fictional, for illustration only)<br><strong>Pathway:</strong> Sustain (Institutional Durability) Diagnostic<br><strong>Candid Seal today:</strong> Silver</p><ul class="bullet-list"><li><strong>1. Strategy and Positioning (68/100).</strong> Written strategic plan in use; no written criteria for saying no to new opportunities.</li><li><strong>2. Program and Impact Evidence (52/100).</strong> Outputs tracked for every program; outcomes measured for only one.</li><li><strong>3. Revenue and Financial Health (58/100).</strong> Two years of filed financials reviewed; no reserve policy on file.</li><li><strong>4. Leadership and Organizational Capacity (44/100).</strong> Single point of failure identified in program leadership.</li><li><strong>5. Operations and Infrastructure (66/100).</strong> Core workflows documented; no KPI dashboard in use.</li><li><strong>6. Partnerships and Ecosystem (63/100).</strong> Strong partners, but only two of eight formalized.</li><li><strong>7. Governance and Risk (71/100).</strong> Bylaws and Form 990 policies current; succession plan not documented.</li></ul><p><strong>Constraint identified:</strong> Leadership bench strength is the binding constraint, not financial health, which is often assumed to be the problem.</p><p><strong>90-day target:</strong> 44 to 58 (closing 25% of the gap to 100), via a documented succession plan for the top two program roles and one cross-trained backup per critical function.</p><p><strong>Candid Seal step:</strong> Silver to Gold by uploading the latest filed Form 990 and completing the leader demographic fields, both already in hand.</p><p><strong>What you get:</strong> the full scorecard above, a written memo explaining each score, and a 60-90 minute session walking through the plan, delivered whether the news is good or hard to hear.</p><p class="pricing-reassurance reveal">Not ready for a conversation yet? <a href="#assessments">Take a free assessment</a> first, it points to where to focus.</p></div></section><!-- ============ FAQ ============ --><!-- Answers drawn only from facts stated elsewhere on the site and in
+         the privacy policy. Add remote/in-person and payment-terms answers
+         once confirmed. --><section id="faq" class="section faq"><div class="container narrow"><h2 class="section-title reveal">Frequently Asked Questions</h2><div class="faq-list reveal"><details><summary>Where does working together start?</summary><p>With a free 30-minute conversation, then the InstitutionalOS Diagnostic: $2,000 for Formation, $2,500 for Grant Readiness or Institutional Durability. It's the single entry point for every paid engagement.</p></details><details><summary>What do I get from the diagnostic?</summary><p>All seven Health Index dimensions scored against your stage's benchmarks, a written memo naming your single binding constraint, a 90-day plan, a live readout session, and ongoing access to track your score. <a href="#sample-diagnostic">See a sample</a>.</p></details><details><summary>What documents will I need to share?</summary><p>For Grant Readiness, financial health is scored from your public IRS Form 990 filings, so you don't need to send them. For any diagnostic, you can choose to share governance policies, board materials, financial statements, or strategic plans to support the evidence review.</p></details><details><summary>How is my organization's information handled?</summary><p>What you share is used only to complete your diagnostic. It's never sold or reused for another engagement without your knowledge, and you can ask for shared source materials to be deleted once the engagement ends. See the <a href="/privacy">Privacy Policy</a>.</p></details><details><summary>Is there a minimum commitment?</summary><p>The advisory retainer has a three-month recommended minimum. Executive coaching is $350 per 60-minute session, scheduled as needed with no minimum.</p></details><details><summary>Is this legal or accounting advice?</summary><p>No. Where a finding touches legal, accounting, or safeguarding matters, you'll get a recommendation to bring in the right specialist rather than a substitute opinion.</p></details><details><summary>We're not ready to pay for a diagnostic. Where should we start?</summary><p>Take one of the <a href="/tools">free tools</a>. The 7-minute self-assessment covers all seven dimensions and points you to your likely constraint. Every tool you take after that adds to <a href="/health-index">your Health Index</a>, one profile you can print for your board.</p></details><details><summary>How do I make the case to my board?</summary><p>Print your free <a href="/health-index">Health Index</a> and bring it to your next board meeting. It shows all seven dimensions on one page, along with your likely constraint. Your board chair is welcome at the diagnostic's readout session. Some funders also offer capacity-building grants that can cover outside consulting, so ask your program officers.</p></details><details><summary>How are the free tools scored?</summary><p>Every tool uses the same seven dimensions and the same evidence rubric, from "not in place" to "verified." Each question and its research source is published on <a href="/methodology">How Scoring Works</a>.</p></details></div></div></section><!-- ============ CONTACT ============ --><section id="contact" class="section contact alt-bg"><div class="container narrow"><h2 class="section-title reveal">Start a Conversation</h2><div id="score-ref-banner" class="score-ref-banner reveal" hidden></div><p class="lede-sm reveal">Strong missions need sustainable institutions. If your organization is navigating growth, revenue pressure, operational complexity, leadership transition, or the need for a clearer sustainability strategy, start with a conversation.</p><p class="reveal">Tell me a little about your organization, where you are today, and what you're working to strengthen. I'll review your inquiry and follow up regarding whether Frankly Inspired may be a good fit.</p><p class="direct-contact reveal"><a href="mailto:franklin@franklyinspired.associates">franklin@franklyinspired.associates</a><span aria-hidden="true">&middot;</span><a href="tel:+12403918283">240-391-8283</a></p><div class="schedule-cta schedule-cta-primary reveal"><p class="schedule-cta-label">Already know you'd like to talk?</p><button type="button" class="btn btn-primary" id="show-scheduler" data-track="schedule_inline_open">See Available Times</button><p class="scheduler-alt"><a href="https://calendly.com/fparham/30min" target="_blank" rel="noopener" data-track="schedule_click">or open the scheduler in a new tab</a></p><div id="scheduler" class="scheduler" hidden data-url="https://calendly.com/fparham/30min"></div></div><p class="form-divider">Prefer to write it out first? Share a few details below and I'll follow up.</p><!-- This form is live: posts to the frankly-inspired-backend
              /api/contact endpoint, which sends both the visitor's
-             acknowledgement email and the internal lead-notification email
-             via Resend. The `action="#"` attribute below is inert on purpose
-             — submission is handled entirely by the JS fetch call, which
-             calls preventDefault() before it runs. See
-             frankly-inspired-backend/README.md for the deployed service
-             details. -->
-        <form class="contact-form" id="contact-form" action="#" method="POST" novalidate>
-          <!-- Honeypot: real visitors never see or fill this in (see css
-               .hp-field). A filled value means a bot submitted the form. -->
-          <div class="hp-field" aria-hidden="true">
-            <label for="hp_field">Leave this field blank</label>
-            <input type="text" id="hp_field" name="hp_field" tabindex="-1" autocomplete="off">
-          </div>
-          <div class="form-row">
-            <label for="name">Name*</label>
-            <input type="text" id="name" name="name" placeholder="Your name" required>
-          </div>
-          <div class="form-row">
-            <label for="organization">Organization*</label>
-            <input type="text" id="organization" name="organization" placeholder="Organization name" required>
-          </div>
-          <div class="form-row">
-            <label for="title">Title / Role*</label>
-            <input type="text" id="title" name="title" placeholder="Your role" required>
-          </div>
-          <div class="form-row">
-            <label for="email">Email*</label>
-            <input type="email" id="email" name="email" placeholder="Email address" required>
-          </div>
-          <div class="form-row">
-            <label for="phone">Phone</label>
-            <input type="tel" id="phone" name="phone" placeholder="Optional">
-          </div>
-          <div class="form-row">
-            <label for="org-website">Organization Website</label>
-            <input type="url" id="org-website" name="org_website" placeholder="Optional">
-          </div>
+             acknowledgement email and the internal lead-notification email.
+             action="#" is inert on purpose; submission is handled entirely
+             by the fetch call below, which calls preventDefault() first. --><form class="contact-form" id="contact-form" action="#" method="POST" novalidate><!-- Honeypot: real visitors never see or fill this in (see .hp-field
+               in global.css). A filled value means a bot submitted the form. --><div class="hp-field" aria-hidden="true"><label for="hp_field">Leave this field blank</label><input type="text" id="hp_field" name="hp_field" tabindex="-1" autocomplete="off"></div><div class="form-row"><label for="name">Name*</label><input type="text" id="name" name="name" placeholder="Your name" required></div><div class="form-row"><label for="organization">Organization*</label><input type="text" id="organization" name="organization" placeholder="Organization name" required></div><div class="form-row"><label for="title">Title / Role</label><input type="text" id="title" name="title" placeholder="Optional"></div><div class="form-row"><label for="email">Email*</label><input type="email" id="email" name="email" placeholder="Email address" required></div><div class="form-row full"><label for="challenge">What challenge or opportunity are you currently navigating?*</label><textarea id="challenge" name="challenge" rows="4" placeholder="A few sentences is plenty" required></textarea></div><details class="form-row full form-more"><summary>Add more details (optional)</summary><div class="form-more-grid"><div class="form-row"><label for="phone">Phone</label><input type="tel" id="phone" name="phone" placeholder="Optional"></div><div class="form-row"><label for="org-website">Organization Website</label><input type="url" id="org-website" name="org_website" placeholder="Optional"></div><fieldset class="form-row full"><legend>How can I support your organization?</legend><div class="checkbox-group"><label><input type="checkbox" name="support_area" value="InstitutionalOS Diagnostic"> InstitutionalOS Diagnostic</label><label><input type="checkbox" name="support_area" value="Advisory and Implementation Retainer"> Advisory and Implementation Retainer</label><label><input type="checkbox" name="support_area" value="Project Based Engagement"> Project Based Engagement</label><label><input type="checkbox" name="support_area" value="1:1 Executive Coaching"> 1:1 Executive Coaching</label><label><input type="checkbox" name="support_area" value="Speaking and Board Service"> Speaking and Board Service</label><label><input type="checkbox" name="support_area" value="Other"> Other</label></div></fieldset><fieldset class="form-row full"><legend>What is your desired timeline?</legend><div class="radio-group"><label><input type="radio" name="timeline" value="As soon as possible"> As soon as possible</label><label><input type="radio" name="timeline" value="Within 30 days"> Within 30 days</label><label><input type="radio" name="timeline" value="Within 3 months"> Within 3 months</label><label><input type="radio" name="timeline" value="Within 6 months"> Within 6 months</label><label><input type="radio" name="timeline" value="Exploring options"> Exploring options</label></div></fieldset><div class="form-row full"><label for="referral">How did you hear about Frankly Inspired?</label><input type="text" id="referral" name="referral"></div></div></details><p class="form-row full disclaimer">By submitting this form, you agree that Frankly Inspired and Associates, LLC may use the information provided to respond to your inquiry and communicate with you regarding potential services. Submitting this form does not create a consultant client relationship.</p><button type="submit" class="btn btn-primary">Submit Inquiry</button><p class="form-status" id="form-status" role="status" aria-live="polite"></p></form><!-- Client-side "thank you" state, shown after submit --><div class="thank-you" id="thank-you" hidden><h3>Thank you for reaching out.</h3><p>Your inquiry has been received. I appreciate your interest in working with Frankly Inspired and Associates, LLC. I'll review the information you've provided and follow up regarding next steps.</p><p>If you'd like to reserve time now, you can schedule a 30 minute introductory conversation below.</p><a class="btn btn-secondary" href="https://calendly.com/fparham/30min" target="_blank" rel="noopener">Schedule a Conversation &rarr;</a></div></div></section></main><script type="module">var e=document.querySelectorAll(`.reveal`);if(e.length){if(`IntersectionObserver`in window){let t=new WeakMap;e.forEach(e=>{let n=e.parentElement,r=n&&t.get(n)||0;r<6&&(e.style.transitionDelay=r*90+`ms`),n&&t.set(n,r+1)});let n=new IntersectionObserver((e,t)=>{e.forEach(e=>{e.isIntersecting&&(e.target.classList.add(`is-visible`),t.unobserve(e.target))})},{threshold:.15,rootMargin:`0px 0px -40px 0px`});e.forEach(e=>n.observe(e)),window.setTimeout(()=>{document.querySelectorAll(`.reveal:not(.is-visible)`).forEach(e=>{e.classList.add(`is-visible`)})},2500)}else e.forEach(e=>e.classList.add(`is-visible`))}</script><footer class="site-footer"><div class="container"><p class="footer-org">Frankly Inspired and Associates, LLC</p><p class="footer-meta">Founded by Franklin D. Parham &middot; Lanham, Maryland / DMV</p><p class="footer-meta"><a href="mailto:franklin@franklyinspired.associates">franklin@franklyinspired.associates</a><span aria-hidden="true">&middot;</span><a href="tel:+12403918283">240-391-8283</a></p><p class="footer-links"><a href="/about">About &amp; Experience</a><span aria-hidden="true">&middot;</span><a href="/tools">Free Tools</a><span aria-hidden="true">&middot;</span><a href="/health-index">Your Health Index</a><span aria-hidden="true">&middot;</span><a href="/insights">Insights</a><span aria-hidden="true">&middot;</span><a href="/institutionalos">InstitutionalOS</a><span aria-hidden="true">&middot;</span><a href="https://www.linkedin.com/in/franklin-parham-b7a545382" target="_blank" rel="noopener">LinkedIn</a><span aria-hidden="true">&middot;</span><a href="https://calendly.com/fparham/30min" target="_blank" rel="noopener">Schedule a Strategy Conversation</a><span aria-hidden="true">&middot;</span><a href="/#contact">Contact</a></p><p class="footer-legal">&copy; 2026 Frankly Inspired and Associates, LLC<span aria-hidden="true">&middot;</span><a href="/privacy">Privacy Policy</a><span aria-hidden="true">&middot;</span><a href="/terms">Terms of Use</a><span aria-hidden="true">&middot;</span><a href="/methodology">How Scoring Works</a><span aria-hidden="true">&middot;</span><button type="button" class="manage-cookies-link" data-manage-cookies>Manage Cookie Preferences</button></p></div></footer><script type="module">var e=`fi_cookie_consent`,t=`fi-cookie-consent-changed`;function n(){try{return window.localStorage.getItem(e)}catch{return null}}function r(n){try{window.localStorage.setItem(e,n)}catch{}document.dispatchEvent(new CustomEvent(t,{detail:{consent:n}}))}function i(){let e=document.createElement(`div`);return e.id=`cookie-consent-banner`,e.className=`cookie-banner`,e.setAttribute(`role`,`region`),e.setAttribute(`aria-label`,`Cookie consent`),e.innerHTML=`<div class="cookie-banner-inner"><p class="cookie-banner-text">This site uses essential cookies to function, and may use optional analytics cookies to understand website traffic, only if you accept them. See our <a href="/privacy">Privacy Policy</a> for details.</p><div class="cookie-banner-actions"><button type="button" class="btn btn-secondary btn-small" id="cookie-decline">Decline</button><button type="button" class="btn btn-primary btn-small" id="cookie-accept">Accept</button></div></div>`,e}function a(){if(document.getElementById(`cookie-consent-banner`))return;let e=i();document.body.appendChild(e),document.getElementById(`cookie-accept`)?.addEventListener(`click`,()=>{r(`accepted`),o()}),document.getElementById(`cookie-decline`)?.addEventListener(`click`,()=>{r(`declined`),o()}),window.requestAnimationFrame(()=>{e.classList.add(`cookie-banner-visible`)})}function o(){let e=document.getElementById(`cookie-consent-banner`);e&&(e.classList.remove(`cookie-banner-visible`),window.setTimeout(()=>{e.parentNode?.removeChild(e)},300))}window.cookieConsent={get:n,set:r,reopen:a,CHANGE_EVENT:t},document.addEventListener(`DOMContentLoaded`,()=>{n()||a(),document.querySelectorAll(`[data-manage-cookies]`).forEach(e=>{e.addEventListener(`click`,e=>{e.preventDefault(),a()})})});</script><script>(function(){const GA_MEASUREMENT_ID = "";
 
-          <fieldset class="form-row full">
-            <legend>How can I support your organization?*</legend>
-            <div class="checkbox-group">
-              <label><input type="checkbox" name="support_area" value="Nonprofit Sustainability Strategy"> Nonprofit Sustainability Strategy</label>
-              <label><input type="checkbox" name="support_area" value="Fundraising and Revenue Diversification"> Fundraising and Revenue Diversification</label>
-              <label><input type="checkbox" name="support_area" value="Organizational Development and Operations"> Organizational Development and Operations</label>
-              <label><input type="checkbox" name="support_area" value="Executive and Leadership Advisory"> Executive and Leadership Advisory</label>
-              <label><input type="checkbox" name="support_area" value="1:1 Leadership Coaching"> 1:1 Leadership Coaching</label>
-              <label><input type="checkbox" name="support_area" value="Partnership and Ecosystem Strategy"> Partnership and Ecosystem Strategy</label>
-              <label><input type="checkbox" name="support_area" value="AI Readiness and Adoption Advisory"> AI Readiness and Adoption Advisory</label>
-              <label><input type="checkbox" name="support_area" value="Speaking"> Speaking</label>
-              <label><input type="checkbox" name="support_area" value="Board or Advisory Service"> Board or Advisory Service</label>
-              <label><input type="checkbox" name="support_area" value="Other"> Other</label>
-            </div>
-          </fieldset>
+  (function () {
+    function loadGoogleAnalytics() {
+      if (!GA_MEASUREMENT_ID || window.__fiAnalyticsLoaded) return;
+      window.__fiAnalyticsLoaded = true;
 
-          <div class="form-row full">
-            <label for="challenge">What challenge or opportunity are you currently navigating?*</label>
-            <textarea id="challenge" name="challenge" rows="4" placeholder="Open text field" required></textarea>
-          </div>
+      const script = document.createElement('script');
+      script.async = true;
+      script.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_MEASUREMENT_ID;
+      document.head.appendChild(script);
 
-          <fieldset class="form-row full">
-            <legend>What is your desired timeline?</legend>
-            <div class="radio-group">
-              <label><input type="radio" name="timeline" value="As soon as possible"> As soon as possible</label>
-              <label><input type="radio" name="timeline" value="Within 30 days"> Within 30 days</label>
-              <label><input type="radio" name="timeline" value="Within 3 months"> Within 3 months</label>
-              <label><input type="radio" name="timeline" value="Within 6 months"> Within 6 months</label>
-              <label><input type="radio" name="timeline" value="Exploring options"> Exploring options</label>
-            </div>
-          </fieldset>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { window.dataLayer.push(arguments); }
+      window.gtag = gtag;
+      gtag('js', new Date());
+      // anonymize_ip retained for visitor privacy even with consent granted.
+      gtag('config', GA_MEASUREMENT_ID, { anonymize_ip: true });
+    }
 
-          <div class="form-row full">
-            <label for="referral">How did you hear about Frankly Inspired?</label>
-            <input type="text" id="referral" name="referral">
-          </div>
+    function init() {
+      if (!window.cookieConsent) return; // cookie-consent script must load first
 
-          <p class="form-row full disclaimer">By submitting this form, you agree that Frankly Inspired and Associates, LLC may use the information provided to respond to your inquiry and communicate with you regarding potential services. Submitting this form does not create a consultant client relationship.</p>
+      if (window.cookieConsent.get() === 'accepted') {
+        loadGoogleAnalytics();
+      }
 
-          <button type="submit" class="btn btn-primary">Submit Inquiry</button>
-          <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
-        </form>
+      document.addEventListener(window.cookieConsent.CHANGE_EVENT, (e) => {
+        if (e.detail && e.detail.consent === 'accepted') {
+          loadGoogleAnalytics();
+        }
+        // Note: GA's own script, once loaded, can't be unloaded mid-session if
+        // a visitor accepts then later declines. It simply won't be
+        // (re)loaded on their next visit if they've since declined.
+      });
+    }
 
-        <!-- Client-side "thank you" state, shown by js/main.js after submit -->
-        <div class="thank-you" id="thank-you" hidden>
-          <h3>Thank you for reaching out.</h3>
-          <p>Your inquiry has been received. I appreciate your interest in working with Frankly Inspired and Associates, LLC. I'll review the information you've provided and follow up regarding next steps.</p>
-          <p>If you'd like to reserve time now, you can schedule a 30 minute introductory conversation below.</p>
-          <a class="btn btn-secondary" href="https://calendly.com/fparham/30min" target="_blank" rel="noopener">Schedule a Conversation →</a>
-        </div>
-      </div>
-    </section>
+    // ---------- Conversion events ----------
+    // fiTrack sends an event to Google Analytics only if GA has loaded
+    // (i.e. an ID is set above AND the visitor accepted cookies);
+    // otherwise it does nothing. Any link or button with data-track="name"
+    // is tracked automatically on click, and every tool form submit is
+    // tracked as tool_complete.
+    window.fiTrack = function (name, params) {
+      if (typeof window.gtag === 'function') window.gtag('event', name, params || {});
+    };
+    document.addEventListener('click', function (e) {
+      var el = e.target && e.target.closest ? e.target.closest('[data-track]') : null;
+      if (el) window.fiTrack(el.getAttribute('data-track'), { page: location.pathname, tool: el.getAttribute('data-tool') || undefined });
+      var a = e.target && e.target.closest ? e.target.closest('a[href*="calendly.com"]') : null;
+      if (a && !a.hasAttribute('data-track')) window.fiTrack('schedule_click', { page: location.pathname });
+    });
+    document.addEventListener('submit', function (e) {
+      var f = e.target;
+      if (f && f.id && f.id !== 'contact-form') window.fiTrack('tool_complete', { page: location.pathname, form: f.id });
+    }, true);
 
-  </main>
-
-  <!-- ============ FOOTER ============ -->
-  <footer class="site-footer">
-    <div class="container">
-      <p class="footer-org">Frankly Inspired and Associates, LLC</p>
-      <p class="footer-meta">Founded by Franklin D. Parham · Lanham, Maryland / DMV</p>
-      <p class="footer-meta">
-        <a href="mailto:franklin@franklyinspired.associates">franklin@franklyinspired.associates</a>
-        <span aria-hidden="true">·</span>
-        <a href="tel:+12403918283">240-391-8283</a>
-      </p>
-      <p class="footer-links">
-        <a href="about.html">About &amp; Experience</a>
-        <span aria-hidden="true">·</span>
-        <a href="https://www.linkedin.com/in/franklin-parham-b7a545382" target="_blank" rel="noopener">LinkedIn</a>
-        <span aria-hidden="true">·</span>
-        <a href="assessment.html">Free Assessment</a>
-        <span aria-hidden="true">·</span>
-        <a href="revenue-growth-score.html">Revenue &amp; Growth Score</a>
-        <span aria-hidden="true">·</span>
-        <a href="leadership-health.html">Leadership &amp; Operations Score</a>
-        <span aria-hidden="true">·</span>
-        <a href="sustainability-score.html">Sustainability Strategy Score</a>
-        <span aria-hidden="true">·</span>
-        <a href="https://calendly.com/fparham/30min" target="_blank" rel="noopener">Schedule a Strategy Conversation</a>
-        <span aria-hidden="true">·</span>
-        <a href="#contact">Contact</a>
-      </p>
-      <p class="footer-legal">
-        © 2026 Frankly Inspired and Associates, LLC
-        <span aria-hidden="true">·</span>
-        <a href="privacy.html">Privacy Policy</a>
-        <span aria-hidden="true">·</span>
-        <a href="terms.html">Terms of Use</a>
-        <span aria-hidden="true">·</span>
-        <button type="button" class="manage-cookies-link" data-manage-cookies>Manage Cookie Preferences</button>
-      </p>
-    </div>
-  </footer>
-
-  <script src="js/main.js"></script>
-  <script src="js/cookie-consent.js"></script>
-  <script src="js/analytics.js"></script>
-</body>
-</html>
+    document.addEventListener('DOMContentLoaded', init);
+  })();
+})();</script><script type="module">function e(){let e=document.querySelector(`.site-header`);e&&document.documentElement.style.setProperty(`--header-height`,e.getBoundingClientRect().height+`px`)}if(e(),window.addEventListener(`resize`,e),`ResizeObserver`in window){let t=document.querySelector(`.site-header`);t&&new ResizeObserver(e).observe(t)}</script></body></html><script type="module">var e=null;(function(){let t=new URLSearchParams(window.location.search).get(`score_ref`);t&&(e=t,fetch(`https://frankly-inspired-api.onrender.com/api/score-ref?token=`+encodeURIComponent(t)).then(e=>e.ok?e.json():null).then(e=>{if(!e||!e.ok)return;let t=document.getElementById(`score-ref-banner`);if(!t)return;let n=e.score==null?`your result`:`${e.score}/100`,r=e.band?` (${e.band})`:``;t.innerHTML=`<strong>Continuing from your ${e.stage||``} scorecard:</strong> ${n}${r}. No need to re-explain it below, I'll see it with your inquiry.`,t.hidden=!1}).catch(()=>{}))})(),document.querySelectorAll(`.plan-cta[data-plan]`).forEach(e=>{e.addEventListener(`click`,()=>{(e.getAttribute(`data-plan`)||``).split(`,`).forEach(e=>{let t=document.querySelector(`input[name="support_area"][value="${e.trim()}"]`);t&&(t.checked=!0,t.closest(`details`)?.setAttribute(`open`,``))})})});var t=document.getElementById(`contact-form`),n=document.getElementById(`form-status`),r=document.getElementById(`thank-you`),i=t?.querySelector(`button[type="submit"]`);t&&t.addEventListener(`submit`,a=>{if(a.preventDefault(),!t.checkValidity()){t.reportValidity();return}let o=new FormData(t),s={name:o.get(`name`),organization:o.get(`organization`),title:String(o.get(`title`)||``).trim()||`Not provided`,email:o.get(`email`),phone:o.get(`phone`),org_website:o.get(`org_website`),support_area:o.getAll(`support_area`).length?o.getAll(`support_area`):[`Not specified`],challenge:o.get(`challenge`),timeline:o.get(`timeline`),referral:o.get(`referral`),hp_field:o.get(`hp_field`),score_ref:e||void 0,stage:(()=>{try{return localStorage.getItem(`fi_stage`)||void 0}catch{return}})()};n&&(n.textContent=`Sending...`),i&&(i.disabled=!0),fetch(`https://frankly-inspired-api.onrender.com/api/contact`,{method:`POST`,headers:{"Content-Type":`application/json`},body:JSON.stringify(s)}).then(e=>e.json().then(t=>({ok:e.ok,data:t}))).then(e=>{if(!e.ok||!e.data.ok)throw Error(e.data&&e.data.error||`Something went wrong.`);n&&(n.textContent=``),window.fiTrack?.(`contact_form_submit`),t.hidden=!0,r&&(r.hidden=!1)}).catch(e=>{n&&(n.textContent=e.message+` You can also email franklin@franklyinspired.associates directly.`)}).finally(()=>{i&&(i.disabled=!1)})}),(function(){let e=document.getElementById(`show-scheduler`),t=document.getElementById(`scheduler`);!e||!t||e.addEventListener(`click`,()=>{t.hidden=!1,e.hidden=!0;let n=t.dataset.url||``;t.innerHTML=`<div class="calendly-inline-widget" data-url="`+n+`?hide_gdpr_banner=1" style="min-width:300px;height:700px;"></div>`;let r=document.createElement(`script`);r.src=`https://assets.calendly.com/assets/external/widget.js`,r.async=!0,document.body.appendChild(r)})})(),(function(){let e=window.location.hash.replace(`#`,``);if(e!==`pricing-advisory`&&e!==`pricing-implementation`)return;let t=document.getElementById(e);if(!t)return;t.classList.add(`is-recommended`);let n=t.querySelector(`.recommended-badge`);n&&(n.hidden=!1)})();</script>

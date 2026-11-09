@@ -2,6 +2,7 @@
 import { SCORECARD_URL, CALENDLY_URL } from '../config';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
+import EmailResultsForm from '../components/EmailResultsForm.astro';
 ---
 
 <BaseLayout
@@ -258,6 +259,8 @@ import Header from '../components/Header.astro';
           </div>
 
           <div id="score-ref-cta" class="score-ref-cta" hidden></div>
+
+          <EmailResultsForm id="sustainability-email-form" />
 
           <p class="calculator-caveat">Sources: Mark H. Moore, "Creating Public Value: Strategic Management in Government" (Harvard University Press, 1995) and the Strategic Triangle; the COSO Enterprise Risk Management Framework; Jeanne Bell, Jan Masaoka &amp; Steve Zimmerman, "Nonprofit Sustainability: Making Strategic Decisions for Financial Viability" and the Matrix Map; Robert S. Kaplan &amp; David P. Norton, "The Balanced Scorecard" (Harvard Business Review, 1992) and subsequent research on strategy execution. Benchmark figures are sector-wide findings, not specific to any organization Frankly Inspired and Associates, LLC has worked with.</p>
 
@@ -562,6 +565,7 @@ import Header from '../components/Header.astro';
      is always kept in front of whatever text ends up in the summary,
      rather than letting the AI narrative silently overwrite it. */
   function fetchNarrative(blendPrefix: string, payload: { scorePct: number; band: string; pillarScores: { label: string; pct: number }[] }) {
+    (window as any).__fiLastResults = { tool: 'sustainability', ...payload };
     const narrativeLoadingEl = document.getElementById('ss-narrative-loading') as HTMLElement | null;
     if (narrativeLoadingEl) narrativeLoadingEl.hidden = false;
 
@@ -573,6 +577,7 @@ import Header from '../components/Header.astro';
       .then((res) => res.json())
       .then((data) => {
         if (data && data.ok && data.narrative) {
+          if ((window as any).__fiLastResults) (window as any).__fiLastResults.narrative = data.narrative;
           const summaryEl = document.getElementById('ss-summary');
           if (summaryEl) summaryEl.textContent = blendPrefix + data.narrative;
         }

@@ -1975,3 +1975,4 @@ a.card:hover .card-cta { text-decoration: underline; }
 .insight-article:last-child { border-bottom: none; }
 .insight-article h2 { margin-bottom: 0.75rem; }
 .insight-article p { color: #333c45; }
+.results-email-consent { margin: 0.5rem 0 0; font-size: 0.8rem; color: #6b7480; }

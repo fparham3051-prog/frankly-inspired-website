@@ -1,0 +1,64 @@
+---
+// "Email me my results" for any free tool. The tool page stores its latest
+// results on window.__fiLastResults (see each page's fetchNarrative); this
+// form sends them to the backend, which emails the visitor and adds the
+// lead to the operations app.
+interface Props { id: string }
+const { id } = Astro.props;
+---
+
+<form class="results-email-form" id={id} data-email-results novalidate>
+  <div class="hp-field" aria-hidden="true">
+    <label for={`${id}-hp`}>Leave this field blank</label>
+    <input type="text" id={`${id}-hp`} name="hp_field" tabindex="-1" autocomplete="off" />
+  </div>
+  <label for={`${id}-email`}>Want these results emailed to you?</label>
+  <div class="results-email-row">
+    <input type="email" id={`${id}-email`} name="email" placeholder="Email address" required />
+    <button type="submit" class="btn btn-secondary">Email My Results</button>
+  </div>
+  <p class="results-email-consent">Franklin may follow up personally about your results. No mailing list.</p>
+  <p class="form-status" role="status" aria-live="polite"></p>
+</form>
+
+<script>
+  const API_BASE = 'https://frankly-inspired-api.onrender.com';
+  document.querySelectorAll<HTMLFormElement>('form[data-email-results]').forEach((form) => {
+    const status = form.querySelector<HTMLElement>('.form-status');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const results = (window as any).__fiLastResults;
+      if (!results) {
+        if (status) status.textContent = 'See your results first, then send them.';
+        return;
+      }
+      if (!form.checkValidity()) { form.reportValidity(); return; }
+      const fd = new FormData(form);
+      const btn = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+      if (status) status.textContent = 'Sending...';
+      if (btn) btn.disabled = true;
+      fetch(API_BASE + '/api/assessment-lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: fd.get('email'),
+          hp_field: fd.get('hp_field'),
+          tool: results.tool,
+          scorePct: results.scorePct,
+          band: results.band,
+          pillarScores: results.pillarScores,
+          narrative: results.narrative || null,
+        }),
+      })
+        .then((res) => res.json().then((data) => ({ ok: res.ok, data })))
+        .then((r) => {
+          if (!r.ok || !r.data.ok) throw new Error((r.data && r.data.error) || 'Something went wrong.');
+          if (status) status.textContent = 'Sent, check your inbox.';
+          (window as any).fiTrack?.('results_emailed', { tool: results.tool });
+          form.reset();
+        })
+        .catch((err) => { if (status) status.textContent = err.message; })
+        .finally(() => { if (btn) btn.disabled = false; });
+    });
+  });
+</script>

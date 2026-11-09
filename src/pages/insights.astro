@@ -69,6 +69,17 @@ const insights = [
       </div>
     </section>
 
+    <!-- Recent public major gifts, from the operations app's Giving
+         Landscape (refreshed weekly by its own automation). Hidden until
+         the feed returns at least one gift. -->
+    <section id="recent-gifts" class="section" hidden>
+      <div class="container">
+        <h2 class="section-title">Recent Major Gifts</h2>
+        <p class="section-note">Publicly announced gifts of $100,000 or more, tracked weekly. Useful as a read on where large gifts are going right now.</p>
+        <div class="card-grid" id="recent-gifts-list"></div>
+      </div>
+    </section>
+
     <section class="section closing-cta">
       <div class="container narrow center">
         <h2 class="reveal">Want to know which of these matters most for you?</h2>
@@ -80,3 +91,30 @@ const insights = [
 
   <ScrollReveal />
 </BaseLayout>
+
+<script>
+  const API_BASE = 'https://frankly-inspired-api.onrender.com';
+  const esc = (v: unknown) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[c] as string));
+  const money = (n: number) => n >= 1e9 ? '$' + (n / 1e9).toFixed(1).replace(/\.0$/, '') + 'B'
+    : n >= 1e6 ? '$' + (n / 1e6).toFixed(1).replace(/\.0$/, '') + 'M'
+    : '$' + Math.round(n / 1e3) + 'K';
+  fetch(API_BASE + '/api/giving-landscape?limit=6')
+    .then((r) => (r.ok ? r.json() : null))
+    .then((data) => {
+      const gifts = data && Array.isArray(data.gifts) ? data.gifts : [];
+      if (!gifts.length) return;
+      const list = document.getElementById('recent-gifts-list');
+      const section = document.getElementById('recent-gifts');
+      if (!list || !section) return;
+      list.innerHTML = gifts.map((g: any) => `
+        <div class="card card-static">
+          <span class="offering-badge">${esc(money(Number(g.amount) || 0))}</span>
+          <h4>${esc(g.org)}</h4>
+          <p>${esc(g.headline)}</p>
+          <p class="insight-source">${esc([g.donor, g.state, g.announcedAt].filter(Boolean).join(' · '))}</p>
+          ${/^https?:\/\//.test(g.url || '') ? `<a class="link-more" href="${esc(g.url)}" target="_blank" rel="noopener">Source: ${esc(g.source || 'link')} &rarr;</a>` : ''}
+        </div>`).join('');
+      section.hidden = false;
+    })
+    .catch(() => {});
+</script>

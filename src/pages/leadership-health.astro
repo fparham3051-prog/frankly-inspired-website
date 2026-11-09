@@ -2,6 +2,7 @@
 import { CALENDLY_URL } from '../config';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
+import EmailResultsForm from '../components/EmailResultsForm.astro';
 ---
 
 <BaseLayout
@@ -254,6 +255,8 @@ import Header from '../components/Header.astro';
 
           <div id="score-ref-cta" class="score-ref-cta" hidden></div>
 
+          <EmailResultsForm id="leadership-email-form" />
+
           <p class="calculator-caveat">Sources: BoardSource, "Leading with Intent: BoardSource Index of Nonprofit Board Practices"; CompassPoint Nonprofit Services &amp; the Meyer Foundation, "Daring to Lead" (2006/2011 national studies of nonprofit executive leadership); McKinsey &amp; Company, the Organizational Health Index (OHI); John P. Kotter, "Leading Change" (Harvard Business School Press, 1996) and subsequent research on the 8-Step Change Model. Benchmark figures are sector-wide findings, not specific to any organization Frankly Inspired and Associates, LLC has worked with.</p>
 
           <button type="button" class="results-retake" id="lh-retake">Retake the Assessment</button>
@@ -485,6 +488,7 @@ import Header from '../components/Header.astro';
      correct set of results; this just quietly upgrades the description
      text if and when a narrative comes back. */
   function fetchNarrative(payload: { scorePct: number; band: string; pillarScores: { label: string; pct: number }[] }) {
+    (window as any).__fiLastResults = { tool: 'leadership', ...payload };
     const narrativeLoadingEl = document.getElementById('lh-narrative-loading') as HTMLElement | null;
     if (narrativeLoadingEl) narrativeLoadingEl.hidden = false;
 
@@ -496,6 +500,7 @@ import Header from '../components/Header.astro';
       .then((res) => res.json())
       .then((data) => {
         if (data && data.ok && data.narrative) {
+          if ((window as any).__fiLastResults) (window as any).__fiLastResults.narrative = data.narrative;
           const summaryEl = document.getElementById('lh-summary');
           if (summaryEl) summaryEl.textContent = data.narrative;
         }

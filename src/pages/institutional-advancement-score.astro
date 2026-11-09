@@ -2,6 +2,7 @@
 import { CALENDLY_URL } from '../config';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
+import EmailResultsForm from '../components/EmailResultsForm.astro';
 ---
 
 <BaseLayout
@@ -280,6 +281,8 @@ import Header from '../components/Header.astro';
 
           <div id="score-ref-cta" class="score-ref-cta" hidden></div>
 
+          <EmailResultsForm id="institutional-advancement-email-form" />
+
           <p class="calculator-caveat">Sources: David Dunlop's moves-management framework, developed at Cornell University; Penelope Burk / Cygnus Applied Research's donor-centered fundraising research; the Association of Fundraising Professionals' portfolio-size and staffing benchmarks; standard capital-campaign phase methodology (feasibility study, quiet phase, public phase) as practiced across the sector; nonprofit fundraising event ROI benchmarks; Giving USA's charitable bequest data; the Chronicle of Philanthropy's planned-giving research; FreeWill's donor bequest data. Benchmark figures are sector-wide findings, not specific to any organization Frankly Inspired and Associates, LLC has worked with.</p>
 
           <button type="button" class="results-retake" id="ia-retake">Retake the Assessment</button>
@@ -495,6 +498,7 @@ import Header from '../components/Header.astro';
      correct set of results; this just quietly upgrades the description
      text if and when a narrative comes back. */
   function fetchNarrative(payload: { scorePct: number; band: string; pillarScores: { label: string; pct: number }[] }) {
+    (window as any).__fiLastResults = { tool: 'institutional-advancement', ...payload };
     const narrativeLoadingEl = document.getElementById('ia-narrative-loading') as HTMLElement | null;
     if (narrativeLoadingEl) narrativeLoadingEl.hidden = false;
 
@@ -506,6 +510,7 @@ import Header from '../components/Header.astro';
       .then((res) => res.json())
       .then((data) => {
         if (data && data.ok && data.narrative) {
+          if ((window as any).__fiLastResults) (window as any).__fiLastResults.narrative = data.narrative;
           const summaryEl = document.getElementById('ia-summary');
           if (summaryEl) summaryEl.textContent = data.narrative;
         }

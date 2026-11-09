@@ -259,6 +259,7 @@ import Header from '../components/Header.astro';
               <input type="email" id="results-email" name="email" placeholder="Email address" required />
               <button type="submit" class="btn btn-secondary">Email My Results</button>
             </div>
+            <p class="results-email-consent">Franklin may follow up personally about your results. No mailing list.</p>
             <p class="form-status" id="email-status" role="status" aria-live="polite"></p>
           </form>
 
@@ -607,6 +608,7 @@ import Header from '../components/Header.astro';
       const payload = {
         email: formData.get('email'),
         hp_field: formData.get('hp_field'),
+        tool: 'self-assessment',
         scorePct: lastResults.scorePct,
         band: lastResults.band,
         pillarScores: lastResults.pillarScores,

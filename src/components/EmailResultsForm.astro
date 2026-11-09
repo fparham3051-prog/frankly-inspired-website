@@ -44,6 +44,7 @@ const { id } = Astro.props;
           email: fd.get('email'),
           hp_field: fd.get('hp_field'),
           tool: results.tool,
+          stage: (() => { try { return localStorage.getItem('fi_stage') || undefined; } catch { return undefined; } })(),
           scorePct: results.scorePct,
           band: results.band,
           pillarScores: results.pillarScores,

@@ -273,6 +273,7 @@ import EmailResultsForm from '../components/EmailResultsForm.astro';
 </BaseLayout>
 
 <script>
+  import { renderPathway } from '../scripts/pathway';
   // UPDATE THIS once frankly-inspired-backend is deployed to Render. See
   // that repo's README.md. Same value as assessment.astro's API_BASE.
   const API_BASE = 'https://frankly-inspired-api.onrender.com';
@@ -518,27 +519,12 @@ import EmailResultsForm from '../components/EmailResultsForm.astro';
       });
     }
 
-    const recommendationEl = document.getElementById('ss-recommendation');
-    if (recommendationEl) {
-      // Priority area is drawn from this tool's own 4 dimensions, even when
-      // the composite score above blends in the Leadership/Revenue legs,
-      // those legs are single scores from other tools, not dimensions with
-      // their own specificHelp text, so this stays scoped to what this
-      // tool itself measures.
-      const lowest = results.reduce((min, r) => (r.pct < min.pct ? r : min), results[0]);
-      const recommendedTier = compositeBand <= 1 ? 'implementation' : 'advisory';
-      const tierName = 'Ongoing Advisory and Implementation Retainer';
-      const tierReason =
-        compositeBand <= 1
-          ? 'with gaps across strategy, risk, or execution, hands-on weekly implementation tends to build the missing fundamentals faster than periodic advisory alone.'
-          : 'with solid-to-strong strategic fundamentals already in place, experienced strategic guidance is usually enough to sharpen and protect them further.';
-      recommendationEl.innerHTML =
-        '<h3 class="subhead">Priority Area: ' + lowest.dimension.label + '</h3>' +
-        '<p>' + lowest.dimension.specificHelp + '</p>' +
-        '<h3 class="subhead" style="margin-top:1.4rem;">Recommended Starting Point</h3>' +
-        '<p>Based on these results, the <strong>' + tierName + '</strong> is likely the best fit: ' + tierReason + '</p>' +
-        '<a class="btn btn-secondary" href="/#pricing-' + recommendedTier + '">See This Retainer</a>';
-    }
+    renderPathway(document.getElementById('ss-recommendation'), {
+      tool: 'Sustainability Strategy Score',
+      items: results.map((r) => ({ label: r.dimension.label, pct: r.pct, help: r.dimension.specificHelp })),
+      compositePct: composite,
+      basis: 'answers',
+    });
 
     fetchNarrative(summaryPrefix, {
       scorePct: composite,

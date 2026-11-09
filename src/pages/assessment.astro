@@ -235,7 +235,7 @@ import Header from '../components/Header.astro';
 
           <div class="results-related">
             <p>Three of these areas also have a deeper, dedicated diagnostic if you want to go further: the <a href="/leadership-health">Leadership &amp; Operations Score</a> (governance and succession research) and the <a href="/sustainability-score">Sustainability Strategy Score</a>, which blends the others into one strategic view. Revenue Diversification has two: the <a href="/revenue-growth-score">Revenue &amp; Growth Score</a> (real budget numbers against sector benchmarks) and the <a href="/institutional-advancement-score">Institutional Advancement Score</a> (the fundraising program behind those numbers: gift portfolios, stewardship, campaigns, and events).</p>
-            <p>If grant funding is a meaningful part of your revenue strategy, <a href={SCORECARD_URL} target="_blank" rel="noopener">InstitutionalOS</a> scores your organization's grant readiness free, in seconds, across the seven dimensions funders actually weigh. The full guided Grant Readiness Review below adds a financial-health read from your actual filed Form 990 data against a specific funder's stated priorities. The Revenue &amp; Growth Score above is a useful starting point before you bring real numbers into it.</p>
+            <p>This assessment covers five of the seven Health Index dimensions. For all seven in one score, take the free <a href={SCORECARD_URL} target="_blank" rel="noopener">InstitutionalOS Scorecard</a>.</p>
           </div>
 
           <div class="results-cta">
@@ -272,6 +272,7 @@ import Header from '../components/Header.astro';
 </BaseLayout>
 
 <script>
+  import { renderPathway } from '../scripts/pathway';
   // Scoring runs entirely in the browser (no data leaves the page) except
   // two backend calls: an anonymized score log + AI narrative request on
   // completion, and the optional "email me my results" capture at the end.
@@ -429,27 +430,19 @@ import Header from '../components/Header.astro';
     const scoredPillars = pillarScores.map((p) => ({ ...p, pct: Math.round(((p.score - 3) / 12) * 100) }));
     const lowest = scoredPillars.reduce((min, p) => (p.pct < min.pct ? p : min), scoredPillars[0]);
 
-    if (priorityEl) {
-      const deepDiveLinks = lowest.deepDive
-        .map((d) => `<a class="link-more" href="${d.href}">Take the ${d.label}</a>`)
-        .join(' or ');
-      const deepDiveNote = lowest.deepDive.length
-        ? `<p class="section-note" style="margin-top:0.75rem;">Want a deeper, more rigorous read on this specific area? ${deepDiveLinks}</p>`
-        : '';
-      priorityEl.innerHTML =
-        `<h3 class="subhead">Priority Area: ${lowest.label}</h3>` +
-        `<p>${lowest.service}</p>` +
-        `<a class="link-more" href="/#${lowest.anchor}">See this service on the site</a>` +
-        deepDiveNote;
-    }
-
-    const recommendationEl = document.getElementById('results-recommendation');
-    if (recommendationEl) {
-      recommendationEl.innerHTML =
-        '<h3 class="subhead">Recommended Starting Point</h3>' +
-        `<p>Based on your results, the <strong>${band.tierName}</strong> is likely the best fit: ${band.tierReason}</p>` +
-        `<a class="btn btn-secondary" href="/#pricing-${band.recommendedTier}">See This Retainer</a>`;
-    }
+    if (priorityEl) priorityEl.innerHTML = '';
+    const deepDiveLinks = lowest.deepDive
+      .map((d) => `<a class="link-more" href="${d.href}">${d.label}</a>`)
+      .join(' or ');
+    renderPathway(document.getElementById('results-recommendation'), {
+      tool: 'Nonprofit Sustainability Self-Assessment',
+      items: scoredPillars.map((p) => ({ label: p.label, pct: p.pct, help: p.service })),
+      compositePct: pct,
+      basis: 'answers',
+      extraHtml: lowest.deepDive.length
+        ? `<p class="section-note">For a deeper read on this area, take the ${deepDiveLinks}.</p>`
+        : '',
+    });
 
     lastResults = {
       scorePct: pct,
@@ -609,6 +602,7 @@ import Header from '../components/Header.astro';
         email: formData.get('email'),
         hp_field: formData.get('hp_field'),
         tool: 'self-assessment',
+        stage: (() => { try { return localStorage.getItem('fi_stage') || undefined; } catch { return undefined; } })(),
         scorePct: lastResults.scorePct,
         band: lastResults.band,
         pillarScores: lastResults.pillarScores,

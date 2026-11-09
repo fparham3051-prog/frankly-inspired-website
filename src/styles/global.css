@@ -1982,3 +1982,20 @@ a.card:hover .card-cta { text-decoration: underline; }
 .leader-callout p { margin: 0; color: #4a545e; }
 .leader-callout-label { font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold-accessible) !important; font-weight: 700; }
 .tool-dims { margin-top: 0.6rem !important; font-size: 0.8rem !important; color: var(--gold-accessible) !important; font-weight: 600; }
+/* ---------- Results pathway (all five tools) ---------- */
+.pathway .subhead { margin-top: 1.6rem; }
+.pathway .subhead:first-child { margin-top: 0; }
+.pathway-flag { background: var(--gold-soft); border-left: 3px solid var(--gold); padding: 0.75rem 1rem; border-radius: var(--radius-sm); }
+.pathway-stage-q { font-weight: 600; color: var(--navy); margin-bottom: 0.6rem; }
+.stage-choices { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 0.6rem; margin-bottom: 1rem; }
+.stage-choice { text-align: left; background: var(--white); border: 1.5px solid var(--border); border-radius: var(--radius-sm); padding: 0.7rem 0.9rem; cursor: pointer; font: inherit; color: var(--charcoal); display: flex; flex-direction: column; gap: 0.15rem; transition: border-color var(--transition), background var(--transition); }
+.stage-choice strong { color: var(--navy); }
+.stage-choice span { font-size: 0.85rem; color: #4a545e; }
+.stage-choice:hover { border-color: var(--gold); }
+.stage-choice.is-selected { border-color: var(--gold); background: var(--gold-soft); }
+.stage-choice:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.pathway-rec { margin: 0.25rem 0 1rem; }
+.na-toggle { display: flex; gap: 0.5rem; align-items: center; font-size: 0.92rem; margin: 0.4rem 0 1rem; color: var(--navy); cursor: pointer; }
+.pillar-group.is-skipped .likert { opacity: 0.4; }
+.stage-choice.is-selected { background: var(--gold); border-color: var(--gold); }
+.stage-choice.is-selected strong, .stage-choice.is-selected span { color: var(--navy-deep); }

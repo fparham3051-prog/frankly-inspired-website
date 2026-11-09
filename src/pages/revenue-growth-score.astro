@@ -191,6 +191,7 @@ import EmailResultsForm from '../components/EmailResultsForm.astro';
 </BaseLayout>
 
 <script>
+  import { renderPathway } from '../scripts/pathway';
   // UPDATE THIS once frankly-inspired-backend is deployed to Render. See
   // that repo's README.md. Same value as assessment.astro's API_BASE.
   const API_BASE = 'https://frankly-inspired-api.onrender.com';
@@ -437,22 +438,12 @@ import EmailResultsForm from '../components/EmailResultsForm.astro';
       });
     }
 
-    const recommendationEl = document.getElementById('rg-recommendation');
-    if (recommendationEl) {
-      const lowest = results.reduce((min, r) => (r.score < min.score ? r : min), results[0]);
-      const recommendedTier = compositeBand <= 1 ? 'implementation' : 'advisory';
-      const tierName = 'Ongoing Advisory and Implementation Retainer';
-      const tierReason =
-        compositeBand <= 1
-          ? 'with revenue and growth gaps across more than one area, hands-on weekly implementation (including donor stewardship, revenue-pipeline design, and partnership development) tends to stabilize things faster than periodic advisory alone.'
-          : 'with a stable-to-strong revenue and growth foundation, experienced strategic guidance is usually enough to sharpen fundraising strategy and protect that strength further.';
-      recommendationEl.innerHTML =
-        '<h3 class="subhead">Priority Area: ' + lowest.metric.label + '</h3>' +
-        '<p>' + lowest.metric.specificHelp + '</p>' +
-        '<h3 class="subhead" style="margin-top:1.4rem;">Recommended Starting Point</h3>' +
-        '<p>Based on these numbers, the <strong>' + tierName + '</strong> is likely the best fit: ' + tierReason + '</p>' +
-        '<a class="btn btn-secondary" href="/#pricing-' + recommendedTier + '">See This Retainer</a>';
-    }
+    renderPathway(document.getElementById('rg-recommendation'), {
+      tool: 'Revenue & Growth Score',
+      items: results.map((r) => ({ label: r.metric.label, pct: r.score, help: r.metric.specificHelp })),
+      compositePct: composite,
+      basis: 'figures',
+    });
 
     fetchNarrative({
       scorePct: composite,

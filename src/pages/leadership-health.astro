@@ -23,7 +23,8 @@ import EmailResultsForm from '../components/EmailResultsForm.astro';
            (the field's longest-running national board-practices survey)
          - Leadership Succession     -> CompassPoint & Meyer Foundation,
            "Daring to Lead" (the definitive national ED succession/burnout
-           study; only 17% of nonprofits report a documented succession plan)
+           study; BoardSource reports only about a third of boards have an
+           executive succession plan)
          - Organizational Alignment  -> McKinsey's Organizational Health
            Index (OHI): its Direction, Accountability, and Capabilities
            outcomes specifically, simplified from the full 9-outcome/
@@ -268,6 +269,7 @@ import EmailResultsForm from '../components/EmailResultsForm.astro';
 </BaseLayout>
 
 <script>
+  import { renderPathway } from '../scripts/pathway';
   // Scores four dimensions, each a simplified, cited slice of a named
   // research framework rather than a generic HR checklist:
   //   - Governance          -> BoardSource, "Leading with Intent"
@@ -318,8 +320,8 @@ import EmailResultsForm from '../components/EmailResultsForm.astro';
       specificHelp: 'The work here is succession planning: identifying bench strength, documenting institutional knowledge, and building a real leadership pipeline before a transition is forced.',
       questions: ['s1', 's2', 's3'],
       points: [
-        "Without a documented succession plan or a credible interim leader, this organization is one departure away from a real crisis. Only 17% of nonprofits nationally report a documented succession plan; building even a basic one is a high-leverage next step, not a someday project.",
-        "There's some bench strength but real gaps remain. The research here is blunt: roughly three in four executive directors report they're likely to leave within five years, and burnout is driven specifically by weak boards, low investment in leadership development, and concentrated decision-making; worth naming which of those applies here.",
+        "Without a documented succession plan or a credible interim leader, this organization is one departure away from a real crisis. BoardSource's national research has found only about a third of nonprofit boards have an executive succession plan; building even a basic one is a high-leverage next step, not a someday project.",
+        "There's some bench strength but real gaps remain. CompassPoint's Daring to Lead studies found roughly three in four executive directors expected to leave within five years, and burnout is driven specifically by weak boards, low investment in leadership development, and concentrated decision-making; worth naming which of those applies here.",
         "There's a credible interim path if leadership changed suddenly, which puts this organization ahead of most. Formalizing it in writing, with board sign-off, is what separates this from genuine resilience.",
         "Leadership development is a real, active practice here, genuinely uncommon in the sector. The next step is stress-testing it: could the plan survive an unplanned departure, not just a planned one?",
         "This is leadership bench strength most nonprofits lack entirely. Worth treating it as a retention and morale asset in its own right; staff who see a real development path tend to stay longer.",
@@ -347,7 +349,7 @@ import EmailResultsForm from '../components/EmailResultsForm.astro';
         "Kotter's research, based on over 100 organizational transformations, found most change efforts fail not from bad strategy but from skipping the groundwork: urgency, coalition, and a clear vision before asking people to change. That's worth revisiting before the next major initiative launches.",
         "Change tends to be announced rather than built toward. Visible short-term wins along the way, not just a distant end state, are one of the more overlooked steps in Kotter's model and often the easiest one to add immediately.",
         "The organization has real change capacity, though past changes haven't always stuck. Kotter's research points specifically to anchoring change in culture and systems as the step most often skipped; worth checking whether recent changes actually became 'how we operate' or quietly reverted.",
-        "This organization leads change more deliberately than most. Kotter reports roughly 70% of change efforts succeed when the full model is actually followed; worth naming which steps are already instinctive here.",
+        "This organization leads change more deliberately than most. Kotter's work finds most change efforts stall at the groundwork steps, not the strategy; worth naming which of his steps are already instinctive here, so they survive the next leadership change.",
         "This is genuine change leadership maturity. The opportunity now is using it as a real competitive advantage: the ability to adapt faster than peer organizations during funding shifts or sector change.",
       ],
     },
@@ -449,22 +451,12 @@ import EmailResultsForm from '../components/EmailResultsForm.astro';
       });
     }
 
-    const recommendationEl = document.getElementById('lh-recommendation');
-    if (recommendationEl) {
-      const lowest = results.reduce((min, r) => (r.pct < min.pct ? r : min), results[0]);
-      const recommendedTier = compositeBand <= 1 ? 'implementation' : 'advisory';
-      const tierName = 'Ongoing Advisory and Implementation Retainer';
-      const tierReason =
-        compositeBand <= 1
-          ? 'with gaps across more than one leadership or operational dimension, hands-on weekly implementation tends to build capacity faster than periodic advisory alone.'
-          : 'with solid-to-strong leadership fundamentals already in place, experienced strategic guidance is usually enough to sharpen and protect them further.';
-      recommendationEl.innerHTML =
-        '<h3 class="subhead">Priority Area: ' + lowest.dimension.label + '</h3>' +
-        '<p>' + lowest.dimension.specificHelp + '</p>' +
-        '<h3 class="subhead" style="margin-top:1.4rem;">Recommended Starting Point</h3>' +
-        '<p>Based on these results, the <strong>' + tierName + '</strong> is likely the best fit: ' + tierReason + '</p>' +
-        '<a class="btn btn-secondary" href="/#pricing-' + recommendedTier + '">See This Retainer</a>';
-    }
+    renderPathway(document.getElementById('lh-recommendation'), {
+      tool: 'Leadership & Operations Score',
+      items: results.map((r) => ({ label: r.dimension.label, pct: r.pct, help: r.dimension.specificHelp })),
+      compositePct: composite,
+      basis: 'answers',
+    });
 
     fetchNarrative({
       scorePct: composite,

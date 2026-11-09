@@ -122,6 +122,7 @@ import EmailResultsForm from '../components/EmailResultsForm.astro';
           <div class="pillar-group" data-pillar-index="3">
             <h2 class="pillar-heading">3. Campaign Structure &amp; Readiness</h2>
             <p class="fh-field-help">Based on standard capital-campaign phase methodology (feasibility, quiet phase, public phase).</p>
+            <label class="na-toggle"><input type="checkbox" id="cs-na" /> We don't have a campaign planned in the next two years. Skip this section.</label>
             <fieldset class="likert">
               <legend>Before launching a campaign, we run a real feasibility assessment (confidential interviews with top prospects), rather than setting a goal and hoping.</legend>
               <div class="likert-scale">
@@ -294,6 +295,7 @@ import EmailResultsForm from '../components/EmailResultsForm.astro';
 </BaseLayout>
 
 <script>
+  import { renderPathway } from '../scripts/pathway';
   // UPDATE THIS once frankly-inspired-backend is deployed to Render. See
   // that repo's README.md. Same value as assessment.astro's API_BASE.
   const API_BASE = 'https://frankly-inspired-api.onrender.com';
@@ -415,6 +417,23 @@ import EmailResultsForm from '../components/EmailResultsForm.astro';
     pillarGroups.forEach((group) => progressObserver.observe(group));
   }
 
+  // "No campaign planned" skips the three campaign questions: they stop
+  // being required and the dimension is left out of the score, so an
+  // organization isn't marked down for something it isn't doing yet.
+  (function campaignSkip() {
+    const box = document.getElementById('cs-na') as HTMLInputElement | null;
+    if (!box) return;
+    const inputs = () => Array.from(document.querySelectorAll<HTMLInputElement>('input[name="cs1"], input[name="cs2"], input[name="cs3"]'));
+    box.addEventListener('change', () => {
+      inputs().forEach((i) => {
+        i.disabled = box.checked;
+        if (i.value === '1') i.required = !box.checked;
+        if (box.checked) i.checked = false;
+      });
+      box.closest('.pillar-group')?.classList.toggle('is-skipped', box.checked);
+    });
+  })();
+
   function questionScore(name: string, formEl: HTMLFormElement): number {
     const checked = formEl.querySelector<HTMLInputElement>(`input[name="${name}"]:checked`);
     return checked ? Number(checked.value) : 0;
@@ -423,7 +442,8 @@ import EmailResultsForm from '../components/EmailResultsForm.astro';
   function renderResults() {
     if (!form) return;
 
-    const results = DIMENSIONS.map((d) => {
+    const campaignSkipped = (document.getElementById('cs-na') as HTMLInputElement | null)?.checked === true;
+    const results = DIMENSIONS.filter((d) => !(campaignSkipped && d.questions[0] === 'cs1')).map((d) => {
       const scores = d.questions.map((q) => questionScore(q, form));
       const avg = scores.reduce((a, b) => a + b, 0) / scores.length;
       const bandIdx = bandIndexFromAvg(avg);
@@ -459,22 +479,12 @@ import EmailResultsForm from '../components/EmailResultsForm.astro';
       });
     }
 
-    const recommendationEl = document.getElementById('ia-recommendation');
-    if (recommendationEl) {
-      const lowest = results.reduce((min, r) => (r.pct < min.pct ? r : min), results[0]);
-      const recommendedTier = compositeBand <= 1 ? 'implementation' : 'advisory';
-      const tierName = 'Ongoing Advisory and Implementation Retainer';
-      const tierReason =
-        compositeBand <= 1
-          ? 'with gaps across more than one part of the fundraising program, hands-on weekly implementation tends to build the missing structure faster than periodic advisory alone.'
-          : 'with solid-to-strong fundraising program fundamentals already in place, experienced strategic guidance is usually enough to sharpen and protect them further.';
-      recommendationEl.innerHTML =
-        '<h3 class="subhead">Priority Area: ' + lowest.dimension.label + '</h3>' +
-        '<p>' + lowest.dimension.specificHelp + '</p>' +
-        '<h3 class="subhead" style="margin-top:1.4rem;">Recommended Starting Point</h3>' +
-        '<p>Based on these results, the <strong>' + tierName + '</strong> is likely the best fit: ' + tierReason + '</p>' +
-        '<a class="btn btn-secondary" href="/#pricing-' + recommendedTier + '">See This Retainer</a>';
-    }
+    renderPathway(document.getElementById('ia-recommendation'), {
+      tool: 'Institutional Advancement Score',
+      items: results.map((r) => ({ label: r.dimension.label, pct: r.pct, help: r.dimension.specificHelp })),
+      compositePct: composite,
+      basis: 'answers',
+    });
 
     fetchNarrative({
       scorePct: composite,

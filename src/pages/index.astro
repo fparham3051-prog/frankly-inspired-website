@@ -8,8 +8,8 @@ import DurabilityIndex from '../components/DurabilityIndex.astro';
 ---
 
 <BaseLayout
-  title="Franklin D. Parham | Nonprofit Strategy & Sustainability"
-  description="Franklin D. Parham helps nonprofit leaders strengthen sustainability through strategy, diversified revenue, organizational development, operations, and cross-sector partnerships."
+  title="Franklin D. Parham | When Growth Outpaces the Institution"
+  description="For growing nonprofits whose programs, sites, and funding have outpaced their leadership, revenue, evidence, and systems. Frankly Inspired finds the gap that will break first and fixes it in 90 days."
   footerVariant="home"
 >
   <Header variant="full" />
@@ -22,11 +22,11 @@ import DurabilityIndex from '../components/DurabilityIndex.astro';
         <div class="hero-copy">
           <p class="eyebrow reveal" style="margin-bottom:0.35rem;">Franklin D. Parham</p>
           <p class="hero-role reveal">Founder and Principal, Frankly Inspired and Associates</p>
-          <h1 class="hero-h1-long reveal">Find the one thing holding your nonprofit back, and a 90-day plan to close the gap.</h1>
-          <p class="hero-sub reveal">Evidence-based strategy and sustainability consulting for nonprofit leaders. Every engagement scores your organization, names its single binding constraint, and ends with a plan concrete enough to act on Monday morning.</p>
+          <h1 class="hero-h1-long reveal">Your programs are growing faster than your institution can carry them.</h1>
+          <p class="hero-sub reveal">Frankly Inspired finds the gap that will break first, whether it's leadership, revenue, evidence, or systems. We verify it with evidence and give your leadership a 90-day plan to fix it. Built for executive directors and boards of growing youth, education, and workforce nonprofits.</p>
           <div class="hero-ctas reveal">
-            <a class="btn btn-primary" href={CALENDLY_URL} target="_blank" rel="noopener" data-track="schedule_click">Schedule a Strategy Conversation</a>
-            <a class="btn btn-secondary" href={SCORECARD_URL} target="_blank" rel="noopener" data-track="hero_scorecard_click">Get Your Free Health Index Score</a>
+            <a class="btn btn-primary" href={CALENDLY_URL} target="_blank" rel="noopener" data-track="schedule_click">Talk Through Your Situation</a>
+            <a class="btn btn-secondary" href="#situations" data-track="hero_situations_click">Find Your Situation</a>
           </div>
         </div>
         <div class="hero-portrait reveal">
@@ -39,11 +39,88 @@ import DurabilityIndex from '../components/DurabilityIndex.astro';
         </div>
       </div>
       <div class="hero-credentials reveal">
-        <div class="hero-credential"><span class="hero-credential-num">20+</span><span>Years in Education and Nonprofit Leadership</span></div>
+        <div class="hero-credential"><span class="hero-credential-num">2</span><span>Cities led, Baltimore and Philadelphia</span></div>
         <div class="hero-credential-divider" aria-hidden="true"></div>
-        <a class="hero-credential hero-credential-link" href="/consulting#dimensions"><span>7-Dimension Health Index</span></a>
+        <a class="hero-credential hero-credential-link" href="/methodology"><span>7 dimensions, 1 evidence rubric</span></a>
         <div class="hero-credential-divider" aria-hidden="true"></div>
         <a class="hero-credential hero-credential-link" href="/consulting#pricing"><span>Diagnostic from $2,000</span></a>
+      </div>
+    </section>
+
+    <!-- ============ SITUATIONS (trigger doors) ============ -->
+    <!-- The five situations leaders call about. Each card sets the same
+         trigger the free tools ask about (fi_trigger), so the self-check
+         and its results speak to that situation. Keep labels in step with
+         src/scripts/trigger.ts. -->
+    <section id="situations" class="section situations-section">
+      <div class="container">
+        <h2 class="section-title reveal">Which of these sounds like you?</h2>
+        <p class="section-note reveal">Leaders rarely call about "sustainability." They call when something specific is about to happen. Each of these is a door into the same Diagnostic.</p>
+        <div class="door-grid">
+          <article class="door-card reveal">
+            <p class="door-quote">&ldquo;We're opening a second site, and I'm not sure we're ready.&rdquo;</p>
+            <h3>Expansion Readiness</h3>
+            <p>Can the organization carry the new site or program without weakening what already works?</p>
+            <a class="link-more" href="/assessment" data-set-trigger="expansion">Start the free self-check &rarr;</a>
+          </article>
+          <article class="door-card reveal">
+            <p class="door-quote">&ldquo;We keep chasing grants and never get stable.&rdquo;</p>
+            <h3>Funder Readiness</h3>
+            <p>Will your evidence, governance, and finances hold up when a larger funder looks closely?</p>
+            <a class="link-more" href="/assessment" data-set-trigger="funder">Start the free self-check &rarr;</a>
+          </article>
+          <article class="door-card reveal">
+            <p class="door-quote">&ldquo;Everything still runs through me.&rdquo;</p>
+            <h3>Founder Dependence</h3>
+            <p>What has to be written down and handed off so the organization runs without one person?</p>
+            <a class="link-more" href="/leadership-health" data-set-trigger="founder">Start the free self-check &rarr;</a>
+          </article>
+          <article class="door-card reveal">
+            <p class="door-quote">&ldquo;We hired more people, and I'm more overwhelmed.&rdquo;</p>
+            <h3>Capacity Strain</h3>
+            <p>Is the problem really headcount, or decision rights, workflow, or revenue quality?</p>
+            <a class="link-more" href="/leadership-health" data-set-trigger="strain">Start the free self-check &rarr;</a>
+          </article>
+          <article class="door-card reveal">
+            <p class="door-quote">&ldquo;Our founder may step down in the next two years.&rdquo;</p>
+            <h3>Leadership Transition</h3>
+            <p>Which knowledge, relationships, and authority have to transfer first?</p>
+            <a class="link-more" href="/leadership-health" data-set-trigger="transition">Start the free self-check &rarr;</a>
+          </article>
+          <article class="door-card door-card-cta reveal">
+            <h3>Already know it's one of these?</h3>
+            <p>A 30-minute conversation is enough to tell whether a Diagnostic is the right next step, and which door to come through.</p>
+            <a class="btn btn-primary" href={CALENDLY_URL} target="_blank" rel="noopener" data-track="schedule_click">Talk Through Your Situation</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ THE PROBLEM BEHIND THE PROBLEM ============ -->
+    <!-- Sector figures as of Nov 2026: NFF 2025 State of the Nonprofit
+         Sector Survey; CEP State of Nonprofits 2026. Recheck yearly. -->
+    <section id="problem" class="section problem-section alt-bg">
+      <div class="container">
+        <h2 class="section-title reveal">The problem behind the problem</h2>
+        <p class="section-note reveal">Nonprofits rarely struggle because the mission lacks value. They become fragile when the institution doesn't mature as fast as the programs, the funding, and the expectations.</p>
+        <div class="problem-stats">
+          <div class="stat reveal"><span class="stat-num">36%</span><span class="stat-label">of nonprofits ended 2024 with an operating deficit, the highest in ten years</span></div>
+          <div class="stat reveal"><span class="stat-num">52%</span><span class="stat-label">hold three months of cash or less</span></div>
+          <div class="stat reveal"><span class="stat-num">57%</span><span class="stat-label">of nonprofit CEOs say foundation grants have become harder to win since January 2025</span></div>
+        </div>
+        <p class="problem-source reveal">Sources: <a href="https://nff.org/insights/survey-us-nonprofits-at-critical-point-as-funding-for-community-needs-falters/" target="_blank" rel="noopener">Nonprofit Finance Fund, 2025</a>; <a href="https://cep.org/report-backpacks/state-of-nonprofits-2026/" target="_blank" rel="noopener">Center for Effective Philanthropy, 2026</a>.</p>
+        <div class="problem-example reveal">
+          <div>
+            <p class="problem-label">What leaders say</p>
+            <p class="problem-said">&ldquo;We need a grant writer.&rdquo;</p>
+          </div>
+          <span class="problem-arrow" aria-hidden="true">&rarr;</span>
+          <div>
+            <p class="problem-label">What it often turns out to be</p>
+            <p class="problem-found">Thin evidence behind the story. Outcomes are measured for one program, or none, so larger funders can't say yes.</p>
+          </div>
+        </div>
+        <p class="reveal" style="text-align:center;"><a class="link-more" href="/insights#field-notes">More field notes like this &rarr;</a></p>
       </div>
     </section>
 
@@ -53,6 +130,8 @@ import DurabilityIndex from '../components/DurabilityIndex.astro';
          assessments completed, which stays hidden until it passes 25. -->
     <section id="track-record" class="section proof-section">
       <div class="container">
+        <h2 class="section-title reveal">I've run the problem I diagnose</h2>
+        <p class="section-note reveal">As Regional Director for The Hidden Genius Project, Franklin opened and ran a two-city region, owning the budget, the partnerships, the staffing, and the systems. He knows what breaks first because he has had to fix it.</p>
         <p class="affiliation-label reveal">Board leadership and affiliations: Ora Lee Smith Cancer Research Foundation &middot; Turner Foundation for Community Advocacy &middot; Howard Rye Institute Fellow &middot; AFP Fellow</p>
         <div class="stat-grid proof-stats">
           <div class="stat stat-live reveal" id="live-stat" hidden><span class="stat-num" id="live-stat-num"></span><span class="stat-label">free nonprofit assessments completed with Frankly Inspired tools</span></div>
@@ -125,7 +204,7 @@ import DurabilityIndex from '../components/DurabilityIndex.astro';
           <li class="step reveal">
             <span class="step-num" aria-hidden="true">3</span>
             <h3>Plan</h3>
-            <p>A written memo names your single binding constraint, with a 90-day plan that includes your next Candid Seal level.</p>
+            <p>A written memo names your binding constraint, the gap that will break first, with a 90-day plan that includes your next Candid Seal level.</p>
             <a class="link-more" href="/consulting#sample-diagnostic">See a sample &rarr;</a>
           </li>
           <li class="step reveal">
@@ -135,6 +214,18 @@ import DurabilityIndex from '../components/DurabilityIndex.astro';
             <a class="link-more" href="/health-index">Your Health Index &rarr;</a>
           </li>
         </ol>
+        <div class="dim-questions reveal">
+          <h3>Seven questions every Diagnostic answers</h3>
+          <ol>
+            <li><a href="/consulting#pillar-sustainability">Are we clear about where we're going?</a></li>
+            <li><a href="/consulting#pillar-program">Can we show the work matters?</a></li>
+            <li><a href="/consulting#pillar-revenue">Can we pay for the institution reliably?</a></li>
+            <li><a href="/consulting#pillar-leadership">Can we run without one person?</a></li>
+            <li><a href="/consulting#pillar-operations">Can we execute consistently?</a></li>
+            <li><a href="/consulting#pillar-partnership">Do we have the relationships we need?</a></li>
+            <li><a href="/consulting#pillar-governance">Are we governed responsibly?</a></li>
+          </ol>
+        </div>
       </div>
     </section>
 
@@ -384,6 +475,17 @@ import DurabilityIndex from '../components/DurabilityIndex.astro';
 
   <ScrollReveal />
 </BaseLayout>
+
+<script>
+  // Situation cards: remember the situation the visitor picked so the
+  // free tool they open asks less and speaks to it (src/scripts/trigger.ts).
+  document.querySelectorAll<HTMLAnchorElement>('[data-set-trigger]').forEach((a) => {
+    a.addEventListener('click', () => {
+      try { localStorage.setItem('fi_trigger', a.dataset.setTrigger || ''); } catch { /* the tool still works */ }
+      (window as any).fiTrack?.('situation_click', { trigger: a.dataset.setTrigger });
+    });
+  });
+</script>
 
 <script>
   // UPDATE THIS once frankly-inspired-backend is deployed to Render. See

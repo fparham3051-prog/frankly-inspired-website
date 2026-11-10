@@ -1,0 +1,54 @@
+---
+// The Institutional Durability Index: what the free tools show across every
+// organization that answered on the evidence rubric. Read from the backend
+// (/api/durability-index), which returns nothing until at least 25
+// organizations have answered, so this stays hidden until then. Labeled
+// directional: self-reported answers, not verified evidence.
+interface Props { compact?: boolean }
+const { compact = false } = Astro.props;
+---
+
+<div class:list={['durability', { 'durability-compact': compact }]} data-durability hidden>
+  <p class="eyebrow eyebrow-dark">Institutional Durability Index &middot; directional</p>
+  <div class="durability-stats">
+    <div class="durability-stat">
+      <span class="durability-num" data-d-hidden></span>
+      <span class="durability-label">of organizations with a healthy-looking overall score (60% or more) had at least one area under 40%: a strong average hiding a weak spot.</span>
+    </div>
+    <div class="durability-stat">
+      <span class="durability-num durability-word" data-d-weakest></span>
+      <span class="durability-label" data-d-weakest-label></span>
+    </div>
+  </div>
+  {!compact && <div class="durability-triggers" data-d-triggers hidden><h3>What brought them to the tools</h3><ul data-d-trigger-list></ul></div>}
+  <p class="durability-note">From <span data-d-n></span> organizations that took the free tools. Self-reported answers, not verified evidence. <a href="/methodology">How scoring works</a>.</p>
+</div>
+
+<script>
+  import { TRIGGERS, type TriggerKey } from '../scripts/trigger';
+  const API_BASE = 'https://frankly-inspired-api.onrender.com';
+  document.querySelectorAll<HTMLElement>('[data-durability]').forEach((root) => {
+    fetch(API_BASE + '/api/durability-index')
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => {
+        if (!d || !d.ok || !d.ready) return;
+        const q = (s: string) => root.querySelector<HTMLElement>(s);
+        const top = (d.weakestDimensions || [])[0];
+        q('[data-d-hidden]')!.textContent = d.hiddenWeakSpotPct + '%';
+        if (top) {
+          q('[data-d-weakest]')!.textContent = top.dimension;
+          q('[data-d-weakest-label]')!.textContent = `was the weakest dimension most often, for ${top.pct}% of organizations.`;
+        }
+        q('[data-d-n]')!.textContent = String(d.responses);
+        const list = q('[data-d-trigger-list]');
+        if (list && (d.triggers || []).length) {
+          list.innerHTML = d.triggers
+            .map((t: { key: TriggerKey; pct: number }) => `<li><strong>${t.pct}%</strong> ${TRIGGERS[t.key] ? TRIGGERS[t.key].label.toLowerCase() : t.key}</li>`)
+            .join('');
+          q('[data-d-triggers]')!.hidden = false;
+        }
+        root.hidden = false;
+      })
+      .catch(() => { /* stays hidden */ });
+  });
+</script>

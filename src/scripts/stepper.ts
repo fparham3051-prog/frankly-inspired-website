@@ -154,6 +154,9 @@ export function enableStepper(form: HTMLFormElement | null) {
     if (!on || e.altKey || e.ctrlKey || e.metaKey) return;
     const tag = (e.target as HTMLElement).tagName;
     if (tag === 'TEXTAREA' || (tag === 'INPUT' && (e.target as HTMLInputElement).type !== 'radio')) return;
+    // Keys pressed on the trigger question ("What's happening right now?")
+    // belong to it, not to the current question.
+    if ((e.target as HTMLElement).closest('.trigger-picker')) return;
     if (/^[1-5]$/.test(e.key)) {
       const r = questions[i].querySelector<HTMLInputElement>(`input[type="radio"][value="${e.key}"]`);
       if (r) { r.checked = true; r.dispatchEvent(new Event('change', { bubbles: true })); e.preventDefault(); }

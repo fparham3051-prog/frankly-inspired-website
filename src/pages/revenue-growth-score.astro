@@ -198,6 +198,7 @@ import EmailResultsForm from '../components/EmailResultsForm.astro';
 
 <script>
   import { renderPathway } from '../scripts/pathway';
+  import { mountTriggerPicker, getTrigger } from '../scripts/trigger';
   import { recordMetrics } from '../scripts/healthEngine';
   import { mountOrgLookup } from '../scripts/orgLookup';
   // Prefill revenue and expenses from the latest filed 990, only into
@@ -397,6 +398,7 @@ import EmailResultsForm from '../components/EmailResultsForm.astro';
   }
 
   const form = document.getElementById('rg-form') as HTMLFormElement | null;
+  mountTriggerPicker(form, 'revenue-growth');
   const status = document.getElementById('rg-status');
   const resultsEl = document.getElementById('rg-results') as HTMLElement | null;
   const metricsEl = document.getElementById('rg-metrics');
@@ -500,7 +502,7 @@ import EmailResultsForm from '../components/EmailResultsForm.astro';
     fetch(API_BASE + '/api/assessment-narrative', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ tool: 'revenue-growth', ...payload }),
+      body: JSON.stringify({ tool: 'revenue-growth', ...payload, trigger: getTrigger() || undefined }),
     })
       .then((res) => res.json())
       .then((data) => {

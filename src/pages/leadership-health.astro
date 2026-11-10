@@ -142,6 +142,8 @@ import EmailResultsForm from '../components/EmailResultsForm.astro';
 <script>
   import { renderPathway } from '../scripts/pathway';
   import { enableStepper } from '../scripts/stepper';
+  import { mountTriggerPicker, getTrigger } from '../scripts/trigger';
+  mountTriggerPicker(document.getElementById('lh-form') as HTMLFormElement | null, 'leadership');
   enableStepper(document.getElementById('lh-form') as HTMLFormElement | null);
   import { recordAnswers } from '../scripts/healthEngine';
   // Scores four dimensions, each a simplified, cited slice of a named
@@ -362,7 +364,7 @@ import EmailResultsForm from '../components/EmailResultsForm.astro';
     fetch(API_BASE + '/api/assessment-narrative', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ tool: 'leadership', scale: 'evidence', ...payload }),
+      body: JSON.stringify({ tool: 'leadership', scale: 'evidence', ...payload, trigger: getTrigger() || undefined }),
     })
       .then((res) => res.json())
       .then((data) => {

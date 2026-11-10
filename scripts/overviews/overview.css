@@ -1,0 +1,59 @@
+/* Shared print styles for the two-page Diagnostic overviews (leader and
+   funder versions). Rendered to PDF by scripts/build-overviews.py. */
+@font-face { font-family: 'Inter'; font-weight: 400; src: url('fonts/inter-latin-400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Inter'; font-weight: 600; src: url('fonts/inter-latin-600-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Inter'; font-weight: 700; src: url('fonts/inter-latin-700-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Playfair Display'; font-weight: 600; src: url('fonts/playfair-display-latin-600-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Playfair Display'; font-weight: 700; src: url('fonts/playfair-display-latin-700-normal.woff2') format('woff2'); }
+
+@page { size: Letter; margin: 0; }
+:root { --navy: #11233D; --navy-deep: #0B1A2D; --gold: #B28E42; --gold-text: #8E7134; --gold-soft: #F3ECDC; --ink: #23282D; --muted: #55606B; --line: #E2E6EA; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body { font-family: 'Inter', Arial, sans-serif; color: var(--ink); font-size: 10.2pt; line-height: 1.45; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.page { width: 8.5in; height: 11in; padding: 0.6in 0.7in 0.55in; position: relative; overflow: hidden; page-break-after: always; }
+.page:last-child { page-break-after: auto; }
+h1, h2, h3 { font-family: 'Playfair Display', Georgia, serif; color: var(--navy); margin: 0; line-height: 1.15; }
+h1 { font-size: 26pt; margin-bottom: 6pt; }
+h2 { font-size: 14pt; margin: 16pt 0 6pt; }
+h3 { font-size: 11pt; margin-bottom: 3pt; }
+p { margin: 0 0 6pt; }
+ul, ol { margin: 0 0 6pt; padding-left: 14pt; }
+li { margin-bottom: 3pt; }
+.top { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--gold); padding-bottom: 8pt; margin-bottom: 18pt; }
+.brand { font-family: 'Playfair Display', Georgia, serif; font-weight: 700; color: var(--navy); font-size: 12pt; }
+.brand span { color: var(--gold-text); }
+.kicker { text-transform: uppercase; letter-spacing: 0.14em; font-size: 8pt; font-weight: 700; color: var(--gold-text); margin-bottom: 6pt; }
+.lead { font-size: 12pt; color: var(--navy); max-width: 6.2in; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12pt 18pt; }
+.doors { display: grid; grid-template-columns: 1fr 1fr; gap: 8pt; margin-top: 4pt; }
+.door { border: 1px solid var(--line); border-left: 3px solid var(--gold); border-radius: 6px; padding: 7pt 9pt; }
+.door strong { display: block; color: var(--navy); font-size: 10pt; }
+.door span { color: var(--muted); font-size: 9pt; }
+.steps { counter-reset: s; list-style: none; padding: 0; }
+.steps li { counter-increment: s; position: relative; padding-left: 20pt; margin-bottom: 5pt; }
+.steps li::before { content: counter(s); position: absolute; left: 0; top: 0; width: 14pt; height: 14pt; border-radius: 50%; background: var(--navy); color: #fff; font-size: 8pt; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+.box { background: var(--gold-soft); border-radius: 8px; padding: 10pt 12pt; }
+.price-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8pt; margin: 4pt 0 8pt; }
+.price { border: 1px solid var(--line); border-radius: 6px; padding: 8pt; text-align: center; }
+.price b { display: block; font-family: 'Playfair Display', Georgia, serif; font-size: 16pt; color: var(--navy); }
+.price span { font-size: 8.5pt; color: var(--muted); }
+.stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10pt; margin: 6pt 0 4pt; }
+.stat b { display: block; font-family: 'Playfair Display', Georgia, serif; font-size: 20pt; color: var(--navy); }
+.stat span { font-size: 8.8pt; color: var(--ink); }
+.small { font-size: 8.3pt; color: var(--muted); }
+.foot { position: absolute; left: 0.7in; right: 0.7in; bottom: 0.4in; display: flex; justify-content: space-between; font-size: 8.3pt; color: var(--muted); border-top: 1px solid var(--line); padding-top: 6pt; }
+.cta { background: var(--navy); color: #fff; border-radius: 8px; padding: 12pt 14pt; margin-top: 12pt; }
+.cta h3 { color: #fff; }
+.cta p { margin: 0; color: #E3E8EE; }
+.cta a { color: #CBA869; text-decoration: none; font-weight: 600; }
+
+/* Page 1 of the leader overview carries the most; trims it to fit. */
+.tight h1 { font-size: 22pt; }
+.tight .lead { font-size: 11pt; }
+.tight h2 { margin-top: 12pt; }
+.tight .doors .door:last-child { grid-column: 1 / -1; }
+.tight .door { padding: 5pt 8pt; }
+.tight .door span { font-size: 8.6pt; }
+.tight .steps li { margin-bottom: 3pt; }
+.tight .top { margin-bottom: 12pt; }

@@ -12,6 +12,7 @@
 // this browser (localStorage key fi_stage). Nothing leaves the browser.
 
 import { profileTeaserHtml } from './healthEngine';
+import { triggerRecHtml } from './trigger';
 
 export type StageKey = 'build' | 'fund' | 'sustain';
 
@@ -107,6 +108,7 @@ function recommendationHtml(stage: StageKey | null): string {
   }
   return `
     <h3 class="subhead">Recommended next step</h3>
+    ${triggerRecHtml()}
     <p class="pathway-stage-q">Which best describes your organization?</p>
     <div class="stage-choices" role="group" aria-label="Organization stage">${picker}</div>
     ${rec}

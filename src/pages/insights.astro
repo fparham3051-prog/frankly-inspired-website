@@ -3,6 +3,47 @@ import { CALENDLY_URL } from '../config';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import ScrollReveal from '../components/ScrollReveal.astro';
+import DurabilityIndex from '../components/DurabilityIndex.astro';
+
+// Field notes: Franklin's own observations, in one format every time:
+// the signal a leader notices, what organizations usually assume, the
+// constraint it often turns out to be, the evidence to check, and the
+// first 90-day action. Add new notes at the top.
+const fieldNotes = [
+  {
+    id: 'more-staff-more-strain',
+    title: 'More staff, more strain',
+    signal: 'The executive director is working longer hours, even after new hires.',
+    assumption: 'The organization needs more people.',
+    constraint: 'Decisions still run through one person. New staff add questions, not capacity.',
+    evidence: 'Which approvals land on the ED each week, who owns each workflow, and whether roles say what each person can decide alone.',
+    action: 'List the ten approvals the ED makes most often and write down who decides each one from now on. Revisit the list in 30 days.',
+    trigger: 'founder',
+    tool: { href: '/leadership-health', label: 'Score your leadership and operations' },
+  },
+  {
+    id: 'second-site-test',
+    title: 'The second-site test',
+    signal: 'The first site has a waitlist, so leadership plans a second site or city.',
+    assumption: 'The second site needs a site lead and new funding.',
+    constraint: "The first site's success lives in people's heads: how recruitment works, what partners agreed to, what a site really costs.",
+    evidence: 'Is there a written recruitment calendar, a partner agreement template, and a site budget model someone else could run?',
+    action: "Before hiring for site two, write site one's playbook: recruitment steps and dates, a standard partner agreement or MOU, and a budget template. Then test it by having someone new walk through it.",
+    trigger: 'expansion',
+    tool: { href: '/assessment', label: 'Take the Sustainability Self-Assessment' },
+  },
+  {
+    id: 'we-need-a-grant-writer',
+    title: '"We need a grant writer"',
+    signal: 'Proposals go out, but larger funders keep saying no.',
+    assumption: 'The organization needs better proposal writing.',
+    constraint: "The evidence behind the story is thin. Outcomes are measured for one program, or none, and the numbers don't match from report to report.",
+    evidence: 'Outcomes tracked per program, the last two funder reports side by side, and whether a one-page logic model exists for the largest program.',
+    action: 'Draft a one-page logic model for your largest program, pick one outcome, and start measuring it with every participant this quarter. Use the same number in every report.',
+    trigger: 'funder',
+    tool: { href: '/candid-seal', label: 'Check your Candid Seal path' },
+  },
+];
 
 // Research notes. Add new entries at the top. Each links forward to the
 // free tool that scores that area, so readers have a next step.
@@ -52,7 +93,7 @@ const insights = [
 
 <BaseLayout
   title="Nonprofit Research & Insights | Frankly Inspired"
-  description="Short, sourced research notes on donor retention, recurring giving, planned giving, and nonprofit sustainability, each with a free tool to see where your organization stands."
+  description="Field notes on what growing nonprofits usually mistake for their real problem, the Institutional Durability Index from free-tool data, and short sourced research notes."
   footerVariant="home"
 >
   <Header variant="full" />
@@ -61,13 +102,40 @@ const insights = [
     <section class="section assessment-intro">
       <div class="container narrow center">
         <p class="eyebrow eyebrow-dark">Insights</p>
-        <h1>What the research shows</h1>
-        <p class="hero-sub-light">Short, sourced notes on the levers that most affect whether a nonprofit lasts, each paired with a free tool to see where your organization stands.</p>
+        <h1>Field notes and research</h1>
+        <p class="hero-sub-light">The problem a leader names is often not the one holding the organization back. These notes show the difference: what leaders notice, what it usually turns out to be, and the first move to make.</p>
       </div>
     </section>
 
-    <section class="section alt-bg">
+    <section class="section alt-bg" id="field-notes">
       <div class="container narrow">
+        <h2 class="section-title reveal">Field notes</h2>
+        <p class="section-note reveal">Franklin's observations from leading and advising growing organizations. These are patterns to check, not research findings.</p>
+        {fieldNotes.map((n) => (
+          <article id={n.id} class="field-note reveal">
+            <h2>{n.title}</h2>
+            <dl>
+              <dt>Signal</dt><dd>{n.signal}</dd>
+              <dt>Usual assumption</dt><dd>{n.assumption}</dd>
+              <dt>Often it's</dt><dd class="fn-constraint">{n.constraint}</dd>
+              <dt>Check</dt><dd>{n.evidence}</dd>
+              <dt>First 90 days</dt><dd>{n.action}</dd>
+            </dl>
+            <a class="link-more" href={n.tool.href}>{n.tool.label} &rarr;</a>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="section" id="durability-index">
+      <div class="container narrow">
+        <DurabilityIndex />
+      </div>
+    </section>
+
+    <section class="section alt-bg" id="research">
+      <div class="container narrow">
+        <h2 class="section-title reveal">What the research shows</h2>
         {insights.map((i) => (
           <article id={i.id} class="insight-article reveal">
             <h2>{i.title}</h2>

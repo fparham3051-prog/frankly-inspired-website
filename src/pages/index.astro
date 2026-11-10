@@ -4,6 +4,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import ScrollReveal from '../components/ScrollReveal.astro';
 import { testimonials, caseStudies } from '../data/proof';
+import DurabilityIndex from '../components/DurabilityIndex.astro';
 ---
 
 <BaseLayout
@@ -61,6 +62,7 @@ import { testimonials, caseStudies } from '../data/proof';
           <div class="stat reveal"><span class="stat-num">$500K+</span><span class="stat-label">in scholarships secured, with 100% college enrollment for the senior cohort</span></div>
         </div>
         <p class="reveal" style="margin-top:1rem;"><a class="link-more" href="/about">About Franklin and his full track record &rarr;</a></p>
+        <DurabilityIndex compact />
       </div>
     </section>
 
@@ -494,6 +496,7 @@ import { testimonials, caseStudies } from '../data/proof';
         // results, so the lead arrives in the operations app with the right
         // Diagnostic already attached.
         stage: (() => { try { return localStorage.getItem('fi_stage') || undefined; } catch { return undefined; } })(),
+        trigger: (() => { try { return localStorage.getItem('fi_trigger') || undefined; } catch { return undefined; } })(),
       };
 
       if (status) status.textContent = 'Sending...';

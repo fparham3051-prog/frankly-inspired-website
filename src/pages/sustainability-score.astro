@@ -146,6 +146,8 @@ import EmailResultsForm from '../components/EmailResultsForm.astro';
 <script>
   import { renderPathway } from '../scripts/pathway';
   import { enableStepper } from '../scripts/stepper';
+  import { mountTriggerPicker, getTrigger } from '../scripts/trigger';
+  mountTriggerPicker(document.getElementById('ss-form') as HTMLFormElement | null, 'sustainability');
   enableStepper(document.getElementById('ss-form') as HTMLFormElement | null);
   import { recordAnswers } from '../scripts/healthEngine';
   // UPDATE THIS once frankly-inspired-backend is deployed to Render. See
@@ -433,7 +435,7 @@ import EmailResultsForm from '../components/EmailResultsForm.astro';
     fetch(API_BASE + '/api/assessment-narrative', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ tool: 'sustainability', scale: 'evidence', ...payload }),
+      body: JSON.stringify({ tool: 'sustainability', scale: 'evidence', ...payload, trigger: getTrigger() || undefined }),
     })
       .then((res) => res.json())
       .then((data) => {

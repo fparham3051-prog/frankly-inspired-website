@@ -49,6 +49,7 @@ const { id } = Astro.props;
           hp_field: fd.get('hp_field'),
           tool: results.tool,
           stage: (() => { try { return localStorage.getItem('fi_stage') || undefined; } catch { return undefined; } })(),
+          trigger: (() => { try { return localStorage.getItem('fi_trigger') || undefined; } catch { return undefined; } })(),
           scorePct: results.scorePct,
           band: results.band,
           pillarScores: results.pillarScores,

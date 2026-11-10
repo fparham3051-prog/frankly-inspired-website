@@ -122,6 +122,8 @@ import QuestionSection from '../components/QuestionSection.astro';
 <script>
   import { renderPathway } from '../scripts/pathway';
   import { enableStepper } from '../scripts/stepper';
+  import { mountTriggerPicker, getTrigger } from '../scripts/trigger';
+  mountTriggerPicker(document.getElementById('assessment-form') as HTMLFormElement | null, 'self-assessment');
   enableStepper(document.getElementById('assessment-form') as HTMLFormElement | null);
   import { recordAnswers, loadProfile, sealSummary } from '../scripts/healthEngine';
   import { TOOLS } from '../data/questionBank';
@@ -387,6 +389,7 @@ import QuestionSection from '../components/QuestionSection.astro';
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         scale: 'evidence',
+        trigger: getTrigger() || undefined,
         scorePct: results.scorePct,
         band: results.band,
         pillarScores: results.pillarScores,
@@ -477,6 +480,7 @@ import QuestionSection from '../components/QuestionSection.astro';
         email: formData.get('email'),
         hp_field: formData.get('hp_field'),
         tool: 'self-assessment',
+        trigger: getTrigger() || undefined,
         stage: (() => { try { return localStorage.getItem('fi_stage') || undefined; } catch { return undefined; } })(),
         scorePct: lastResults.scorePct,
         band: lastResults.band,

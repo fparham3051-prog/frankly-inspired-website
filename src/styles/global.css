@@ -2331,3 +2331,5 @@ a.card:hover .card-cta { text-decoration: underline; }
 .cohort-offer { background: var(--white); border: 1px solid var(--border); border-top: 4px solid var(--gold); border-radius: var(--radius); padding: 1.6rem; margin-top: 2.5rem; }
 .cohort-offer h3 { margin: 0.4rem 0 0.6rem; font-family: var(--font-heading); color: var(--navy); }
 .cohort-offer .price { margin: 0.8rem 0 1rem; }
+.pillar-proof { font-size: 0.86rem !important; color: #55606B; border-top: 1px solid var(--border); padding-top: 0.6rem; margin-top: 0.6rem; }
+.pillar-proof span { font-weight: 700; color: var(--navy); }

@@ -82,7 +82,7 @@ const RUBRIC_DESC = [
         </ul>
 
         <h2 class="subhead">7. What free tools can't tell you</h2>
-        <p>A free tool can only report what you tell it. The <a href="/consulting#pricing">InstitutionalOS Diagnostic</a> goes further: it checks the evidence behind each answer, reads your Form 990 the way a funder would, tests you against the gates for your stage (Build, Fund, or Sustain), and names the single binding constraint in a written memo with a 90-day plan.</p>
+        <p>A free tool can only report what you tell it. The <a href="/consulting#pricing">InstitutionalOS Diagnostic</a> goes further: it checks the evidence behind each answer, reads your Form 990 the way a funder would, tests you against the gates for your stage (Build, Fund, or Sustain), and names the single binding constraint in a written memo with a 90-Day Improvement Plan your team works through weekly check-ins.</p>
 
         <h2 class="subhead" id="candid-seal">8. The Candid Seal path</h2>
         <p>We don't issue a seal of our own. Instead, every tool points toward Candid's free <a href="https://candid.org/" target="_blank" rel="noopener">Seals of Transparency</a>, which funders already use to screen applicants. In Candid's own research, Seal holders received on average 62% more in contributions. The <a href="/candid-seal">Candid Seal Path</a> follows Candid's {SEAL_YEAR} requirements, which must be earned in order (Bronze, Silver, Gold, Platinum) and renewed yearly. It links each requirement to the organizational work behind it and to its Health Index dimension. Candid decides every Seal, and Frankly Inspired is not affiliated with Candid.</p>
@@ -93,7 +93,23 @@ const RUBRIC_DESC = [
           </tbody>
         </table></div>
 
-        <h2 class="subhead" id="questions">9. Every question, by dimension</h2>
+        <h2 class="subhead" id="glossary">9. Terms we use</h2>
+        <p>One word for each idea, used the same way on this site, in InstitutionalOS, in client reports, and in every proposal.</p>
+        <dl class="glossary">
+          <dt>Health Index</dt><dd>Your scores on the seven dimensions, 0 to 100, from the free tools (self-reported) or the Diagnostic (verified).</dd>
+          <dt>Evidence</dt><dd>Something a funder or board could check: a filed 990, an adopted policy, board minutes, outcome data, an observed practice.</dd>
+          <dt>Stage</dt><dd>Build, Fund, or Sustain. It sets which dimensions weigh most and which gates apply.</dd>
+          <dt>Decision gate</dt><dd>A minimum score on a critical dimension for your stage. A strong average can't make up for a failed gate.</dd>
+          <dt>Binding constraint</dt><dd>The one gap most likely to stall your next funding, growth, or leadership decision. Chosen by the gates first, then by what other gaps depend on, then by what the decision requires; not simply your lowest score.</dd>
+          <dt>Next in line</dt><dd>The constraint we'd work on after this one, named so nothing is hidden.</dd>
+          <dt>90-Day Improvement Plan</dt><dd>One target for the binding constraint, a baseline, and five to ten actions, each with an owner, a date, and the evidence that will show it's done.</dd>
+          <dt>Weekly check-in</dt><dd>Fifteen minutes: what got done, what's blocked, what evidence was added, what decision is needed, what happens next.</dd>
+          <dt>90-day review</dt><dd>Did the actions happen, are the early signs moving, does the diagnosis still hold, and should the plan change.</dd>
+          <dt>Standard practice</dt><dd>The change is written down, owned, used consistently, taught to new staff, and measured.</dd>
+          <dt>Reassessment</dt><dd>A full evidence-based rescoring at six months, compared with your baseline.</dd>
+        </dl>
+
+        <h2 class="subhead" id="questions">10. Every question, by dimension</h2>
         <p>{ITEMS.length} questions across {AREAS.length} areas and {TOOLS.length} tools, plus the Revenue &amp; Growth Score's figures.</p>
         {byDim.map((d) => (
           <details class="method-dim">

@@ -2363,3 +2363,9 @@ a.card:hover .card-cta { text-decoration: underline; }
   .problem-arrow { transform: rotate(90deg); justify-self: start; }
   .dim-questions ol { columns: 1; }
 }
+
+/* Methodology glossary */
+.glossary { display: grid; grid-template-columns: minmax(150px, 220px) 1fr; gap: 10px 18px; margin: 12px 0 28px; }
+.glossary dt { font-weight: 700; color: var(--navy, #1B2A41); }
+.glossary dd { margin: 0; }
+@media (max-width: 640px) { .glossary { grid-template-columns: 1fr; gap: 2px; } .glossary dd { margin-bottom: 10px; } }

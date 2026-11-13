@@ -1,5 +1,5 @@
 ---
-// Homepage motion: headline word rise, self-drawing lines, speech-bubble
+// Homepage motion: headline word rise, speech-bubble
 // pops, scroll-scrubbed text, drifting card rows, and number count-ups.
 // CSS lives under "Homepage motion" in global.css. Everything is skipped
 // for visitors who prefer reduced motion, and every effect leaves the
@@ -54,10 +54,7 @@
       requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add('is-in')));
     });
 
-    // Self-drawing lines and speech bubbles.
-    document.querySelectorAll<HTMLElement>('.hero-lines').forEach((el) => {
-      requestAnimationFrame(() => el.classList.add('is-in'));
-    });
+    // Speech bubbles.
     document.querySelectorAll<HTMLElement>('.pop').forEach((el) => inView(el, () => el.classList.add('is-in'), 0.4));
 
     // Scroll-scrubbed text: words ink in as the paragraph moves up the screen.
@@ -75,9 +72,6 @@
 
     // Drifting rows: cards in alternating rows slide opposite ways.
     const drifters = Array.from(document.querySelectorAll<HTMLElement>('[data-drift]'));
-
-    // Scroll-linked line drawing in "How it works".
-    const scrollDraws = Array.from(document.querySelectorAll<SVGSVGElement>('[data-scroll-draw]'));
 
     let ticking = false;
     const update = () => {
@@ -109,15 +103,6 @@
         });
       });
 
-      scrollDraws.forEach((svg) => {
-        const r = svg.getBoundingClientRect();
-        if (r.bottom < 0 || r.top > vh) return;
-        const p = Math.min(1, Math.max(0, (vh - r.top) / (vh * 0.4 + r.height * 0.7)));
-        svg.querySelectorAll<SVGPathElement>('path').forEach((path, i) => {
-          const local = Math.min(1, Math.max(0, p * 1.25 - i * 0.08));
-          path.style.strokeDashoffset = String(1 - local);
-        });
-      });
     };
     const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
     window.addEventListener('scroll', onScroll, { passive: true });

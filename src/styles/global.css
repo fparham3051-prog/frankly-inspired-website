@@ -2373,7 +2373,7 @@ a.card:hover .card-cta { text-decoration: underline; }
 /* ==========================================================================
    Homepage motion (Nov 2026)
    Editorial motion borrowed in spirit from story-led consulting sites:
-   hand-drawn lines that draw themselves, italic tag chips, speech-bubble
+   italic tag chips, speech-bubble
    callouts, text that "inks in" as you read, and cards that drift with the
    scroll. Everything is driven by src/components/HomeMotion.astro.
    Rules: nothing here hides content unless html.js is set AND the visitor
@@ -2399,37 +2399,6 @@ a.card:hover .card-cta { text-decoration: underline; }
 .tag-chip.tc-sand { background: #F1E1CF; }
 .hero .tag-chip { background: rgba(203, 168, 105, 0.18); color: var(--gold-light); }
 .text-center { text-align: center; }
-
-/* Hero: drawn lines behind the copy, telling the site's story. The gold
-   line (programs) races ahead; the light line (the institution) lags, then
-   catches up once the plan is in place. */
-.hero-lines {
-  position: relative;
-  display: block;
-  width: 100%;
-  height: clamp(90px, 14vh, 150px);
-  margin-top: -1rem;
-  z-index: 0;
-  pointer-events: none;
-}
-.hero-lines path { fill: none; stroke-linecap: round; vector-effect: non-scaling-stroke; }
-.hero-lines .hl-programs { stroke: var(--gold); stroke-width: 5; }
-.hero-lines .hl-institution { stroke: #F5F1E8; stroke-width: 5; }
-.hero-lines .hl-evidence { stroke: #7FA3CC; stroke-width: 4; }
-.hero-lines .hl-revenue { stroke: #E9B98A; stroke-width: 3; opacity: 0.8; }
-.hero-lines-key {
-  position: relative; z-index: 1;
-  max-width: var(--max-width); width: 100%; margin: -0.25rem auto 0.6rem; padding: 0 1.5rem;
-  display: flex; justify-content: flex-end; gap: 1rem; font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: #b9c4d1;
-  pointer-events: none;
-}
-.hero-lines-key span::before { content: ''; display: inline-block; width: 14px; height: 3px; border-radius: 2px; margin-right: 6px; vertical-align: middle; background: currentColor; }
-.hero-lines-key .k-programs::before { background: var(--gold); }
-.hero-lines-key .k-institution::before { background: #F5F1E8; }
-@media (max-width: 640px) {
-  .hero-lines { height: 70px; }
-  .hero-lines-key { justify-content: flex-start; }
-}
 
 /* Speech bubble on the portrait */
 .hero-bubble {
@@ -2477,8 +2446,6 @@ a.card:hover .card-cta { text-decoration: underline; }
 /* "How it works": steps get drawn rings and a growing connector */
 .how-section { position: relative; overflow: hidden; }
 .how-section > .container { position: relative; z-index: 1; }
-.how-lines { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; opacity: 0.55; }
-.how-lines path { fill: none; stroke-linecap: round; vector-effect: non-scaling-stroke; }
 .step-num { position: relative; background: transparent; color: var(--navy); width: 2.6rem; height: 2.6rem; font-family: var(--font-heading); font-size: 1.15rem; }
 .step-ring { position: absolute; inset: 0; width: 100%; height: 100%; transform: rotate(-90deg); }
 .step-ring circle { fill: var(--gold-soft); stroke: var(--gold); stroke-width: 3; }
@@ -2493,17 +2460,6 @@ a.card:hover .card-cta { text-decoration: underline; }
   html.js .split-line .w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.18em; margin-bottom: -0.18em; }
   html.js .split-line .w > span { display: inline-block; transform: translateY(105%); transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1); transition-delay: calc(var(--i, 0) * 55ms + 120ms); }
   html.js .split-line.is-in .w > span { transform: none; }
-
-  /* Lines draw themselves */
-  html.js .draw path { stroke-dasharray: 1; stroke-dashoffset: 1; }
-  html.js .hero-lines.is-in path { animation: fi-draw 2.4s cubic-bezier(0.65, 0, 0.35, 1) forwards; }
-  html.js .hero-lines.is-in .hl-revenue { animation-delay: 0.3s; }
-  html.js .hero-lines.is-in .hl-programs { animation-delay: 0.5s; animation-duration: 1.9s; }
-  html.js .hero-lines.is-in .hl-evidence { animation-delay: 1s; }
-  html.js .hero-lines.is-in .hl-institution { animation-delay: 1.4s; animation-duration: 2.8s; }
-  @keyframes fi-draw { to { stroke-dashoffset: 0; } }
-  html.js .hero-lines-key { opacity: 0; transition: opacity 0.8s ease 2.8s; }
-  html.js .hero-lines.is-in ~ .hero-lines-key { opacity: 1; }
 
   /* Speech bubbles pop from their tail */
   html.js .pop { opacity: 0; transform: scale(0.85) translateY(14px); transform-origin: 30% 100%; transition: opacity 0.5s ease, transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1); }

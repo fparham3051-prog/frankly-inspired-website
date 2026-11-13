@@ -5,6 +5,7 @@ import Header from '../components/Header.astro';
 import ScrollReveal from '../components/ScrollReveal.astro';
 import { testimonials, caseStudies } from '../data/proof';
 import DurabilityIndex from '../components/DurabilityIndex.astro';
+import HomeMotion from '../components/HomeMotion.astro';
 ---
 
 <BaseLayout
@@ -22,7 +23,7 @@ import DurabilityIndex from '../components/DurabilityIndex.astro';
         <div class="hero-copy">
           <p class="eyebrow reveal" style="margin-bottom:0.35rem;">Franklin D. Parham</p>
           <p class="hero-role reveal">Founder and Principal, Frankly Inspired and Associates</p>
-          <h1 class="hero-h1-long reveal">Your programs are growing faster than your institution can carry them.</h1>
+          <h1 class="hero-h1-long" data-split>Your programs are growing faster than your institution can carry them.</h1>
           <p class="hero-sub reveal">Frankly Inspired finds the gap that will break first, whether it's leadership, revenue, evidence, or systems. We verify it with evidence and give your leadership a 90-Day Improvement Plan to fix it. Built for executive directors and boards of growing youth, education, and workforce nonprofits.</p>
           <div class="hero-ctas reveal">
             <a class="btn btn-primary" href={CALENDLY_URL} target="_blank" rel="noopener" data-track="schedule_click">Talk Through Your Situation</a>
@@ -36,8 +37,18 @@ import DurabilityIndex from '../components/DurabilityIndex.astro';
             width="800"
             height="800"
           />
+          <p class="hero-bubble pop">Find the gap<br />that breaks first.</p>
         </div>
       </div>
+      <!-- Story lines: programs (gold) race ahead, the institution (light)
+           lags, then catches up. Drawn by HomeMotion.astro. -->
+      <svg class="hero-lines draw" viewBox="0 0 1440 320" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+        <path class="hl-revenue" pathLength="1" d="M0,262 C200,256 420,236 600,198 S820,150 980,150 S1300,112 1440,104" />
+        <path class="hl-evidence" pathLength="1" d="M0,300 C260,298 520,300 700,272 S980,142 1180,98 S1400,88 1440,88" />
+        <path class="hl-programs" pathLength="1" d="M0,284 C220,276 340,262 500,176 S740,36 980,52 S1300,66 1440,62" />
+        <path class="hl-institution" pathLength="1" d="M0,296 C300,294 560,290 760,262 S1020,120 1200,78 S1380,66 1440,66" />
+      </svg>
+      <p class="hero-lines-key" aria-hidden="true"><span class="k-programs">Programs</span><span class="k-institution">Institution</span></p>
       <div class="hero-credentials reveal">
         <div class="hero-credential"><span class="hero-credential-num">20+</span><span>Years in Education and Nonprofit Leadership</span></div>
         <div class="hero-credential-divider" aria-hidden="true"></div>
@@ -54,9 +65,10 @@ import DurabilityIndex from '../components/DurabilityIndex.astro';
          src/scripts/trigger.ts. -->
     <section id="situations" class="section situations-section">
       <div class="container">
+        <p class="tag-chip reveal">The situations</p>
         <h2 class="section-title reveal">Which of these sounds like you?</h2>
-        <p class="section-note reveal">Leaders rarely call about "sustainability." They call when something specific is about to happen. Each of these is a door into the same Diagnostic.</p>
-        <div class="door-grid">
+        <p class="section-note scrub">Leaders rarely call about "sustainability." They call when something specific is about to happen. Each of these is a door into the same Diagnostic.</p>
+        <div class="door-grid" data-drift>
           <article class="door-card reveal">
             <p class="door-quote">&ldquo;We're opening a second site, and I'm not sure we're ready.&rdquo;</p>
             <h3>Expansion Readiness</h3>
@@ -101,21 +113,21 @@ import DurabilityIndex from '../components/DurabilityIndex.astro';
          Sector Survey; CEP State of Nonprofits 2026. Recheck yearly. -->
     <section id="problem" class="section problem-section alt-bg">
       <div class="container">
+        <p class="tag-chip tc-blue reveal">The pattern</p>
         <h2 class="section-title reveal">The problem behind the problem</h2>
-        <p class="section-note reveal">Nonprofits rarely struggle because the mission lacks value. They become fragile when the institution doesn't mature as fast as the programs, the funding, and the expectations.</p>
-        <div class="problem-stats">
+        <p class="section-note scrub">Nonprofits rarely struggle because the mission lacks value. They become fragile when the institution doesn't mature as fast as the programs, the funding, and the expectations.</p>
+        <div class="problem-stats" data-count>
           <div class="stat reveal"><span class="stat-num">36%</span><span class="stat-label">of nonprofits ended 2024 with an operating deficit, the highest in ten years</span></div>
           <div class="stat reveal"><span class="stat-num">52%</span><span class="stat-label">hold three months of cash or less</span></div>
           <div class="stat reveal"><span class="stat-num">57%</span><span class="stat-label">of nonprofit CEOs say foundation grants have become harder to win since January 2025</span></div>
         </div>
         <p class="problem-source reveal">Sources: <a href="https://nff.org/insights/survey-us-nonprofits-at-critical-point-as-funding-for-community-needs-falters/" target="_blank" rel="noopener">Nonprofit Finance Fund, 2025</a>; <a href="https://cep.org/report-backpacks/state-of-nonprofits-2026/" target="_blank" rel="noopener">Center for Effective Philanthropy, 2026</a>.</p>
-        <div class="problem-example reveal">
-          <div>
+        <div class="bubble-pair">
+          <div class="bubble bubble-said pop">
             <p class="problem-label">What leaders say</p>
             <p class="problem-said">&ldquo;We need a grant writer.&rdquo;</p>
           </div>
-          <span class="problem-arrow" aria-hidden="true">&rarr;</span>
-          <div>
+          <div class="bubble bubble-found pop">
             <p class="problem-label">What it often turns out to be</p>
             <p class="problem-found">Thin evidence behind the story. Outcomes are measured for one program, or none, so larger funders can't say yes.</p>
           </div>
@@ -130,10 +142,11 @@ import DurabilityIndex from '../components/DurabilityIndex.astro';
          assessments completed, which stays hidden until it passes 25. -->
     <section id="track-record" class="section proof-section">
       <div class="container">
+        <p class="tag-chip tc-sage reveal">The track record</p>
         <h2 class="section-title reveal">I've run the problem I diagnose</h2>
-        <p class="section-note reveal">As Regional Director for The Hidden Genius Project, Franklin opened and ran a two-city region, owning the budget, the partnerships, the staffing, and the systems. He knows what breaks first because he has had to fix it.</p>
+        <p class="section-note scrub">As Regional Director for The Hidden Genius Project, Franklin opened and ran a two-city region, owning the budget, the partnerships, the staffing, and the systems. He knows what breaks first because he has had to fix it.</p>
         <p class="affiliation-label reveal">Board leadership and affiliations: Ora Lee Smith Cancer Research Foundation &middot; Turner Foundation for Community Advocacy &middot; Howard Rye Institute Fellow &middot; AFP Fellow</p>
-        <div class="stat-grid proof-stats">
+        <div class="stat-grid proof-stats" data-count>
           <div class="stat stat-live reveal" id="live-stat" hidden><span class="stat-num" id="live-stat-num"></span><span class="stat-label">free nonprofit assessments completed with Frankly Inspired tools</span></div>
           <div class="stat reveal"><span class="stat-num">20+</span><span class="stat-label">years in student development, higher-education advancement, and nonprofit leadership</span></div>
           <div class="stat reveal"><span class="stat-num">$1.3M</span><span class="stat-label">in regional operating budgets managed, The Hidden Genius Project</span></div>
@@ -185,30 +198,36 @@ import DurabilityIndex from '../components/DurabilityIndex.astro';
 
     <!-- ============ HOW IT WORKS ============ -->
     <section id="how" class="section how-section alt-bg">
+      <svg class="how-lines draw" data-scroll-draw viewBox="0 0 1440 600" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+        <path pathLength="1" stroke="#11233D" stroke-width="3" d="M-20,520 C180,520 260,140 420,150 S620,520 820,470 S1120,180 1460,210" />
+        <path pathLength="1" stroke="#B28E42" stroke-width="3" d="M-20,440 C220,420 320,260 520,300 S820,560 1000,430 S1260,320 1460,330" />
+        <path pathLength="1" stroke="#7FA3CC" stroke-width="3" d="M-20,560 C260,560 380,420 560,420 S900,250 1080,280 S1340,420 1460,400" />
+      </svg>
       <div class="container">
+        <p class="tag-chip tc-sand reveal">The method</p>
         <h2 class="section-title reveal">How it works</h2>
         <p class="section-note reveal">One method, from your first free score to measurable progress.</p>
         <ol class="steps">
           <li class="step reveal">
-            <span class="step-num" aria-hidden="true">1</span>
+            <span class="step-num" aria-hidden="true"><svg class="step-ring" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" pathLength="1" /></svg><span style="position:relative">1</span></span>
             <h3>Score</h3>
             <p>Take the free tools. Every answer builds one Health Index across seven dimensions, saved in your browser.</p>
             <a class="link-more" href="/tools">Start free &rarr;</a>
           </li>
           <li class="step reveal">
-            <span class="step-num" aria-hidden="true">2</span>
+            <span class="step-num" aria-hidden="true"><svg class="step-ring" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" pathLength="1" /></svg><span style="position:relative">2</span></span>
             <h3>Verify</h3>
             <p>The Diagnostic checks the evidence behind each score: filed 990s, policies, and practices, not self-reported optimism.</p>
             <a class="link-more" href="/consulting#pricing">See the Diagnostic &rarr;</a>
           </li>
           <li class="step reveal">
-            <span class="step-num" aria-hidden="true">3</span>
+            <span class="step-num" aria-hidden="true"><svg class="step-ring" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" pathLength="1" /></svg><span style="position:relative">3</span></span>
             <h3>Plan</h3>
             <p>A written memo names your binding constraint, the gap that will break first, with a 90-Day Improvement Plan that includes your next Candid Seal level.</p>
             <a class="link-more" href="/consulting#sample-diagnostic">See a sample &rarr;</a>
           </li>
           <li class="step reveal">
-            <span class="step-num" aria-hidden="true">4</span>
+            <span class="step-num" aria-hidden="true"><svg class="step-ring" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" pathLength="1" /></svg><span style="position:relative">4</span></span>
             <h3>Do the work</h3>
             <p>A 90-Day Improvement Plan with owners, dates, and a 15-minute weekly check-in in your client portal, then a 90-day review and a full reassessment at six months.</p>
             <a class="link-more" href="/institutionalos#method">How the plan works &rarr;</a>
@@ -234,6 +253,7 @@ import DurabilityIndex from '../components/DurabilityIndex.astro';
          organization (regenerate with scripts/product-shots.py). -->
     <section id="preview" class="section preview-section">
       <div class="container">
+        <p class="tag-chip tc-blue reveal">The tools</p>
         <h2 class="section-title reveal">See exactly what you get</h2>
         <p class="section-note reveal">Real screens from the tools, shown with a fictional sample organization.</p>
         <div class="preview-grid">
@@ -256,6 +276,7 @@ import DurabilityIndex from '../components/DurabilityIndex.astro';
     <!-- ============ OFFERS ============ -->
     <section id="offers" class="section offers-section alt-bg">
       <div class="container">
+        <p class="tag-chip reveal">The offer</p>
         <h2 class="section-title reveal">Ways to work together</h2>
         <p class="section-note reveal">Every paid engagement starts with the Diagnostic. Full details, a sample report, and the funder-sponsorship letter are on the <a href="/consulting">Consulting page</a>.</p>
         <div class="offer-grid">
@@ -294,6 +315,7 @@ import DurabilityIndex from '../components/DurabilityIndex.astro';
     <!-- ============ FREE TOOLS ============ -->
     <section id="assessments" class="section assessments-section">
       <div class="container">
+        <p class="tag-chip tc-sage reveal">Start free</p>
         <h2 class="section-title reveal">Score your organization for free</h2>
         <div class="card-grid">
           <a class="card reveal featured-tool" href="/assessment" data-track="tool_start" data-tool="self-assessment">
@@ -322,6 +344,7 @@ import DurabilityIndex from '../components/DurabilityIndex.astro';
     <!-- ============ FAQ ============ -->
     <section id="faq" class="section faq alt-bg">
       <div class="container narrow">
+        <p class="tag-chip tc-sand reveal">Questions</p>
         <h2 class="section-title reveal">Common questions</h2>
         <div class="faq-list reveal">
           <details>
@@ -352,6 +375,7 @@ import DurabilityIndex from '../components/DurabilityIndex.astro';
     <!-- ============ CONTACT ============ -->
     <section id="contact" class="section contact">
       <div class="container narrow">
+        <p class="tag-chip reveal">Let's talk</p>
         <h2 class="section-title reveal">Start a Conversation</h2>
         <div id="score-ref-banner" class="score-ref-banner reveal" hidden></div>
         <p class="lede-sm reveal">Strong missions need sustainable institutions. If your organization is navigating growth, revenue pressure, operational complexity, leadership transition, or the need for a clearer sustainability strategy, start with a conversation.</p>
@@ -474,6 +498,7 @@ import DurabilityIndex from '../components/DurabilityIndex.astro';
   </main>
 
   <ScrollReveal />
+  <HomeMotion />
 </BaseLayout>
 
 <script>

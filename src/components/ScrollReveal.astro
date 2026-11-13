@@ -40,11 +40,24 @@
       // unusual layout, a browser quirk) and an element never gets marked
       // visible on its own, force everything visible after a few seconds
       // rather than risk content staying hidden indefinitely.
+      // Only elements already on screen or scrolled past are forced, so
+      // content further down still animates in when the visitor reaches it.
       window.setTimeout(() => {
         document.querySelectorAll('.reveal:not(.is-visible)').forEach((el) => {
-          el.classList.add('is-visible');
+          if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('is-visible');
         });
       }, 2500);
+      let pending = false;
+      window.addEventListener('scroll', () => {
+        if (pending) return;
+        pending = true;
+        window.setTimeout(() => {
+          pending = false;
+          document.querySelectorAll('.reveal:not(.is-visible)').forEach((el) => {
+            if (el.getBoundingClientRect().top < window.innerHeight * 0.6) el.classList.add('is-visible');
+          });
+        }, 400);
+      }, { passive: true });
     } else {
       revealEls.forEach((el) => el.classList.add('is-visible'));
     }

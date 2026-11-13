@@ -102,9 +102,9 @@ function recommendationHtml(stage: StageKey | null): string {
   let rec: string;
   if (stage) {
     const s = STAGES[stage];
-    rec = `<p class="pathway-rec"><strong>InstitutionalOS Diagnostic: ${s.name} (${s.full}), ${s.price} flat fee.</strong> Verifies the evidence behind every dimension for your stage, names your single binding constraint in a written memo, and ends with a 90-day plan in a live readout session.</p>`;
+    rec = `<p class="pathway-rec"><strong>InstitutionalOS Diagnostic: ${s.name} (${s.full}), ${s.price} flat fee.</strong> Verifies the evidence behind every dimension for your stage, names your single binding constraint in a written memo, and ends with a 90-Day Improvement Plan in a live readout session.</p>`;
   } else {
-    rec = `<p class="pathway-rec"><strong>InstitutionalOS Diagnostic, $2,000 to $2,500 by stage.</strong> Choose your stage above and this will show the one that fits. It verifies the evidence behind every dimension, names your binding constraint in a written memo, and ends with a 90-day plan.</p>`;
+    rec = `<p class="pathway-rec"><strong>InstitutionalOS Diagnostic, $2,000 to $2,500 by stage.</strong> Choose your stage above and this will show the one that fits. It verifies the evidence behind every dimension, names your binding constraint in a written memo, and ends with a 90-Day Improvement Plan.</p>`;
   }
   return `
     <h3 class="subhead">Recommended next step</h3>

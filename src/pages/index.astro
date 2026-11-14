@@ -1,5 +1,5 @@
 ---
-import { CALENDLY_URL } from '../config';
+import { CALENDLY_URL, EMAIL, PHONE_DISPLAY, PHONE_TEL } from '../config';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import ScrollReveal from '../components/ScrollReveal.astro';
@@ -292,9 +292,9 @@ const dialSegs = dialAreas.map(([name, score], i) => {
         <p class="reveal">Tell me a little about your organization, where you are today, and what you're working to strengthen. I'll review your inquiry and follow up regarding whether Frankly Inspired may be a good fit.</p>
 
         <p class="direct-contact reveal">
-          <a href="mailto:franklin@franklyinspired.associates">franklin@franklyinspired.associates</a>
+          <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
           <span aria-hidden="true">&middot;</span>
-          <a href="tel:+12403918283">240-391-8283</a>
+          <a href={`tel:${PHONE_TEL}`}>{PHONE_DISPLAY}</a>
         </p>
 
         <div class="schedule-cta schedule-cta-primary reveal">

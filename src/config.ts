@@ -1,10 +1,16 @@
-// Site-wide links in one place. The quick check-up is a copy of the
-// InstitutionalOS landing page (see scripts/sync-quick-checkup.py).
-// SCORECARD_URL points at it so every link stays on this domain.
-export const SITE_URL = 'https://franklyinspired.associates';
+// Site-wide settings in one place. Organization facts (name, leader,
+// contact, booking link, offers) come from src/org.config.json, the same
+// profile the operations app and the InstitutionalOS console use. Page copy
+// stays in the pages themselves.
+// The quick check-up is a copy of the InstitutionalOS landing page (see
+// scripts/sync-quick-checkup.py); SCORECARD_URL keeps every link on this domain.
+import ORG from './org.config.json';
+
+export { ORG };
+export const SITE_URL = ORG.links.website.replace(/\/$/, '');
 export const SCORECARD_URL = '/quick-check-up/';
-export const CALENDLY_URL = 'https://calendly.com/fparham/30min';
+export const CALENDLY_URL = ORG.links.booking;
 export const LINKEDIN_URL = 'https://www.linkedin.com/in/franklin-parham-b7a545382';
-export const EMAIL = 'franklin@franklyinspired.associates';
-export const PHONE_DISPLAY = '240-391-8283';
-export const PHONE_TEL = '+12403918283';
+export const EMAIL = ORG.org.email;
+export const PHONE_DISPLAY = ORG.org.phone;
+export const PHONE_TEL = '+1' + ORG.org.phone.replace(/\D/g, '');

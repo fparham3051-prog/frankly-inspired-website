@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { EMAIL } from '../config';
 import Header from '../components/Header.astro';
 ---
 
@@ -75,6 +76,7 @@ import Header from '../components/Header.astro';
 
         <h2>Website Analytics and Cookies</h2>
         <p>This website uses essential cookies and similar technologies required for the website to function correctly, such as remembering your cookie preference.</p>
+        <p>To know which pages are useful, the website also counts page visits and a few actions (starting a free tool, opening the scheduler). These counts use no cookies and store only the page, the action, and the date. They do not record your IP address or anything else that identifies you.</p>
         <p>This website may also use optional analytics cookies to understand general website traffic, visitor behavior, and website performance. Optional analytics cookies are only set if you accept them through the cookie banner shown when you first visit the site. If you decline, or take no action, no analytics cookies are set.</p>
         <p>You can change your cookie preference at any time using the "Manage Cookie Preferences" link in the footer of any page.</p>
 
@@ -99,7 +101,7 @@ import Header from '../components/Header.astro';
         <p>
           Frankly Inspired and Associates, LLC<br />
           Lanham, Maryland<br />
-          Email: <a href="mailto:franklin@franklyinspired.associates">franklin@franklyinspired.associates</a>
+          Email: <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
         </p>
       </div>
     </section>

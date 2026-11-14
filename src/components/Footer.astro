@@ -1,5 +1,5 @@
 ---
-import { CALENDLY_URL } from '../config';
+import { CALENDLY_URL, EMAIL, PHONE_DISPLAY, PHONE_TEL } from '../config';
 // The original static site has four distinct footer configurations, not
 // two, preserved exactly here rather than collapsed into Header's
 // full/minimal split:
@@ -24,9 +24,9 @@ const { variant = 'home' } = Astro.props;
 
     {variant !== 'legal' && (
       <p class="footer-meta">
-        <a href="mailto:franklin@franklyinspired.associates">franklin@franklyinspired.associates</a>
+        <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
         <span aria-hidden="true">&middot;</span>
-        <a href="tel:+12403918283">240-391-8283</a>
+        <a href={`tel:${PHONE_TEL}`}>{PHONE_DISPLAY}</a>
       </p>
     )}
 

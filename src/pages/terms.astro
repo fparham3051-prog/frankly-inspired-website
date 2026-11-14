@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { EMAIL } from '../config';
 import Header from '../components/Header.astro';
 ---
 
@@ -66,7 +67,7 @@ import Header from '../components/Header.astro';
         <p>
           Frankly Inspired and Associates, LLC<br />
           Lanham, Maryland<br />
-          Email: <a href="mailto:franklin@franklyinspired.associates">franklin@franklyinspired.associates</a>
+          Email: <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
         </p>
       </div>
     </section>

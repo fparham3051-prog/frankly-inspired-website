@@ -58,6 +58,9 @@ for a, b in [
         sys.exit(f'sync-quick-checkup: text not found: {a}')
     s = s.replace(a, b)
 s = s.replace('href="https://franklyinspired.associates/assessment"', 'href="/assessment"')
+# Cookie-free visit count for the funnel (page and date only), same as the rest of the site.
+sub(r'</body>', """<script>try{if(!/^(localhost|127\\.)/.test(location.hostname))navigator.sendBeacon('https://frankly-inspired-api.onrender.com/api/pv',JSON.stringify({p:'/quick-check-up',e:'view'}))}catch(e){}</script>
+</body>""")
 
 OUT.parent.mkdir(parents=True, exist_ok=True)
 OUT.write_text(s)

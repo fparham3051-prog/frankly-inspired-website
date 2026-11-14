@@ -45,8 +45,21 @@
     // otherwise it does nothing. Any link or button with data-track="name"
     // is tracked automatically on click, and every tool form submit is
     // tracked as tool_complete.
+    // Cookie-free counting for the funnel in the operations app: page and
+    // event name only, no cookies, no IP stored, no visitor ID. Runs for
+    // everyone because nothing in it identifies a person.
+    var PV_URL = 'https://frankly-inspired-api.onrender.com/api/pv';
+    function count(e) {
+      try {
+        var body = JSON.stringify({ p: location.pathname, e: e || 'view' });
+        if (navigator.sendBeacon) navigator.sendBeacon(PV_URL, body);
+        else fetch(PV_URL, { method: 'POST', body: body, keepalive: true, mode: 'cors' });
+      } catch (err) {}
+    }
+    if (!/^(localhost|127\.)/.test(location.hostname)) count('view');
     window.fiTrack = function (name, params) {
       if (typeof window.gtag === 'function') window.gtag('event', name, params || {});
+      if (['tool_start', 'tool_complete', 'schedule_click', 'schedule_inline_open', 'contact_submit'].indexOf(name) >= 0 && !/^(localhost|127\.)/.test(location.hostname)) count(name);
     };
     document.addEventListener('click', function (e) {
       var el = e.target && e.target.closest ? e.target.closest('[data-track]') : null;

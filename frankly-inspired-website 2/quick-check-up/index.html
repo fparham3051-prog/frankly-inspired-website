@@ -641,5 +641,6 @@ const ctaScheduleEl = document.getElementById("ctaSchedule");
 if (ctaScheduleEl) ctaScheduleEl.addEventListener("click", () => logEvent("cta_schedule", selectedStage));
 </script>
 
+<script>try{if(!/^(localhost|127\.)/.test(location.hostname))navigator.sendBeacon('https://frankly-inspired-api.onrender.com/api/pv',JSON.stringify({p:'/quick-check-up',e:'view'}))}catch(e){}</script>
 </body>
 </html>

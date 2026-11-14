@@ -138,10 +138,10 @@ Thank you for considering this request.
         <div class="pricing-grid">
           <div class="pricing-card reveal" style="align-self:start;">
             <span class="offering-badge">Free</span>
-            <h4>Start with the Scorecard</h4>
+            <h4>Start with the Free Check-up</h4>
             <p class="price">$0<span>no sign-up</span></p>
             <p class="plan-fit">Not ready for a diagnostic? Get a free read on all seven dimensions first, then decide.</p>
-            <a class="btn btn-secondary" href={SCORECARD_URL} target="_blank" rel="noopener" data-track="tool_start" data-tool="institutionalos-scorecard">Get Your Free Score</a>
+            <a class="btn btn-secondary" href={SCORECARD_URL} data-track="tool_start" data-tool="institutionalos-scorecard">Start the Free Check-up</a>
           </div>
           <div class="pricing-card featured reveal" id="build">
             <span id="fund" class="anchor-offset"></span>
@@ -241,7 +241,7 @@ Thank you for considering this request.
           <li><a href="/#contact">Tell me</a> you've asked. I can join a call with the funder if that helps.</li>
         </ol>
         <div class="funder-letter reveal">
-          <pre id="funder-letter-text">{FUNDER_LETTER}</pre>
+          <pre id="funder-letter-text" tabindex="0" aria-label="Funder sponsorship letter text">{FUNDER_LETTER}</pre>
           <div class="hero-ctas">
             <button type="button" class="btn btn-secondary" id="copy-funder-letter" data-track="funder_letter_copy">Copy the Letter</button>
             <a class="btn btn-ghost" id="email-funder-letter" href={`mailto:?subject=${encodeURIComponent('Capacity-building request: organizational diagnostic')}&body=${encodeURIComponent(FUNDER_LETTER)}`} data-track="funder_letter_email">Open in Email</a>
@@ -311,12 +311,12 @@ Thank you for considering this request.
       </div>
     </section>
 
-    <section class="section closing-cta alt-bg">
+    <section class="section closing-cta">
       <div class="container narrow center">
         <h2 class="reveal">Not sure which option fits?</h2>
         <p class="reveal">A 30-minute conversation is the fastest way to find the right scope. Or start free: score your organization first and bring your Health Index to the call.</p>
         <div class="hero-ctas center reveal">
-          <a class="btn btn-primary" href={CALENDLY_URL} target="_blank" rel="noopener" data-track="schedule_click">Schedule a Strategy Conversation</a>
+          <a class="btn btn-primary" href={CALENDLY_URL} target="_blank" rel="noopener" data-track="schedule_click">Schedule a Conversation</a>
           <a class="btn btn-secondary" href="/tools" data-track="tool_start">Score Your Organization Free</a>
         </div>
       </div>

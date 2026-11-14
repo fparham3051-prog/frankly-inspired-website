@@ -29,7 +29,7 @@ export const DIMENSIONS: Dimension[] = [
 export const TOOLS: Tool[] = [
   {
     "key": "self-assessment",
-    "name": "Nonprofit Sustainability Self-Assessment",
+    "name": "Free Check-up (Sustainability Self-Assessment)",
     "href": "/assessment"
   },
   {

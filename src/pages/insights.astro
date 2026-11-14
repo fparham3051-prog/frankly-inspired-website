@@ -4,6 +4,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import ScrollReveal from '../components/ScrollReveal.astro';
 import DurabilityIndex from '../components/DurabilityIndex.astro';
+import HomeMotion from '../components/HomeMotion.astro';
 
 // Field notes: Franklin's own observations, in one format every time:
 // the signal a leader notices, what organizations usually assume, the
@@ -30,7 +31,7 @@ const fieldNotes = [
     evidence: 'Is there a written recruitment calendar, a partner agreement template, and a site budget model someone else could run?',
     action: "Before hiring for site two, write site one's playbook: recruitment steps and dates, a standard partner agreement or MOU, and a budget template. Then test it by having someone new walk through it.",
     trigger: 'expansion',
-    tool: { href: '/assessment', label: 'Take the Sustainability Self-Assessment' },
+    tool: { href: '/assessment', label: 'Start the Free Check-up' },
   },
   {
     id: 'we-need-a-grant-writer',
@@ -107,6 +108,33 @@ const insights = [
       </div>
     </section>
 
+    <!-- ============ THE PROBLEM BEHIND THE PROBLEM ============ -->
+    <!-- Sector figures as of Nov 2026: NFF 2025 State of the Nonprofit
+         Sector Survey; CEP State of Nonprofits 2026. Recheck yearly. -->
+    <section id="pattern" class="section problem-section">
+      <div class="container">
+        <p class="tag-chip tc-blue reveal">The pattern</p>
+        <h2 class="section-title reveal">The problem behind the problem</h2>
+        <p class="section-note scrub">Nonprofits rarely struggle because the mission lacks value. They become fragile when the institution doesn't mature as fast as the programs, the funding, and the expectations.</p>
+        <div class="problem-stats" data-count>
+          <div class="stat reveal"><span class="stat-num">36%</span><span class="stat-label">of nonprofits ended 2024 with an operating deficit, the highest in ten years</span></div>
+          <div class="stat reveal"><span class="stat-num">52%</span><span class="stat-label">hold three months of cash or less</span></div>
+          <div class="stat reveal"><span class="stat-num">57%</span><span class="stat-label">of nonprofit CEOs say foundation grants have become harder to win since January 2025</span></div>
+        </div>
+        <p class="problem-source reveal">Sources: <a href="https://nff.org/insights/survey-us-nonprofits-at-critical-point-as-funding-for-community-needs-falters/" target="_blank" rel="noopener">Nonprofit Finance Fund, 2025</a>; <a href="https://cep.org/report-backpacks/state-of-nonprofits-2026/" target="_blank" rel="noopener">Center for Effective Philanthropy, 2026</a>.</p>
+        <div class="bubble-pair">
+          <div class="bubble bubble-said pop">
+            <p class="problem-label">What leaders say</p>
+            <p class="problem-said">&ldquo;We need a grant writer.&rdquo;</p>
+          </div>
+          <div class="bubble bubble-found pop">
+            <p class="problem-label">What it often turns out to be</p>
+            <p class="problem-found">Thin evidence behind the story. Outcomes are measured for one program, or none, so larger funders can't say yes.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="section alt-bg" id="field-notes">
       <div class="container narrow">
         <h2 class="section-title reveal">Field notes</h2>
@@ -162,12 +190,13 @@ const insights = [
       <div class="container narrow center">
         <h2 class="reveal">Want to know which of these matters most for you?</h2>
         <p class="reveal">A 30-minute conversation is the fastest way to find out.</p>
-        <a class="btn btn-primary reveal" href={CALENDLY_URL} target="_blank" rel="noopener" data-track="schedule_click">Schedule a Strategy Conversation</a>
+        <a class="btn btn-primary reveal" href={CALENDLY_URL} target="_blank" rel="noopener" data-track="schedule_click">Schedule a Conversation</a>
       </div>
     </section>
   </main>
 
   <ScrollReveal />
+  <HomeMotion />
 </BaseLayout>
 
 <script>

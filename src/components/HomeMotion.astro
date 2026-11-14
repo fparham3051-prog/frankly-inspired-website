@@ -131,4 +131,34 @@
       }, 0.5);
     });
   }
+
+  // ---------- Hero dial: hover, tap, or tab through the seven areas ----------
+  // Works with or without motion; the center shows the area you're on, and
+  // returns to the overall sample score when you leave the dial.
+  document.querySelectorAll<HTMLElement>('[data-dial]').forEach((dial) => {
+    const num = dial.querySelector<HTMLElement>('[data-dial-num]');
+    const label = dial.querySelector<HTMLElement>('[data-dial-label]');
+    const center = dial.querySelector<HTMLElement>('.dial-center');
+    const segs = Array.from(dial.querySelectorAll<SVGGElement>('.dial-seg'));
+    if (!num || !label || !center) return;
+    const reset = () => {
+      num.textContent = num.dataset.avg || num.textContent;
+      label.textContent = 'Sample score';
+      center.classList.remove('is-weak');
+      segs.forEach((g) => g.classList.remove('is-active'));
+    };
+    const show = (g: SVGGElement) => {
+      segs.forEach((x) => x.classList.toggle('is-active', x === g));
+      num.textContent = g.dataset.score || '';
+      label.textContent = g.dataset.name || '';
+      center.classList.toggle('is-weak', g.classList.contains('weak'));
+    };
+    segs.forEach((g) => {
+      g.addEventListener('mouseenter', () => show(g));
+      g.addEventListener('focus', () => show(g));
+      g.addEventListener('click', () => show(g));
+      g.addEventListener('blur', reset);
+    });
+    dial.addEventListener('mouseleave', reset);
+  });
 </script>

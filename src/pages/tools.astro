@@ -3,6 +3,7 @@ import { SCORECARD_URL, CALENDLY_URL } from '../config';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import ScrollReveal from '../components/ScrollReveal.astro';
+import HomeMotion from '../components/HomeMotion.astro';
 
 // One place to choose a free tool. Order matters: one clear first step,
 // then the comprehensive read, then the four single-area deep dives.
@@ -43,77 +44,73 @@ const deepDives = [
 ---
 
 <BaseLayout
-  title="Free Nonprofit Assessment Tools | Frankly Inspired"
-  description="Free, research-grounded tools that score your nonprofit's sustainability, revenue, fundraising program, leadership, and strategy. No sign-up required."
+  title="Free Check-up | Frankly Inspired"
+  description="A free 7-minute check-up for growing nonprofits: your score, the one area most likely to break first, and a first step for the next 90 days. No sign-up."
   footerVariant="home"
 >
   <Header variant="full" />
 
   <main id="main">
+    <!-- One free tool, one start button. The deeper scores and the Candid
+         Seal path are parts of the check-up, tucked behind "Go further" so
+         the analytics stay out of the way until someone wants them. -->
     <section class="section assessment-intro">
       <div class="container narrow center">
-        <p class="eyebrow eyebrow-dark">Free Tools</p>
-        <h1>Score your organization for free</h1>
-        <p class="hero-sub-light">Start with the InstitutionalOS Scorecard for a free read on all seven Health Index dimensions. Every tool here uses those same seven dimensions, is free, and needs no sign-up.</p>
+        <p class="tag-chip reveal">Free Check-up</p>
+        <h1>Find out what will break first</h1>
+        <p class="hero-sub-light">Answer 21 short questions about how your organization actually runs. In about 7 minutes you'll see your score, the one area holding you back most, and a first step you can take this quarter. Free, no sign-up, saved only in your browser.</p>
+        <p style="margin-top:1.5rem;"><a class="btn btn-primary btn-lg" href="/assessment" data-track="tool_start" data-tool="self-assessment">Start the Free Check-up</a></p>
+        <p class="checkup-alt reveal">Short on time? <a href={SCORECARD_URL} data-track="tool_start" data-tool="institutionalos-scorecard">Describe your organization in a paragraph instead</a> (2 minutes). Already started? <a href="/health-index" data-track="health_index_open">See your results</a>.</p>
       </div>
     </section>
 
     <section class="section alt-bg">
       <div class="container">
-        <h2 class="section-title reveal">Get your score</h2>
-        <div class="card-grid">
-          <a class="card reveal featured-tool" href={SCORECARD_URL} target="_blank" rel="noopener" data-track="tool_start" data-tool="institutionalos-scorecard">
-            <span class="offering-badge">Start here</span>
-            <h4>InstitutionalOS Scorecard</h4>
-            <p>Describe your organization in a paragraph. You'll get a score on all seven dimensions, your lowest dimension, and a 90-day target, using the same system as the paid diagnostic.</p>
-            <span class="card-cta">Get Your Free Score &rarr;</span>
-          </a>
-          <a class="card reveal featured-tool" href="/assessment" data-track="tool_start" data-tool="self-assessment">
-            <span class="offering-badge">Or answer 21 questions &middot; 7 minutes</span>
-            <h4>Nonprofit Sustainability Self-Assessment</h4>
-            <p>Rate 21 practices across all seven dimensions by the evidence you could show. You'll get your likely constraint, a 90-day action, and the deeper tool that fits.</p>
-            <span class="card-cta">Take the Self-Assessment &rarr;</span>
-          </a>
-        </div>
+        <p class="tag-chip tc-blue reveal">What you get</p>
+        <h2 class="section-title reveal">Three answers, in plain language</h2>
+        <ol class="steps steps-3">
+          <li class="step reveal">
+            <span class="step-num" aria-hidden="true"><svg class="step-ring" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" pathLength="1" /></svg><span style="position:relative">1</span></span>
+            <h3>Where you stand</h3>
+            <p>One score from 0 to 100, your Health Index, with a plain reading of what it means.</p>
+          </li>
+          <li class="step reveal">
+            <span class="step-num" aria-hidden="true"><svg class="step-ring" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" pathLength="1" /></svg><span style="position:relative">2</span></span>
+            <h3>What will break first</h3>
+            <p>The single area most likely to hold the organization back as it grows.</p>
+          </li>
+          <li class="step reveal">
+            <span class="step-num" aria-hidden="true"><svg class="step-ring" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" pathLength="1" /></svg><span style="position:relative">3</span></span>
+            <h3>What to do next</h3>
+            <p>A first step for the next 90 days, and a page you can print for your board.</p>
+          </li>
+        </ol>
       </div>
     </section>
 
     <section class="section">
       <div class="container">
-        <h2 class="section-title reveal">Get on the path to a Candid Seal</h2>
-        <div class="card-grid">
-          <a class="card reveal featured-tool" href="/candid-seal" data-track="tool_start" data-tool="candid-seal">
-            <span class="offering-badge">5 minutes</span>
-            <h4>Candid Seal Path</h4>
-            <p>See which of Candid's free Seals of Transparency you qualify for, what to post today, and the work behind each level up to Platinum. Funders use these Seals to screen applicants.</p>
-            <span class="card-cta">Find Your Path to Platinum &rarr;</span>
-          </a>
-          <a class="card reveal featured-tool" href="/health-index" data-track="health_index_open">
-            <span class="offering-badge">Your results</span>
-            <h4>Your Health Index</h4>
-            <p>Every tool you take, combined into one profile on all seven dimensions, with your Candid Seal level, your progress over time, and a page to print for your board.</p>
-            <span class="card-cta">See Your Health Index &rarr;</span>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <section class="section alt-bg">
-      <div class="container">
-        <h2 class="section-title reveal">Go deeper on one area</h2>
-        <p class="section-note reveal">Each goes further on one or two of the seven dimensions, grounded in its own named research. Every tool you take adds to <a href="/health-index">your Health Index</a>: one profile on all seven dimensions, saved only in your browser. <a href="/methodology">How scoring works</a>.</p>
-        <div class="card-grid">
-          {deepDives.map((t) => (
-            <a class="card reveal" href={t.href} data-track="tool_start" data-tool={t.href.slice(1)}>
-              <span class="offering-badge">{t.time}</span>
-              <h4>{t.name}</h4>
-              <p>{t.what}</p>
-              <p class="tool-dims">Dimensions: {t.dims}</p>
-              <p style="margin-top:0.6rem;"><em>{t.best}</em></p>
+        <details class="go-further reveal">
+          <summary><span class="tag-chip tc-sage" style="margin:0 .6rem 0 0;">Optional</span>Go further on one area</summary>
+          <p class="section-note">After your check-up, these go deeper on a single area. Each one adds to the same results page. <a href="/methodology">How scoring works</a>.</p>
+          <div class="card-grid">
+            {deepDives.map((t) => (
+              <a class="card" href={t.href} data-track="tool_start" data-tool={t.href.slice(1)}>
+                <span class="offering-badge">{t.time}</span>
+                <h4>{t.name}</h4>
+                <p>{t.what}</p>
+                <p style="margin-top:0.6rem;"><em>{t.best}</em></p>
+                <span class="card-cta">Start &rarr;</span>
+              </a>
+            ))}
+            <a class="card" href="/candid-seal" data-track="tool_start" data-tool="candid-seal">
+              <span class="offering-badge">5 minutes</span>
+              <h4>Candid Seal Path</h4>
+              <p>Which of Candid's free Seals of Transparency you qualify for today, and what it takes to reach Platinum. Funders use these Seals to screen applicants.</p>
               <span class="card-cta">Start &rarr;</span>
             </a>
-          ))}
-        </div>
+          </div>
+        </details>
       </div>
     </section>
 
@@ -121,10 +118,11 @@ const deepDives = [
       <div class="container narrow center">
         <h2 class="reveal">Rather talk it through?</h2>
         <p class="reveal">A 30-minute conversation is the fastest way to find where to focus.</p>
-        <a class="btn btn-primary reveal" href={CALENDLY_URL} target="_blank" rel="noopener" data-track="schedule_click">Schedule a Strategy Conversation</a>
+        <a class="btn btn-primary reveal" href={CALENDLY_URL} target="_blank" rel="noopener" data-track="schedule_click">Schedule a Conversation</a>
       </div>
     </section>
   </main>
 
   <ScrollReveal />
+  <HomeMotion />
 </BaseLayout>

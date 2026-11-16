@@ -139,6 +139,7 @@ const insights = [
       <div class="container narrow">
         <h2 class="section-title reveal">Field notes</h2>
         <p class="section-note reveal">Franklin's observations from leading and advising growing organizations. These are patterns to check, not research findings.</p>
+        <div id="fn-live"></div>
         {fieldNotes.map((n) => (
           <article id={n.id} class="field-note reveal">
             <h2>{n.title}</h2>
@@ -224,4 +225,27 @@ const insights = [
       section.hidden = false;
     })
     .catch(() => {});
+</script>
+
+<script>
+  // Newer field notes published from the operations app. The static notes
+  // above always show; these are added on top when the website server answers.
+  (async () => {
+    const box = document.getElementById('fn-live');
+    if (!box) return;
+    try {
+      const r = await fetch('https://frankly-inspired-api.onrender.com/api/field-notes', { signal: AbortSignal.timeout(60000) });
+      const j = await r.json();
+      const notes = (j && j.notes) || [];
+      if (!notes.length) return;
+      const esc = (v: string) => String(v || '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c] as string));
+      const seen = new Set(Array.from(document.querySelectorAll('.field-note h2')).map((h) => (h.textContent || '').trim().toLowerCase()));
+      box.innerHTML = notes.filter((n: any) => !seen.has(String(n.title || '').trim().toLowerCase())).map((n: any) =>
+        `<article id="${esc(n.id)}" class="field-note"><h2>${esc(n.title)}</h2><dl>` +
+        `<dt>Signal</dt><dd>${esc(n.signal)}</dd><dt>Usual assumption</dt><dd>${esc(n.assumption)}</dd>` +
+        `<dt>Often it's</dt><dd class="fn-constraint">${esc(n.constraint)}</dd><dt>Check</dt><dd>${esc(n.evidence)}</dd>` +
+        `<dt>First 90 days</dt><dd>${esc(n.action)}</dd></dl><a class="link-more" href="/assessment">Take the free check-up &rarr;</a></article>`).join('');
+      if (location.hash && document.getElementById(location.hash.slice(1))) document.getElementById(location.hash.slice(1))!.scrollIntoView();
+    } catch { /* static notes still show */ }
+  })();
 </script>

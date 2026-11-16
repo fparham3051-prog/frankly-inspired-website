@@ -1,0 +1,169 @@
+---
+// Site-wide sign-up card: name + email for field notes. The website API
+// (POST /api/subscribe) puts each sign-up straight into the operations
+// app's Prospecting as a "website pop-up" lead.
+//
+// Polite by design: slides in at the bottom corner (it never covers the
+// page), only after the visitor has read for a while (30 seconds, or half
+// the page), never before the cookie choice is made, not on the free tools
+// or legal pages, and not again for 30 days after "No thanks" (never after
+// signing up). Esc closes it.
+---
+
+<div id="lead-popup" class="lead-popup" role="dialog" aria-labelledby="lead-popup-title" aria-describedby="lead-popup-desc" hidden>
+  <button type="button" class="lead-popup-close" aria-label="Close" data-lp-close>&times;</button>
+  <div data-lp-form-wrap>
+    <p class="lead-popup-eyebrow">Field notes</p>
+    <h2 id="lead-popup-title" class="lead-popup-title">What's really holding your organization back?</h2>
+    <p id="lead-popup-desc" class="lead-popup-desc">Short notes from the field for nonprofit leaders and boards: the signal you notice, the constraint it usually turns out to be, and one 90-day action.</p>
+    <form class="lead-popup-form" novalidate>
+      <label class="lead-popup-label">Name<input name="name" type="text" autocomplete="name" required maxlength="120" /></label>
+      <label class="lead-popup-label">Email<input name="email" type="email" autocomplete="email" required maxlength="200" /></label>
+      <div class="lead-popup-hp" aria-hidden="true"><label>Leave blank<input name="hp_field" type="text" tabindex="-1" autocomplete="off" /></label></div>
+      <button type="submit" class="btn btn-primary lead-popup-submit">Send me field notes</button>
+      <p class="lead-popup-error" role="alert" hidden></p>
+      <p class="lead-popup-fine">I'll email new notes occasionally. Reply "unsubscribe" anytime. <a href="/privacy">Privacy policy</a></p>
+    </form>
+    <button type="button" class="lead-popup-dismiss" data-lp-close>No thanks</button>
+  </div>
+  <div class="lead-popup-done" data-lp-done hidden>
+    <h2 class="lead-popup-title" tabindex="-1">You're on the list<span data-lp-first></span>.</h2>
+    <p class="lead-popup-desc">Start with the latest notes, or take the free check-up to see where your organization stands.</p>
+    <p class="lead-popup-links"><a class="btn btn-primary btn-small" href="/insights">Read the field notes</a> <a class="btn btn-secondary btn-small" href="/assessment">Free check-up</a></p>
+  </div>
+</div>
+
+<script>
+  const API = 'https://frankly-inspired-api.onrender.com/api/subscribe';
+  const KEY = 'fi_lead_popup'; // {state: 'dismissed'|'joined', at}
+  const SKIP = /^\/(assessment|health-index|revenue-growth-score|institutional-advancement-score|sustainability-score|leadership-health|candid-seal|feedback|privacy|terms)(\/|$)/;
+  const DELAY_MS = 30000;
+
+  function read(): { state?: string; at?: number } {
+    try { return JSON.parse(window.localStorage.getItem(KEY) || '{}') || {}; } catch { return {}; }
+  }
+  function write(state: string) {
+    try { window.localStorage.setItem(KEY, JSON.stringify({ state, at: Date.now() })); } catch { /* shows again next visit */ }
+  }
+  function eligible(): boolean {
+    if (SKIP.test(window.location.pathname)) return false;
+    if (new URLSearchParams(window.location.search).has('nopopup')) return false;
+    const s = read();
+    if (s.state === 'joined') return false;
+    if (s.state === 'dismissed' && s.at && Date.now() - s.at < 30 * 864e5) return false;
+    return true;
+  }
+  function cookieChoiceMade(): boolean {
+    try { return !!window.localStorage.getItem('fi_cookie_consent'); } catch { return true; }
+  }
+
+  const box = document.getElementById('lead-popup') as HTMLDivElement | null;
+  let shown = false, lastFocus: Element | null = null;
+
+  function show() {
+    if (!box || shown || !eligible()) return;
+    if (!cookieChoiceMade()) { document.addEventListener('fi-cookie-consent-changed', () => window.setTimeout(show, 4000), { once: true }); return; }
+    shown = true;
+    lastFocus = document.activeElement;
+    box.hidden = false;
+    window.requestAnimationFrame(() => box.classList.add('lead-popup-visible'));
+  }
+  function hide(remember: boolean) {
+    if (!box) return;
+    if (remember) write('dismissed');
+    box.classList.remove('lead-popup-visible');
+    window.setTimeout(() => { box.hidden = true; }, 300);
+    if (lastFocus instanceof HTMLElement) lastFocus.focus();
+  }
+
+  if (box && eligible()) {
+    const timer = window.setTimeout(show, DELAY_MS);
+    const onScroll = () => {
+      const h = document.documentElement.scrollHeight - window.innerHeight;
+      if (h > 0 && window.scrollY / h > 0.5) { window.clearTimeout(timer); window.removeEventListener('scroll', onScroll); show(); }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    box.querySelectorAll('[data-lp-close]').forEach((b) => b.addEventListener('click', () => hide(!box.querySelector('[data-lp-done]:not([hidden])'))));
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && shown && !box.hidden) hide(!box.querySelector('[data-lp-done]:not([hidden])')); });
+
+    const form = box.querySelector('form') as HTMLFormElement;
+    const err = box.querySelector('.lead-popup-error') as HTMLParagraphElement;
+    const submit = box.querySelector('.lead-popup-submit') as HTMLButtonElement;
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      err.hidden = true;
+      const name = (form.elements.namedItem('name') as HTMLInputElement).value.trim();
+      const email = (form.elements.namedItem('email') as HTMLInputElement).value.trim();
+      const hp = (form.elements.namedItem('hp_field') as HTMLInputElement).value;
+      if (!name) { err.textContent = 'Please add your name.'; err.hidden = false; return; }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { err.textContent = 'Please enter a valid email address.'; err.hidden = false; return; }
+      submit.disabled = true; submit.textContent = 'Sending...';
+      try {
+        const r = await fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name, email, hp_field: hp, page: window.location.pathname }) });
+        const j = await r.json().catch(() => ({}));
+        if (!r.ok || !j.ok) throw new Error(j.error || 'Something went wrong. Please try again.');
+        write('joined');
+        (box.querySelector('[data-lp-first]') as HTMLElement).textContent = ', ' + name.split(/\s+/)[0];
+        (box.querySelector('[data-lp-form-wrap]') as HTMLElement).hidden = true;
+        const done = box.querySelector('[data-lp-done]') as HTMLElement; done.hidden = false;
+        (done.querySelector('h2') as HTMLElement).focus();
+        try { (window as any).fiTrack && (window as any).fiTrack('lead_popup_signup'); } catch { /* analytics optional */ }
+      } catch (ex) {
+        err.textContent = (ex as Error).message || 'Something went wrong. Please try again.'; err.hidden = false;
+        submit.disabled = false; submit.textContent = 'Send me field notes';
+      }
+    });
+  }
+</script>
+
+<style>
+  .lead-popup {
+    position: fixed; right: 1.25rem; bottom: 1.25rem; z-index: 1150;
+    width: min(380px, calc(100vw - 2rem)); max-height: calc(100vh - 2.5rem); overflow-y: auto;
+    background: var(--white); color: var(--charcoal);
+    border: 1px solid var(--border); border-top: 4px solid var(--gold);
+    border-radius: var(--radius); box-shadow: var(--shadow-lg);
+    padding: 1.5rem 1.4rem 1.1rem;
+    transform: translateY(24px); opacity: 0;
+    transition: transform var(--transition-slow), opacity var(--transition);
+  }
+  .lead-popup-visible { transform: translateY(0); opacity: 1; }
+  .lead-popup[hidden] { display: none; }
+  .lead-popup-close {
+    position: absolute; top: 0.5rem; right: 0.6rem; width: 2.25rem; height: 2.25rem;
+    border: 0; background: transparent; font-size: 1.6rem; line-height: 1; color: #5b6570; cursor: pointer; border-radius: 50%;
+  }
+  .lead-popup-close:hover, .lead-popup-close:focus-visible { background: var(--light-gray); color: var(--navy); }
+  .lead-popup-eyebrow { margin: 0 0 0.35rem; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold-accessible); }
+  .lead-popup-title { margin: 0 2rem 0.5rem 0; font-family: var(--font-heading); font-size: 1.35rem; line-height: 1.25; color: var(--navy); }
+  .lead-popup-desc { margin: 0 0 1rem; font-size: 0.92rem; line-height: 1.5; color: #4a535c; }
+  .lead-popup-form { display: grid; gap: 0.7rem; }
+  .lead-popup-label { display: grid; gap: 0.3rem; min-width: 0; font-size: 0.85rem; font-weight: 600; color: var(--navy); }
+  .lead-popup-label input {
+    width: 100%; min-width: 0; box-sizing: border-box;
+    font: inherit; font-weight: 400; font-size: 1rem; padding: 0.65rem 0.75rem;
+    border: 1px solid #c9d0d7; border-radius: var(--radius-sm); background: var(--white); color: var(--charcoal);
+  }
+  .lead-popup-label input:focus { outline: 2px solid var(--gold); outline-offset: 1px; border-color: var(--gold); }
+  .lead-popup-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  .lead-popup-submit { width: 100%; justify-content: center; margin-top: 0.2rem; }
+  .lead-popup-error { margin: 0; font-size: 0.85rem; color: var(--band-0); }
+  .lead-popup-fine { margin: 0.1rem 0 0; font-size: 0.75rem; color: #5b6570; }
+  .lead-popup-fine a { color: var(--gold-accessible); }
+  .lead-popup-dismiss { display: block; margin: 0.6rem auto 0; border: 0; background: none; font: inherit; font-size: 0.85rem; color: #5b6570; text-decoration: underline; cursor: pointer; padding: 0.35rem; }
+  .lead-popup-links { display: flex; gap: 0.6rem; flex-wrap: wrap; margin: 0; }
+  @media (max-width: 560px) {
+    .lead-popup { right: 0.6rem; left: 0.6rem; bottom: 0.6rem; width: auto; padding: 0.9rem 0.9rem 0.6rem; }
+    .lead-popup-eyebrow { display: none; }
+    .lead-popup-title { font-size: 1.05rem; margin-bottom: 0.6rem; }
+    [data-lp-form-wrap] .lead-popup-desc { display: none; }
+    .lead-popup-form { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0.5rem; }
+    .lead-popup-label { font-size: 0.78rem; }
+    .lead-popup-label input { padding: 0.5rem 0.6rem; font-size: 16px; }
+    .lead-popup-submit, .lead-popup-error, .lead-popup-fine { grid-column: 1 / -1; }
+    .lead-popup-submit { padding-top: 0.6rem; padding-bottom: 0.6rem; }
+    .lead-popup-dismiss { margin-top: 0.2rem; }
+  }
+  @media (prefers-reduced-motion: reduce) { .lead-popup { transition: none; transform: none; } }
+</style>

@@ -144,6 +144,8 @@ export function enableStepper(form: HTMLFormElement | null) {
     if (!on || t.type !== 'radio' || !questions[i].contains(t)) return;
     if (rubric && rubric.open && i === 0) rubric.open = false;
     render();
+    // A strong answer opens the "what could you show?" prompt: wait for Next.
+    if (Number(t.value) >= 4 && questions[i].querySelector('.ev-prompt')) { window.clearTimeout(advanceTimer); return; }
     if (step(i, 1) !== -1) {
       window.clearTimeout(advanceTimer);
       advanceTimer = window.setTimeout(goNext, 320);
@@ -153,6 +155,11 @@ export function enableStepper(form: HTMLFormElement | null) {
   form.addEventListener('keydown', (e) => {
     if (!on || e.altKey || e.ctrlKey || e.metaKey) return;
     const tag = (e.target as HTMLElement).tagName;
+    if (e.key === 'Enter' && (e.target as HTMLElement).closest('.ev-prompt')) {
+      e.preventDefault();
+      if (step(i, 1) !== -1) goNext(); else form.querySelector<HTMLButtonElement>('button[type="submit"]')?.focus();
+      return;
+    }
     if (tag === 'TEXTAREA' || (tag === 'INPUT' && (e.target as HTMLInputElement).type !== 'radio')) return;
     // Keys pressed on the trigger question ("What's happening right now?")
     // belong to it, not to the current question.

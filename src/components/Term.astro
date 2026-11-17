@@ -1,0 +1,24 @@
+---
+// A term with a short plain definition: hover, focus, or tap shows it.
+// Keyboard: Tab to it; Escape closes. The definition is also read by
+// screen readers (aria-describedby).
+interface Props { def: string }
+const { def } = Astro.props;
+const id = 'term-' + Math.random().toString(36).slice(2, 9);
+---
+<span class="term" tabindex="0" aria-describedby={id}><slot /><span class="term-def" role="tooltip" id={id}>{def}</span></span>
+<script>
+  document.addEventListener('click', (e) => {
+    const t = (e.target as HTMLElement).closest('.term');
+    document.querySelectorAll('.term.is-open').forEach((x) => { if (x !== t) x.classList.remove('is-open'); });
+    if (t) t.classList.toggle('is-open');
+  });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') document.querySelectorAll('.term.is-open, .term:focus').forEach((x) => { x.classList.remove('is-open'); (x as HTMLElement).blur(); }); });
+</script>
+<style is:global>
+  .term { position: relative; border-bottom: 1px dotted currentColor; cursor: help; }
+  .term:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; border-radius: 2px; }
+  .term-def { position: absolute; left: 50%; bottom: calc(100% + 8px); transform: translateX(-50%); width: max-content; max-width: min(280px, 80vw); background: var(--navy); color: #fff; font-size: 0.82rem; font-weight: 400; font-style: normal; line-height: 1.45; padding: 0.55rem 0.7rem; border-radius: 6px; box-shadow: var(--shadow-lg); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.15s; z-index: 20; text-align: left; letter-spacing: normal; text-transform: none; }
+  .term:hover .term-def, .term:focus .term-def, .term.is-open .term-def { opacity: 1; visibility: visible; }
+  @media print { .term-def { display: none; } }
+</style>

@@ -34,6 +34,11 @@ const BY_AREA = [
   { area: 'Baltimore and Central Maryland', n: 358, res: '7.6', under3: 28, def: 38, strained: 38 },
   { area: 'Frederick', n: 57, res: '6.2', under3: 25, def: 33, strained: 36 },
 ];
+// Bar charts: each shows one measure across groups on a fixed 0-50% scale,
+// so bars compare across the three breakdowns. The full table sits below each.
+type Row = { n: number; res: string; under3: number; def: number; strained: number } & Record<string, any>;
+const MEASURES: [keyof Row, string][] = [['strained', 'Growing organizations under strain'], ['def', 'Ran a deficit in the latest year'], ['under3', 'Under 3 months of expenses in net assets']];
+const chart = (rows: Row[], labelKey: string) => MEASURES.map(([k, title]) => ({ title, k, bars: rows.map((r) => ({ label: r[labelKey], v: Number(r[k]), n: r.n })), max: Math.max(...rows.map((r) => Number(r[k]))) }));
 const BY_TYPE = [
   { type: 'Education', n: 831, res: '9.2', under3: 21, def: 39, strained: 36 },
   { type: 'Human services', n: 623, res: '6.6', under3: 26, def: 43, strained: 42 },
@@ -75,24 +80,66 @@ const BY_TYPE = [
         <p>About half ({STATS.contrib70}%) rely on contributions and grants for 70% or more of revenue, so a single funder decision can move the whole picture.</p>
 
         <h2 class="subhead">By organization size</h2>
+        <div class="dmv-charts">
+          {chart(BY_SIZE, 'band').map((c) => (
+            <figure class="dmv-chart">
+              <figcaption>{c.title}</figcaption>
+              <ul class="dmv-bars">
+                {c.bars.map((b) => (
+                  <li title={`${b.label}: ${b.v}% (${b.n} organizations)`}><span class="dmv-bl">{b.label}</span><span class="dmv-track"><span class={`dmv-fill${b.v === c.max ? ' is-max' : ''}`} style={`width:${(b.v / 50) * 100}%`}></span></span><span class="dmv-bv">{b.v}%</span></li>
+                ))}
+              </ul>
+            </figure>
+          ))}
+        </div>
+        <details class="dmv-table-fold"><summary>See all figures</summary>
         <div class="org-table-wrap"><table class="org-table method-table">
           <thead><tr><th>Annual revenue</th><th>Organizations</th><th>Median months of expenses in net assets</th><th>Under 3 months</th><th>Deficit, latest year</th><th>Growers under strain</th></tr></thead>
           <tbody>{BY_SIZE.map((r) => <tr><td><strong>{r.band}</strong></td><td>{r.n}</td><td>{r.res}</td><td>{r.under3}%</td><td>{r.def}%</td><td>{r.strained}%</td></tr>)}</tbody>
         </table></div>
+        </details>
         <p class="dmv-note">Smaller organizations carry the most risk on every measure, and the gap is widest on growth strain: 43% of growing organizations under $1M show it, against 31% at $5M and up.</p>
 
         <h2 class="subhead">By region</h2>
+        <div class="dmv-charts">
+          {chart(BY_AREA, 'area').map((c) => (
+            <figure class="dmv-chart">
+              <figcaption>{c.title}</figcaption>
+              <ul class="dmv-bars">
+                {c.bars.map((b) => (
+                  <li title={`${b.label}: ${b.v}% (${b.n} organizations)`}><span class="dmv-bl">{b.label}</span><span class="dmv-track"><span class={`dmv-fill${b.v === c.max ? ' is-max' : ''}`} style={`width:${(b.v / 50) * 100}%`}></span></span><span class="dmv-bv">{b.v}%</span></li>
+                ))}
+              </ul>
+            </figure>
+          ))}
+        </div>
+        <details class="dmv-table-fold"><summary>See all figures</summary>
         <div class="org-table-wrap"><table class="org-table method-table">
           <thead><tr><th>Region</th><th>Organizations</th><th>Median months</th><th>Under 3 months</th><th>Deficit, latest year</th><th>Growers under strain</th></tr></thead>
           <tbody>{BY_AREA.map((r) => <tr><td><strong>{r.area}</strong></td><td>{r.n}</td><td>{r.res}</td><td>{r.under3}%</td><td>{r.def}%</td><td>{r.strained}%</td></tr>)}</tbody>
         </table></div>
+        </details>
         <p class="dmv-note">DC organizations were the most likely to post a deficit in their latest year (45%) and to show strain while growing (43%). Baltimore and Central Maryland had the largest share with under three months in net assets (28%). Frederick is a small group (57 organizations), so read its figures with care.</p>
 
         <h2 class="subhead">By type of organization</h2>
+        <div class="dmv-charts">
+          {chart(BY_TYPE, 'type').map((c) => (
+            <figure class="dmv-chart">
+              <figcaption>{c.title}</figcaption>
+              <ul class="dmv-bars">
+                {c.bars.map((b) => (
+                  <li title={`${b.label}: ${b.v}% (${b.n} organizations)`}><span class="dmv-bl">{b.label}</span><span class="dmv-track"><span class={`dmv-fill${b.v === c.max ? ' is-max' : ''}`} style={`width:${(b.v / 50) * 100}%`}></span></span><span class="dmv-bv">{b.v}%</span></li>
+                ))}
+              </ul>
+            </figure>
+          ))}
+        </div>
+        <details class="dmv-table-fold"><summary>See all figures</summary>
         <div class="org-table-wrap"><table class="org-table method-table">
           <thead><tr><th>Type</th><th>Organizations</th><th>Median months</th><th>Under 3 months</th><th>Deficit, latest year</th><th>Growers under strain</th></tr></thead>
           <tbody>{BY_TYPE.map((r) => <tr><td><strong>{r.type}</strong></td><td>{r.n}</td><td>{r.res}</td><td>{r.under3}%</td><td>{r.def}%</td><td>{r.strained}%</td></tr>)}</tbody>
         </table></div>
+        </details>
         <p class="dmv-note">Human services organizations have the thinnest cushion (a median of 6.6 months) and the highest rates of deficits and growth strain.</p>
 
         <h2 class="subhead">How we did this</h2>
@@ -120,6 +167,18 @@ const BY_TYPE = [
   .dmv-stat { background: var(--white); border: 1px solid var(--border); border-top: 4px solid var(--gold); border-radius: var(--radius); padding: 1.1rem 1.1rem 1rem; display: grid; gap: 0.4rem; align-content: start; }
   .dmv-num { font-family: var(--font-heading); font-size: 2.2rem; line-height: 1; color: var(--navy); font-weight: 700; }
   .dmv-label { font-size: 0.92rem; line-height: 1.45; color: #4a535c; }
+  .dmv-charts { display: grid; grid-template-columns: repeat(auto-fit, minmax(205px, 1fr)); gap: 1.25rem; margin: 0.75rem 0 0.5rem; }
+  .dmv-chart { margin: 0; background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.9rem 1rem; }
+  .dmv-chart figcaption { font-weight: 600; color: var(--navy); font-size: 0.9rem; margin-bottom: 0.6rem; }
+  .dmv-bars { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.45rem; }
+  .dmv-bars li { display: grid; grid-template-columns: minmax(0, 6.5rem) 1fr 2.4rem; align-items: center; gap: 0.5rem; font-size: 0.82rem; color: #3a434c; }
+  .dmv-bl { line-height: 1.2; }
+  .dmv-track { height: 10px; background: #EDF0F3; border-radius: 4px; overflow: hidden; }
+  .dmv-fill { display: block; height: 100%; background: #6B7A8C; border-radius: 0 4px 4px 0; }
+  .dmv-fill.is-max { background: var(--navy); }
+  .dmv-bv { text-align: right; font-variant-numeric: tabular-nums; color: #3a434c; }
+  .dmv-table-fold { margin: 0.25rem 0 0; }
+  .dmv-table-fold summary { cursor: pointer; font-size: 0.88rem; font-weight: 600; color: var(--navy); }
   .dmv-note { font-size: 0.92rem; color: #4a535c; margin-top: 0.5rem; }
   .dmv-cta { margin-top: 2.5rem; padding: 1.5rem; background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); }
   .dmv-cta-buttons { display: flex; gap: 0.6rem; flex-wrap: wrap; margin: 0; }

@@ -1,4 +1,5 @@
 ---
+import Term from '../components/Term.astro';
 import MarkDivider from '../components/MarkDivider.astro';
 import { CALENDLY_URL, SCORECARD_URL } from '../config';
 import BaseLayout from '../layouts/BaseLayout.astro';
@@ -221,9 +222,9 @@ Thank you for considering this request.
         <MarkDivider step={5} />
         <h3 id="30-60-90" class="subhead reveal">What's done by day 30, 60, and 90</h3>
         <div class="trust-grid reveal">
-          <div class="trust-card"><h4>By day 30</h4><ul><li>Diagnostic complete: scorecard, memo, and readout</li><li>The gap to fix first named and agreed by leadership</li><li>A 90-Day Improvement Plan: one target and three to six actions, each with an owner and a date</li><li>Client portal live, weekly check-ins started</li></ul></div>
-          <div class="trust-card"><h4>By day 60</h4><ul><li>First actions finished, with the evidence logged</li><li>A month-one check: does the diagnosis still hold?</li><li>Anything blocked unblocked or re-planned</li><li>A progress view you can share with your board</li></ul></div>
-          <div class="trust-card"><h4>By day 90</h4><ul><li>The 90-day review: what moved, shown with evidence, not impressions</li><li>The change written down, owned, and taught to staff</li><li>The next constraint in line, and a decision: next plan, retainer, or close out</li><li>Six-month reassessment on the calendar</li></ul></div>
+          <div class="trust-card"><h3 class="h4-style">By day 30</h3><ul><li>Diagnostic complete: scorecard, memo, and readout</li><li>The gap to fix first named and agreed by leadership</li><li>A 90-Day Improvement Plan: one target and three to six actions, each with an owner and a date</li><li>Client portal live, weekly check-ins started</li></ul></div>
+          <div class="trust-card"><h3 class="h4-style">By day 60</h3><ul><li>First actions finished, with the evidence logged</li><li>A month-one check: does the diagnosis still hold?</li><li>Anything blocked unblocked or re-planned</li><li>A progress view you can share with your board</li></ul></div>
+          <div class="trust-card"><h3 class="h4-style">By day 90</h3><ul><li>The 90-day review: what moved, shown with evidence, not impressions</li><li>The change written down, owned, and taught to staff</li><li>The next constraint in line, and a decision: next plan, retainer, or close out</li><li>Six-month reassessment on the calendar</li></ul></div>
         </div>
 
         <MarkDivider step={6} />
@@ -255,10 +256,11 @@ Thank you for considering this request.
             <tr><td><strong>Governance and Risk</strong></td><td>71</td><td>Bylaws and Form 990 policies current; succession plan not documented.</td></tr>
           </tbody>
         </table></div>
-        <p><strong>Constraint identified:</strong> Leadership bench strength is the binding constraint, not financial health, which is often assumed to be the problem.</p>
+        <p><strong>Constraint identified:</strong> Leadership bench strength is the <Term def="The one gap most likely to stall your next funding, growth, or leadership decision. It's chosen on evidence, not simply your lowest score.">binding constraint</Term>, not financial health, which is often assumed to be the problem.</p>
         <p><strong>90-day target:</strong> 44 to 58 (closing 25% of the gap to 100), via a documented succession plan for the top two program roles and one cross-trained backup per critical function.</p>
         <p><strong>Candid Seal step:</strong> Silver to Gold by uploading the latest filed Form 990 and completing the leader demographic fields, both already in hand.</p>
         <p><strong>What you get:</strong> the full scorecard above, a written memo explaining each score, and a 60-90 minute session walking through the plan, delivered whether the news is good or hard to hear.</p>
+        <p><a class="link-more" href="/assets/docs/sample-board-report.pdf" target="_blank" rel="noopener" data-track="sample_board_report">Download a sample board report (PDF, fictional organization) &rarr;</a></p>
 
         <p class="pricing-reassurance reveal">Not ready for a conversation yet? <a href="/tools">Take a free assessment</a> first, it points to where to focus.</p>
       </div>
@@ -298,6 +300,17 @@ Thank you for considering this request.
     </section>
 
     <!-- ============ FAQ ============ -->
+    <section id="your-information" class="section">
+      <div class="container">
+        <h2 class="section-title reveal">How your information is handled</h2>
+        <div class="trust-grid reveal">
+          <div class="trust-card"><h3 class="h4-style">Used for your Diagnostic only</h3><p>What you share is used to score, write the memo, and hold the readout. It's never sold, and never reused for another engagement without your knowledge.</p></div>
+          <div class="trust-card"><h3 class="h4-style">Private by default</h3><p>Your workspace opens by a link only your team holds. A funder sees results only if you choose to share a separate, funder-safe view, without your internal notes.</p></div>
+          <div class="trust-card"><h3 class="h4-style">Yours to remove</h3><p>Free check-up answers stay in your browser. After an engagement, ask and the source documents you shared are deleted. AI that helps prepare drafts is checked by a person before anything reaches you. <a href="/privacy">Privacy policy</a></p></div>
+        </div>
+      </div>
+    </section>
+
     <section id="faq" class="section faq">
       <div class="container narrow">
         <h2 class="section-title reveal">Frequently Asked Questions</h2>

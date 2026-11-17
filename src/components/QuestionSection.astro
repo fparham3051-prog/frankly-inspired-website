@@ -21,6 +21,23 @@ const items = itemsFor(area.key);
           <label><input type="radio" name={q.name} value={String(i + 1)} required={i === 0} /><span>{i + 1}</span><small>{label}</small></label>
         ))}
       </div>
+      <label class="ev-prompt" hidden>What could you show for this? <span>Optional. It stays in your browser.</span>
+        <input type="text" name={`${q.name}_ev`} maxlength="140" autocomplete="off" placeholder="For example: board-approved reserve policy, 2025" />
+      </label>
     </fieldset>
   ))}
 </div>
+
+<script>
+  // Evidence prompt: answering "Documented" or "Verified" asks what you could
+  // show. Naming it is optional; the results count how many strong answers
+  // have something named behind them.
+  document.addEventListener('change', (e) => {
+    const t = e.target as HTMLInputElement;
+    if (t.type !== 'radio') return;
+    const fs = t.closest('fieldset.likert');
+    const pr = fs?.querySelector<HTMLElement>('.ev-prompt');
+    if (!pr) return;
+    pr.hidden = Number(t.value) < 4;
+  });
+</script>

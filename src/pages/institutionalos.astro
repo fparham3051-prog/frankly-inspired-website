@@ -1,4 +1,5 @@
 ---
+import Term from '../components/Term.astro';
 import MarkDivider from '../components/MarkDivider.astro';
 import { SCORECARD_URL, CALENDLY_URL } from '../config';
 import BaseLayout from '../layouts/BaseLayout.astro';
@@ -64,7 +65,7 @@ import ScrollReveal from '../components/ScrollReveal.astro';
           <li class="ios-step reveal">
             <div class="ios-step-text">
               <p class="ios-step-num">1 &middot; Assess</p>
-              <h3>One Health Index, seven areas</h3>
+              <h3>One <Term def="One score from 0 to 100 across the seven areas, weighted for your stage (Build, Fund, or Sustain).">Health Index</Term>, seven areas</h3>
               <p>The organization is scored 0 to 100 across direction, proof of results, revenue, leadership, operations, partnerships, and governance. The weakest area, the one most likely to break first, is flagged in red.</p>
             </div>
             <figure class="ios-shot"><img src="/assets/images/ios/t1-assess.webp" width="1600" height="625" loading="lazy" alt="Client portal header for a sample organization showing a Health Index of 54 on a seven-segment dial, with the weakest area in red" /></figure>
@@ -101,8 +102,16 @@ import ScrollReveal from '../components/ScrollReveal.astro';
             </div>
             <figure class="ios-shot"><img src="/assets/images/ios/t5-progress.webp" width="1600" height="600" loading="lazy" alt="A progress chart showing a sample organization's Health Index rising across three reassessments from August to November" /></figure>
           </li>
+          <li class="ios-step reveal">
+            <div class="ios-step-text">
+              <p class="ios-step-num">6 &middot; Before and after, ready for the board</p>
+              <h3>What changed, on one page</h3>
+              <p>Every area's score at the Diagnostic sits next to today's, so the change is plain to see. A two-page board report pulls it together: where you stand, what moved, the plan's progress, and the decisions ahead. <a href="/assets/docs/sample-board-report.pdf" target="_blank" rel="noopener" data-track="sample_board_report">See a sample board report (PDF)</a>.</p>
+            </div>
+            <figure class="ios-shot"><img src="/assets/images/ios/t6-before-after.webp" width="1600" height="857" loading="lazy" alt="Before and after table: each of seven areas with its score at the Diagnostic, today's score, and the change, all up between 2 and 8 points" /></figure>
+          </li>
         </ol>
-        <p class="ios-tour-note reveal">Sample organization with fictional data, shown in the real client portal.</p>
+        <p class="ios-tour-note reveal">Sample organization with fictional data, shown in the real client portal. Your own workspace is private to your organization, opened by a link only your team holds.</p>
         <div class="hero-ctas reveal" style="justify-content:center; display:flex; flex-wrap:wrap; gap:0.75rem;">
           <a class="btn btn-primary" href="https://grantpass-dashboard.onrender.com/report.html?demo=sample" target="_blank" rel="noopener" data-track="sample_workspace_open">Explore the Sample Workspace</a>
           <a class="btn btn-secondary" href="/assessment" data-track="tool_start" data-tool="institutionalos-tour">Start the Free Check-up</a>
@@ -119,19 +128,19 @@ import ScrollReveal from '../components/ScrollReveal.astro';
         <div class="card-grid">
           <a class="card reveal" href="/consulting#build">
             <span class="offering-badge">Formation Readiness</span>
-            <h4>Build</h4>
+            <h3 class="h4-style">Build</h3>
             <p>Is the organization clear and structured enough to launch responsibly, covering governance, strategy, and the basics funders and boards look for from day one?</p>
             <span class="card-cta">See the price for this stage &rarr;</span>
           </a>
           <a class="card reveal" href="/consulting#fund">
             <span class="offering-badge">Grant Readiness</span>
-            <h4>Fund</h4>
+            <h3 class="h4-style">Fund</h3>
             <p>Is the case for support, evidence, and financial picture strong enough for a specific funder to say yes, scored with your actual filed Form 990 data, not self-reported estimates.</p>
             <span class="card-cta">See the price for this stage &rarr;</span>
           </a>
           <a class="card reveal" href="/consulting#sustain">
             <span class="offering-badge">Institutional Durability</span>
-            <h4>Sustain</h4>
+            <h3 class="h4-style">Sustain</h3>
             <p>Is the institution resilient enough to keep performing without depending on any one grant, funder, or person, measured through financial resilience, leadership bench strength, and mature operations.</p>
             <span class="card-cta">See the price for this stage &rarr;</span>
           </a>
@@ -144,9 +153,9 @@ import ScrollReveal from '../components/ScrollReveal.astro';
       <div class="container">
         <h2 class="section-title reveal">Scores you have to earn</h2>
         <div class="trust-grid reveal">
-          <div class="trust-card"><h4>Evidence, not confidence</h4><p>Each area is scored 0 to 100 on what you can show: an idea scores 25, something informal 50, documented and in use 75, routine and checked 100. A score with nothing behind it is treated as an assumption.</p></div>
-          <div class="trust-card"><h4>No hiding behind an average</h4><p>Each stage has a few areas that must clear a minimum on their own. A strong overall score can't make up for weak governance before a launch, or thin proof of results before a major grant.</p></div>
-          <div class="trust-card"><h4>A target you can reach</h4><p>The 90-day target closes a quarter of the gap: an area at 44 aims for 58. Financial health comes straight from your filed Form 990s, not estimates. Every score is rechecked at six months.</p></div>
+          <div class="trust-card"><h3 class="h4-style">Evidence, not confidence</h3><p>Each area is scored 0 to 100 on what you can show: an idea scores 25, something informal 50, documented and in use 75, routine and checked 100. A score with nothing behind it is treated as an assumption.</p></div>
+          <div class="trust-card"><h3 class="h4-style">No hiding behind an average</h3><p>Each stage has a few areas that must clear a minimum on their own. A strong overall score can't make up for weak governance before a launch, or thin proof of results before a major grant.</p></div>
+          <div class="trust-card"><h3 class="h4-style">A target you can reach</h3><p>The 90-day target closes a quarter of the gap: an area at 44 aims for 58. Financial health comes straight from your filed Form 990s, not estimates. Every score is rechecked at six months.</p></div>
         </div>
         <p class="section-note reveal" style="margin-top:1.25rem;">Every question, the full rubric, and how the overall score reads are on <a href="/methodology">How Scoring Works</a>.</p>
       </div>

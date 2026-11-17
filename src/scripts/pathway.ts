@@ -136,11 +136,12 @@ export function renderPathway(el: HTMLElement | null, opts: PathwayOptions) {
         : allEven
           ? `<p>Your areas scored about evenly (around ${lowest.pct}%), so no single gap stands out. ${esc(lowest.label)} is a sensible place to start; a diagnostic would show which area is really holding things back.</p>`
           : `<p>${esc(lowest.label)} scored lowest, at ${lowest.pct}%. It's the most likely place progress is getting stuck.</p>`}
-      ${lowest.help ? `<p>${esc(lowest.help)}</p>` : ''}
+      ${lowest.help ? `<p class="pathway-help">${esc(lowest.help)}</p>` : ''}
       ${opts.extraHtml || ''}
 
       ${action ? `<h3 class="subhead">Your next 90 days</h3><p>${esc(action)}</p>` : ''}
 
+      <div class="pathway-limits">
       <h3 class="subhead">What this tool can't tell you</h3>
       <p>${basis} It can't tell you:</p>
       <ul class="bullet-list">
@@ -150,6 +151,7 @@ export function renderPathway(el: HTMLElement | null, opts: PathwayOptions) {
         <li>${opts.coversAllSeven ? 'which single dimension is truly the binding constraint once the evidence is checked.' : `whether ${esc(lowest.label)} is really the binding constraint across all seven Health Index dimensions, since this tool covers only part of them.`}</li>
       </ul>
       <p>That is what the InstitutionalOS Diagnostic verifies, directly with you.</p>
+      </div>
 
       <div class="pathway-next" data-pathway-next>${recommendationHtml(getStage())}</div>
       ${opts.profile === false ? '' : profileTeaserHtml()}

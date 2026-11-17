@@ -218,7 +218,7 @@ ul, ol { padding-left: 1.25em; }
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.96);
   backdrop-filter: saturate(180%) blur(14px);
   -webkit-backdrop-filter: saturate(180%) blur(14px);
   border-bottom: 1px solid var(--border);
@@ -2658,3 +2658,50 @@ details.letter-fold pre { margin-top: 0.75rem; }
 section + .mark-divider, .mark-divider + section { margin-top: 0; }
 main > .mark-divider { max-width: var(--max-width); margin: 0 auto; padding: 0 1.5rem; }
 .footer-mark { display: block; margin: 0 auto 0.6rem; }
+
+/* Check-up: evidence prompt after a strong answer */
+.ev-prompt { display: grid; gap: 0.35rem; margin-top: 0.9rem; padding: 0.75rem 0.9rem; background: #F7F3EA; border-left: 3px solid var(--gold); border-radius: var(--radius-sm); font-weight: 600; color: var(--navy); font-size: 0.95rem; }
+.ev-prompt[hidden] { display: none; }
+.ev-prompt span { font-weight: 400; font-size: 0.82rem; color: #55606B; }
+.ev-prompt input { font: inherit; font-weight: 400; padding: 0.55rem 0.7rem; border: 1px solid #C9D0D7; border-radius: var(--radius-sm); background: #fff; width: 100%; box-sizing: border-box; }
+.ev-prompt input:focus { outline: 2px solid var(--gold); outline-offset: 1px; }
+.results-confidence { margin: 1.25rem 0; padding: 1rem 1.1rem; border: 1px solid var(--border); border-left: 4px solid var(--gold); border-radius: var(--radius); background: #fff; }
+.results-confidence h3 { margin: 0 0 0.35rem; font-size: 1.05rem; }
+.results-confidence p { margin: 0; }
+.results-tools { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 1rem 0 0.5rem; }
+.print-only { display: none; }
+@media print { .print-only { display: block; } .results-tools, .checkup-bar { display: none !important; } }
+
+/* Check-up board brief: one page */
+@media print {
+  .assessment-intro, .assessment-progress, .results-related, .results-cta, #score-ref-cta, .results-retake, .results-disclaimer, .results-narrative-loading, .results-avg-overall, .lead-popup, .skip-link { display: none !important; }
+  .assessment-form-section { padding: 0 !important; background: #fff !important; }
+  .assessment-results { margin: 0 !important; padding: 0 !important; box-shadow: none !important; border: 0 !important; font-size: 10.5pt; }
+  .assessment-results .subhead { margin: 0.6rem 0 0.3rem !important; font-size: 12pt; }
+  .results-score { margin: 0.2rem 0 !important; }
+  .results-score-num { font-size: 28pt !important; }
+  .results-bar-row { margin: 0.15rem 0 !important; }
+  .results-confidence { margin: 0.5rem 0 !important; padding: 0.5rem 0.7rem !important; }
+  .results-recommendation .section-note, .results-recommendation .pathway-more { display: none !important; }
+  .board-brief-head { margin: 0 0 0.4rem; font-size: 10pt; color: #333; }
+  @page { margin: 0.45in 0.55in; }
+}
+@media print {
+  .pathway-limits, .pathway-next, .hi-teaser, .pathway-help, .results-priority:empty { display: none !important; }
+  .results-bars { display: block; }
+  .results-bar-row { padding: 0 !important; min-height: 0 !important; font-size: 9.5pt; line-height: 1.25; }
+  .results-bar-label { text-decoration: none !important; }
+  .assessment-results .container, .assessment-form-section .container { max-width: none !important; }
+  .results-band-desc { margin: 0 0 0.3rem !important; }
+  .pathway { padding: 0.5rem 0.7rem !important; border: 0 !important; box-shadow: none !important; }
+  .pathway .subhead { margin: 0.4rem 0 0.15rem !important; }
+  .pathway p { margin: 0.2rem 0 !important; }
+}
+.gp-wrap { margin-top: 3rem; padding-top: 2.25rem; border-top: 1px solid var(--border); }
+.gp-title { font-family: var(--font-heading); font-size: clamp(1.4rem, 2.6vw, 1.9rem); color: var(--navy); margin: 0 0 0.4rem; }
+.about-short { list-style: none; padding: 1rem 1.2rem; margin: 0.5rem 0 1.5rem; background: var(--white); border: 1px solid var(--border); border-left: 4px solid var(--gold); border-radius: var(--radius); display: grid; gap: 0.4rem; }
+.about-short li { margin: 0; line-height: 1.5; }
+h3.h4-style { font-size: 1.2rem; margin-bottom: 0.55rem; }
+.hero-dial .dial-seg:focus-visible { outline: none; }
+.hero-dial .dial-seg:focus-visible .seg-bg { stroke: rgba(17, 35, 61, 0.35); }
+.contact-form [aria-invalid="true"] { border-color: #B3402C !important; box-shadow: 0 0 0 1px #B3402C; }

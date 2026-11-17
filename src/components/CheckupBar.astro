@@ -1,0 +1,49 @@
+---
+// Phones only: a slim bar with the Free Check-up after the visitor scrolls
+// past the first screen. Hidden on the check-up and tool pages themselves,
+// near the contact form and footer, while the sign-up card is open, after the
+// check-up is done, and for the rest of the visit once closed.
+import SevenMark from './SevenMark.astro';
+---
+<div id="checkup-bar" class="checkup-bar" hidden>
+  <a class="checkup-bar-link" href="/assessment" data-track="tool_start" data-tool="phone-bar"><SevenMark size={18} weak={2} tone="light" /> <span>Free Check-up <small>7 minutes, no sign-up</small></span></a>
+  <button type="button" class="checkup-bar-close" aria-label="Close">&times;</button>
+</div>
+<script>
+  const bar = document.getElementById('checkup-bar');
+  const SKIP = /^\/(assessment|health-index|revenue-growth-score|institutional-advancement-score|sustainability-score|leadership-health|candid-seal|feedback|privacy|terms|tools)(\/|$)/;
+  const ok = (() => {
+    if (!bar || SKIP.test(location.pathname)) return false;
+    try { if (sessionStorage.getItem('fi_bar_closed') || localStorage.getItem('fi_checkup_done')) return false; } catch { /* show */ }
+    return true;
+  })();
+  if (bar && ok) {
+    const phone = window.matchMedia('(max-width: 640px)');
+    const update = () => {
+      const popupOpen = !!document.querySelector('.lead-popup-visible');
+      const end = document.querySelector('#contact, .site-footer');
+      const nearEnd = end ? end.getBoundingClientRect().top < window.innerHeight : false;
+      const show = phone.matches && window.scrollY > window.innerHeight * 0.9 && !nearEnd && !popupOpen;
+      bar.hidden = !show;
+      bar.classList.toggle('is-on', show);
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    setInterval(update, 1500); // catches the sign-up card opening
+    bar.querySelector('.checkup-bar-close')?.addEventListener('click', () => {
+      bar.hidden = true;
+      try { sessionStorage.setItem('fi_bar_closed', '1'); } catch { /* ignore */ }
+      window.removeEventListener('scroll', update);
+    });
+  }
+</script>
+<style>
+  .checkup-bar { position: fixed; left: 0.6rem; right: 0.6rem; bottom: 0.6rem; z-index: 1100; display: flex; align-items: center; gap: 0.25rem; background: var(--navy); border: 1px solid rgba(255,255,255,0.14); border-radius: 999px; box-shadow: var(--shadow-lg); padding: 0.3rem 0.35rem 0.3rem 0.4rem; }
+  .checkup-bar[hidden] { display: none; }
+  .checkup-bar-link { flex: 1; display: flex; align-items: center; gap: 0.55rem; padding: 0.45rem 0.6rem; color: #fff; text-decoration: none; font-weight: 600; font-size: 0.95rem; min-height: 44px; }
+  .checkup-bar-link small { display: block; font-weight: 400; font-size: 0.75rem; color: #C9D2DD; }
+  .checkup-bar-close { width: 44px; height: 44px; border: 0; background: transparent; color: #C9D2DD; font-size: 1.5rem; line-height: 1; border-radius: 50%; cursor: pointer; }
+  .checkup-bar-close:focus-visible, .checkup-bar-link:focus-visible { outline: 2px solid var(--gold-light); outline-offset: 2px; }
+  @media (min-width: 641px) { .checkup-bar { display: none !important; } }
+  @media print { .checkup-bar { display: none !important; } }
+</style>

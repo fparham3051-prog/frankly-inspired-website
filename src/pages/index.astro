@@ -1,5 +1,6 @@
 ---
 import SevenMark from '../components/SevenMark.astro';
+import GapPicker from '../components/GapPicker.astro';
 import { CALENDLY_URL, EMAIL, PHONE_DISPLAY, PHONE_TEL } from '../config';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
@@ -75,7 +76,7 @@ const dialSegs = dialAreas.map(([name, score], i) => {
                 <span class="dial-label" data-dial-label>Sample score</span>
               </div>
             </div>
-            <figcaption><span class="dial-weak">Breaks first: <strong>{dialWeak[0]}</strong></span><a href="/tools" data-track="tool_start" data-tool="hero-dial">Get yours free &rarr;</a></figcaption>
+            <figcaption><span class="dial-weak">Breaks first: <strong>{dialWeak[0]}</strong></span><a href="/assessment" data-track="tool_start" data-tool="hero-dial">Get yours free &rarr;</a></figcaption>
           </figure>
         </div>
       </div>
@@ -134,6 +135,11 @@ const dialSegs = dialAreas.map(([name, score], i) => {
             <p>A 30-minute conversation is enough to tell whether a Diagnostic is the right next step, and which door to come through.</p>
             <a class="btn btn-primary" href={CALENDLY_URL} target="_blank" rel="noopener" data-track="schedule_click">Schedule a Conversation</a>
           </article>
+        </div>
+        <div class="gp-wrap reveal" id="which-gap">
+          <h3 class="gp-title">Not sure which? Three questions.</h3>
+          <p class="section-note">Pick the answer closest to true. The dial lights up the area most likely to break first.</p>
+          <GapPicker />
         </div>
       </div>
     </section>
@@ -216,7 +222,7 @@ const dialSegs = dialAreas.map(([name, score], i) => {
             <span class="step-num" aria-hidden="true"><svg class="step-ring" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" pathLength="1" /></svg><span style="position:relative">1</span></span>
             <h3>Score</h3>
             <p>Take the free check-up. Seven minutes, no sign-up, and you see where you stand right away.</p>
-            <a class="link-more" href="/tools">Start the free check-up &rarr;</a>
+            <a class="link-more" href="/assessment">Start the free check-up &rarr;</a>
           </li>
           <li class="step reveal">
             <span class="step-num" aria-hidden="true"><svg class="step-ring" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" pathLength="1" /></svg><span style="position:relative">2</span></span>
@@ -227,14 +233,14 @@ const dialSegs = dialAreas.map(([name, score], i) => {
           <li class="step reveal">
             <span class="step-num" aria-hidden="true"><svg class="step-ring" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" pathLength="1" /></svg><span style="position:relative">3</span></span>
             <h3>Plan</h3>
-            <p>A short written memo names the one gap that will break first and lays out a 90-Day Improvement Plan to close it.</p>
+            <p>A short written memo names the one gap that will break first and lays out a 90-day plan to close it.</p>
             <a class="link-more" href="/consulting#sample-diagnostic">See a sample &rarr;</a>
           </li>
           <li class="step reveal">
             <span class="step-num" aria-hidden="true"><svg class="step-ring" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" pathLength="1" /></svg><span style="position:relative">4</span></span>
             <h3>Do the work</h3>
             <p>Each step has an owner and a date. A 15-minute weekly check-in keeps it moving, with a review at 90 days and a full re-check at six months.</p>
-            <a class="link-more" href="/institutionalos#method">How the plan works &rarr;</a>
+            <a class="link-more" href="/institutionalos#inside">See the workspace &rarr;</a>
           </li>
         </ol>
         <div class="dim-questions reveal">
@@ -259,7 +265,7 @@ const dialSegs = dialAreas.map(([name, score], i) => {
         <h2 class="section-title reveal">Ways to work together</h2>
         <p class="section-note reveal">Start free. Every paid engagement begins with the Diagnostic. <a href="/consulting#sample-diagnostic">See a sample report</a> or the <a href="/consulting#funder-sponsored">letter that asks a funder to cover it</a>.</p>
         <div class="offer-grid">
-          <a class="offer-card reveal" href="/tools" data-track="tool_start">
+          <a class="offer-card reveal" href="/assessment" data-track="tool_start">
             <span class="offering-badge">Start here</span>
             <h3>Free Check-up</h3>
             <p class="offer-price">$0 <span>7 minutes</span></p>
@@ -297,8 +303,7 @@ const dialSegs = dialAreas.map(([name, score], i) => {
         <p class="tag-chip reveal"><SevenMark size={13} weak={6} />Let's talk</p>
         <h2 class="section-title reveal">Tell me about your organization</h2>
         <div id="score-ref-banner" class="score-ref-banner reveal" hidden></div>
-        <p class="lede-sm reveal">Strong missions need sustainable institutions. If your organization is navigating growth, revenue pressure, operational complexity, leadership transition, or the need for a clearer sustainability strategy, start with a conversation.</p>
-        <p class="reveal">Tell me a little about your organization, where you are today, and what you're working to strengthen. I'll review your inquiry and follow up regarding whether Frankly Inspired may be a good fit.</p>
+        <p class="lede-sm reveal">Growth, revenue pressure, a leadership change, or a decision coming up: tell me what's happening, and I'll reply within one business day about whether I can help.</p>
 
         <p class="direct-contact reveal">
           <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
@@ -315,7 +320,7 @@ const dialSegs = dialAreas.map(([name, score], i) => {
 
         <p class="contact-faq reveal">Questions about cost, funder sponsorship, or how the check-up is scored? <a href="/consulting#faq">See common questions &rarr;</a></p>
 
-        <p class="form-divider">Prefer to write it out first? Share a few details below and I'll follow up.</p>
+        <p class="form-divider">Prefer to write it out first? Four fields, two minutes.</p>
 
         <!-- This form is live: posts to the frankly-inspired-backend
              /api/contact endpoint, which sends both the visitor's
@@ -331,28 +336,28 @@ const dialSegs = dialAreas.map(([name, score], i) => {
           </div>
           <div class="form-row">
             <label for="name">Name*</label>
-            <input type="text" id="name" name="name" placeholder="Your name" required />
+            <input type="text" id="name" name="name" placeholder="Your name" autocomplete="name" required />
           </div>
           <div class="form-row">
             <label for="organization">Organization*</label>
-            <input type="text" id="organization" name="organization" placeholder="Organization name" required />
-          </div>
-          <div class="form-row">
-            <label for="title">Title / Role</label>
-            <input type="text" id="title" name="title" placeholder="Optional" />
+            <input type="text" id="organization" name="organization" placeholder="Organization name" autocomplete="organization" required />
           </div>
           <div class="form-row">
             <label for="email">Email*</label>
-            <input type="email" id="email" name="email" placeholder="Email address" required />
+            <input type="email" id="email" name="email" placeholder="Email address" autocomplete="email" required />
           </div>
           <div class="form-row full">
-            <label for="challenge">What challenge or opportunity are you currently navigating?*</label>
+            <label for="challenge">What's happening at your organization?*</label>
             <textarea id="challenge" name="challenge" rows="4" placeholder="A few sentences is plenty" required></textarea>
           </div>
 
           <details class="form-row full form-more">
-          <summary>Add more details (optional)</summary>
+          <summary>Add more details: role, phone, timeline (optional)</summary>
           <div class="form-more-grid">
+          <div class="form-row">
+            <label for="title">Title / Role</label>
+            <input type="text" id="title" name="title" placeholder="Optional" />
+          </div>
           <div class="form-row">
             <label for="phone">Phone</label>
             <input type="tel" id="phone" name="phone" placeholder="Optional" />
@@ -406,7 +411,7 @@ const dialSegs = dialAreas.map(([name, score], i) => {
           <div class="precall reveal-off">
             <p><strong>Before we talk (optional, about 15 minutes):</strong></p>
             <ol class="bullet-list">
-              <li><a href="/tools">Take the free 7-minute check-up</a>.</li>
+              <li><a href="/assessment">Take the free 7-minute check-up</a>.</li>
               <li>Have your latest filed Form 990, this year's budget, bylaws, and any strategic plan on hand.</li>
               <li><a href="/candid-seal">Check your Candid Seal path</a>.</li>
             </ol>
@@ -521,7 +526,16 @@ const dialSegs = dialAreas.map(([name, score], i) => {
     form.addEventListener('submit', (e) => {
       e.preventDefault();
 
-      if (!form.checkValidity()) {
+      // Flag each empty or invalid field and say which ones, so screen
+      // readers hear it too (the browser bubble alone isn't announced).
+      const bad: string[] = [];
+      form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('input[required], textarea[required]').forEach((f) => {
+        const ok = f.checkValidity();
+        f.setAttribute('aria-invalid', ok ? 'false' : 'true');
+        if (!ok) bad.push((f.labels && f.labels[0] ? f.labels[0].textContent || '' : f.name).replace(/[*?]/g, '').trim());
+      });
+      if (bad.length) {
+        if (status) { status.textContent = 'Please fill in: ' + bad.join(', ') + '.'; }
         form.reportValidity();
         return;
       }
@@ -551,6 +565,7 @@ const dialSegs = dialAreas.map(([name, score], i) => {
       };
 
       if (status) status.textContent = 'Sending...';
+      form.querySelectorAll('[aria-invalid]').forEach((f) => f.setAttribute('aria-invalid', 'false'));
       if (submitBtn) submitBtn.disabled = true;
 
       fetch(API_BASE + '/api/contact', {

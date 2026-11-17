@@ -61,6 +61,7 @@ import QuestionSection from '../components/QuestionSection.astro';
 
         <!-- ============ RESULTS (rendered by the script below) ============ -->
         <div class="assessment-results" id="assessment-results" hidden>
+          <p class="print-only board-brief-head"><strong>Board brief: Free Check-up results</strong><br /><span id="brief-date"></span> &middot; Frankly Inspired and Associates &middot; franklyinspired.associates</p>
           <div class="results-score">
             <span class="results-score-num" id="results-score-num"></span>
             <span class="results-score-band" id="results-score-band"></span>
@@ -69,12 +70,20 @@ import QuestionSection from '../components/QuestionSection.astro';
           <p class="results-avg-overall" id="results-avg-overall" hidden></p>
           <p class="results-narrative-loading" id="results-narrative-loading" hidden>Writing a personalized summary of your results&hellip;</p>
 
-          <h3 class="subhead">By Pillar</h3>
+          <h3 class="subhead">By area</h3>
           <div class="results-bars" id="results-bars"></div>
+
+          <div class="results-confidence" id="results-confidence" hidden></div>
 
           <div class="results-priority" id="results-priority"></div>
 
           <div class="results-recommendation" id="results-recommendation"></div>
+
+          <div class="results-tools">
+            <button type="button" class="btn btn-secondary btn-small" id="results-print" data-track="results_print">Print a one-page board brief</button>
+            <button type="button" class="btn btn-secondary btn-small" id="results-ics" data-track="results_plan_calendar">Add a 90-day starter plan to my calendar</button>
+            <button type="button" class="btn btn-ghost btn-small" id="results-checklist" data-track="results_plan_checklist">Download the checklist</button>
+          </div>
 
           <div class="results-disclaimer">
             <p>This is a directional self-assessment based on your own responses, not a formal audit or guarantee of any outcome. It's meant to help you think through your organization's sustainability posture and where to focus next.</p>
@@ -269,6 +278,69 @@ import QuestionSection from '../components/QuestionSection.astro';
     return BANDS[BANDS.length - 1];
   }
 
+  // How many strong answers ("Documented" or "Verified") have something named
+  // behind them. Unnamed ones are treated as assumptions, the same rule the
+  // paid Diagnostic applies.
+  function renderConfidence() {
+    const box = document.getElementById('results-confidence');
+    if (!box || !form) return;
+    let strong = 0, named = 0;
+    form.querySelectorAll<HTMLFieldSetElement>('fieldset.likert').forEach((fs) => {
+      const c = fs.querySelector<HTMLInputElement>('input[type="radio"]:checked:not(:disabled)');
+      if (!c || Number(c.value) < 4) return;
+      strong++;
+      const ev = fs.querySelector<HTMLInputElement>('.ev-prompt input');
+      if (ev && ev.value.trim()) named++;
+    });
+    if (!strong) { box.hidden = true; return; }
+    const un = strong - named;
+    box.innerHTML = '<h3>How sure is this score?</h3><p>You rated ' + strong + ' practice' + (strong === 1 ? '' : 's') + ' as documented or verified and named what backs ' + named + ' of them. ' +
+      (un ? 'Treat the other ' + un + ' as assumptions until you can point to the document. A funder will ask, and the paid Diagnostic checks each one.' : "That's the habit funders look for: every strong answer has something behind it.") + '</p>';
+    box.hidden = false;
+  }
+
+  // A 90-day starter plan for the area that scored lowest: calendar reminders
+  // and a checklist, built in the browser (nothing is sent anywhere).
+  let planArea = '';
+  const addDays = (d: Date, n: number) => { const x = new Date(d); x.setDate(x.getDate() + n); return x; };
+  const ymd = (d: Date) => `${d.getFullYear()}${String(d.getMonth() + 1).padStart(2, '0')}${String(d.getDate()).padStart(2, '0')}`;
+  function planSteps() {
+    const a = planArea || 'your lowest area';
+    return [
+      [1, `Name one owner for ${a}`, `Pick the one person accountable for improving ${a} over the next 90 days.`],
+      [7, `List the evidence you have for ${a}`, `Write down every document, report, or policy that shows how ${a} works today, and what's missing.`],
+      [14, `Choose one 90-day target for ${a}`, 'One measurable change, with the evidence that will show it happened.'],
+      [30, 'Month-one check', 'Is the first action done? Is this still the area most likely to break first?'],
+      [60, 'Month-two check', 'What evidence has been added? What is blocked, and who can unblock it?'],
+      [90, 'Retake the free check-up', 'See what moved: https://franklyinspired.associates/assessment'],
+    ] as [number, string, string][];
+  }
+  function download(name: string, type: string, text: string) {
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([text], { type }));
+    a.download = name; document.body.appendChild(a); a.click(); a.remove();
+  }
+  document.getElementById('results-print')?.addEventListener('click', () => {
+    const d = document.getElementById('brief-date'); if (d) d.textContent = new Date().toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' });
+    window.print();
+  });
+  document.getElementById('results-ics')?.addEventListener('click', () => {
+    const now = new Date(), stamp = now.toISOString().replace(/[-:]/g, '').slice(0, 15) + 'Z';
+    const esc = (t: string) => t.replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,');
+    const ev = planSteps().map(([day, title, body], k) => [
+      'BEGIN:VEVENT', `UID:fi-plan-${now.getTime()}-${k}@franklyinspired.associates`, `DTSTAMP:${stamp}`,
+      `DTSTART;VALUE=DATE:${ymd(addDays(now, day))}`, `DTEND;VALUE=DATE:${ymd(addDays(now, day + 1))}`,
+      `SUMMARY:${esc('90-day plan: ' + title)}`, `DESCRIPTION:${esc(body)}`, 'END:VEVENT'].join('\r\n'));
+    download('90-day-starter-plan.ics', 'text/calendar', ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Frankly Inspired//Check-up//EN'].concat(ev, ['END:VCALENDAR']).join('\r\n'));
+  });
+  document.getElementById('results-checklist')?.addEventListener('click', () => {
+    const now = new Date();
+    const lines = ['90-DAY STARTER PLAN: ' + (planArea || 'your lowest area').toUpperCase(), 'From the Frankly Inspired Free Check-up, ' + now.toLocaleDateString(), ''];
+    planSteps().forEach(([day, title, body]) => lines.push(`[ ] Day ${day} (${addDays(now, day).toLocaleDateString()}): ${title}`, `    ${body}`, ''));
+    lines.push('Want help with this? Book a free results debrief: franklyinspired.associates');
+    download('90-day-starter-plan.txt', 'text/plain', lines.join('\n'));
+  });
+
   function renderResults(pillarScores: { num: number; label: string; service: string; anchor: string; deepDive: { href: string; label: string }[]; score: number }[]) {
     // Each area is 3 questions scored 1-5 (3-15). Composite runs from 3n
     // to 15n for n areas, mapped to 0-100% (evidence rubric: 0/25/50/75/100).
@@ -325,6 +397,9 @@ import QuestionSection from '../components/QuestionSection.astro';
       band: band.name,
       pillarScores: scoredPillars.map((p) => ({ label: p.label, pct: p.pct })),
     };
+
+    renderConfidence();
+    planArea = lowest.label;
 
     if (form) form.hidden = true;
     if (progressEl) progressEl.hidden = true;

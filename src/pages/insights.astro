@@ -1,4 +1,5 @@
 ---
+import SevenMark from '../components/SevenMark.astro';
 import { CALENDLY_URL } from '../config';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
@@ -114,7 +115,7 @@ const insights = [
          Sector Survey; CEP State of Nonprofits 2026. Recheck yearly. -->
     <section id="pattern" class="section problem-section">
       <div class="container">
-        <p class="tag-chip tc-blue reveal">The pattern</p>
+        <p class="tag-chip tc-blue reveal"><SevenMark size={13} weak={0} />The pattern</p>
         <h2 class="section-title reveal">The problem behind the problem</h2>
         <p class="section-note scrub">Nonprofits rarely struggle because the mission lacks value. They become fragile when the institution doesn't mature as fast as the programs, the funding, and the expectations.</p>
         <div class="problem-stats" data-count>

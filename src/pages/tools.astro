@@ -1,4 +1,5 @@
 ---
+import SevenMark from '../components/SevenMark.astro';
 import { SCORECARD_URL, CALENDLY_URL } from '../config';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
@@ -56,7 +57,7 @@ const deepDives = [
          the analytics stay out of the way until someone wants them. -->
     <section class="section assessment-intro">
       <div class="container narrow center">
-        <p class="tag-chip reveal">Free Check-up</p>
+        <p class="tag-chip reveal"><SevenMark size={13} weak={0} />Free Check-up</p>
         <h1>Find out what will break first</h1>
         <p class="hero-sub-light">Answer 21 short questions about how your organization actually runs. In about 7 minutes you'll see your score, the one area holding you back most, and a first step you can take this quarter. Free, no sign-up, saved only in your browser.</p>
         <p style="margin-top:1.5rem;"><a class="btn btn-primary btn-lg" href="/assessment" data-track="tool_start" data-tool="self-assessment">Start the Free Check-up</a></p>
@@ -66,7 +67,7 @@ const deepDives = [
 
     <section class="section alt-bg">
       <div class="container">
-        <p class="tag-chip tc-blue reveal">What you get</p>
+        <p class="tag-chip tc-blue reveal"><SevenMark size={13} weak={1} />What you get</p>
         <h2 class="section-title reveal">Three answers, in plain language</h2>
         <ol class="steps steps-3">
           <li class="step reveal">

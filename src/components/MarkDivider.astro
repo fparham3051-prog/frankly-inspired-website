@@ -1,0 +1,12 @@
+---
+// A section divider built on the seven-area mark: a hairline, the mark, a
+// hairline. The mark is the full seven-area ring with one arc in red, the gap
+// that breaks first; pass `step` and the red arc moves one place at each
+// divider down a long page.
+import SevenMark from './SevenMark.astro';
+interface Props { step?: number; tone?: 'light' | 'dark' }
+const { step = 7, tone = 'dark' } = Astro.props;
+---
+<div class={`mark-divider mark-divider-${tone}`} aria-hidden="true">
+  <span></span><SevenMark size={30} weak={(step - 1) % 7} tone={tone} /><span></span>
+</div>

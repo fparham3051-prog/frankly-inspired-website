@@ -1,0 +1,26 @@
+---
+// The seven-area mark: the same seven arcs as the Health Index dial, used as
+// the site's visual signature (section chips, dividers, the footer).
+// Decorative only (aria-hidden); the words next to it carry the meaning.
+//
+//   size    pixel width/height (default 18)
+//   filled  how many of the seven arcs are filled gold, clockwise from the
+//           top (default 7). Dividers on a long page count up 1, 2, 3...
+//           so the dial "fills" as you read.
+//   weak    index (0-6) of an arc drawn in the "breaks first" red, or -1
+//   tone    'light' for navy backgrounds, 'dark' for light ones (default)
+interface Props { size?: number; filled?: number; weak?: number; tone?: 'light' | 'dark'; class?: string }
+const { size = 18, filled = 7, weak = -1, tone = 'dark', class: cls = '' } = Astro.props;
+const pt = (deg: number, r = 80) => {
+  const a = ((deg - 90) * Math.PI) / 180;
+  return `${(100 + r * Math.cos(a)).toFixed(1)},${(100 + r * Math.sin(a)).toFixed(1)}`;
+};
+const span = 360 / 7, gap = 9;
+const segs = Array.from({ length: 7 }, (_, i) => {
+  const a0 = i * span + gap / 2, a1 = (i + 1) * span - gap / 2;
+  return { d: `M${pt(a0)} A80,80 0 0 1 ${pt(a1)}`, on: i < filled, weak: i === weak };
+});
+---
+<svg class={`seven-mark seven-${tone} ${cls}`} width={size} height={size} viewBox="0 0 200 200" aria-hidden="true" focusable="false">
+  {segs.map((g) => <path d={g.d} class={g.weak ? 'sm-weak' : g.on ? 'sm-on' : 'sm-off'} />)}
+</svg>

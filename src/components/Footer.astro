@@ -1,4 +1,5 @@
 ---
+import SevenMark from './SevenMark.astro';
 import { ANALYTICS_ON } from '../config/analytics';
 import { CALENDLY_URL, EMAIL, PHONE_DISPLAY, PHONE_TEL } from '../config';
 // The original static site has four distinct footer configurations, not
@@ -20,6 +21,7 @@ const { variant = 'home' } = Astro.props;
 
 <footer class="site-footer">
   <div class="container">
+    <SevenMark size={34} tone="light" weak={2} class="footer-mark" />
     <p class="footer-org">Frankly Inspired and Associates, LLC</p>
     <p class="footer-meta">Founded by Franklin D. Parham &middot; Lanham, Maryland / DMV</p>
 
@@ -103,8 +105,9 @@ const { variant = 'home' } = Astro.props;
       <a href="/terms">Terms of Use</a>
       <span aria-hidden="true">&middot;</span>
       <a href="/methodology">How Scoring Works</a>
-      <a href="/dmv-nonprofit-health">DMV Nonprofit Health Brief</a>
       <span aria-hidden="true">&middot;</span>
+      <a href="/dmv-nonprofit-health">DMV Nonprofit Health Brief</a>
+      {ANALYTICS_ON && <span aria-hidden="true">&middot;</span>}
       {ANALYTICS_ON && <button type="button" class="manage-cookies-link" data-manage-cookies>Manage Cookie Preferences</button>}
     </p>
   </div>

@@ -2584,3 +2584,77 @@ a.card:hover .card-cta { text-decoration: underline; }
 .fit-table th:nth-child(2), .fit-table td:nth-child(2) { width: 22%; }
 @media (max-width: 640px) { .fit-table { table-layout: auto; } .fit-table th:nth-child(n), .fit-table td:nth-child(n) { width: auto; } }
 .compare-table th, .compare-table td { white-space: normal !important; text-align: left !important; }
+
+/* Phone first screen: name, headline, one line, and the check-up button all
+   fit before scrolling. The portrait and dial follow. */
+.lbl-short { display: none; }
+@media (max-width: 560px) {
+  .lbl-long { display: none; }
+  .lbl-short { display: inline; }
+  .nav-menu-minimal { gap: 0.9rem; flex-wrap: nowrap; }
+  .nav-menu-minimal .btn-nav { padding: 0.55rem 0.9rem; }
+}
+@media (max-width: 640px) {
+  .hero { min-height: 0; }
+  .hero-inner { padding: 2rem 1.25rem 2rem; gap: 2rem; }
+  .hero .eyebrow { margin-bottom: 0.6rem !important; }
+  .hero-role { display: none; }
+  .hero h1.hero-h1-long { font-size: clamp(1.85rem, 8.4vw, 2.3rem); line-height: 1.12; margin-bottom: 0.9rem; }
+  .hero-sub { font-size: 1.02rem; line-height: 1.5; margin-bottom: 1.25rem; }
+  .hero-sub-more { display: none; }
+  .hero-ctas { gap: 0.6rem; }
+  .hero-ctas .btn { flex: 1 1 100%; justify-content: center; text-align: center; }
+}
+@media (max-width: 640px) {
+  .assessment-intro { padding-top: 2rem; padding-bottom: 2rem; }
+  .assessment-intro .hero-sub-light { font-size: 1rem; line-height: 1.5; }
+  .intro-more { display: none; }
+}
+/* Smallest phones: keep the header on one row (Schedule stays in the menu). */
+@media (max-width: 370px) {
+  .nav-wrap { flex-wrap: nowrap; }
+  .btn-nav-mobile { padding: 0.45rem 0.7rem; font-size: 0.85rem; }
+  .brand { font-size: 1.05rem; gap: 0.4rem; white-space: nowrap; }
+  .nav-actions { gap: 0.6rem; flex-wrap: nowrap; }
+}
+@media (max-width: 640px) {
+  .hero-credential { white-space: normal; }
+  .footer-meta { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.25rem 0.5rem; }
+  .footer-meta a { overflow-wrap: anywhere; }
+}
+@media (max-width: 640px) { .direct-contact a { overflow-wrap: anywhere; } }
+
+/* Consulting: Franklin's experience per area, folded */
+details.pillar-proof summary { cursor: pointer; font-weight: 700; color: var(--navy); font-size: 0.84rem; list-style: none; }
+details.pillar-proof summary::-webkit-details-marker { display: none; }
+details.pillar-proof summary::after { content: " +"; color: var(--gold-accessible); }
+details.pillar-proof[open] summary::after { content: " \2212"; }
+details.pillar-proof p { margin: 0.45rem 0 0; font-size: 0.86rem; color: #55606B; }
+details.letter-fold { margin-bottom: 1rem; }
+details.letter-fold summary { cursor: pointer; font-weight: 600; color: var(--navy); }
+details.letter-fold pre { margin-top: 0.75rem; }
+.sample-table th:nth-child(1), .sample-table td:nth-child(1) { width: 34%; }
+.sample-table th:nth-child(2), .sample-table td:nth-child(2) { width: 10%; }
+/* Consulting: the seven areas as a denser grid */
+#consulting .card-grid.dims-grid { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1rem; }
+#consulting .dims-grid .card { padding: 1.1rem 1.2rem; }
+#consulting .dims-grid .card h4 { font-size: 1.05rem; margin: 0.35rem 0 0.3rem; }
+#consulting .dims-grid .card > p { font-size: 0.92rem; margin: 0; }
+
+/* ---------- The seven-area mark (site signature) ---------- */
+.seven-mark { display: inline-block; vertical-align: -0.15em; flex: 0 0 auto; }
+.seven-mark path { fill: none; stroke-width: 30; }
+.seven-dark .sm-on { stroke: var(--gold); }
+.seven-dark .sm-off { stroke: #D5DAE0; }
+.seven-light .sm-on { stroke: var(--gold-light); }
+.seven-light .sm-off { stroke: rgba(255, 255, 255, 0.22); }
+.seven-mark .sm-weak { stroke: #B3402C; }
+.seven-light .sm-weak { stroke: #F09B88; }
+.tag-chip { display: inline-flex; align-items: center; gap: 0.4rem; }
+.tag-chip .seven-dark .sm-off { stroke: rgba(17, 35, 61, 0.18); }
+.mark-divider { display: flex; align-items: center; gap: 0.9rem; margin: 2.75rem 0 1.25rem; }
+.mark-divider span { flex: 1; height: 1px; background: var(--border); }
+.mark-divider-light span { background: rgba(255, 255, 255, 0.18); }
+section + .mark-divider, .mark-divider + section { margin-top: 0; }
+main > .mark-divider { max-width: var(--max-width); margin: 0 auto; padding: 0 1.5rem; }
+.footer-mark { display: block; margin: 0 auto 0.6rem; }

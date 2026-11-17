@@ -1,4 +1,5 @@
 ---
+import SevenMark from '../components/SevenMark.astro';
 import { CALENDLY_URL, EMAIL, PHONE_DISPLAY, PHONE_TEL } from '../config';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
@@ -42,7 +43,7 @@ const dialSegs = dialAreas.map(([name, score], i) => {
           <p class="eyebrow reveal" style="margin-bottom:0.35rem;">Franklin D. Parham</p>
           <p class="hero-role reveal">Founder and Principal, Frankly Inspired and Associates</p>
           <h1 class="hero-h1-long" data-split>Your programs are growing faster than your institution can carry them.</h1>
-          <p class="hero-sub reveal">Frankly Inspired finds the one gap that will break first, whether it's leadership, money, proof of results, or systems, and gives your leadership a 90-day plan to fix it. Built for executive directors and boards of growing youth, education, and workforce nonprofits.</p>
+          <p class="hero-sub reveal">Frankly Inspired finds the one gap that will break first<span class="hero-sub-more">, whether it's leadership, money, proof of results, or systems,</span> and gives your leadership a 90-day plan to fix it.<span class="hero-sub-more"> Built for executive directors and boards of growing youth, education, and workforce nonprofits.</span></p>
           <div class="hero-ctas reveal">
             <a class="btn btn-primary" href="/assessment" data-track="tool_start" data-tool="hero">Start the Free Check-up</a>
             <a class="btn btn-secondary" href={CALENDLY_URL} target="_blank" rel="noopener" data-track="schedule_click">Schedule a Conversation</a>
@@ -94,7 +95,7 @@ const dialSegs = dialAreas.map(([name, score], i) => {
          src/scripts/trigger.ts. -->
     <section id="situations" class="section situations-section">
       <div class="container">
-        <p class="tag-chip reveal">The situations</p>
+        <p class="tag-chip reveal"><SevenMark size={13} weak={2} />The situations</p>
         <h2 class="section-title reveal">Which of these sounds like you?</h2>
         <p class="section-note scrub">Leaders rarely call about "sustainability." They call when something specific is about to happen. Pick the one that sounds like you, and the free check-up starts there.</p>
         <div class="door-grid" data-drift>
@@ -143,7 +144,7 @@ const dialSegs = dialAreas.map(([name, score], i) => {
          assessments completed, which stays hidden until it passes 25. -->
     <section id="track-record" class="section proof-section alt-bg">
       <div class="container">
-        <p class="tag-chip tc-sage reveal">The track record</p>
+        <p class="tag-chip tc-sage reveal"><SevenMark size={13} weak={3} />The track record</p>
         <h2 class="section-title reveal">I've run the problem I diagnose</h2>
         <p class="section-note scrub">As Regional Director for The Hidden Genius Project, Franklin opened and ran a two-city region, owning the budget, the partnerships, the staffing, and the systems. He knows what breaks first because he has had to fix it.</p>
         <p class="affiliation-label reveal">Board leadership and affiliations: Ora Lee Smith Cancer Research Foundation &middot; Turner Foundation for Community Advocacy &middot; Howard Rye Institute Fellow &middot; AFP Fellow</p>
@@ -207,7 +208,7 @@ const dialSegs = dialAreas.map(([name, score], i) => {
     <!-- ============ HOW IT WORKS ============ -->
     <section id="how" class="section how-section">
       <div class="container">
-        <p class="tag-chip tc-sand reveal">The method</p>
+        <p class="tag-chip tc-sand reveal"><SevenMark size={13} weak={4} />The method</p>
         <h2 class="section-title reveal">How it works</h2>
         <p class="section-note reveal">Four steps, from a free seven-minute check-up to progress your board can see.</p>
         <ol class="steps">
@@ -254,7 +255,7 @@ const dialSegs = dialAreas.map(([name, score], i) => {
     <!-- ============ OFFERS ============ -->
     <section id="offers" class="section offers-section alt-bg">
       <div class="container">
-        <p class="tag-chip reveal">The offer</p>
+        <p class="tag-chip reveal"><SevenMark size={13} weak={5} />The offer</p>
         <h2 class="section-title reveal">Ways to work together</h2>
         <p class="section-note reveal">Start free. Every paid engagement begins with the Diagnostic. <a href="/consulting#sample-diagnostic">See a sample report</a> or the <a href="/consulting#funder-sponsored">letter that asks a funder to cover it</a>.</p>
         <div class="offer-grid">
@@ -293,7 +294,7 @@ const dialSegs = dialAreas.map(([name, score], i) => {
     <!-- ============ CONTACT ============ -->
     <section id="contact" class="section contact">
       <div class="container narrow">
-        <p class="tag-chip reveal">Let's talk</p>
+        <p class="tag-chip reveal"><SevenMark size={13} weak={6} />Let's talk</p>
         <h2 class="section-title reveal">Tell me about your organization</h2>
         <div id="score-ref-banner" class="score-ref-banner reveal" hidden></div>
         <p class="lede-sm reveal">Strong missions need sustainable institutions. If your organization is navigating growth, revenue pressure, operational complexity, leadership transition, or the need for a clearer sustainability strategy, start with a conversation.</p>

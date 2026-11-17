@@ -11,11 +11,12 @@ import{i as e}from"./trigger.Cl45byHg.js";import{o as t}from"./healthEngine.BTBD
     <div class="pathway">
       <h3 class="subhead">${u?`Where to start`:`Your likely constraint`}: ${s(r.label)}</h3>
       ${l?`<p class="pathway-flag">Your overall score looks healthy, but ${s(r.label)} scored ${r.pct}%. A strong average doesn't cancel out a weak area; this is usually the one that limits everything else.</p>`:u?`<p>Your areas scored about evenly (around ${r.pct}%), so no single gap stands out. ${s(r.label)} is a sensible place to start; a diagnostic would show which area is really holding things back.</p>`:`<p>${s(r.label)} scored lowest, at ${r.pct}%. It's the most likely place progress is getting stuck.</p>`}
-      ${r.help?`<p>${s(r.help)}</p>`:``}
+      ${r.help?`<p class="pathway-help">${s(r.help)}</p>`:``}
       ${n.extraHtml||``}
 
       ${d?`<h3 class="subhead">Your next 90 days</h3><p>${s(d)}</p>`:``}
 
+      <div class="pathway-limits">
       <h3 class="subhead">What this tool can't tell you</h3>
       <p>${f} It can't tell you:</p>
       <ul class="bullet-list">
@@ -25,6 +26,7 @@ import{i as e}from"./trigger.Cl45byHg.js";import{o as t}from"./healthEngine.BTBD
         <li>${n.coversAllSeven?`which single dimension is truly the binding constraint once the evidence is checked.`:`whether ${s(r.label)} is really the binding constraint across all seven Health Index dimensions, since this tool covers only part of them.`}</li>
       </ul>
       <p>That is what the InstitutionalOS Diagnostic verifies, directly with you.</p>
+      </div>
 
       <div class="pathway-next" data-pathway-next>${c(i())}</div>
       ${n.profile===!1?``:t()}

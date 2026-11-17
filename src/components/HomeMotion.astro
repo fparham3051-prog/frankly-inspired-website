@@ -118,6 +118,11 @@
       const target = parseFloat(numStr.replace(/,/g, ''));
       const decimals = (numStr.split('.')[1] || '').length;
       if (!isFinite(target)) return;
+      // Screen readers get the final value right away; only the visual count animates.
+      const sr = document.createElement('span');
+      sr.className = 'sr-only'; sr.textContent = final;
+      el.setAttribute('aria-hidden', 'true');
+      el.after(sr);
       el.textContent = pre + (0).toFixed(decimals) + post;
       inView(el, () => {
         const t0 = performance.now(), dur = 1400;

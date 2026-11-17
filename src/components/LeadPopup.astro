@@ -50,10 +50,14 @@
     if (new URLSearchParams(window.location.search).has('nopopup')) return false;
     const s = read();
     if (s.state === 'joined') return false;
+    // Check-up takers already gave their email or saw the debrief offer.
+    try { if (window.localStorage.getItem('fi_checkup_done')) return false; } catch { /* ignore */ }
     if (s.state === 'dismissed' && s.at && Date.now() - s.at < 30 * 864e5) return false;
     return true;
   }
   function cookieChoiceMade(): boolean {
+    // No banner on the page (analytics off) means there's no choice to wait for.
+    if (!(window as any).cookieConsent) return true;
     try { return !!window.localStorage.getItem('fi_cookie_consent'); } catch { return true; }
   }
 

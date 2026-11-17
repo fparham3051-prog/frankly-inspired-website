@@ -7,7 +7,7 @@
 // but ONLY for visitors who click "Accept" on the cookie banner
 // (CookieConsentBanner.astro). Nobody who declines, or hasn't answered yet,
 // gets a tracking script loaded. Leave the ID blank and this does nothing.
-const GA_MEASUREMENT_ID = ''; // e.g. 'G-XXXXXXXXXX'
+import { GA_MEASUREMENT_ID } from '../config/analytics'; // set it in src/config/analytics.ts
 ---
 
 <script is:inline define:vars={{ GA_MEASUREMENT_ID }}>

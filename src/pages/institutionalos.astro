@@ -45,8 +45,66 @@ import ScrollReveal from '../components/ScrollReveal.astro';
         <h1 class="reveal">InstitutionalOS</h1>
         <p class="hero-sub-light reveal">Frankly Inspired helps leaders build institutions that are clear enough to launch, strong enough to fund, and disciplined enough to endure. InstitutionalOS is the operating system underneath that work: one shared way to diagnose institutional health, verify the evidence behind a score, clear the gates that actually matter, and track whether things get better over time, not another dashboard promising a shortcut.</p>
         <div class="hero-ctas reveal" style="justify-content:center; display:flex; flex-wrap:wrap; gap:0.75rem; margin-top:0.5rem;">
-          <a class="btn btn-primary" href={SCORECARD_URL}>Start the Free Check-up</a>
+          <a class="btn btn-primary" href="/assessment" data-track="tool_start" data-tool="institutionalos">Start the Free Check-up</a>
           <a class="btn btn-ghost" href={CALENDLY_URL} target="_blank" rel="noopener" style="border-color:rgba(255,255,255,0.4); color:#fff;">Schedule a Conversation</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PRODUCT TOUR ============ -->
+    <!-- Real InstitutionalOS client-portal screens, filled with a fictional
+         sample organization (labeled as such). The "Explore" button opens the
+         same portal in its read-only sample mode (report.html?demo=sample). -->
+    <section class="section" id="inside">
+      <div class="container">
+        <h2 class="section-title reveal">See inside an InstitutionalOS workspace</h2>
+        <p class="section-note reveal">Every client gets a private workspace that stays with them across the whole engagement: one record of their scores, the evidence behind them, the plan, and every check-in. Shown here with a sample organization.</p>
+        <ol class="ios-tour">
+          <li class="ios-step reveal">
+            <div class="ios-step-text">
+              <p class="ios-step-num">1 &middot; Assess</p>
+              <h3>One Health Index, seven areas</h3>
+              <p>The organization is scored 0 to 100 across direction, proof of results, revenue, leadership, operations, partnerships, and governance. The weakest area, the one most likely to break first, is flagged in red.</p>
+            </div>
+            <figure class="ios-shot"><img src="/assets/images/ios/t1-assess.webp" width="1600" height="625" loading="lazy" alt="Client portal header for a sample organization showing a Health Index of 54 on a seven-segment dial, with the weakest area in red" /></figure>
+          </li>
+          <li class="ios-step reveal">
+            <div class="ios-step-text">
+              <p class="ios-step-num">2 &middot; Verify</p>
+              <h3>Every score shows what backs it</h3>
+              <p>Each area carries the evidence behind its score: verified when a source document is attached, noted when it isn't, and flagged when nothing is on file yet. Scores without evidence are treated as assumptions.</p>
+            </div>
+            <figure class="ios-shot"><img src="/assets/images/ios/t3-evidence.webp" width="1600" height="1219" loading="lazy" alt="Evidence on file: each of seven areas with its score and a tag reading Verified, Noted, or No evidence on file" /></figure>
+          </li>
+          <li class="ios-step reveal">
+            <div class="ios-step-text">
+              <p class="ios-step-num">3 &middot; Decide</p>
+              <h3>Gates, targets, and the binding constraint</h3>
+              <p>Each area gets a 90-day target. Stage gates show the minimums funders and boards expect, so the organization knows what to fix first, whatever the average says.</p>
+            </div>
+            <figure class="ios-shot"><img src="/assets/images/ios/t2-dimensions.webp" width="1600" height="1489" loading="lazy" alt="Seven dimension bars with 90-day targets, and stage gates for governance, revenue, and proof of results" /></figure>
+          </li>
+          <li class="ios-step reveal">
+            <div class="ios-step-text">
+              <p class="ios-step-num">4 &middot; Act</p>
+              <h3>A 90-day plan the team works in every week</h3>
+              <p>Actions with owners, dates, and what counts as done. The team updates status and files a 15-minute weekly check-in in the same workspace, so blocked items surface right away.</p>
+            </div>
+            <figure class="ios-shot"><img src="/assets/images/ios/t4-plan.webp" width="1600" height="1066" loading="lazy" alt="A 90-Day Improvement Plan with six actions marked done, blocked, in progress, or not started" /></figure>
+          </li>
+          <li class="ios-step reveal">
+            <div class="ios-step-text">
+              <p class="ios-step-num">5 &middot; Review and reassess</p>
+              <h3>Progress you can see over time</h3>
+              <p>Every reassessment adds a point to the organization's history, so the board sees whether the work is moving the score, not just whether tasks got done.</p>
+            </div>
+            <figure class="ios-shot"><img src="/assets/images/ios/t5-progress.webp" width="1600" height="600" loading="lazy" alt="A progress chart showing a sample organization's Health Index rising across three reassessments from August to November" /></figure>
+          </li>
+        </ol>
+        <p class="ios-tour-note reveal">Sample organization with fictional data, shown in the real client portal.</p>
+        <div class="hero-ctas reveal" style="justify-content:center; display:flex; flex-wrap:wrap; gap:0.75rem;">
+          <a class="btn btn-primary" href="https://grantpass-dashboard.onrender.com/report.html?demo=sample" target="_blank" rel="noopener" data-track="sample_workspace_open">Explore the Sample Workspace</a>
+          <a class="btn btn-secondary" href="/assessment" data-track="tool_start" data-tool="institutionalos-tour">Start the Free Check-up</a>
         </div>
       </div>
     </section>
@@ -192,7 +250,7 @@ import ScrollReveal from '../components/ScrollReveal.astro';
         <h2 class="reveal">Clear enough to launch. Strong enough to fund. Disciplined enough to endure.</h2>
         <p class="reveal">Start with the free check-up for wherever your organization actually is, or skip straight to a conversation if you already know what you're navigating.</p>
         <div class="reveal" style="display:flex; flex-wrap:wrap; gap:0.75rem; justify-content:center;">
-          <a class="btn btn-primary" href={SCORECARD_URL}>Start the Free Check-up</a>
+          <a class="btn btn-primary" href="/assessment" data-track="tool_start" data-tool="institutionalos">Start the Free Check-up</a>
           <a class="btn btn-ghost" href={CALENDLY_URL} target="_blank" rel="noopener" style="border-color:rgba(255,255,255,0.4); color:#fff;">Schedule a Conversation</a>
         </div>
         <p style="margin-top: 1rem;"><a class="link-more" href="/consulting#pricing">See services and pricing</a></p>
@@ -203,3 +261,20 @@ import ScrollReveal from '../components/ScrollReveal.astro';
 
   <ScrollReveal />
 </BaseLayout>
+
+<style>
+  .ios-tour { list-style: none; padding: 0; margin: 2rem 0 0; display: grid; gap: 3.5rem; }
+  .ios-step { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 2.5rem; align-items: center; }
+  .ios-step:nth-child(even) .ios-step-text { order: 2; }
+  .ios-step-num { margin: 0 0 0.4rem; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold-accessible); }
+  .ios-step h3 { margin: 0 0 0.6rem; font-family: var(--font-heading); color: var(--navy); font-size: 1.45rem; line-height: 1.25; }
+  .ios-step-text p:last-child { margin: 0; color: #4a535c; line-height: 1.6; }
+  .ios-shot { margin: 0; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow-lg); background: #f3f4f6; max-height: 520px; }
+  .ios-shot img { display: block; width: 100%; height: auto; }
+  .ios-tour-note { text-align: center; font-size: 0.85rem; color: #5b6570; margin: 2.5rem 0 1.25rem; }
+  @media (max-width: 820px) {
+    .ios-step { grid-template-columns: 1fr; gap: 1.25rem; }
+    .ios-step:nth-child(even) .ios-step-text { order: 0; }
+    .ios-shot { max-height: 420px; }
+  }
+</style>

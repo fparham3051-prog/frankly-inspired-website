@@ -86,10 +86,10 @@ import QuestionSection from '../components/QuestionSection.astro';
           </div>
 
           <div class="results-cta">
-            <h3>Not sure where to start?</h3>
-            <p>A short conversation is the fastest way to turn this into a plan.</p>
+            <h3>Your next step: a free results debrief</h3>
+            <p>Bring these results to a short call. We'll name the one area to work on first and sketch what a 90-day plan would look like. No cost, no obligation.</p>
             <div class="hero-ctas center">
-              <a class="btn btn-primary" href={CALENDLY_URL} target="_blank" rel="noopener">Schedule a Conversation</a>
+              <a class="btn btn-primary" href={CALENDLY_URL} target="_blank" rel="noopener" data-track="debrief_click">Book a Free Debrief</a>
               <a class="btn btn-secondary" href="/consulting#pricing">See Pricing</a>
             </div>
           </div>
@@ -330,6 +330,7 @@ import QuestionSection from '../components/QuestionSection.astro';
     if (progressEl) progressEl.hidden = true;
     if (resultsEl) {
       resultsEl.hidden = false;
+      try { localStorage.setItem('fi_checkup_done', String(Date.now())); } catch { /* optional */ }
       resultsEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 

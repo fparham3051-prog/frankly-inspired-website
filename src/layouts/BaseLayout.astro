@@ -4,6 +4,7 @@ import Footer from '../components/Footer.astro';
 import CookieConsentBanner from '../components/CookieConsentBanner.astro';
 import Analytics from '../components/Analytics.astro';
 import LeadPopup from '../components/LeadPopup.astro';
+import { ANALYTICS_ON } from '../config/analytics';
 import { SITE_URL, EMAIL, PHONE_TEL, LINKEDIN_URL } from '../config';
 
 interface Props {
@@ -87,7 +88,7 @@ const structuredData = {
     <slot />
 
     <Footer variant={footerVariant} />
-    <CookieConsentBanner />
+    {ANALYTICS_ON && <CookieConsentBanner />}
     <Analytics />
     <LeadPopup />
 

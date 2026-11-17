@@ -2544,3 +2544,11 @@ a.card:hover .card-cta { text-decoration: underline; }
 .bubble-said .problem-label { color: #7A5F27; }
 .fh-field-help { color: #5f6b77 !important; }
 .offer-card:not(.featured) .offer-price span { color: #6f5a2c; opacity: 1; }
+
+/* When the cookie banner is shown (analytics on), keep it to a slim bar on phones. */
+@media (max-width: 560px) {
+  .cookie-banner-inner { padding: 0.6rem 0.9rem; gap: 0.5rem; flex-wrap: nowrap; }
+  .cookie-banner-text { font-size: 0.75rem; line-height: 1.35; flex: 1 1 auto; }
+  .cookie-banner-actions { gap: 0.4rem; }
+  .cookie-banner .btn-small { padding: 0.4rem 0.7rem; font-size: 0.78rem; }
+}

@@ -1,0 +1,126 @@
+---
+import { CALENDLY_URL } from '../config';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+
+// DMV Nonprofit Health Brief. Aggregate figures only, from Frankly
+// Inspired's scan of public IRS Form 990 filings (ProPublica Nonprofit
+// Explorer). No organization is named or identifiable. To refresh, rerun
+// the aggregation over the operations app's market scan and update the
+// numbers below.
+const STATS = {
+  orgs: '1,668',
+  asOf: 'November 2026',
+  medianReserve: '8.2',
+  under3: 23,
+  under1: 11,
+  deficitLatest: 39,
+  expOutran: 52,
+  reservesThinner: 37,
+  grew: 57,
+  strainedOfGrowers: 38,
+  declined: 17,
+  contrib70: 49,
+};
+const BY_SIZE = [
+  { band: 'Under $1M', n: 523, res: '7.8', under3: 26, def: 43, strained: 43 },
+  { band: '$1M to $5M', n: 746, res: '7.6', under3: 23, def: 39, strained: 38 },
+  { band: '$5M and up', n: 399, res: '9.6', under3: 17, def: 37, strained: 31 },
+];
+const BY_AREA = [
+  { area: 'Washington, DC', n: 576, res: '8.3', under3: 21, def: 45, strained: 43 },
+  { area: 'Northern Virginia', n: 391, res: '8.9', under3: 20, def: 36, strained: 30 },
+  { area: 'Suburban Maryland', n: 286, res: '7.9', under3: 23, def: 36, strained: 37 },
+  { area: 'Baltimore and Central Maryland', n: 358, res: '7.6', under3: 28, def: 38, strained: 38 },
+  { area: 'Frederick', n: 57, res: '6.2', under3: 25, def: 33, strained: 36 },
+];
+const BY_TYPE = [
+  { type: 'Education', n: 831, res: '9.2', under3: 21, def: 39, strained: 36 },
+  { type: 'Human services', n: 623, res: '6.6', under3: 26, def: 43, strained: 42 },
+  { type: 'Youth development', n: 135, res: '9.4', under3: 20, def: 31, strained: 27 },
+  { type: 'Employment and workforce', n: 79, res: '7.9', under3: 19, def: 39, strained: 39 },
+];
+---
+
+<BaseLayout
+  title="DMV Nonprofit Health Brief | Frankly Inspired"
+  description={`What public Form 990 filings show about ${STATS.orgs} nonprofits in Washington DC, Maryland, and Virginia: reserves, deficits, and how often growth outpaces the institution behind it.`}
+  footerVariant="home"
+>
+  <Header variant="full" />
+
+  <main id="main">
+    <section class="section assessment-intro">
+      <div class="container narrow center">
+        <p class="eyebrow eyebrow-dark">Research brief · {STATS.asOf}</p>
+        <h1>DMV Nonprofit Health Brief</h1>
+        <p class="hero-sub-light">We read the public Form 990 filings of {STATS.orgs} education, human services, youth, and workforce nonprofits across DC, Maryland, and Virginia. Most are growing. More than a third of those growing are doing it on a foundation that isn't keeping up.</p>
+      </div>
+    </section>
+
+    <section class="section alt-bg">
+      <div class="container narrow method">
+        <h2 class="subhead">Five findings</h2>
+        <div class="dmv-stats">
+          <div class="dmv-stat"><span class="dmv-num">{STATS.strainedOfGrowers}%</span><span class="dmv-label">of organizations that grew revenue 20% or more show strain: reserves under three months, a deficit with spending outrunning revenue, or reserves that fell sharply.</span></div>
+          <div class="dmv-stat"><span class="dmv-num">{STATS.expOutran}%</span><span class="dmv-label">saw expenses grow faster than revenue over the five-year period.</span></div>
+          <div class="dmv-stat"><span class="dmv-num">{STATS.deficitLatest}%</span><span class="dmv-label">ran a deficit in their most recent filed year.</span></div>
+          <div class="dmv-stat"><span class="dmv-num">{STATS.under3}%</span><span class="dmv-label">have net assets covering less than three months of expenses ({STATS.under1}% less than one month).</span></div>
+          <div class="dmv-stat"><span class="dmv-num">{STATS.reservesThinner}%</span><span class="dmv-label">have a thinner cushion than five years earlier, measured in months of expenses.</span></div>
+        </div>
+
+        <h2 class="subhead">What it means</h2>
+        <p>Growth is the common story here: {STATS.grew}% of these organizations grew revenue by at least 20% over the period, and only {STATS.declined}% shrank by 10% or more. The problem is rarely demand. It's that programs expand faster than the systems, reserves, and leadership capacity that have to carry them.</p>
+        <p>Strain shows up first in the numbers a funder reads: a deficit year, a reserve that drops, expenses that grow a step ahead of revenue. Behind those numbers is usually one binding constraint, such as decisions that still route to one person, a site that runs on someone's memory, or outcomes no one can show. That's the constraint worth finding before the next grant or the next site.</p>
+        <p>About half ({STATS.contrib70}%) rely on contributions and grants for 70% or more of revenue, so a single funder decision can move the whole picture.</p>
+
+        <h2 class="subhead">By organization size</h2>
+        <div class="org-table-wrap"><table class="org-table method-table">
+          <thead><tr><th>Annual revenue</th><th>Organizations</th><th>Median months of expenses in net assets</th><th>Under 3 months</th><th>Deficit, latest year</th><th>Growers under strain</th></tr></thead>
+          <tbody>{BY_SIZE.map((r) => <tr><td><strong>{r.band}</strong></td><td>{r.n}</td><td>{r.res}</td><td>{r.under3}%</td><td>{r.def}%</td><td>{r.strained}%</td></tr>)}</tbody>
+        </table></div>
+        <p class="dmv-note">Smaller organizations carry the most risk on every measure, and the gap is widest on growth strain: 43% of growing organizations under $1M show it, against 31% at $5M and up.</p>
+
+        <h2 class="subhead">By region</h2>
+        <div class="org-table-wrap"><table class="org-table method-table">
+          <thead><tr><th>Region</th><th>Organizations</th><th>Median months</th><th>Under 3 months</th><th>Deficit, latest year</th><th>Growers under strain</th></tr></thead>
+          <tbody>{BY_AREA.map((r) => <tr><td><strong>{r.area}</strong></td><td>{r.n}</td><td>{r.res}</td><td>{r.under3}%</td><td>{r.def}%</td><td>{r.strained}%</td></tr>)}</tbody>
+        </table></div>
+        <p class="dmv-note">DC organizations were the most likely to post a deficit in their latest year (45%) and to show strain while growing (43%). Baltimore and Central Maryland had the largest share with under three months in net assets (28%). Frederick is a small group (57 organizations), so read its figures with care.</p>
+
+        <h2 class="subhead">By type of organization</h2>
+        <div class="org-table-wrap"><table class="org-table method-table">
+          <thead><tr><th>Type</th><th>Organizations</th><th>Median months</th><th>Under 3 months</th><th>Deficit, latest year</th><th>Growers under strain</th></tr></thead>
+          <tbody>{BY_TYPE.map((r) => <tr><td><strong>{r.type}</strong></td><td>{r.n}</td><td>{r.res}</td><td>{r.under3}%</td><td>{r.def}%</td><td>{r.strained}%</td></tr>)}</tbody>
+        </table></div>
+        <p class="dmv-note">Human services organizations have the thinnest cushion (a median of 6.6 months) and the highest rates of deficits and growth strain.</p>
+
+        <h2 class="subhead">How we did this</h2>
+        <ul class="bullet-list">
+          <li><strong>Who's included:</strong> tax-exempt organizations in DC, Maryland, and Virginia classified as education, human services, youth development, or employment, with annual revenue between about $500,000 and $20 million on the IRS master file, and at least one e-filed Form 990 with figures. {STATS.orgs} organizations met that bar.</li>
+          <li><strong>Source:</strong> filed Form 990 summaries through <a href="https://projects.propublica.org/nonprofits/" target="_blank" rel="noopener">ProPublica's Nonprofit Explorer</a>. For 96% of organizations the latest filing covers 2023 or 2024; the starting year is usually 2019. Public filings run one to two years behind.</li>
+          <li><strong>Months of expenses in net assets:</strong> end-of-year net assets divided by one month of total expenses. Net assets include restricted funds and buildings, so this overstates the cash an organization can actually spend. Treat it as an upper bound.</li>
+          <li><strong>Growers under strain:</strong> among organizations whose revenue grew 20% or more, the share with net assets under three months, a deficit year where expenses grew faster than revenue, or net assets that fell by 40% or more (in months) to below six months.</li>
+          <li><strong>Privacy:</strong> this brief reports totals only. It doesn't name, rank, or describe any individual organization.</li>
+        </ul>
+
+        <div class="dmv-cta">
+          <h2 class="subhead">Where does your organization stand?</h2>
+          <p>The free check-up takes about 7 minutes. It scores your organization on the same evidence rubric we use with clients and points to the likely constraint.</p>
+          <p class="dmv-cta-buttons"><a class="btn btn-primary" href="/assessment" data-track="dmv_brief_checkup">Start the Free Check-up</a> <a class="btn btn-secondary" href={CALENDLY_URL} target="_blank" rel="noopener" data-track="dmv_brief_schedule">Talk it through</a></p>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .dmv-stats { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin: 1rem 0 2rem; }
+  .dmv-stat { background: var(--white); border: 1px solid var(--border); border-top: 4px solid var(--gold); border-radius: var(--radius); padding: 1.1rem 1.1rem 1rem; display: grid; gap: 0.4rem; align-content: start; }
+  .dmv-num { font-family: var(--font-heading); font-size: 2.2rem; line-height: 1; color: var(--navy); font-weight: 700; }
+  .dmv-label { font-size: 0.92rem; line-height: 1.45; color: #4a535c; }
+  .dmv-note { font-size: 0.92rem; color: #4a535c; margin-top: 0.5rem; }
+  .dmv-cta { margin-top: 2.5rem; padding: 1.5rem; background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); }
+  .dmv-cta-buttons { display: flex; gap: 0.6rem; flex-wrap: wrap; margin: 0; }
+  .method-table th, .method-table td { font-size: 0.9rem; }
+</style>

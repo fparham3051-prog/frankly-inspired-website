@@ -2552,3 +2552,8 @@ a.card:hover .card-cta { text-decoration: underline; }
   .cookie-banner-actions { gap: 0.4rem; }
   .cookie-banner .btn-small { padding: 0.4rem 0.7rem; font-size: 0.78rem; }
 }
+
+/* Home: research teaser under the track record */
+.dmv-teaser { margin-top: 1.75rem; padding: 1.1rem 1.25rem; background: var(--white); border: 1px solid var(--border); border-left: 4px solid var(--gold); border-radius: var(--radius); max-width: 760px; }
+.dmv-teaser-eyebrow { margin: 0 0 0.35rem; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-accessible); }
+.dmv-teaser-text { margin: 0 0 0.5rem; line-height: 1.5; }

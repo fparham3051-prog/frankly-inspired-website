@@ -50,7 +50,7 @@
   "offers": [
     {
       "key": "institutionalos-diagnostic",
-      "name": "InstitutionalOS Diagnostic",
+      "name": "The Diagnostic",
       "short": "Diagnostic",
       "price": {
         "build": 2000,

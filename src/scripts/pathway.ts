@@ -6,20 +6,23 @@
 //   2. One specific thing to do in the next 90 days, free.
 //   3. What this tool can't tell you: the honest limit of a self-rating,
 //      which is what the paid diagnostic verifies.
-//   4. Recommended next step: the InstitutionalOS Diagnostic for the
-//      visitor's stage (Build / Fund / Sustain), with its price.
+//   4. Recommended next step: the Diagnostic on the visitor's path
+//      (Build / Fund / Sustain), with its price. With no path chosen yet,
+//      the answer to "what's happening" suggests one (see trigger.ts).
 // The stage is asked here, in the results, and remembered across tools in
 // this browser (localStorage key fi_stage). Nothing leaves the browser.
 
 import { profileTeaserHtml } from './healthEngine';
-import { triggerRecHtml } from './trigger';
+import { triggerRecHtml, triggerPath } from './trigger';
 
 export type StageKey = 'build' | 'fund' | 'sustain';
 
+// The three paths, in the words of the messaging system (Nov 2026): one
+// promise, three paths, the same four steps. 'full' is the plain subhead.
 export const STAGES: Record<StageKey, { name: string; full: string; price: string; question: string }> = {
-  build: { name: 'Build', full: 'Formation Readiness', price: '$2,000', question: 'Forming or recently launched' },
-  fund: { name: 'Fund', full: 'Grant Readiness', price: '$2,500', question: 'Preparing to win grants or major funding' },
-  sustain: { name: 'Sustain', full: 'Institutional Durability', price: '$2,500', question: 'Established and want to last' },
+  build: { name: 'Build', full: 'Get the foundation right', price: '$2,000', question: 'New or founder-led' },
+  fund: { name: 'Fund', full: 'Get ready for bigger money', price: '$2,500', question: 'Growing, going after larger grants' },
+  sustain: { name: 'Sustain', full: 'Make it last beyond one person', price: '$2,500', question: 'Established, too much runs through one leader' },
 };
 
 const STAGE_KEY = 'fi_stage';
@@ -95,21 +98,24 @@ function esc(s: string): string {
   return s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[c] as string));
 }
 
-function recommendationHtml(stage: StageKey | null): string {
+function recommendationHtml(chosen: StageKey | null): string {
+  // A path the visitor picked wins; otherwise suggest one from what's happening.
+  const suggested = chosen ? null : triggerPath();
+  const stage = chosen || suggested;
   const picker = (Object.keys(STAGES) as StageKey[])
     .map((k) => `<button type="button" class="stage-choice${stage === k ? ' is-selected' : ''}" data-stage="${k}" aria-pressed="${stage === k}"><strong>${STAGES[k].name}</strong><span>${STAGES[k].question}</span></button>`)
     .join('');
   let rec: string;
   if (stage) {
     const s = STAGES[stage];
-    rec = `<p class="pathway-rec"><strong>InstitutionalOS Diagnostic: ${s.name} (${s.full}), ${s.price} flat fee.</strong> Verifies the evidence behind every dimension for your stage, names your single binding constraint in a written memo, and ends with a 90-Day Improvement Plan in a live readout session.</p>`;
+    rec = `<p class="pathway-rec">You're on the <strong>${s.name} path: ${s.full.toLowerCase()}</strong>.${suggested ? ' (Suggested from what you told us; pick another path above if it fits better.)' : ''} <strong>The ${s.name} Diagnostic, ${s.price} flat fee,</strong> gives you a clear picture with the evidence behind it, names the gap that will break first, prices your next hires and fundraising goal, and ends with a 90-day plan in a live readout.</p>`;
   } else {
-    rec = `<p class="pathway-rec"><strong>InstitutionalOS Diagnostic, $2,000 to $2,500 by stage.</strong> Choose your stage above and this will show the one that fits. It verifies the evidence behind every dimension, names your binding constraint in a written memo, and ends with a 90-Day Improvement Plan.</p>`;
+    rec = `<p class="pathway-rec"><strong>The Diagnostic, $2,000 to $2,500 depending on your path.</strong> Choose your path above and this will show the one that fits. It gives you a clear picture with the evidence behind it, names the gap that will break first, and ends with a priced 90-day plan.</p>`;
   }
   return `
     <h3 class="subhead">Recommended next step</h3>
     ${triggerRecHtml()}
-    <p class="pathway-stage-q">Which best describes your organization?</p>
+    <p class="pathway-stage-q">Which path sounds like you?</p>
     <div class="stage-choices" role="group" aria-label="Organization stage">${picker}</div>
     ${rec}
     <div class="hero-ctas">
@@ -150,7 +156,7 @@ export function renderPathway(el: HTMLElement | null, opts: PathwayOptions) {
         <li>whether you'd clear the specific gates for your stage, or</li>
         <li>${opts.coversAllSeven ? 'which single dimension is truly the binding constraint once the evidence is checked.' : `whether ${esc(lowest.label)} is really the binding constraint across all seven Health Index dimensions, since this tool covers only part of them.`}</li>
       </ul>
-      <p>That is what the InstitutionalOS Diagnostic verifies, directly with you.</p>
+      <p>That is what the Diagnostic verifies, directly with you.</p>
       </div>
 
       <div class="pathway-next" data-pathway-next>${recommendationHtml(getStage())}</div>

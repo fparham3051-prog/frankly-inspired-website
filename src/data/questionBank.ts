@@ -44,7 +44,7 @@ export const TOOLS: Tool[] = [
   },
   {
     "key": "sustainability",
-    "name": "Sustainability Strategy Score",
+    "name": "Strategy and Direction Score",
     "href": "/sustainability-score"
   },
   {
@@ -59,7 +59,7 @@ export const AREAS: Area[] = [
     "key": "self-assessment:1",
     "tool": "self-assessment",
     "index": 1,
-    "label": "Sustainability Strategy",
+    "label": "Strategy and Direction",
     "dimension": "strategy",
     "help": "",
     "helpClass": "",

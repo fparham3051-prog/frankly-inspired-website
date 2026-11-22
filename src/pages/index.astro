@@ -102,31 +102,31 @@ const dialSegs = dialAreas.map(([name, score], i) => {
         <div class="door-grid" data-drift>
           <article class="door-card reveal">
             <p class="door-quote">&ldquo;We're opening a second site, and I'm not sure we're ready.&rdquo;</p>
-            <h3>Usually the Fund path</h3>
+            <h3>Fund: get ready for bigger money</h3>
             <p>Can the organization carry the new site or program without weakening what already works?</p>
             <a class="link-more" href="/assessment" data-set-trigger="expansion">Start the free check-up &rarr;</a>
           </article>
           <article class="door-card reveal">
             <p class="door-quote">&ldquo;We keep chasing grants and never get stable.&rdquo;</p>
-            <h3>Usually the Fund path</h3>
+            <h3>Fund: get ready for bigger money</h3>
             <p>Will your evidence, governance, and finances hold up when a larger funder looks closely?</p>
             <a class="link-more" href="/assessment" data-set-trigger="funder">Start the free check-up &rarr;</a>
           </article>
           <article class="door-card reveal">
             <p class="door-quote">&ldquo;Everything still runs through me.&rdquo;</p>
-            <h3>Usually the Sustain path</h3>
+            <h3>Sustain: make it last beyond one person</h3>
             <p>What has to be written down and handed off so the organization runs without one person?</p>
             <a class="link-more" href="/leadership-health" data-set-trigger="founder">Start the free check-up &rarr;</a>
           </article>
           <article class="door-card reveal">
             <p class="door-quote">&ldquo;We hired more people, and I'm more overwhelmed.&rdquo;</p>
-            <h3>Build or Fund, depending on size</h3>
+            <h3>Build or Fund, depending on your size</h3>
             <p>Is the problem really headcount, or decision rights, workflow, or revenue quality?</p>
             <a class="link-more" href="/leadership-health" data-set-trigger="strain">Start the free check-up &rarr;</a>
           </article>
           <article class="door-card reveal">
             <p class="door-quote">&ldquo;Our founder may step down in the next two years.&rdquo;</p>
-            <h3>Usually the Sustain path</h3>
+            <h3>Sustain: make it last beyond one person</h3>
             <p>Which knowledge, relationships, and authority have to transfer first?</p>
             <a class="link-more" href="/leadership-health" data-set-trigger="transition">Start the free check-up &rarr;</a>
           </article>
@@ -201,7 +201,7 @@ const dialSegs = dialAreas.map(([name, score], i) => {
               <div class="card card-static reveal">
                 <span class="offering-badge">{c.stage}</span>
                 <h4>{c.org}</h4>
-                <p><strong>Constraint:</strong> {c.constraint}</p>
+                <p><strong>Breaks first:</strong> {c.constraint}</p>
                 <p><strong>What we did:</strong> {c.action}</p>
                 <p><strong>Result:</strong> {c.result}</p>
               </div>
@@ -216,45 +216,34 @@ const dialSegs = dialAreas.map(([name, score], i) => {
       <div class="container">
         <p class="tag-chip tc-sand reveal"><SevenMark size={13} weak={4} />The method</p>
         <h2 class="section-title reveal">How it works</h2>
-        <p class="section-note reveal">Four steps, from a free seven-minute check-up to progress your board can see.</p>
+        <p class="section-note reveal">The same four steps on every path, from a free seven-minute check-up to progress your board can see.</p>
         <ol class="steps">
           <li class="step reveal">
             <span class="step-num" aria-hidden="true"><svg class="step-ring" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" pathLength="1" /></svg><span style="position:relative">1</span></span>
-            <h3>Score</h3>
-            <p>Take the free check-up. Seven minutes, no sign-up, and you see where you stand right away.</p>
+            <h3>Free check-up</h3>
+            <p>Seven minutes, no sign-up. You see where you stand, the area most likely to break first, and which path fits: Build, Fund or Sustain.</p>
             <a class="link-more" href="/assessment">Start the free check-up &rarr;</a>
           </li>
           <li class="step reveal">
             <span class="step-num" aria-hidden="true"><svg class="step-ring" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" pathLength="1" /></svg><span style="position:relative">2</span></span>
-            <h3>Verify</h3>
-            <p>In the Diagnostic, Franklin checks the evidence behind each answer: your filed 990s, your policies, and how things actually run.</p>
+            <h3>The Diagnostic</h3>
+            <p>Franklin checks the evidence behind each answer, names the gap that will break first, and prices your plan: the next hires, a fundraising goal and what your board needs.</p>
             <a class="link-more" href="/consulting#pricing">See the Diagnostic &rarr;</a>
           </li>
           <li class="step reveal">
             <span class="step-num" aria-hidden="true"><svg class="step-ring" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" pathLength="1" /></svg><span style="position:relative">3</span></span>
-            <h3>Plan</h3>
-            <p>A short written memo names the one gap that will break first and lays out a 90-day plan to close it.</p>
-            <a class="link-more" href="/consulting#sample-diagnostic">See a sample &rarr;</a>
+            <h3>Do the work</h3>
+            <p>A 90-day plan with an owner and a date on every step, carried out in a private workspace, on a retainer or a 90-Day Sprint.</p>
+            <a class="link-more" href="/institutionalos#inside">See the workspace &rarr;</a>
           </li>
           <li class="step reveal">
             <span class="step-num" aria-hidden="true"><svg class="step-ring" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" pathLength="1" /></svg><span style="position:relative">4</span></span>
-            <h3>Do the work</h3>
-            <p>Each step has an owner and a date. A 15-minute weekly check-in keeps it moving, with a review at 90 days and a full re-check at six months.</p>
-            <a class="link-more" href="/institutionalos#inside">See the workspace &rarr;</a>
+            <h3>Keep it</h3>
+            <p>A quarterly re-score shows your board the trend, not a snapshot, and tells you what to work on next.</p>
+            <a class="link-more" href="/consulting#sample-diagnostic">See a sample report &rarr;</a>
           </li>
         </ol>
-        <div class="dim-questions reveal">
-          <h3>Seven questions every Diagnostic answers</h3>
-          <ol>
-            <li><a href="/consulting#pillar-sustainability">Are we clear about where we're going?</a></li>
-            <li><a href="/consulting#pillar-program">Can we show the work matters?</a></li>
-            <li><a href="/consulting#pillar-revenue">Can we pay for the institution reliably?</a></li>
-            <li><a href="/consulting#pillar-leadership">Can we run without one person?</a></li>
-            <li><a href="/consulting#pillar-operations">Can we execute consistently?</a></li>
-            <li><a href="/consulting#pillar-partnership">Do we have the relationships we need?</a></li>
-            <li><a href="/consulting#pillar-governance">Are we governed responsibly?</a></li>
-          </ol>
-        </div>
+        <p class="section-note reveal">Every Diagnostic answers seven questions, from &ldquo;Are we clear about where we&rsquo;re going?&rdquo; to &ldquo;Can we run without one person?&rdquo; <a href="/consulting#dimensions">See all seven &rarr;</a></p>
       </div>
     </section>
 

@@ -81,9 +81,20 @@ export function mountTriggerPicker(form: HTMLFormElement | null, tool: string) {
 }
 
 /** One line for the results pathway when a trigger was chosen. */
+// The path each situation usually points to, before we know the budget
+// (messaging system, Nov 2026). The visitor's own pick in the results wins.
+const PATH_FOR: Record<TriggerKey, 'build' | 'fund' | 'sustain' | null> = {
+  expansion: 'fund', funder: 'fund', founder: 'sustain', strain: 'fund', transition: 'sustain', checkup: null,
+};
+
+export function triggerPath(): 'build' | 'fund' | 'sustain' | null {
+  const k = getTrigger();
+  return k ? PATH_FOR[k] : null;
+}
+
 export function triggerRecHtml(): string {
   const k = getTrigger();
   if (!k || k === 'checkup') return '';
   const t = TRIGGERS[k];
-  return `<p class="pathway-trigger">You said: <strong>${t.label.toLowerCase()}</strong>. The <strong>${t.door} Diagnostic</strong> answers one question: ${t.question}</p>`;
+  return `<p class="pathway-trigger">You said: <strong>${t.label.toLowerCase()}</strong>. The Diagnostic will answer one question for you: ${t.question}</p>`;
 }

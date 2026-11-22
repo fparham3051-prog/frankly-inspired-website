@@ -155,7 +155,7 @@ export function dimensionScores(p: Profile = loadProfile()): DimScore[] {
 
 /** Which tool fills a dimension the profile hasn't covered yet. */
 export const FILL_TOOL: Record<DimensionKey, { href: string; name: string }> = {
-  strategy: { href: '/sustainability-score', name: 'Sustainability Strategy Score' },
+  strategy: { href: '/sustainability-score', name: 'Strategy and Direction Score' },
   program: { href: '/assessment', name: 'Free Check-up' },
   revenue: { href: '/revenue-growth-score', name: 'Revenue & Growth Score' },
   leadership: { href: '/leadership-health', name: 'Leadership & Operations Score' },

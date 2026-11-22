@@ -44,6 +44,7 @@ function setStage(s: StageKey) {
 // exact area label each tool uses.
 const ACTIONS: Record<string, string> = {
   // Self-assessment pillars
+  'Strategy and Direction': 'Hold a 90-minute session with your board chair and two senior staff to agree your top three priorities for the next 12 months, in writing. For the rest of the quarter, test every new request or opportunity against those three.',
   'Sustainability Strategy': 'Hold a 90-minute session with your board chair and two senior staff to agree your top three priorities for the next 12 months, in writing. For the rest of the quarter, test every new request or opportunity against those three.',
   'Revenue Diversification': "List every revenue source with its share of last year's revenue. If any single source is above 30%, the commonly cited risk threshold, set a goal to open two funding conversations outside that source this quarter.",
   'Leadership & Organizational Development': 'Write a one-page role card for each senior position: its purpose, the decisions it owns, and three measures of success. Review each one in that person’s next check-in.',
@@ -136,7 +137,7 @@ export function renderPathway(el: HTMLElement | null, opts: PathwayOptions) {
 
   el.innerHTML = `
     <div class="pathway">
-      <h3 class="subhead">${allEven ? 'Where to start' : 'Your likely constraint'}: ${esc(lowest.label)}</h3>
+      <h3 class="subhead">${allEven ? 'Where to start' : 'Most likely to break first'}: ${esc(lowest.label)}</h3>
       ${hiddenWeakSpot
         ? `<p class="pathway-flag">Your overall score looks healthy, but ${esc(lowest.label)} scored ${lowest.pct}%. A strong average doesn't cancel out a weak area; this is usually the one that limits everything else.</p>`
         : allEven
@@ -154,7 +155,7 @@ export function renderPathway(el: HTMLElement | null, opts: PathwayOptions) {
         <li>whether the evidence behind each answer would hold up to a funder or board,</li>
         <li>how your filed IRS Form 990 reads to a grantmaker,</li>
         <li>whether you'd clear the specific gates for your stage, or</li>
-        <li>${opts.coversAllSeven ? 'which single dimension is truly the binding constraint once the evidence is checked.' : `whether ${esc(lowest.label)} is really the binding constraint across all seven Health Index dimensions, since this tool covers only part of them.`}</li>
+        <li>${opts.coversAllSeven ? 'which single area is truly the gap that will break first once the evidence is checked.' : `whether ${esc(lowest.label)} is really the gap that will break first across all seven areas, since this tool covers only part of them.`}</li>
       </ul>
       <p>That is what the Diagnostic verifies, directly with you.</p>
       </div>

@@ -112,7 +112,7 @@ import EmailResultsForm from '../components/EmailResultsForm.astro';
           </div>
 
           <div class="results-related">
-            <p>This tool measures leadership and organizational capacity. For a numbers-based read on revenue and growth capacity (reserves, spending mix, revenue diversification, and liquidity), see the <a href="/revenue-growth-score">Revenue &amp; Growth Score</a>. This score also feeds directly into the <a href="/sustainability-score">Sustainability Strategy Score</a>, which places it alongside revenue and growth capacity and strategic clarity in a single Strategic Triangle view.</p>
+            <p>This tool measures leadership and organizational capacity. For a numbers-based read on revenue and growth capacity (reserves, spending mix, revenue diversification, and liquidity), see the <a href="/revenue-growth-score">Revenue &amp; Growth Score</a>. This score also feeds directly into the <a href="/sustainability-score">Strategy and Direction Score</a>, which places it alongside revenue and growth capacity and strategic clarity in a single Strategic Triangle view.</p>
             <p>Haven't taken the <a href="/assessment">Free Check-up</a> yet? It covers this and the other six Health Index dimensions in about 7 minutes.</p>
           </div>
 
@@ -301,7 +301,7 @@ import EmailResultsForm from '../components/EmailResultsForm.astro';
     if (gaugeBandEl) gaugeBandEl.textContent = BAND_NAMES[compositeBand] + ' (' + BAND_SUBNAMES[compositeBand] + ')';
     if (summaryEl) summaryEl.textContent = COMPOSITE_SUMMARY[compositeBand];
 
-    // Saved so the Sustainability Strategy Score tool can pull this in as
+    // Saved so the Strategy and Direction Score tool can pull this in as
     // the "Operational Capacity" leg of its Strategic Triangle view, if
     // this visitor has completed both tools in the same browser. Stays
     // entirely on-device, same as every other calculation on this page.

@@ -2705,3 +2705,14 @@ h3.h4-style { font-size: 1.2rem; margin-bottom: 0.55rem; }
 .hero-dial .dial-seg:focus-visible { outline: none; }
 .hero-dial .dial-seg:focus-visible .seg-bg { stroke: rgba(17, 35, 61, 0.35); }
 .contact-form [aria-invalid="true"] { border-color: #B3402C !important; box-shadow: 0 0 0 1px #B3402C; }
+
+/* Full-length portrait (Nov 2026), saved with a transparent background
+   so it reads as a cutout on any section color. */
+.about-hero { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 2.5rem; align-items: end; }
+.about-lede { font-size: 1.2rem; line-height: 1.55; color: var(--navy); margin: 0 0 1rem; }
+.about-portrait img { display: block; width: 100%; height: auto; }
+.about-portrait { max-width: 360px; justify-self: end; }
+@media (max-width: 760px) {
+  .about-hero { grid-template-columns: 1fr; }
+  .about-portrait { justify-self: center; max-width: 260px; order: -1; }
+}

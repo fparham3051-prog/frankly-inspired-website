@@ -151,9 +151,17 @@ const dialSegs = dialAreas.map(([name, score], i) => {
     <section id="track-record" class="section proof-section alt-bg">
       <div class="container">
         <p class="tag-chip tc-sage reveal"><SevenMark size={13} weak={3} />The track record</p>
-        <h2 class="section-title reveal">I've run the problem I diagnose</h2>
-        <p class="section-note scrub">As Regional Director for The Hidden Genius Project, Franklin opened and ran a two-city region, owning the budget, the partnerships, the staffing, and the systems. He knows what breaks first because he has had to fix it.</p>
-        <p class="affiliation-label reveal">Board leadership and affiliations: Ora Lee Smith Cancer Research Foundation &middot; Turner Foundation for Community Advocacy &middot; Howard Rye Institute Fellow &middot; AFP Fellow</p>
+        <div class="track-intro">
+          <div>
+            <h2 class="section-title reveal">I've run the problem I diagnose</h2>
+            <p class="section-note scrub">As Regional Director for The Hidden Genius Project, Franklin opened and ran a two-city region, owning the budget, the partnerships, the staffing, and the systems. He knows what breaks first because he has had to fix it.</p>
+            <p class="affiliation-label reveal">Board leadership and affiliations: Ora Lee Smith Cancer Research Foundation &middot; Turner Foundation for Community Advocacy &middot; Howard Rye Institute Fellow &middot; AFP Fellow</p>
+          </div>
+          <picture class="track-portrait reveal">
+            <source srcset="/assets/images/franklin-parham-portrait.webp" type="image/webp" />
+            <img src="/assets/images/franklin-parham-portrait.png" alt="Franklin D. Parham, Founder and Principal of Frankly Inspired and Associates" width="738" height="1064" loading="lazy" />
+          </picture>
+        </div>
         <div class="stat-grid proof-stats" data-count>
           <div class="stat stat-live reveal" id="live-stat" hidden><span class="stat-num" id="live-stat-num"></span><span class="stat-label">free nonprofit assessments completed with Frankly Inspired tools</span></div>
         </div>

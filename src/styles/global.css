@@ -2710,12 +2710,9 @@ h3.h4-style { font-size: 1.2rem; margin-bottom: 0.55rem; }
    so it reads as a cutout on any section color. */
 .about-hero { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 2.5rem; align-items: end; }
 .about-lede { font-size: 1.2rem; line-height: 1.55; color: var(--navy); margin: 0 0 1rem; }
-.about-portrait img, .track-portrait img { display: block; width: 100%; height: auto; }
+.about-portrait img { display: block; width: 100%; height: auto; }
 .about-portrait { max-width: 360px; justify-self: end; }
-.track-intro { display: grid; grid-template-columns: minmax(0, 1fr) 260px; gap: 2rem; align-items: center; }
-.track-portrait { max-width: 260px; }
 @media (max-width: 760px) {
-  .about-hero, .track-intro { grid-template-columns: 1fr; }
+  .about-hero { grid-template-columns: 1fr; }
   .about-portrait { justify-self: center; max-width: 260px; order: -1; }
-  .track-portrait { display: none; }
 }

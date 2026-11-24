@@ -111,6 +111,10 @@ import QuestionSection from '../components/QuestionSection.astro';
               <input type="text" id="hp_field_assessment" name="hp_field" tabindex="-1" autocomplete="off" />
             </div>
             <label for="results-email">Want these results emailed to you?</label>
+            <div class="results-email-optional">
+              <input type="text" id="results-name" name="name" placeholder="Your name (optional)" autocomplete="name" maxlength="80" aria-label="Your name (optional)" />
+              <input type="text" id="results-org" name="orgName" placeholder="Organization (optional)" autocomplete="organization" maxlength="120" aria-label="Organization (optional)" />
+            </div>
             <div class="results-email-row">
               <input type="email" id="results-email" name="email" placeholder="Email address" required />
               <button type="submit" class="btn btn-secondary">Email My Results</button>
@@ -556,6 +560,8 @@ import QuestionSection from '../components/QuestionSection.astro';
       const formData = new FormData(emailForm);
       const payload = {
         email: formData.get('email'),
+        name: String(formData.get('name') || '').trim() || undefined,
+        orgName: String(formData.get('orgName') || '').trim() || undefined,
         hp_field: formData.get('hp_field'),
         tool: 'self-assessment',
         trigger: getTrigger() || undefined,

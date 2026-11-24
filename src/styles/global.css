@@ -1596,6 +1596,18 @@ a.hero-credential-link:hover {
   border-radius: var(--radius-sm);
 }
 .results-email-row input:focus { border-color: var(--gold); box-shadow: 0 0 0 4px var(--gold-soft); outline: none; }
+.results-email-optional { display: flex; gap: 0.8rem; margin-bottom: 0.8rem; }
+.results-email-optional input,
+.results-email-row input {
+  flex: 1;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  padding: 0.7em 0.8em;
+  border: 1px solid #c7cdd3;
+  border-radius: var(--radius-sm);
+  min-width: 0;
+}
+.results-email-optional input:focus { border-color: var(--gold); box-shadow: 0 0 0 4px var(--gold-soft); outline: none; }
 .results-email-form .form-status {
   margin-top: 0.75rem;
   font-weight: 600;
@@ -1835,7 +1847,7 @@ a.card:hover .card-cta { text-decoration: underline; }
   }
   .results-bar-pct { text-align: left; }
   .results-bar-avg { grid-column: auto; }
-  .results-email-row { flex-direction: column; }
+  .results-email-row, .results-email-optional { flex-direction: column; }
 }
 
 /* ---------- Cookie consent banner ---------- */

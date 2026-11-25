@@ -2793,3 +2793,11 @@ html.js .stage-portrait { opacity: 0; transform: translateY(36px) scale(0.985); 
   .stage-glow { animation: none; }
   html.js .stage-in, html.js .stage-portrait { opacity: 1; transform: none; animation: none; }
 }
+
+/* About: headshot card beside the opening paragraph */
+.about-col > .about-intro { max-width: 52rem; }
+.about-intro { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 2.2rem; align-items: center; padding-bottom: 2.2rem; margin-bottom: 2.2rem; border-bottom: 1px solid var(--border); }
+.about-headshot img { display: block; width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; object-position: 50% 30%; border-radius: var(--radius); box-shadow: var(--shadow-md); }
+.about-intro-eyebrow { font-size: 0.76rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-accessible); margin: 0 0 0.6rem; font-weight: 600; }
+.about-col .about-intro-lead { font-family: var(--font-heading); font-size: clamp(1.25rem, 2vw, 1.5rem); line-height: 1.45; color: var(--navy); margin: 0; }
+@media (max-width: 640px) { .about-intro { grid-template-columns: 1fr; gap: 1.2rem; } .about-headshot { max-width: 200px; } }

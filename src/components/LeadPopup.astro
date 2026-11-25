@@ -14,8 +14,8 @@
   <button type="button" class="lead-popup-close" aria-label="Close" data-lp-close>&times;</button>
   <div data-lp-form-wrap>
     <p class="lead-popup-eyebrow">Field notes</p>
-    <h2 id="lead-popup-title" class="lead-popup-title">What's really holding your organization back?</h2>
-    <p id="lead-popup-desc" class="lead-popup-desc">Short notes from the field for nonprofit leaders and boards: the signal you notice, the gap it usually turns out to be, and one 90-day action.</p>
+    <h2 id="lead-popup-title" class="lead-popup-title">Notes from the field</h2>
+    <p id="lead-popup-desc" class="lead-popup-desc">Now and then, a short note for nonprofit leaders: a problem I keep seeing and one thing to do about it.</p>
     <form class="lead-popup-form" novalidate>
       <label class="lead-popup-label">Name<input name="name" type="text" autocomplete="name" required maxlength="120" /></label>
       <label class="lead-popup-label">Email<input name="email" type="email" autocomplete="email" required maxlength="200" /></label>
@@ -81,7 +81,10 @@
   }
 
   if (box && eligible()) {
-    const timer = window.setTimeout(show, DELAY_MS);
+    // Never while the first screen (the hero photo) is in view: the timer only
+    // shows the card once the visitor has scrolled past it.
+    const pastHero = () => window.scrollY > window.innerHeight * 0.9;
+    const timer = window.setTimeout(function tryShow() { if (pastHero()) show(); else window.addEventListener('scroll', function once() { if (pastHero()) { window.removeEventListener('scroll', once); show(); } }, { passive: true }); }, DELAY_MS);
     const onScroll = () => {
       const h = document.documentElement.scrollHeight - window.innerHeight;
       if (h > 0 && window.scrollY / h > 0.5) { window.clearTimeout(timer); window.removeEventListener('scroll', onScroll); show(); }

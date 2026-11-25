@@ -1,6 +1,5 @@
 ---
 import SevenMark from '../components/SevenMark.astro';
-import GapPicker from '../components/GapPicker.astro';
 import { CALENDLY_URL, EMAIL, PHONE_DISPLAY, PHONE_TEL } from '../config';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
@@ -30,7 +29,7 @@ const dialSegs = dialAreas.map(([name, score], i) => {
 
 <BaseLayout
   title="Franklin D. Parham | Know What to Build Next, What It Costs, and How to Fund It"
-  description="Frankly Inspired helps nonprofits know what to build next, what it costs, and how to fund it, then helps them get there. Three paths: Build, Fund and Sustain."
+  description="Franklin D. Parham helps growing nonprofits find the gap that will break first, price the fix, and close it in 90 days. Start with a free 7-minute check-up."
   footerVariant="home"
 >
   <Header variant="full" />
@@ -44,7 +43,7 @@ const dialSegs = dialAreas.map(([name, score], i) => {
           <p class="eyebrow reveal" style="margin-bottom:0.35rem;">Franklin D. Parham</p>
           <p class="hero-role reveal">Founder and Principal, Frankly Inspired and Associates</p>
           <h1 class="hero-h1-long" data-split>Know what to build next, what it costs, and how to fund it.</h1>
-          <p class="hero-sub reveal">A clear picture, a priced plan, and proof it's working.<span class="hero-sub-more"> Whether you're getting the foundation right, getting ready for bigger money, or making it last beyond one person,</span> Frankly Inspired finds the gap that will break first and helps you close it in 90 days.</p>
+          <p class="hero-sub reveal">I find the gap that will break first as your nonprofit grows, put a price on fixing it, and help you close it in 90 days.</p>
           <div class="hero-ctas reveal">
             <a class="btn btn-primary" href="/assessment" data-track="tool_start" data-tool="hero">Start the Free Check-up</a>
             <a class="btn btn-secondary" href={CALENDLY_URL} target="_blank" rel="noopener" data-track="schedule_click">Schedule a Conversation</a>
@@ -81,9 +80,9 @@ const dialSegs = dialAreas.map(([name, score], i) => {
         </div>
       </div>
       <div class="hero-credentials reveal">
-        <div class="hero-credential"><span class="hero-credential-num">20+</span><span>Years in Education and Nonprofit Leadership</span></div>
+        <div class="hero-credential"><span class="hero-credential-num">20+</span><span>Years in nonprofit leadership and fundraising</span></div>
         <div class="hero-credential-divider" aria-hidden="true"></div>
-        <a class="hero-credential hero-credential-link" href="/methodology"><span>Seven questions, one standard of evidence</span></a>
+        <a class="hero-credential hero-credential-link" href="/assessment"><span>Free check-up in 7 minutes</span></a>
         <div class="hero-credential-divider" aria-hidden="true"></div>
         <a class="hero-credential hero-credential-link" href="/consulting#pricing"><span>Diagnostic from $2,000</span></a>
       </div>
@@ -98,48 +97,43 @@ const dialSegs = dialAreas.map(([name, score], i) => {
       <div class="container">
         <p class="tag-chip reveal"><SevenMark size={13} weak={2} />The situations</p>
         <h2 class="section-title reveal">Which of these sounds like you?</h2>
-        <p class="section-note scrub">Leaders rarely call about "sustainability." They call when something specific is about to happen. Pick the one that sounds like you, and the free check-up starts there.</p>
+        <p class="section-note scrub">Most leaders call me when something specific is about to happen. Pick the closest one and the free check-up starts there.</p>
         <div class="door-grid" data-drift>
           <article class="door-card reveal">
             <p class="door-quote">&ldquo;We're opening a second site, and I'm not sure we're ready.&rdquo;</p>
-            <h3>Fund: get ready for bigger money</h3>
-            <p>Can the organization carry the new site or program without weakening what already works?</p>
-            <a class="link-more" href="/assessment" data-set-trigger="expansion">Start the free check-up &rarr;</a>
+            <h3>Fund path</h3>
+            <p>Can you carry the new site without weakening what already works?</p>
+            <a class="link-more" href="/assessment" data-set-trigger="expansion">Start here &rarr;</a>
           </article>
           <article class="door-card reveal">
             <p class="door-quote">&ldquo;We keep chasing grants and never get stable.&rdquo;</p>
-            <h3>Fund: get ready for bigger money</h3>
-            <p>Will your evidence, governance, and finances hold up when a larger funder looks closely?</p>
-            <a class="link-more" href="/assessment" data-set-trigger="funder">Start the free check-up &rarr;</a>
+            <h3>Fund path</h3>
+            <p>Will your results, board and books hold up when a larger funder looks closely?</p>
+            <a class="link-more" href="/assessment" data-set-trigger="funder">Start here &rarr;</a>
           </article>
           <article class="door-card reveal">
             <p class="door-quote">&ldquo;Everything still runs through me.&rdquo;</p>
-            <h3>Sustain: make it last beyond one person</h3>
-            <p>What has to be written down and handed off so the organization runs without one person?</p>
-            <a class="link-more" href="/leadership-health" data-set-trigger="founder">Start the free check-up &rarr;</a>
+            <h3>Sustain path</h3>
+            <p>What has to be written down and handed off so it runs without you?</p>
+            <a class="link-more" href="/assessment" data-set-trigger="founder">Start here &rarr;</a>
           </article>
           <article class="door-card reveal">
             <p class="door-quote">&ldquo;We hired more people, and I'm more overwhelmed.&rdquo;</p>
-            <h3>Build or Fund, depending on your size</h3>
-            <p>Is the problem really headcount, or decision rights, workflow, or revenue quality?</p>
-            <a class="link-more" href="/leadership-health" data-set-trigger="strain">Start the free check-up &rarr;</a>
+            <h3>Build or Fund path</h3>
+            <p>Is it really a headcount problem, or who decides what?</p>
+            <a class="link-more" href="/assessment" data-set-trigger="strain">Start here &rarr;</a>
           </article>
           <article class="door-card reveal">
             <p class="door-quote">&ldquo;Our founder may step down in the next two years.&rdquo;</p>
-            <h3>Sustain: make it last beyond one person</h3>
-            <p>Which knowledge, relationships, and authority have to transfer first?</p>
-            <a class="link-more" href="/leadership-health" data-set-trigger="transition">Start the free check-up &rarr;</a>
+            <h3>Sustain path</h3>
+            <p>Which relationships and decisions have to move first?</p>
+            <a class="link-more" href="/assessment" data-set-trigger="transition">Start here &rarr;</a>
           </article>
           <article class="door-card door-card-cta reveal">
             <h3>Already know it's one of these?</h3>
-            <p>A 30-minute conversation is enough to tell whether a Diagnostic is the right next step, and which path fits: Build, Fund or Sustain.</p>
+            <p>In 30 minutes we can tell whether a Diagnostic is the right next step.</p>
             <a class="btn btn-primary" href={CALENDLY_URL} target="_blank" rel="noopener" data-track="schedule_click">Schedule a Conversation</a>
           </article>
-        </div>
-        <div class="gp-wrap reveal" id="which-gap">
-          <h3 class="gp-title">Not sure which? Three questions.</h3>
-          <p class="section-note">Pick the answer closest to true. The dial lights up the area most likely to break first.</p>
-          <GapPicker />
         </div>
       </div>
     </section>
@@ -151,23 +145,23 @@ const dialSegs = dialAreas.map(([name, score], i) => {
     <section id="track-record" class="section proof-section alt-bg">
       <div class="container">
         <p class="tag-chip tc-sage reveal"><SevenMark size={13} weak={3} />The track record</p>
-        <h2 class="section-title reveal">I've run the problem I diagnose</h2>
-        <p class="section-note scrub">As Regional Director for The Hidden Genius Project, Franklin opened and ran a two-city region, owning the budget, the partnerships, the staffing, and the systems. He knows what breaks first because he has had to fix it.</p>
+        <h2 class="section-title reveal">I've done this job</h2>
+        <p class="section-note scrub">As Regional Director for The Hidden Genius Project, I opened and ran a two-city region: the budget, partners, staff and systems. Most of what breaks in a growing nonprofit, I've had to fix myself.</p>
         <p class="affiliation-label reveal">Board leadership and affiliations: Ora Lee Smith Cancer Research Foundation &middot; Turner Foundation for Community Advocacy &middot; Howard Rye Institute Fellow &middot; AFP Fellow</p>
         <div class="stat-grid proof-stats" data-count>
           <div class="stat stat-live reveal" id="live-stat" hidden><span class="stat-num" id="live-stat-num"></span><span class="stat-label">free nonprofit assessments completed with Frankly Inspired tools</span></div>
         </div>
-        <p class="proof-label reveal">From Franklin's career before Frankly Inspired:</p>
+        <p class="proof-label reveal">Before Frankly Inspired:</p>
         <div class="stat-grid proof-stats" data-count>
           <div class="stat reveal"><span class="stat-num">20+</span><span class="stat-label">years in student development, higher-education advancement, and nonprofit leadership</span></div>
           <div class="stat reveal"><span class="stat-num">$1.3M</span><span class="stat-label">in regional operating budgets managed, The Hidden Genius Project</span></div>
           <div class="stat reveal"><span class="stat-num">20+</span><span class="stat-label">cross-sector partnerships built and stewarded</span></div>
           <div class="stat reveal"><span class="stat-num">$500K+</span><span class="stat-label">in scholarships secured, with 100% college enrollment for the senior cohort</span></div>
         </div>
-        <p class="reveal" style="margin-top:1rem;"><a class="link-more" href="/about">About Franklin and his full track record &rarr;</a></p>
+        <p class="reveal" style="margin-top:1rem;"><a class="link-more" href="/about">More about me &rarr;</a></p>
         <div class="dmv-teaser reveal">
           <p class="dmv-teaser-eyebrow">New research · DMV Nonprofit Health Brief</p>
-          <p class="dmv-teaser-text"><strong>38% of growing DMV nonprofits show strain.</strong> We read the public 990s of 1,668 education, human services, youth, and workforce nonprofits across DC, Maryland, and Virginia. Here's where the foundation isn't keeping up.</p>
+          <p class="dmv-teaser-text"><strong>38% of growing DMV nonprofits show strain.</strong> I read the public tax filings of 1,668 education, youth, workforce and human services nonprofits in DC, Maryland and Virginia.</p>
           <a class="link-more" href="/dmv-nonprofit-health" data-track="home_dmv_brief">Read the brief &rarr;</a>
         </div>
       </div>
@@ -216,34 +210,34 @@ const dialSegs = dialAreas.map(([name, score], i) => {
       <div class="container">
         <p class="tag-chip tc-sand reveal"><SevenMark size={13} weak={4} />The method</p>
         <h2 class="section-title reveal">How it works</h2>
-        <p class="section-note reveal">The same four steps on every path, from a free seven-minute check-up to progress your board can see.</p>
+        <p class="section-note reveal">Four steps, the same on every path.</p>
         <ol class="steps">
           <li class="step reveal">
             <span class="step-num" aria-hidden="true"><svg class="step-ring" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" pathLength="1" /></svg><span style="position:relative">1</span></span>
             <h3>Free check-up</h3>
-            <p>Seven minutes, no sign-up. You see where you stand, the area most likely to break first, and which path fits: Build, Fund or Sustain.</p>
+            <p>Seven minutes, no sign-up. You get a score, the area most likely to break first, and your path.</p>
             <a class="link-more" href="/assessment">Start the free check-up &rarr;</a>
           </li>
           <li class="step reveal">
             <span class="step-num" aria-hidden="true"><svg class="step-ring" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" pathLength="1" /></svg><span style="position:relative">2</span></span>
             <h3>The Diagnostic</h3>
-            <p>Franklin checks the evidence behind each answer, names the gap that will break first, and prices your plan: the next hires, a fundraising goal and what your board needs.</p>
+            <p>I check the documents behind your answers, name the gap, and price the fix: next hires, a fundraising goal, and a plan for your board.</p>
             <a class="link-more" href="/consulting#pricing">See the Diagnostic &rarr;</a>
           </li>
           <li class="step reveal">
             <span class="step-num" aria-hidden="true"><svg class="step-ring" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" pathLength="1" /></svg><span style="position:relative">3</span></span>
             <h3>Do the work</h3>
-            <p>A 90-day plan with an owner and a date on every step, carried out in a private workspace, on a retainer or a 90-Day Sprint.</p>
+            <p>A 90-day plan with an owner and a date on every step. We work it together in a private workspace.</p>
             <a class="link-more" href="/institutionalos#inside">See the workspace &rarr;</a>
           </li>
           <li class="step reveal">
             <span class="step-num" aria-hidden="true"><svg class="step-ring" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" pathLength="1" /></svg><span style="position:relative">4</span></span>
             <h3>Keep it</h3>
-            <p>A quarterly re-score shows your board the trend, not a snapshot, and tells you what to work on next.</p>
+            <p>Every quarter we score again, so your board sees what moved and what's next.</p>
             <a class="link-more" href="/consulting#sample-diagnostic">See a sample report &rarr;</a>
           </li>
         </ol>
-        <p class="section-note reveal">Every Diagnostic answers seven questions, from &ldquo;Are we clear about where we&rsquo;re going?&rdquo; to &ldquo;Can we run without one person?&rdquo; <a href="/consulting#dimensions">See all seven &rarr;</a></p>
+
       </div>
     </section>
 
@@ -252,34 +246,34 @@ const dialSegs = dialAreas.map(([name, score], i) => {
       <div class="container">
         <p class="tag-chip reveal"><SevenMark size={13} weak={5} />The offer</p>
         <h2 class="section-title reveal">Ways to work together</h2>
-        <p class="section-note reveal">One promise, three paths: <strong>Build</strong> (get the foundation right), <strong>Fund</strong> (get ready for bigger money) and <strong>Sustain</strong> (make it last beyond one person). Every path starts free and follows the same steps. <a href="/consulting#sample-diagnostic">See a sample report</a> or the <a href="/consulting#funder-sponsored">letter that asks a funder to cover it</a>.</p>
+        <p class="section-note reveal"><strong>Build</strong> gets the foundation right. <strong>Fund</strong> gets you ready for bigger money. <strong>Sustain</strong> makes it last beyond one person. <a href="/consulting#sample-diagnostic">See a sample report</a>.</p>
         <div class="offer-grid">
           <a class="offer-card reveal" href="/assessment" data-track="tool_start">
             <span class="offering-badge">Step 1 &middot; Start here</span>
             <h3>Free Check-up</h3>
             <p class="offer-price">$0 <span>7 minutes</span></p>
-            <p>Your score, the area most likely to break first, your suggested path, and a first step for the next 90 days. No sign-up.</p>
+            <p>Your score, the area most likely to break first, and a first step. No sign-up.</p>
             <span class="card-cta">Start the free check-up &rarr;</span>
           </a>
           <a class="offer-card featured reveal" href="/consulting#pricing">
             <span class="offering-badge">Step 2</span>
             <h3>The Diagnostic</h3>
             <p class="offer-price">$2,000 to $2,500 <span>by path</span></p>
-            <p>Build, Fund or Sustain. Franklin verifies the evidence with you, names the gap that will break first, prices your next hires and fundraising goal, and walks your board through a 90-day plan.</p>
+            <p>Four weeks. The gap named and checked against your documents, a priced plan, and a 90-day plan your board can follow.</p>
             <span class="card-cta">See the Diagnostic &rarr;</span>
           </a>
           <a class="offer-card reveal" href="/consulting#pricing-advisory">
             <span class="offering-badge">Step 3: Do the work</span>
             <h3>Advisory and Implementation Retainer</h3>
             <p class="offer-price">$2,500 to $3,500 <span>per month</span></p>
-            <p>Ongoing support carrying out your plan, or a 90-Day Sprint with a set scope. Then a quarterly re-score keeps the gains.</p>
+            <p>Help carrying out the plan, monthly or weekly. Three-month minimum.</p>
             <span class="card-cta">See the retainer &rarr;</span>
           </a>
           <a class="offer-card reveal" href="/consulting#coaching">
             <span class="offering-badge">For the leader</span>
             <h3>1:1 Executive Coaching</h3>
             <p class="offer-price">$350 <span>per session</span></p>
-            <p>Confidential 60-minute sessions for executive directors and senior leaders. No minimum.</p>
+            <p>Confidential hour-long sessions for executive directors. Book as needed.</p>
             <span class="card-cta">See coaching &rarr;</span>
           </a>
         </div>
@@ -292,7 +286,7 @@ const dialSegs = dialAreas.map(([name, score], i) => {
         <p class="tag-chip reveal"><SevenMark size={13} weak={6} />Let's talk</p>
         <h2 class="section-title reveal">Tell me about your organization</h2>
         <div id="score-ref-banner" class="score-ref-banner reveal" hidden></div>
-        <p class="lede-sm reveal">Growth, revenue pressure, a leadership change, or a decision coming up: tell me what's happening, and I'll reply within one business day about whether I can help.</p>
+        <p class="lede-sm reveal">Tell me what's happening and I'll reply within one business day, including whether I'm the right fit.</p>
 
         <p class="direct-contact reveal">
           <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
@@ -307,9 +301,9 @@ const dialSegs = dialAreas.map(([name, score], i) => {
           <div id="scheduler" class="scheduler" hidden data-url={CALENDLY_URL}></div>
         </div>
 
-        <p class="contact-faq reveal">Questions about cost, funder sponsorship, or how the check-up is scored? <a href="/consulting#faq">See common questions &rarr;</a></p>
+        <p class="contact-faq reveal">Questions about cost or funder sponsorship? <a href="/consulting#faq">Common questions &rarr;</a></p>
 
-        <p class="form-divider">Prefer to write it out first? Four fields, two minutes.</p>
+        <p class="form-divider">Or write it out here.</p>
 
         <!-- This form is live: posts to the frankly-inspired-backend
              /api/contact endpoint, which sends both the visitor's
@@ -402,7 +396,6 @@ const dialSegs = dialAreas.map(([name, score], i) => {
             <ol class="bullet-list">
               <li><a href="/assessment">Take the free 7-minute check-up</a>.</li>
               <li>Have your latest filed Form 990, this year's budget, bylaws, and any strategic plan on hand.</li>
-              <li><a href="/candid-seal">Check your Candid Seal path</a>.</li>
             </ol>
           </div>
           <a class="btn btn-secondary" href={CALENDLY_URL} target="_blank" rel="noopener">Schedule a Conversation &rarr;</a>

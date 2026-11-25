@@ -86,17 +86,13 @@ import QuestionSection from '../components/QuestionSection.astro';
           </div>
 
           <div class="results-disclaimer">
-            <p>This is a directional self-assessment based on your own responses, not a formal audit or guarantee of any outcome. It's meant to help you think through your organization's sustainability posture and where to focus next.</p>
+            <p>These scores come from your own answers. They're a starting point for a conversation, not an audit.</p>
           </div>
 
-          <div class="results-related">
-            <p>Several of these areas also have a deeper, dedicated tool if you want to go further: the <a href="/leadership-health">Leadership &amp; Operations Score</a> (governance and succession research) and the <a href="/sustainability-score">Strategy and Direction Score</a>, which blends the others into one strategic view. Revenue Diversification has two: the <a href="/revenue-growth-score">Revenue &amp; Growth Score</a> (real budget numbers against sector benchmarks) and the <a href="/institutional-advancement-score">Institutional Advancement Score</a> (the fundraising program behind those numbers: gift portfolios, stewardship, campaigns, and events).</p>
-            <p>This assessment covers all seven Health Index dimensions from your own answers. For a second read built from a description of your organization, try the <a href={SCORECARD_URL}>Quick Check-up</a>.</p>
-          </div>
 
           <div class="results-cta">
             <h3>Your next step: a free results debrief</h3>
-            <p>Bring these results to a short call. We'll name the one area to work on first and sketch what a 90-day plan would look like. No cost, no obligation.</p>
+            <p>Bring these results to a short call. We'll pick the one area to work on first and sketch a 90-day plan. No cost.</p>
             <div class="hero-ctas center">
               <a class="btn btn-primary" href={CALENDLY_URL} target="_blank" rel="noopener" data-track="debrief_click">Book a Free Debrief</a>
               <a class="btn btn-secondary" href="/consulting#pricing">See Pricing</a>
@@ -170,24 +166,21 @@ import QuestionSection from '../components/QuestionSection.astro';
       label: 'Strategy and Direction',
       service: 'Organizational assessment, strategic priorities, risk identification, sustainability roadmaps, and implementation planning.',
       anchor: 'pillar-sustainability',
-      deepDive: [{ href: '/sustainability-score', label: 'Strategy and Direction Score' }],
+      deepDive: [],
     },
     {
       num: 2,
       label: 'Revenue Diversification',
       service: 'Fundraising strategy, partnership development, grant and public-funding strategy, sponsorship thinking, and revenue-pipeline design.',
       anchor: 'pillar-revenue',
-      deepDive: [
-        { href: '/revenue-growth-score', label: 'Revenue & Growth Score' },
-        { href: '/institutional-advancement-score', label: 'Institutional Advancement Score' },
-      ],
+      deepDive: [],
     },
     {
       num: 3,
       label: 'Leadership & Organizational Development',
       service: 'Executive advising, leadership systems, role clarity, performance expectations, staff alignment, and change leadership.',
       anchor: 'pillar-leadership',
-      deepDive: [{ href: '/leadership-health', label: 'Leadership & Operations Score' }],
+      deepDive: [],
     },
     {
       num: 4,
@@ -215,10 +208,7 @@ import QuestionSection from '../components/QuestionSection.astro';
       label: 'Governance & Risk',
       service: 'Board practice, core policies, Form 990 governance, executive oversight, and the risks a funder will ask about.',
       anchor: 'pillar-governance',
-      deepDive: [
-        { href: '/leadership-health', label: 'Leadership & Operations Score' },
-        { href: '/sustainability-score', label: 'Strategy and Direction Score' },
-      ],
+      deepDive: [],
     },
   ];
 
@@ -227,7 +217,7 @@ import QuestionSection from '../components/QuestionSection.astro';
   // deep-link to the specific retainer that best matches this score band.
   const BANDS = [
     { max: 30, name: 'Foundational', desc: "This is a common starting point, and exactly where a focused strategy makes the most difference. The priority area below is where to start.", recommendedTier: 'implementation', tierName: 'Advisory and Implementation Retainer', tierReason: 'with this many areas to build at once, weekly hands-on support tends to move faster than periodic advisory alone.' },
-    { max: 55, name: 'Developing', desc: 'Some structure is in place, but meaningful gaps remain in one or more areas. Closing them is very achievable with the right focus.', recommendedTier: 'implementation', tierName: 'Advisory and Implementation Retainer', tierReason: 'closing gaps across more than one pillar usually benefits from hands-on implementation, not just advisory guidance.' },
+    { max: 55, name: 'Developing', desc: 'Some structure is in place, but meaningful gaps remain in one or more areas. Closing them is very achievable with the right focus.', recommendedTier: 'implementation', tierName: 'Advisory and Implementation Retainer', tierReason: 'closing gaps across more than one pillar usually needs hands-on help, beyond advice.' },
     { max: 80, name: 'Strengthening', desc: "A solid foundation is in place. The opportunity now is to sharpen and connect what's already working.", recommendedTier: 'advisory', tierName: 'Advisory and Implementation Retainer', tierReason: 'with a solid foundation already in place, experienced strategic guidance is usually enough to sharpen it further.' },
     { max: 101, name: 'Resilient', desc: 'A strong sustainability posture. The opportunity now is to protect it and extend it as the organization grows.', recommendedTier: 'advisory', tierName: 'Advisory and Implementation Retainer', tierReason: 'a strong foundation like this usually just needs a periodic strategic thought partner to protect and extend it.' },
   ];

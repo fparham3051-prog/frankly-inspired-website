@@ -1,10 +1,9 @@
 import { SITE_URL } from '../config';
 
-// Every indexable page. Privacy and Terms are noindex, so they're left out.
+// Pages we want found. Privacy and Terms are noindex; the older single-area
+// tools still work at their addresses but are no longer promoted (Nov 2026).
 const pages = [
-  '/', '/about', '/institutionalos', '/tools', '/insights', '/assessment',
-  '/revenue-growth-score', '/institutional-advancement-score',
-  '/leadership-health', '/sustainability-score', '/health-index', '/methodology', '/candid-seal', '/consulting', '/dmv-nonprofit-health',
+  '/', '/about', '/consulting', '/institutionalos', '/assessment', '/insights', '/methodology', '/dmv-nonprofit-health',
 ];
 
 export function GET() {

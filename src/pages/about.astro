@@ -16,24 +16,39 @@ import { talks } from '../data/proof';
 
   <main id="main">
 
-    <!-- ============ ABOUT ============ -->
-    <section id="about" class="section about alt-bg">
-      <div class="container about-hero">
-        <div class="about-hero-text">
-        <h1 class="section-title reveal">About Franklin</h1>
-        <p class="about-lede reveal">I help nonprofit leaders know what to build next, what it costs, and how to fund it. I've raised the money, run the region and built the systems myself.</p>
-        <ul class="about-short reveal">
-          <li><strong>20+ years</strong> in education, advancement, fundraising, and nonprofit leadership</li>
-          <li><strong>Most recently</strong> Regional Director for The Hidden Genius Project, running a two-city region (Baltimore and Philadelphia)</li>
-          <li><strong>Now</strong> helps growing nonprofits find the one gap that will break first, and close it in 90 days</li>
-        </ul>
+    <!-- ============ ABOUT: dark stage hero ============ -->
+    <section class="about-stage" aria-labelledby="about-name">
+      <div class="stage-glow stage-glow-gold" aria-hidden="true"></div>
+      <div class="stage-glow stage-glow-blue" aria-hidden="true"></div>
+      <div class="stage-grid" aria-hidden="true"></div>
+      <div class="container stage-inner">
+        <div class="stage-text">
+          <p class="stage-eyebrow stage-in" style="--d:0ms">About</p>
+          <h1 id="about-name" class="stage-name stage-in" style="--d:120ms">Franklin D.<br />Parham</h1>
+          <p class="stage-role stage-in" style="--d:260ms">Founder &amp; Principal, Frankly Inspired and Associates</p>
+          <p class="stage-lede stage-in" style="--d:380ms">I help nonprofit leaders know what to build next, what it costs, and how to fund it.</p>
+          <ul class="stage-facts stage-in" style="--d:520ms">
+            <li><strong>20+ years</strong><span>education, advancement and nonprofit leadership</span></li>
+            <li><strong>Two-city region</strong><span>Regional Director, The Hidden Genius Project</span></li>
+            <li><strong>90 days</strong><span>to close the gap that will break first</span></li>
+          </ul>
         </div>
-        <picture class="about-portrait reveal">
-            <source srcset="/assets/images/franklin-parham-portrait.webp" type="image/webp" />
-            <img src="/assets/images/franklin-parham-portrait.png" alt="Franklin D. Parham, Founder and Principal of Frankly Inspired and Associates" width="738" height="1064" loading="eager" />
-          </picture>
+        <picture class="stage-portrait">
+          <source srcset="/assets/images/franklin-parham-portrait-dark.webp" type="image/webp" />
+          <img src="/assets/images/franklin-parham-portrait-dark.png" alt="Franklin D. Parham, Founder and Principal of Frankly Inspired and Associates" width="738" height="1064" loading="eager" fetchpriority="high" />
+        </picture>
       </div>
-      <div class="container narrow">
+    </section>
+
+    <!-- ============ Statement that lights up as you scroll ============ -->
+    <section class="about-statement" aria-label="In short">
+      <div class="container">
+        <p class="lit-text" data-lit>I've raised the money, run the region and built the systems myself. Now I help growing nonprofits find the one gap that will break first, and close it before it does.</p>
+      </div>
+    </section>
+
+    <section id="about" class="section about about-body">
+      <div class="container about-col">
         <p class="reveal">Franklin D. Parham is an institution builder, nonprofit executive, educator, and strategist whose career has centered on expanding opportunity while strengthening the organizations that make opportunity possible.</p>
         <p class="reveal">Raised in Alabama and educated at Alabama State University, where he earned both a Bachelor of Arts in English &amp; Communications and a Master of Education in English Education, Franklin began his career close to students and communities. Work as an undergraduate in the university's Reading and Learning Lab and Educational Teaching and Learning Lab, then in residential life and TRIO Upward Bound, helped shape a philosophy that education should do more than transmit knowledge: it should build skills, develop people, and create practical pathways toward opportunity.</p>
         <p class="reveal">His career has since crossed higher education, institutional advancement, donor relations, fundraising and development, workforce development, alumni engagement, and regional nonprofit leadership. His experience includes roles with Brandeis University, George Washington University, the Society of American Foresters, and The Hidden Genius Project, along with board and advisory service.</p>
@@ -175,4 +190,26 @@ import { talks } from '../data/proof';
   </main>
 
   <ScrollReveal />
+  <script>
+    // Word-by-word light-up as the statement crosses the viewport. Off for reduced motion.
+    const lit = document.querySelector<HTMLElement>('[data-lit]');
+    if (lit && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const words = lit.textContent!.trim().split(/\s+/);
+      lit.innerHTML = words.map((w) => `<span class="lit-w">${w}</span>`).join(' ');
+      lit.classList.add('lit-ready');
+      const spans = Array.from(lit.querySelectorAll<HTMLElement>('.lit-w'));
+      let ticking = false;
+      const update = () => {
+        ticking = false;
+        const r = lit.getBoundingClientRect(), vh = window.innerHeight;
+        // 0 when the block's top reaches 85% of the screen, 1 when its bottom reaches 45%.
+        const p = Math.min(1, Math.max(0, (vh * 0.85 - r.top) / (r.height + vh * 0.4)));
+        const n = Math.round(p * spans.length);
+        spans.forEach((s, i) => s.classList.toggle('on', i < n));
+      };
+      addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+      addEventListener('resize', update);
+      update();
+    }
+  </script>
 </BaseLayout>

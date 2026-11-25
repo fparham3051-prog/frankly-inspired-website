@@ -1,2 +1,2 @@
-Built output of the Astro site (branch astro-rebuild, commit 3749dbc).
+Built output of the Astro site (branch astro-rebuild, commit 23629fb).
 Do not edit here; edit astro-rebuild and run scripts/publish-to-domain.sh.

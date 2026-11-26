@@ -4,11 +4,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import RubricKey from '../components/RubricKey.astro';
 import QuestionSection from '../components/QuestionSection.astro';
+import ArcSection from '../components/ArcSection.astro';
 ---
 
 <BaseLayout
   title="Free Check-up: Nonprofit Sustainability Self-Assessment | Frankly Inspired"
-  description="A free, 21-question self-assessment that scores your nonprofit on all seven InstitutionalOS Health Index dimensions by the evidence you could show, then names the area most likely to break first and a 90-day action."
+  description="A free check-up that places your nonprofit on the path from idea to legacy, scores seven areas by the evidence you could show, names the gap that will break first, and gives you a 90-day first step."
   footerVariant="assessment"
 >
   <Header variant="minimal" />
@@ -18,9 +19,9 @@ import QuestionSection from '../components/QuestionSection.astro';
     <!-- ============ INTRO ============ -->
     <section class="section assessment-intro">
       <div class="container narrow center">
-        <p class="eyebrow eyebrow-dark">7 minutes &middot; No sign-up</p>
+        <p class="eyebrow eyebrow-dark">About 8 minutes &middot; No sign-up</p>
         <h1>Free Check-up</h1>
-        <p class="hero-sub-light">21 short questions about how your organization actually runs. For each one, pick what you could show evidence for, not what you hope is true.<span class="intro-more"> You'll see your score, the area most likely to break first, and a first step for the next 90 days. Your answers stay in your browser unless you choose to email yourself the results.</span></p>
+        <p class="hero-sub-light">Four facts about your organization, 21 questions about how it runs, and six about whether it could run without you. Answer with what you could show evidence for.<span class="intro-more"> You'll see where you are on the path from idea to legacy, the gap that will break first, and a first step for the next 90 days. Your answers stay in your browser unless you email yourself the results.</span></p>
       </div>
     </section>
 
@@ -37,6 +38,8 @@ import QuestionSection from '../components/QuestionSection.astro';
         </div>
 
         <form id="assessment-form" novalidate>
+          <ArcSection part="stage" />
+
           <RubricKey />
 
           <QuestionSection tool="self-assessment" index={1} />
@@ -52,6 +55,8 @@ import QuestionSection from '../components/QuestionSection.astro';
           <QuestionSection tool="self-assessment" index={6} />
 
           <QuestionSection tool="self-assessment" index={7} />
+
+          <ArcSection part="legacy" />
 
           <div class="assessment-submit">
             <button type="submit" class="btn btn-primary">See My Results</button>
@@ -132,6 +137,7 @@ import QuestionSection from '../components/QuestionSection.astro';
   import { renderPathway } from '../scripts/pathway';
   import { enableStepper } from '../scripts/stepper';
   import { mountTriggerPicker, getTrigger } from '../scripts/trigger';
+  import { readStage, measuredPath, gapFirst, minimumsCleared, readLegacy, arcHtml, legacyHtml } from '../scripts/arc';
   mountTriggerPicker(document.getElementById('assessment-form') as HTMLFormElement | null, 'self-assessment');
   enableStepper(document.getElementById('assessment-form') as HTMLFormElement | null);
   import { recordAnswers, loadProfile, sealSummary } from '../scripts/healthEngine';
@@ -148,6 +154,10 @@ import QuestionSection from '../components/QuestionSection.astro';
     band: string;
     pillarScores: { label: string; pct: number }[];
     narrative?: string;
+    path?: string;
+    stageAnswers?: { budget: number; staff: number; years: number; decide: number };
+    gap?: string;
+    legacy?: { met: number; total: number; missing: string[] };
   } | null = null;
 
   // Pillar definitions. "service" text is copied verbatim from the
@@ -279,7 +289,7 @@ import QuestionSection from '../components/QuestionSection.astro';
     const box = document.getElementById('results-confidence');
     if (!box || !form) return;
     let strong = 0, named = 0;
-    form.querySelectorAll<HTMLFieldSetElement>('fieldset.likert').forEach((fs) => {
+    form.querySelectorAll<HTMLFieldSetElement>('fieldset.likert[data-item]').forEach((fs) => {
       const c = fs.querySelector<HTMLInputElement>('input[type="radio"]:checked:not(:disabled)');
       if (!c || Number(c.value) < 4) return;
       strong++;
@@ -368,12 +378,13 @@ import QuestionSection from '../components/QuestionSection.astro';
     }
 
     const scoredPillars = pillarScores.map((p) => ({ ...p, pct: Math.round(((p.score - 3) / 12) * 100) }));
-    const lowest = scoredPillars.reduce((min, p) => (p.pct < min.pct ? p : min), scoredPillars[0]);
+    const stageAnswers = form ? readStage(form) : { budget: -1, staff: -1, years: -1, decide: -1 };
+    const measured = measuredPath(stageAnswers, getTrigger());
+    const legacy = form ? readLegacy(form) : null;
+    const gap = gapFirst(scoredPillars, measured.path);
+    const lowest = scoredPillars.find((p) => p.label === gap.label) || scoredPillars[0];
 
     if (priorityEl) priorityEl.innerHTML = '';
-    const deepDiveLinks = lowest.deepDive
-      .map((d) => `<a class="link-more" href="${d.href}">${d.label}</a>`)
-      .join(' or ');
     if (form) recordAnswers('self-assessment', form, pct);
     renderPathway(document.getElementById('results-recommendation'), {
       tool: 'Nonprofit Sustainability Self-Assessment',
@@ -381,15 +392,22 @@ import QuestionSection from '../components/QuestionSection.astro';
       compositePct: pct,
       basis: 'answers',
       coversAllSeven: true,
-      extraHtml: lowest.deepDive.length
-        ? `<p class="section-note">For a deeper read on this area, take the ${deepDiveLinks}.</p>`
-        : '',
+      extraHtml: '',
+      measured: measured.path ? { path: measured.path, why: measured.why } : undefined,
+      gap: { label: gap.label, why: gap.why, min: gap.min },
+      gates: measured.path ? minimumsCleared(scoredPillars, measured.path) : undefined,
+      arcHtml: arcHtml(measured.path),
+      legacyHtml: legacy ? legacyHtml(legacy) : '',
     });
 
     lastResults = {
       scorePct: pct,
       band: band.name,
       pillarScores: scoredPillars.map((p) => ({ label: p.label, pct: p.pct })),
+      path: measured.path || undefined,
+      stageAnswers,
+      gap: gap.label,
+      legacy: legacy ? { met: legacy.met, total: legacy.total, missing: legacy.items.filter((i) => !i.met).map((i) => i.short) } : undefined,
     };
 
     renderConfidence();
@@ -555,7 +573,10 @@ import QuestionSection from '../components/QuestionSection.astro';
         hp_field: formData.get('hp_field'),
         tool: 'self-assessment',
         trigger: getTrigger() || undefined,
-        stage: (() => { try { return localStorage.getItem('fi_stage') || undefined; } catch { return undefined; } })(),
+        stage: (() => { try { return localStorage.getItem('fi_stage') || lastResults.path || undefined; } catch { return lastResults.path || undefined; } })(),
+        stageAnswers: lastResults.stageAnswers,
+        gap: lastResults.gap,
+        legacy: lastResults.legacy,
         scorePct: lastResults.scorePct,
         band: lastResults.band,
         pillarScores: lastResults.pillarScores,

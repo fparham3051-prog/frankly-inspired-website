@@ -2829,3 +2829,42 @@ html.js .stage-portrait { opacity: 0; transform: translateY(36px) scale(0.985); 
   -webkit-mask-image: linear-gradient(to bottom, #000 74%, transparent 100%);
   mask-image: linear-gradient(to bottom, #000 74%, transparent 100%);
 }
+
+/* ---------- Idea to Legacy (check-up, Nov 2026) ---------- */
+.arc-scale { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)) !important; }
+.arc-scale small { font-size: 0.86rem; }
+.arc-yn { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; max-width: 420px; }
+.arc-mini { list-style: none; margin: 0.6rem 0 1.6rem; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0; position: relative; }
+.arc-mini::before { content: ''; position: absolute; left: 10%; right: 10%; top: 13px; height: 2px; background: linear-gradient(90deg, var(--border), var(--gold)); }
+.arc-mini li { position: relative; text-align: center; padding: 34px 0.3rem 0; font-size: 0.8rem; line-height: 1.3; color: #55606b; }
+.arc-mini li::before { content: ''; position: absolute; top: 6px; left: 50%; width: 16px; height: 16px; margin-left: -8px; border-radius: 50%; background: #fff; border: 2px solid #c7cdd3; }
+.arc-mini li strong { display: block; font-family: var(--font-heading); font-size: 1rem; color: var(--navy); }
+.arc-mini li em { display: block; font-style: normal; font-weight: 700; color: var(--gold-accessible); margin-top: 0.2rem; }
+.arc-mini li.is-here::before { background: var(--gold); border-color: var(--gold); box-shadow: 0 0 0 5px var(--gold-soft); }
+.arc-mini li.is-finish::before { border-color: var(--navy); }
+.pathway-gates { font-size: 0.95rem; color: var(--charcoal); }
+.legacy-box { margin: 1.6rem 0; padding: 1.2rem 1.3rem; border: 1px solid var(--border); border-left: 4px solid var(--navy); border-radius: var(--radius-sm); background: #fff; }
+.legacy-track { display: block; height: 8px; border-radius: 999px; background: #E7EBEF; overflow: hidden; margin: 0.6rem 0 0.9rem; }
+.legacy-fill { display: block; height: 100%; background: var(--navy); border-radius: 999px; }
+.legacy-list { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.35rem 1rem; font-size: 0.92rem; color: #55606b; }
+.legacy-list li.is-met { color: var(--navy); font-weight: 600; }
+@media (max-width: 640px) {
+  .arc-mini li { font-size: 0.68rem; } .arc-mini li strong { font-size: 0.85rem; } .arc-mini li span { display: none; }
+  .legacy-list { grid-template-columns: 1fr; }
+}
+/* Inside the dark results pathway box */
+.pathway .arc-mini li { color: rgba(255, 255, 255, 0.62); }
+.pathway .arc-mini li strong { color: #fff; }
+.pathway .arc-mini li em { color: var(--gold-light); }
+.pathway .arc-mini::before { background: linear-gradient(90deg, rgba(255,255,255,0.25), var(--gold)); }
+.pathway .legacy-box, .pathway .legacy-box p { color: var(--charcoal); }
+.pathway .legacy-box .subhead { color: var(--navy); margin-top: 0; }
+/* Idea to Legacy road (home and consulting) */
+.arc-road { list-style: none; margin: 1.6rem 0 1.4rem; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); position: relative; }
+.arc-road::before { content: ''; position: absolute; left: 10%; right: 10%; top: 15px; height: 3px; border-radius: 3px; background: linear-gradient(90deg, #d6dbe0, var(--gold) 70%, var(--navy)); }
+.arc-road li { position: relative; text-align: center; padding: 42px 0.4rem 0; }
+.arc-road li::before { content: ''; position: absolute; top: 5px; left: 50%; width: 22px; height: 22px; margin-left: -11px; border-radius: 50%; background: #fff; border: 3px solid var(--gold); box-sizing: border-box; }
+.arc-road li.is-finish::before { background: var(--navy); border-color: var(--navy); box-shadow: 0 0 0 6px rgba(17, 35, 61, 0.12); }
+.arc-road strong { display: block; font-family: var(--font-heading); font-size: 1.2rem; color: var(--navy); }
+.arc-road span { display: block; font-size: 0.85rem; line-height: 1.35; color: #55606b; margin-top: 0.2rem; }
+@media (max-width: 640px) { .arc-road strong { font-size: 0.95rem; } .arc-road span { font-size: 0.7rem; } }

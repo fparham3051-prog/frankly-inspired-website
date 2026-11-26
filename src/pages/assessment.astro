@@ -21,7 +21,7 @@ import ArcSection from '../components/ArcSection.astro';
       <div class="container narrow center">
         <p class="eyebrow eyebrow-dark">About 8 minutes &middot; No sign-up</p>
         <h1>Free Check-up</h1>
-        <p class="hero-sub-light">Four facts about your organization, 21 questions about how it runs, and six about whether it could run without you. Answer with what you could show evidence for.<span class="intro-more"> You'll see where you are on the path from idea to legacy, the gap that will break first, and a first step for the next 90 days. Your answers stay in your browser unless you email yourself the results.</span></p>
+        <p class="hero-sub-light">Four facts about your organization, 21 questions about how it runs, and six about whether it could run without you. Answer with what you could show evidence for.<span class="intro-more"> You'll see where you are on the path from idea to legacy, the gap that will break first, and a first step for the next 90 days. Your scores are saved anonymously, with no name or email. Need to stop partway? Save your progress and we'll email you a link to finish.</span></p>
       </div>
     </section>
 
@@ -111,7 +111,7 @@ import ArcSection from '../components/ArcSection.astro';
               <label for="hp_field_assessment">Leave this field blank</label>
               <input type="text" id="hp_field_assessment" name="hp_field" tabindex="-1" autocomplete="off" />
             </div>
-            <label for="results-email">Want these results emailed to you?</label>
+            <label for="results-email">Get these results by email, with a short note from Franklin on what stands out</label>
             <div class="results-email-optional">
               <input type="text" id="results-name" name="name" placeholder="Your name (optional)" autocomplete="name" maxlength="80" aria-label="Your name (optional)" />
               <input type="text" id="results-org" name="orgName" placeholder="Organization (optional)" autocomplete="organization" maxlength="120" aria-label="Organization (optional)" />
@@ -140,6 +140,8 @@ import ArcSection from '../components/ArcSection.astro';
   import { readStage, measuredPath, gapFirst, minimumsCleared, readLegacy, arcHtml, legacyHtml } from '../scripts/arc';
   mountTriggerPicker(document.getElementById('assessment-form') as HTMLFormElement | null, 'self-assessment');
   enableStepper(document.getElementById('assessment-form') as HTMLFormElement | null);
+  import { enableCheckupSave } from '../scripts/checkupSave';
+  const saver = enableCheckupSave(document.getElementById('assessment-form') as HTMLFormElement | null);
   import { recordAnswers, loadProfile, sealSummary } from '../scripts/healthEngine';
   import { TOOLS } from '../data/questionBank';
   // Scoring runs entirely in the browser (no data leaves the page) except
@@ -158,6 +160,8 @@ import ArcSection from '../components/ArcSection.astro';
     stageAnswers?: { budget: number; staff: number; years: number; decide: number };
     gap?: string;
     legacy?: { met: number; total: number; missing: string[] };
+    legacyKeys?: string[];
+    ref?: string;
   } | null = null;
 
   // Pillar definitions. "service" text is copied verbatim from the
@@ -408,7 +412,11 @@ import ArcSection from '../components/ArcSection.astro';
       stageAnswers,
       gap: gap.label,
       legacy: legacy ? { met: legacy.met, total: legacy.total, missing: legacy.items.filter((i) => !i.met).map((i) => i.short) } : undefined,
+      legacyKeys: legacy ? legacy.items.filter((i) => i.met).map((i) => i.key) : undefined,
+      ref: saver.ref(),
     };
+    // Finished: saved progress (and any finish-later reminders) end here.
+    saver.finished(lastResults.ref || '');
 
     renderConfidence();
     planArea = lowest.label;
@@ -483,6 +491,12 @@ import ArcSection from '../components/ArcSection.astro';
         scorePct: results.scorePct,
         band: results.band,
         pillarScores: results.pillarScores,
+        // The full result, saved anonymously with every finished check-up.
+        ref: results.ref,
+        path: results.path,
+        stageAnswers: results.stageAnswers,
+        gap: results.gap,
+        legacy: results.legacyKeys ? { markers: results.legacyKeys } : undefined,
       }),
     })
       .then((res) => res.json())
@@ -585,6 +599,7 @@ import ArcSection from '../components/ArcSection.astro';
         toolsTaken: Object.keys(loadProfile().tools).map((k) => TOOLS.find((t) => t.key === k)?.name || k),
         seal: (() => { const s = sealSummary(); return s ? { current: s.current, next: s.next } : undefined; })(),
         remind: (document.querySelector<HTMLInputElement>('#results-email-remind')?.checked) || false,
+        checkupRef: lastResults.ref,
       };
 
       const submitBtn = emailForm.querySelector<HTMLButtonElement>('button[type="submit"]');

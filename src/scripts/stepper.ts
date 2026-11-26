@@ -186,6 +186,14 @@ export function enableStepper(form: HTMLFormElement | null) {
     }
   }, true);
 
+  // Saved answers were put back (checkupSave.ts): go to the first open question.
+  form.addEventListener('checkup:resume', () => {
+    window.clearTimeout(advanceTimer);
+    const firstOpen = questions.findIndex((q) => !answered(q) && !skipped(q));
+    i = firstOpen === -1 ? total - 1 : firstOpen;
+    render();
+  });
+
   form.addEventListener('reset', () => {
     window.setTimeout(() => { i = 0; if (rubric) rubric.open = true; render(); }, 0);
   });

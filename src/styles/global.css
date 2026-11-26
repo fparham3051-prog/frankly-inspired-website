@@ -2815,3 +2815,17 @@ html.js .stage-portrait { opacity: 0; transform: translateY(36px) scale(0.985); 
   .hero-bubble { right: -6%; top: -8%; }
 }
 @media (max-width: 640px) { .hero-bubble { right: -4%; top: -10%; left: auto; bottom: auto; font-size: 0.95rem; } }
+
+/* About hero: seat the portrait in the scene (soft light behind, legs fade into the dark). */
+.stage-portrait { position: relative; }
+.stage-portrait::before {
+  content: ''; position: absolute; z-index: -1; pointer-events: none;
+  left: 8%; right: 8%; top: 4%; height: 62%;
+  background: radial-gradient(closest-side, rgba(120, 150, 210, 0.28), rgba(178, 142, 66, 0.10) 55%, transparent 100%);
+  filter: blur(30px);
+}
+.stage-portrait img {
+  filter: drop-shadow(0 0 18px rgba(7, 15, 28, 0.55)) drop-shadow(0 24px 40px rgba(0, 0, 0, 0.45));
+  -webkit-mask-image: linear-gradient(to bottom, #000 74%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 74%, transparent 100%);
+}

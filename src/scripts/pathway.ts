@@ -93,15 +93,24 @@ export interface PathwayOptions {
   coversAllSeven?: boolean;
   extraHtml?: string;      // tool-specific links shown under the constraint
   profile?: boolean;       // show the 'Health Index so far' block (default true)
+  // Idea to Legacy (check-up): the measured path, the one gap rule, the
+  // path minimums, the arc and the Legacy Readiness block (see arc.ts).
+  measured?: { path: StageKey; why: string };
+  gap?: { label: string; why: 'below-minimum' | 'weighted' | 'lowest'; min?: number };
+  gates?: { cleared: number; total: number; misses: { label: string; pct: number; min: number }[] };
+  arcHtml?: string;
+  legacyHtml?: string;
 }
+
+let MEASURED: { path: StageKey; why: string } | undefined;
 
 function esc(s: string): string {
   return s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[c] as string));
 }
 
 function recommendationHtml(chosen: StageKey | null): string {
-  // A path the visitor picked wins; otherwise suggest one from what's happening.
-  const suggested = chosen ? null : triggerPath();
+  // A path the visitor picked wins; then the measured stage; then what's happening.
+  const suggested = chosen ? null : (MEASURED ? MEASURED.path : triggerPath());
   const stage = chosen || suggested;
   const picker = (Object.keys(STAGES) as StageKey[])
     .map((k) => `<button type="button" class="stage-choice${stage === k ? ' is-selected' : ''}" data-stage="${k}" aria-pressed="${stage === k}"><strong>${STAGES[k].name}</strong><span>${STAGES[k].question}</span></button>`)
@@ -109,7 +118,8 @@ function recommendationHtml(chosen: StageKey | null): string {
   let rec: string;
   if (stage) {
     const s = STAGES[stage];
-    rec = `<p class="pathway-rec">You're on the <strong>${s.name} path: ${s.full.toLowerCase()}</strong>.${suggested ? ' (Suggested from what you told us; pick another path above if it fits better.)' : ''} <strong>The ${s.name} Diagnostic, ${s.price} flat fee,</strong> gives you a clear picture with the evidence behind it, names the gap that will break first, prices your next hires and fundraising goal, and ends with a 90-day plan in a live readout.</p>`;
+    const because = suggested && MEASURED && MEASURED.path === suggested ? ` Because ${esc(MEASURED.why)}.` : '';
+    rec = `<p class="pathway-rec">You're on the <strong>${s.name} path: ${s.full.toLowerCase()}</strong>.${because}${suggested ? ' Pick another path above if it fits better.' : ''} <strong>The ${s.name} Diagnostic, ${s.price} flat fee,</strong> gives you a clear picture with the evidence behind it, names the gap that will break first, prices your next hires and fundraising goal, and ends with a 90-day plan in a live readout.</p>`;
   } else {
     rec = `<p class="pathway-rec"><strong>The Diagnostic, $2,000 to $2,500 depending on your path.</strong> Choose your path above and this will show the one that fits. It gives you a clear picture with the evidence behind it, names the gap that will break first, and ends with a priced 90-day plan.</p>`;
   }
@@ -127,7 +137,18 @@ function recommendationHtml(chosen: StageKey | null): string {
 
 export function renderPathway(el: HTMLElement | null, opts: PathwayOptions) {
   if (!el || !opts.items.length) return;
-  const lowest = opts.items.reduce((m, i) => (i.pct < m.pct ? i : m), opts.items[0]);
+  MEASURED = opts.measured;
+  const lowestRaw = opts.items.reduce((m, i) => (i.pct < m.pct ? i : m), opts.items[0]);
+  const lowest = (opts.gap && opts.items.find((i) => i.label === opts.gap!.label)) || lowestRaw;
+  const pathName = opts.measured ? STAGES[opts.measured.path].name : '';
+  const gapWhy = opts.gap && opts.gap.why === 'below-minimum'
+    ? `<p class="pathway-flag">${esc(lowest.label)} scored ${lowest.pct}%, under the ${opts.gap.min}% the ${pathName} path needs before you move on. That makes it the gap that will break first.</p>`
+    : opts.gap && opts.gap.why === 'weighted' && lowest.label !== lowestRaw.label
+      ? `<p>${esc(lowest.label)} scored ${lowest.pct}%. ${esc(lowestRaw.label)} scored lower, at ${lowestRaw.pct}%, but on the ${pathName} path ${esc(lowest.label)} matters more, so it is the gap that will break first.</p>`
+      : '';
+  const gatesLine = opts.gates && opts.measured
+    ? `<p class="pathway-gates">${pathName} path minimums cleared: <strong>${opts.gates.cleared} of ${opts.gates.total}</strong>${opts.gates.misses.length ? ' (' + opts.gates.misses.map((m) => `${esc(m.label)} ${m.pct}% of ${m.min}%`).join('; ') + ')' : ''}.</p>`
+    : '';
   const hiddenWeakSpot = opts.compositePct >= 60 && lowest.pct < 40;
   const allEven = opts.items.every((i) => Math.abs(i.pct - lowest.pct) < 5);
   const action = ACTIONS[lowest.label] || ACTIONS[lowest.label.trim()] || '';
@@ -137,16 +158,18 @@ export function renderPathway(el: HTMLElement | null, opts: PathwayOptions) {
 
   el.innerHTML = `
     <div class="pathway">
-      <h3 class="subhead">${allEven ? 'Where to start' : 'Most likely to break first'}: ${esc(lowest.label)}</h3>
-      ${hiddenWeakSpot
+      ${opts.arcHtml ? `<h3 class="subhead">Where you are, from idea to legacy</h3>${opts.arcHtml}` : ''}
+      <h3 class="subhead">${allEven && !gapWhy ? 'Where to start' : 'Most likely to break first'}: ${esc(lowest.label)}</h3>
+      ${gapWhy ? gapWhy + gatesLine : gatesLine + (hiddenWeakSpot
         ? `<p class="pathway-flag">Your overall score looks healthy, but ${esc(lowest.label)} scored ${lowest.pct}%. A strong average doesn't cancel out a weak area; this is usually the one that limits everything else.</p>`
         : allEven
           ? `<p>Your areas scored about evenly (around ${lowest.pct}%), so no single gap stands out. ${esc(lowest.label)} is a sensible place to start; a diagnostic would show which area is really holding things back.</p>`
-          : `<p>${esc(lowest.label)} scored lowest, at ${lowest.pct}%. It's the most likely place progress is getting stuck.</p>`}
+          : `<p>${esc(lowest.label)} scored lowest, at ${lowest.pct}%. It's the most likely place progress is getting stuck.</p>`)}
       ${lowest.help ? `<p class="pathway-help">${esc(lowest.help)}</p>` : ''}
       ${opts.extraHtml || ''}
 
       ${action ? `<h3 class="subhead">Your next 90 days</h3><p>${esc(action)}</p>` : ''}
+      ${opts.legacyHtml || ''}
 
       <div class="pathway-limits">
       <h3 class="subhead">What this tool can't tell you</h3>

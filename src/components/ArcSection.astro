@@ -1,0 +1,40 @@
+---
+// The stage questions (before the seven areas) and the Legacy Readiness
+// markers (after them). They use the same one-question-at-a-time stepper as
+// the scored areas but are not part of the seven-area score.
+import { STAGE_QS, LEGACY_QS } from '../scripts/arc';
+interface Props { part: 'stage' | 'legacy' }
+const { part } = Astro.props;
+const YESNO = ['Yes', 'No', 'Not sure'];
+---
+{part === 'stage' ? (
+  <div class="pillar-group arc-group" data-arc="stage">
+    <h2 class="pillar-heading">About your organization</h2>
+    <p class="pillar-help">Four quick facts. They place you on the path from idea to legacy.</p>
+    {STAGE_QS.map((s) => (
+      <fieldset class="likert arc-q">
+        <legend>{s.q}</legend>
+        <div class="likert-scale arc-scale">
+          {s.opts.map((o, i) => (
+            <label><input type="radio" name={s.name} value={String(i + 1)} required={i === 0} /><span>{i + 1}</span><small>{o}</small></label>
+          ))}
+        </div>
+      </fieldset>
+    ))}
+  </div>
+) : (
+  <div class="pillar-group arc-group" data-arc="legacy">
+    <h2 class="pillar-heading">Could it run without you?</h2>
+    <p class="pillar-help">Six markers of an organization that lasts beyond its founder. Answer for today, not the plan.</p>
+    {LEGACY_QS.map((s) => (
+      <fieldset class="likert arc-q">
+        <legend>{s.q}</legend>
+        <div class="likert-scale arc-scale arc-yn">
+          {YESNO.map((o, i) => (
+            <label><input type="radio" name={s.name} value={String(i + 1)} required={i === 0} /><span>{i + 1}</span><small>{o}</small></label>
+          ))}
+        </div>
+      </fieldset>
+    ))}
+  </div>
+)}

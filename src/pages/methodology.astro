@@ -61,12 +61,61 @@ const RUBRIC_DESC = [
         <h2 class="subhead">3. How scores are calculated</h2>
         <ul class="bullet-list">
           <li><strong>Each area</strong> is the average of its questions on the rubric above (0 to 100%).</li>
-          <li><strong>Each tool's overall score</strong> is the average of its areas.</li>
-          <li><strong>The Revenue &amp; Growth Score</strong> uses your figures instead of answers. Each ratio is scored against a published benchmark: operating reserves (Nonprofit Operating Reserves Initiative and Propel Nonprofits guidance), program expense ratio (BBB Wise Giving Alliance and Charity Navigator), revenue concentration (a single source above 30% is the commonly cited risk threshold), liquidity (current ratio), and donor retention (the Fundraising Effectiveness Project).</li>
-          <li><strong>Your Health Index</strong> combines every tool you've taken. Each dimension is the average of every answer that maps to it, with your latest answer used for each question. The overall score averages the dimensions you've covered.</li>
-          <li><strong>Your likely constraint</strong> is your lowest-scoring area. If your overall score is 60% or higher but one area is under 40%, we flag it: a strong average doesn't cancel out a weak spot, and the weak spot usually limits everything else.</li>
-          <li><strong>Bands:</strong> Foundational (up to 30%), Developing (31 to 55%), Strengthening (56 to 80%), and Resilient (above 80%). The deeper tools use five bands: Critical, At Risk, Stable, Strong, and Resilient, with cutoffs at 20, 40, 60, and 80%.</li>
+          <li><strong>The overall score</strong> is the average of the seven areas. We keep it unweighted so scores compare fairly across organizations and over time.</li>
+          <li><strong>Bands:</strong> Foundational (up to 30%), Developing (31 to 55%), Strengthening (56 to 80%) and Resilient (above 80%). One set of bands, used everywhere.</li>
         </ul>
+
+        <h3 class="subhead" id="stage">Your stage and path</h3>
+        <p>Four questions place you on the path from idea to legacy: budget, paid staff, years operating, and who makes day-to-day decisions.</p>
+        <ul class="bullet-list">
+          <li><strong>Build</strong> if your budget is under $250,000 or you're under three years old.</li>
+          <li><strong>Sustain</strong> if your budget is $1 million or more and you're eight or more years old or have more than ten staff.</li>
+          <li><strong>Fund</strong> otherwise. A Fund organization moves to Sustain if you tell us too much depends on one leader, a leadership change is coming, or decisions still run through one person with more than ten staff.</li>
+        </ul>
+        <p>You can always choose another path on the results screen. In the Diagnostic I confirm the stage from your filed 990s and staffing.</p>
+
+        <h3 class="subhead" id="weights">What each path weighs most</h3>
+        <p>Each path counts the seven areas differently and sets minimums an organization should clear before moving on. These are the same numbers the paid Diagnostic uses.</p>
+        <div class="org-table-wrap" tabindex="0" role="region" aria-label="Weights and minimums by path"><table class="org-table">
+          <thead><tr><th>Area</th><th>Build</th><th>Fund</th><th>Sustain</th></tr></thead>
+          <tbody>
+            <tr><td>Strategy and Direction</td><td>20% &middot; min 70</td><td>10%</td><td>15%</td></tr>
+            <tr><td>Program and Impact Evidence</td><td>15%</td><td>20% &middot; min 70</td><td>15%</td></tr>
+            <tr><td>Revenue and Financial Health</td><td>10%</td><td>20% &middot; min 70</td><td>20% &middot; min 70</td></tr>
+            <tr><td>Leadership and Organizational Capacity</td><td>15%</td><td>10%</td><td>15% &middot; min 70</td></tr>
+            <tr><td>Operations and Infrastructure</td><td>10%</td><td>15%</td><td>15%</td></tr>
+            <tr><td>Partnerships and Ecosystem</td><td>10%</td><td>10%</td><td>10%</td></tr>
+            <tr><td>Governance and Risk</td><td>20% &middot; min 75</td><td>15% &middot; min 75</td><td>10% &middot; min 70</td></tr>
+          </tbody>
+        </table></div>
+
+        <h3 class="subhead" id="gap-rule">The gap that will break first</h3>
+        <p>One rule, in the free check-up and the Diagnostic alike:</p>
+        <ol class="bullet-list">
+          <li>If any area is below its minimum for your path, the gap is the one furthest below.</li>
+          <li>Otherwise it is the area with the largest weighted shortfall: its weight times the distance to 100.</li>
+        </ol>
+        <p>In the Diagnostic the rule runs on verified scores. If the evidence points elsewhere, I say so in the memo and explain why.</p>
+
+        <h3 class="subhead" id="legacy">Legacy Readiness: the finish line</h3>
+        <p>The finish line on every path is an organization that can run, raise money and make decisions without its founder. We check six markers, each met or not:</p>
+        <ul class="bullet-list two-col">
+          <li>Someone other than the executive director could run it for three months</li>
+          <li>Key decisions, processes and passwords are written down</li>
+          <li>The board has approved an executive director succession plan</li>
+          <li>Six or more months of operating reserves</li>
+          <li>No single funder above 30% of revenue</li>
+          <li>Candid's Platinum Seal of Transparency</li>
+        </ul>
+        <p>In the Diagnostic, reserves are estimated from your latest 990 when you don't give a figure, and the Seal comes from your Candid profile.</p>
+
+        <h3 class="subhead" id="validation">How we know it works</h3>
+        <p>A score is only useful if it tracks reality. For every client, InstitutionalOS keeps:</p>
+        <ul class="bullet-list">
+          <li><strong>Self-score next to verified score</strong> for each area, so we can see where leaders over- or under-rate themselves, and how often the check-up named the same gap the evidence did.</li>
+          <li><strong>What happened next:</strong> grants awarded or declined, expansions, leadership transitions, each stored with the score at the time.</li>
+        </ul>
+        <p>Once at least ten clients have both scores, I'll publish the results here once a year, including where the weights or minimums need to change.</p>
 
         <h2 class="subhead">4. Comparisons with other organizations</h2>
         <p>When you finish a tool, your scores are logged anonymously, with no name, email, or organization attached, so we can show how you compare with everyone else who has taken it. We only compare answers given on the same rubric. If fewer than five organizations have taken a tool, we label the comparison as early data.</p>

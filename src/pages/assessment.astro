@@ -73,7 +73,6 @@ import ArcSection from '../components/ArcSection.astro';
           </div>
           <p class="results-band-desc" id="results-band-desc"></p>
           <p class="results-avg-overall" id="results-avg-overall" hidden></p>
-          <p class="results-narrative-loading" id="results-narrative-loading" hidden>Writing a personalized summary of your results&hellip;</p>
 
           <h3 class="subhead">By area</h3>
           <div class="results-bars" id="results-bars"></div>
@@ -242,7 +241,6 @@ import ArcSection from '../components/ArcSection.astro';
   const barsEl = document.getElementById('results-bars');
   const priorityEl = document.getElementById('results-priority');
   const bandDescEl = document.getElementById('results-band-desc');
-  const narrativeLoadingEl = document.getElementById('results-narrative-loading') as HTMLElement | null;
 
   /* ---------- Sticky progress bar ---------- */
   const progressEl = document.getElementById('assessment-progress') as HTMLElement | null;
@@ -473,14 +471,11 @@ import ArcSection from '../components/ArcSection.astro';
       });
   }
 
-  /* AI-generated personalized summary. An enhancement, not a dependency:
-     the static band description is already visible from renderResults()
-     above, so if this call is slow, fails, or the backend has no
-     ANTHROPIC_API_KEY configured, the visitor still has a complete,
-     correct set of results; this just quietly upgrades the description
-     text if and when a narrative comes back. */
+  /* Saves the finished result anonymously (and returns a reference for the
+     "continue to a conversation" link). Results text is written by Franklin,
+     not generated: narrative: false tells the server not to draft an
+     AI summary, and the page never shows one. */
   function fetchNarrative(results: NonNullable<typeof lastResults>) {
-    if (narrativeLoadingEl) narrativeLoadingEl.hidden = false;
 
     fetch(API_BASE + '/api/assessment-narrative', {
       method: 'POST',
@@ -497,15 +492,11 @@ import ArcSection from '../components/ArcSection.astro';
         stageAnswers: results.stageAnswers,
         gap: results.gap,
         legacy: results.legacyKeys ? { markers: results.legacyKeys } : undefined,
+        narrative: false,
       }),
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data && data.ok && data.narrative) {
-          if (bandDescEl) bandDescEl.textContent = data.narrative;
-          if (lastResults) lastResults.narrative = data.narrative;
-        }
-      
         if (data && data.score_ref) {
           const scoreRefCtaEl = document.getElementById('score-ref-cta');
           if (scoreRefCtaEl) {
@@ -520,9 +511,6 @@ import ArcSection from '../components/ArcSection.astro';
       .catch(() => {
         // Silent by design, static description already shown, nothing to fix.
       })
-      .finally(() => {
-        if (narrativeLoadingEl) narrativeLoadingEl.hidden = true;
-      });
   }
 
   if (form) {

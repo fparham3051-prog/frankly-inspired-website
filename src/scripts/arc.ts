@@ -122,10 +122,10 @@ export const LEGACY_QS = [
   { name: 'lg_candid', q: 'Your Candid profile holds the Platinum Seal of Transparency.', short: "Candid's top Seal (Platinum)" },
 ] as const;
 
-export function readLegacy(form: HTMLFormElement): { met: number; total: number; items: { short: string; met: boolean; unsure: boolean }[] } {
+export function readLegacy(form: HTMLFormElement): { met: number; total: number; items: { key: string; short: string; met: boolean; unsure: boolean }[] } {
   const items = LEGACY_QS.map((q) => {
     const c = form.querySelector<HTMLInputElement>(`input[name="${q.name}"]:checked`);
-    return { short: q.short, met: c?.value === '1', unsure: c?.value === '3' };
+    return { key: q.name.replace(/^lg_/, ''), short: q.short, met: c?.value === '1', unsure: c?.value === '3' };
   });
   return { met: items.filter((i) => i.met).length, total: items.length, items };
 }

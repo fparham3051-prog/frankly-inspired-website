@@ -2879,3 +2879,16 @@ html.js .stage-portrait { opacity: 0; transform: translateY(36px) scale(0.985); 
 .arc-road strong { display: block; font-family: var(--font-heading); font-size: 1.2rem; color: var(--navy); }
 .arc-road span { display: block; font-size: 0.85rem; line-height: 1.35; color: #55606b; margin-top: 0.2rem; }
 @media (max-width: 640px) { .arc-road strong { font-size: 0.95rem; } .arc-road span { font-size: 0.7rem; } }
+
+/* ---------- Check-up: pick up where you left off, save for later ---------- */
+.checkup-save { margin: 0 0 1.25rem; display: grid; gap: 0.75rem; }
+.checkup-resume { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.5rem 1rem; background: var(--gold-soft); border-left: 4px solid var(--gold); border-radius: var(--radius-sm); padding: 0.85rem 1rem; }
+.checkup-resume p { margin: 0; color: var(--charcoal); }
+.checkup-later { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.7rem 1rem; }
+.checkup-later summary { cursor: pointer; font-weight: 600; color: var(--navy); font-size: 0.95rem; }
+.checkup-later-form { margin-top: 0.75rem; }
+.checkup-later-form label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.35rem; color: var(--charcoal); }
+.checkup-later-row { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.checkup-later-row input { flex: 1 1 220px; min-width: 0; padding: 0.6rem 0.75rem; border: 1px solid var(--border); border-radius: var(--radius-sm); font: inherit; }
+.checkup-later-note { font-size: 0.8rem; color: #5a6372; margin: 0.6rem 0 0; line-height: 1.5; }
+@media print { .checkup-save { display: none; } }

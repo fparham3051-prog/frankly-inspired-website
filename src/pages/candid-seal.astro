@@ -90,7 +90,7 @@ import { LEVELS, SEAL_ITEMS, SEAL_YEAR } from '../data/candidSeal';
     <section class="section closing-cta">
       <div class="container narrow center">
         <h2>Want help getting to Platinum?</h2>
-        <p>The Diagnostic's 90-day plan includes the steps to your next Candid Seal level, alongside your binding constraint.</p>
+        <p>The Diagnostic's 90-day plan includes the steps to your next Candid Seal level, alongside the gap that will break first.</p>
         <a class="btn btn-primary" href={CALENDLY_URL} target="_blank" rel="noopener" data-track="schedule_click">Schedule a Conversation</a>
       </div>
     </section>
@@ -189,13 +189,12 @@ import { LEVELS, SEAL_ITEMS, SEAL_YEAR } from '../data/candidSeal';
     const rec = document.getElementById('seal-recommendation')!;
     if (topDim) {
       const d = dimension(topDim[0] as any);
-      const t = FILL_TOOL[d.key];
       rec.innerHTML = `<div class="pathway">
-        <h3 class="subhead">Where the Seal path meets your Health Index</h3>
+        <h3 class="subhead">Where to start</h3>
         <p>${topDims.length > 1
           ? `What stands between you and Platinum is spread across ${(() => { const n = topDims.map((k) => `<strong>${esc(dimension(k as any).label)}</strong>`); return n.length > 2 ? n.slice(0, -1).join(', ') + ', and ' + n[n.length - 1] : n.join(' and '); })()}. Start with ${esc(d.label)}; strengthening these dimensions moves your Seal and your operations forward together.`
           : `Most of what stands between you and Platinum sits in <strong>${esc(d.label)}</strong> (${topDim[1]} requirement${topDim[1] === 1 ? '' : 's'}). Strengthening that dimension moves your Seal and your operations forward together.`}</p>
-        <div class="hero-ctas"><a class="btn btn-secondary" href="${t.href}">Score it with the ${esc(t.name)}</a><a class="link-more" href="/health-index">See your Health Index &rarr;</a></div>
+        <div class="hero-ctas"><a class="btn btn-secondary" href="/assessment">Take the free check-up</a></div>
         <h3 class="subhead">Recommended next step</h3>
         <p>The Diagnostic verifies the evidence behind every dimension and builds your next Seal level into its 90-day plan.</p>
         <div class="hero-ctas"><a class="btn btn-primary" href="/#contact" data-track="pathway_diagnostic_click">Discuss Your Diagnostic</a><a class="btn btn-secondary" href="/consulting#pricing">See Pricing</a></div>

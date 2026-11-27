@@ -7,8 +7,6 @@ import { SEAL_ITEMS, LEVELS, SEAL_YEAR } from '../data/candidSeal';
 
 // Generated from the same question bank the tools render from, so this
 // page can't drift from what visitors are actually asked.
-const toolName = (k: string) => TOOLS.find((t) => t.key === k)?.name || k;
-const toolHref = (k: string) => TOOLS.find((t) => t.key === k)?.href || '/tools';
 const byDim = DIMENSIONS.map((d) => {
   const areas = AREAS.filter((a) => a.dimension === d.key).map((a) => ({
     ...a,
@@ -27,7 +25,7 @@ const RUBRIC_DESC = [
 
 <BaseLayout
   title="How Scoring Works | Frankly Inspired"
-  description="The methodology behind Frankly Inspired's free nonprofit tools and the InstitutionalOS Health Index: the seven dimensions, the evidence rubric, every question and its research basis, and how your data is handled."
+  description="The methodology behind Frankly Inspired's free check-up and the InstitutionalOS Health Index: the seven dimensions, the evidence rubric, every question and its research basis, and how your data is handled."
   footerVariant="home"
 >
   <Header variant="full" />
@@ -37,7 +35,7 @@ const RUBRIC_DESC = [
       <div class="container narrow center">
         <p class="eyebrow eyebrow-dark">Methodology</p>
         <h1>How scoring works</h1>
-        <p class="hero-sub-light">Every free tool and every paid diagnostic scores the same seven dimensions on the same evidence rubric. This page shows exactly how, including every question we ask and where it comes from.</p>
+        <p class="hero-sub-light">The free check-up and the paid Diagnostic score the same seven dimensions on the same evidence rubric. This page shows exactly how, including every question we ask and where it comes from.</p>
       </div>
     </section>
 
@@ -125,13 +123,13 @@ const RUBRIC_DESC = [
 
         <h2 class="subhead">6. Your data</h2>
         <ul class="bullet-list">
-          <li>Your answers and your Health Index stay in your browser. Clearing your browser data, or using "Clear my saved answers" on <a href="/health-index">your Health Index</a>, removes them.</li>
-          <li>To write your summary and show comparisons, we send only your scores, never your name or organization.</li>
+          <li>Your answers are kept in your browser while you work, so you can pick up where you left off. Clearing your browser data removes them.</li>
+          <li>Each finished check-up is saved anonymously: scores, stage answers, path, the gap that will break first, and Legacy markers, with no name, email or organization.</li>
           <li>Your email, scores, and the organization you looked up reach Franklin only if you choose to email yourself your results. There's no mailing list. See the <a href="/privacy">privacy policy</a>.</li>
         </ul>
 
-        <h2 class="subhead">7. What free tools can't tell you</h2>
-        <p>A free tool can only report what you tell it. The <a href="/consulting#pricing">Diagnostic</a> goes further: it checks the evidence behind each answer, reads your Form 990 the way a funder would, tests you against the gates for your stage (Build, Fund, or Sustain), and names the single binding constraint in a written memo with a 90-Day Improvement Plan your team works through weekly check-ins.</p>
+        <h2 class="subhead">7. What the free check-up can't tell you</h2>
+        <p>The free check-up can only report what you tell it. The <a href="/consulting#pricing">Diagnostic</a> goes further: it checks the evidence behind each answer, reads your Form 990 the way a funder would, tests you against the gates for your stage (Build, Fund, or Sustain), and names the single gap that will break first in a written memo with a 90-Day Improvement Plan your team works through weekly check-ins.</p>
 
         <h3 class="method-h3" id="diagnostic-bands">Reading a Diagnostic score</h3>
         <p>In the paid Diagnostic, the overall score suggests a posture for the decision in front of you. A strong average never gives a green light on its own: each stage has a few areas that must clear a minimum (governance, strategy, financial health, or proof of results, depending on the stage), and a single open gate holds the decision back.</p>
@@ -161,14 +159,14 @@ const RUBRIC_DESC = [
         <h2 class="subhead" id="glossary">9. Terms we use</h2>
         <p>One word for each idea, used the same way on this site, in InstitutionalOS, in client reports, and in every proposal.</p>
         <dl class="glossary">
-          <dt>Health Index</dt><dd>Your scores on the seven dimensions, 0 to 100, from the free tools (self-reported) or the Diagnostic (verified).</dd>
+          <dt>Health Index</dt><dd>Your scores on the seven dimensions, 0 to 100, from the free check-up (self-reported) or the Diagnostic (verified).</dd>
           <dt>Leader survey</dt><dd>The same 21 practices as the free self-assessment, answered privately by the executive director, board members, and senior staff. Shown beside the verified score, with how far apart the answers are.</dd>
           <dt>Evidence</dt><dd>Something a funder or board could check: a filed 990, an adopted policy, board minutes, outcome data, an observed practice.</dd>
           <dt>Stage</dt><dd>Build, Fund, or Sustain. It sets which dimensions weigh most and which gates apply.</dd>
           <dt>Decision gate</dt><dd>A minimum score on a critical dimension for your stage. A strong average can't make up for a failed gate.</dd>
           <dt>Binding constraint</dt><dd>The one gap most likely to stall your next funding, growth, or leadership decision. Chosen by the gates first, then by what other gaps depend on, then by what the decision requires; not simply your lowest score.</dd>
           <dt>Next in line</dt><dd>The constraint we'd work on after this one, named so nothing is hidden.</dd>
-          <dt>90-Day Improvement Plan</dt><dd>One target for the binding constraint, a baseline, and three to six actions, each with an owner, a date, and the evidence that will show it's done.</dd>
+          <dt>90-Day Improvement Plan</dt><dd>One target for the gap that will break first, a baseline, and three to six actions, each with an owner, a date, and the evidence that will show it's done.</dd>
           <dt>Weekly check-in</dt><dd>Fifteen minutes: what got done, what's blocked, what evidence was added, what decision is needed, what happens next.</dd>
           <dt>90-day review</dt><dd>Did the actions happen, are the early signs moving, does the diagnosis still hold, and should the plan change.</dd>
           <dt>Standard practice</dt><dd>The change is written down, owned, used consistently, taught to new staff, and measured.</dd>
@@ -176,13 +174,13 @@ const RUBRIC_DESC = [
         </dl>
 
         <h2 class="subhead" id="questions">10. Every question, by dimension</h2>
-        <p>{ITEMS.length} questions across {AREAS.length} areas and {TOOLS.length} tools, plus the Revenue &amp; Growth Score's figures.</p>
+        <p>The full question bank behind the scoring: {ITEMS.length} questions across {AREAS.length} areas. The free check-up asks 21 of them, in the areas marked below.</p>
         {byDim.map((d) => (
           <details class="method-dim">
-            <summary><strong>{d.num}. {d.label}</strong> <span>{d.count} questions{d.key === 'revenue' ? ', plus Revenue & Growth Score figures' : ''}</span></summary>
+            <summary><strong>{d.num}. {d.label}</strong> <span>{d.count} questions</span></summary>
             {d.areas.map((a) => (
               <div class="method-area">
-                <h3>{a.label} <span>· <a href={toolHref(a.tool)}>{toolName(a.tool)}</a></span></h3>
+                <h3>{a.label}{a.tool === 'self-assessment' && <span>· <a href="/assessment">in the free check-up</a></span>}</h3>
                 <p class="method-basis">{a.basis}</p>
                 <ol>{a.items.map((i) => <li>{i.text}</li>)}</ol>
               </div>

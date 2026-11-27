@@ -100,6 +100,7 @@ export interface PathwayOptions {
   gates?: { cleared: number; total: number; misses: { label: string; pct: number; min: number }[] };
   arcHtml?: string;
   legacyHtml?: string;
+  situationHtml?: string;  // "Your question": their situation answered, plus one recommendation (situation.ts)
 }
 
 let MEASURED: { path: StageKey; why: string } | undefined;
@@ -158,6 +159,7 @@ export function renderPathway(el: HTMLElement | null, opts: PathwayOptions) {
 
   el.innerHTML = `
     <div class="pathway">
+      ${opts.situationHtml || ''}
       ${opts.arcHtml ? `<h3 class="subhead">Where you are, from idea to legacy</h3>${opts.arcHtml}` : ''}
       <h3 class="subhead">${allEven && !gapWhy ? 'Where to start' : 'Most likely to break first'}: ${esc(lowest.label)}</h3>
       ${gapWhy ? gapWhy + gatesLine : gatesLine + (hiddenWeakSpot

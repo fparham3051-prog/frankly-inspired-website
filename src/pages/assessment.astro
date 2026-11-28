@@ -133,12 +133,13 @@ import ArcSection from '../components/ArcSection.astro';
 </BaseLayout>
 
 <script>
-  import { renderPathway } from '../scripts/pathway';
+  import { renderPathway, STAGES } from '../scripts/pathway';
   import { enableStepper } from '../scripts/stepper';
   import { mountTriggerPicker, getTrigger } from '../scripts/trigger';
   import { readStage, measuredPath, gapFirst, minimumsCleared, readLegacy, arcHtml, legacyHtml } from '../scripts/arc';
   mountTriggerPicker(document.getElementById('assessment-form') as HTMLFormElement | null, 'self-assessment');
   enableStepper(document.getElementById('assessment-form') as HTMLFormElement | null);
+  import { recommend, shortAnswer, situationHtml, type Rec } from '../scripts/situation';
   import { enableCheckupSave } from '../scripts/checkupSave';
   const saver = enableCheckupSave(document.getElementById('assessment-form') as HTMLFormElement | null);
   import { recordAnswers, loadProfile, sealSummary } from '../scripts/healthEngine';
@@ -161,6 +162,8 @@ import ArcSection from '../components/ArcSection.astro';
     legacy?: { met: number; total: number; missing: string[] };
     legacyKeys?: string[];
     ref?: string;
+    answer?: string;
+    rec?: Rec;
   } | null = null;
 
   // Pillar definitions. "service" text is copied verbatim from the
@@ -386,6 +389,19 @@ import ArcSection from '../components/ArcSection.astro';
     const gap = gapFirst(scoredPillars, measured.path);
     const lowest = scoredPillars.find((p) => p.label === gap.label) || scoredPillars[0];
 
+    // Their own question, answered, and one recommendation (situation.ts).
+    const gates = measured.path ? minimumsCleared(scoredPillars, measured.path) : undefined;
+    const sitIn = {
+      trigger: getTrigger(),
+      gap: { label: gap.label, pct: lowest.pct, min: gap.min, belowMinimum: gap.why === 'below-minimum' },
+      misses: gates ? gates.misses : [],
+      pathName: measured.path ? STAGES[measured.path].name : '',
+      price: measured.path ? STAGES[measured.path].price : '',
+      compositePct: pct,
+      legacy: legacy ? { met: legacy.met, total: legacy.total, missing: legacy.items.filter((i) => !i.met).map((i) => i.short) } : null,
+    };
+    const rec = recommend(sitIn);
+
     if (priorityEl) priorityEl.innerHTML = '';
     if (form) recordAnswers('self-assessment', form, pct);
     renderPathway(document.getElementById('results-recommendation'), {
@@ -397,7 +413,8 @@ import ArcSection from '../components/ArcSection.astro';
       extraHtml: '',
       measured: measured.path ? { path: measured.path, why: measured.why } : undefined,
       gap: { label: gap.label, why: gap.why, min: gap.min },
-      gates: measured.path ? minimumsCleared(scoredPillars, measured.path) : undefined,
+      gates,
+      situationHtml: situationHtml(sitIn, rec),
       arcHtml: arcHtml(measured.path),
       legacyHtml: legacy ? legacyHtml(legacy) : '',
     });
@@ -412,6 +429,8 @@ import ArcSection from '../components/ArcSection.astro';
       legacy: legacy ? { met: legacy.met, total: legacy.total, missing: legacy.items.filter((i) => !i.met).map((i) => i.short) } : undefined,
       legacyKeys: legacy ? legacy.items.filter((i) => i.met).map((i) => i.key) : undefined,
       ref: saver.ref(),
+      answer: shortAnswer(sitIn),
+      rec,
     };
     // Finished: saved progress (and any finish-later reminders) end here.
     saver.finished(lastResults.ref || '');
@@ -588,6 +607,8 @@ import ArcSection from '../components/ArcSection.astro';
         seal: (() => { const s = sealSummary(); return s ? { current: s.current, next: s.next } : undefined; })(),
         remind: (document.querySelector<HTMLInputElement>('#results-email-remind')?.checked) || false,
         checkupRef: lastResults.ref,
+        answer: lastResults.answer,
+        recommendation: lastResults.rec,
       };
 
       const submitBtn = emailForm.querySelector<HTMLButtonElement>('button[type="submit"]');

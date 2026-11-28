@@ -2892,3 +2892,10 @@ html.js .stage-portrait { opacity: 0; transform: translateY(36px) scale(0.985); 
 .checkup-later-row input { flex: 1 1 220px; min-width: 0; padding: 0.6rem 0.75rem; border: 1px solid var(--border); border-radius: var(--radius-sm); font: inherit; }
 .checkup-later-note { font-size: 0.8rem; color: #5a6372; margin: 0.6rem 0 0; line-height: 1.5; }
 @media print { .checkup-save { display: none; } }
+
+/* ---------- Check-up results: their question, answered ---------- */
+.situation-answer { background: var(--gold-soft); border-left: 4px solid var(--gold); border-radius: var(--radius-sm); padding: 1.1rem 1.25rem; margin-bottom: 1.5rem; }
+.situation-answer .subhead { margin-top: 0; }
+.situation-q { font-family: var(--font-heading); font-style: italic; font-size: 1.15rem; color: var(--navy); margin: 0 0 0.75rem; }
+.situation-answer .hero-ctas { margin-top: 0.75rem; }
+.results-priority:empty { display: none; }
